@@ -4,8 +4,18 @@ import { CategoryService } from './category.service'
 import { CreateCategoryDto } from './dto/create_category.dto'
 import { UpdateCategoryDto } from './dto/update_category.dto'
 import { JwtAuthGuard } from '../auth/guards/jwt_auth.guard'
+import { 
+  ApiSuccessResponse,
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+  ApiUnauthorizedResponse,
+  ApiNotFoundResponse,
+  ApiConflictResponse,
+  ApiInternalServerErrorResponse
+} from '../../common/decorators/api_response.decorator'
+import { CategoryResponseDto } from '../../common/dto/paginated_response.dto'
 
-@ApiTags('分类管理')
+@ApiTags('分类')
 @Controller('categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
@@ -14,31 +24,37 @@ export class CategoryController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '创建分类' })
-  @ApiResponse({ status: 201, description: '分类创建成功' })
-  @ApiResponse({ status: 409, description: '分类名称或别名已存在' })
+  @ApiCreatedResponse(CategoryResponseDto, '分类创建成功')
+  @ApiBadRequestResponse()
+  @ApiUnauthorizedResponse()
+  @ApiConflictResponse()
+  @ApiInternalServerErrorResponse()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto)
   }
 
   @Get()
   @ApiOperation({ summary: '获取所有分类' })
-  @ApiResponse({ status: 200, description: '获取分类列表成功' })
+  @ApiSuccessResponse(CategoryResponseDto, '获取分类列表成功')
+  @ApiInternalServerErrorResponse()
   find_all() {
     return this.categoryService.find_all()
   }
 
   @Get(':id')
   @ApiOperation({ summary: '根据ID获取分类' })
-  @ApiResponse({ status: 200, description: '获取分类成功' })
-  @ApiResponse({ status: 404, description: '分类不存在' })
+  @ApiSuccessResponse(CategoryResponseDto, '获取分类成功')
+  @ApiNotFoundResponse()
+  @ApiInternalServerErrorResponse()
   find_one(@Param('id') id: string) {
     return this.categoryService.find_one(+id)
   }
 
   @Get('slug/:slug')
   @ApiOperation({ summary: '根据别名获取分类' })
-  @ApiResponse({ status: 200, description: '获取分类成功' })
-  @ApiResponse({ status: 404, description: '分类不存在' })
+  @ApiSuccessResponse(CategoryResponseDto, '获取分类成功')
+  @ApiNotFoundResponse()
+  @ApiInternalServerErrorResponse()
   get_by_slug(@Param('slug') slug: string) {
     return this.categoryService.get_by_slug(slug)
   }
@@ -47,9 +63,12 @@ export class CategoryController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '更新分类信息' })
-  @ApiResponse({ status: 200, description: '分类更新成功' })
-  @ApiResponse({ status: 404, description: '分类不存在' })
-  @ApiResponse({ status: 409, description: '分类名称或别名已存在' })
+  @ApiSuccessResponse(CategoryResponseDto, '分类更新成功')
+  @ApiBadRequestResponse()
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
+  @ApiConflictResponse()
+  @ApiInternalServerErrorResponse()
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(+id, updateCategoryDto)
   }
@@ -58,16 +77,19 @@ export class CategoryController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '删除分类' })
-  @ApiResponse({ status: 200, description: '分类删除成功' })
-  @ApiResponse({ status: 404, description: '分类不存在' })
-  @ApiResponse({ status: 409, description: '该分类下还有文章，无法删除' })
+  @ApiSuccessResponse(CategoryResponseDto, '分类删除成功')
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
+  @ApiConflictResponse()
+  @ApiInternalServerErrorResponse()
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id)
   }
 
   @Get('statistics')
   @ApiOperation({ summary: '获取分类统计信息' })
-  @ApiResponse({ status: 200, description: '获取成功' })
+  @ApiSuccessResponse(Object, '获取分类统计成功')
+  @ApiInternalServerErrorResponse()
   get_category_statistics() {
     return this.categoryService.get_category_statistics()
   }
@@ -75,7 +97,8 @@ export class CategoryController {
   @Get('popular')
   @ApiOperation({ summary: '获取热门分类' })
   @ApiQuery({ name: 'limit', required: false, description: '数量限制', example: 10 })
-  @ApiResponse({ status: 200, description: '获取成功' })
+  @ApiSuccessResponse(CategoryResponseDto, '获取热门分类成功')
+  @ApiInternalServerErrorResponse()
   get_popular_categories(@Query('limit', new ParseIntPipe({ optional: true })) limit: number = 10) {
     return this.categoryService.get_popular_categories(limit)
   }

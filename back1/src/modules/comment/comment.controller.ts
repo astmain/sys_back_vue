@@ -5,8 +5,19 @@ import { CreateCommentDto } from './dto/create_comment.dto'
 import { UpdateCommentDto } from './dto/update_comment.dto'
 import { QueryCommentDto } from './dto/query_comment.dto'
 import { JwtAuthGuard } from '../auth/guards/jwt_auth.guard'
+import { 
+  ApiSuccessResponse,
+  ApiCreatedResponse,
+  ApiPaginatedResponse,
+  ApiBadRequestResponse,
+  ApiUnauthorizedResponse,
+  ApiNotFoundResponse,
+  ApiConflictResponse,
+  ApiInternalServerErrorResponse
+} from '../../common/decorators/api_response.decorator'
+import { CommentResponseDto } from '../../common/dto/paginated_response.dto'
 
-@ApiTags('评论管理')
+@ApiTags('评论')
 @Controller('comments')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
@@ -15,10 +26,11 @@ export class CommentController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '创建评论' })
-  @ApiResponse({ status: 201, description: '评论创建成功' })
-  @ApiResponse({ status: 400, description: '请求参数错误' })
-  @ApiResponse({ status: 401, description: '未授权' })
-  @ApiResponse({ status: 404, description: '文章或父评论不存在' })
+  @ApiCreatedResponse(CommentResponseDto, '评论创建成功')
+  @ApiBadRequestResponse()
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
+  @ApiInternalServerErrorResponse()
   create(@Body() createCommentDto: CreateCommentDto, @Request() req) {
     return this.commentService.create(createCommentDto, req.user.id)
   }

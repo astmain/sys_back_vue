@@ -9,18 +9,20 @@
 - **框架**: NestJS
 - **数据库**: SQLite (通过 Prisma ORM)
 - **认证**: JWT + Passport
-- **文档**: Swagger/OpenAPI
+- **文档**: Swagger/OpenAPI + Knife4j2
 - **验证**: class-validator + class-transformer
 
 ## 功能模块
 
 ### 1. 用户管理 (Users)
+
 - 用户注册/登录
 - 用户信息管理
 - 用户统计信息
 - 用户搜索
 
 ### 2. 文章管理 (Articles)
+
 - 文章 CRUD 操作
 - 文章发布/草稿
 - 文章搜索和筛选
@@ -28,22 +30,26 @@
 - 相关文章推荐
 
 ### 3. 分类管理 (Categories)
+
 - 分类 CRUD 操作
 - 分类统计信息
 - 热门分类
 
 ### 4. 标签管理 (Tags)
+
 - 标签 CRUD 操作
 - 标签统计信息
 - 标签搜索
 
 ### 5. 评论管理 (Comments)
+
 - 评论 CRUD 操作
 - 评论回复（支持嵌套）
 - 评论点赞
 - 评论搜索
 
 ### 6. 统计信息 (Statistics)
+
 - 系统整体统计
 - 最近活动
 - 热门内容
@@ -51,10 +57,12 @@
 ## API 端点
 
 ### 认证相关
+
 - `POST /auth/login` - 用户登录
 - `POST /auth/register` - 用户注册
 
 ### 用户管理
+
 - `GET /users` - 获取用户列表
 - `GET /users/:id` - 获取用户详情
 - `GET /users/:id/stats` - 获取用户统计
@@ -65,6 +73,7 @@
 - `DELETE /users/:id` - 删除用户
 
 ### 文章管理
+
 - `GET /articles` - 获取文章列表
 - `GET /articles/:id` - 获取文章详情
 - `GET /articles/slug/:slug` - 根据别名获取文章
@@ -80,6 +89,7 @@
 - `POST /articles/:id/like` - 点赞文章
 
 ### 分类管理
+
 - `GET /categories` - 获取分类列表
 - `GET /categories/:id` - 获取分类详情
 - `GET /categories/slug/:slug` - 根据别名获取分类
@@ -90,6 +100,7 @@
 - `DELETE /categories/:id` - 删除分类
 
 ### 标签管理
+
 - `GET /tags` - 获取标签列表
 - `GET /tags/:id` - 获取标签详情
 - `GET /tags/slug/:slug` - 根据别名获取标签
@@ -101,6 +112,7 @@
 - `DELETE /tags/:id` - 删除标签
 
 ### 评论管理
+
 - `GET /comments` - 获取评论列表
 - `GET /comments/:id` - 获取评论详情
 - `GET /comments/article/:articleId` - 获取文章评论
@@ -113,6 +125,7 @@
 - `POST /comments/:id/like` - 点赞评论
 
 ### 统计信息
+
 - `GET /statistics/system` - 获取系统统计
 - `GET /statistics/recent-activity` - 获取最近活动
 - `GET /statistics/popular-content` - 获取热门内容
@@ -120,28 +133,37 @@
 ## 启动项目
 
 1. 安装依赖
+
 ```bash
 pnpm install
 ```
 
 2. 生成 Prisma 客户端
+
 ```bash
 pnpm prisma:generate
 ```
 
 3. 推送数据库模式
+
 ```bash
 pnpm prisma:push
 ```
 
 4. 启动开发服务器
+
 ```bash
 pnpm dev
 ```
 
 5. 访问 API 文档
+
 ```
+# 标准 Swagger 文档
 http://localhost:3000/api
+
+# Knife4j2 增强文档界面
+http://localhost:3000/doc.html
 ```
 
 ## 环境变量
@@ -175,6 +197,8 @@ NODE_ENV=development
 
 所有 API 响应都遵循统一格式：
 
+### 成功响应格式
+
 ```json
 {
   "success": true,
@@ -184,7 +208,24 @@ NODE_ENV=development
 }
 ```
 
-## 错误处理
+### 分页响应格式
+
+```json
+{
+  "success": true,
+  "data": {
+    "items": [],
+    "total": 100,
+    "page": 1,
+    "limit": 10,
+    "total_pages": 10
+  },
+  "message": "获取列表成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### 错误响应格式
 
 系统提供全局异常处理，错误响应格式：
 
@@ -195,6 +236,179 @@ NODE_ENV=development
   "path": "/api/users",
   "method": "GET",
   "message": "错误信息"
+}
+```
+
+## 响应示例
+
+### 用户相关响应示例
+
+#### 用户信息响应
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "username": "john_doe",
+    "email": "john@example.com",
+    "role": "user",
+    "avatar": "https://example.com/avatar.jpg",
+    "bio": "这是一个用户简介",
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  },
+  "message": "获取用户成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+#### 登录成功响应
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": 1,
+      "username": "john_doe",
+      "email": "john@example.com",
+      "role": "user",
+      "created_at": "2024-01-01T00:00:00.000Z"
+    },
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  },
+  "message": "登录成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### 文章相关响应示例
+
+#### 文章信息响应
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "title": "这是一篇文章标题",
+    "slug": "this-is-an-article-title",
+    "summary": "这是文章摘要",
+    "content": "这是文章内容...",
+    "is_published": true,
+    "view_count": 100,
+    "like_count": 10,
+    "author": {
+      "id": 1,
+      "username": "john_doe",
+      "email": "john@example.com",
+      "role": "user"
+    },
+    "category": {
+      "id": 1,
+      "name": "技术",
+      "slug": "technology"
+    },
+    "tags": [
+      {
+        "id": 1,
+        "name": "JavaScript",
+        "slug": "javascript"
+      }
+    ],
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  },
+  "message": "获取文章成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### 分类相关响应示例
+
+#### 分类信息响应
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "name": "技术",
+    "slug": "technology",
+    "description": "技术相关文章分类",
+    "article_count": 10,
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  },
+  "message": "获取分类成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### 标签相关响应示例
+
+#### 标签信息响应
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "name": "JavaScript",
+    "slug": "javascript",
+    "color": "#3498db",
+    "article_count": 5,
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  },
+  "message": "获取标签成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### 评论相关响应示例
+
+#### 评论信息响应
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "content": "这是一条评论",
+    "like_count": 3,
+    "parent_id": null,
+    "author": {
+      "id": 1,
+      "username": "john_doe",
+      "email": "john@example.com",
+      "role": "user"
+    },
+    "article": {
+      "id": 1,
+      "title": "这是一篇文章标题",
+      "slug": "this-is-an-article-title"
+    },
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  },
+  "message": "获取评论成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### 统计信息响应示例
+
+#### 系统统计响应
+```json
+{
+  "success": true,
+  "data": {
+    "total_users": 100,
+    "total_articles": 500,
+    "total_categories": 10,
+    "total_tags": 50,
+    "total_comments": 1000,
+    "total_views": 10000,
+    "total_likes": 500
+  },
+  "message": "获取系统统计成功",
+  "timestamp": "2024-01-01T00:00:00.000Z"
 }
 ```
 
