@@ -32,8 +32,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       },
     })
 
-
-    console.log("user---:",user)
+    console.log('user---:', user)
 
     if (!user || !user.is_active) {
       throw new UnauthorizedException('用户不存在或已被禁用')
