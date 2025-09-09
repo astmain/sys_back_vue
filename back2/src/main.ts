@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
+import { App_Module } from './App_Module'
 import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { AllExceptionsFilter } from './common/filters/http-exception.filter'
 import { Plugins } from './Plugins/index'
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(App_Module)
 
   // 全局响应拦截器
   app.useGlobalInterceptors(new ResponseInterceptor())
@@ -16,7 +16,7 @@ async function bootstrap() {
   await Plugins.filter_dto(app) // dto配置(全局验证管道)
   await Plugins.swagger_knife4j2(app) //文档配置(swagger_knife4j2)
 
-  const port = process.env.PORT || 3000
+  const port = process.env.PORT || 3001
   await app.listen(port)
 
   console.log(`应用运行在: http://localhost:${port}`)

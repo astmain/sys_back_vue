@@ -8,10 +8,9 @@ import * as bcrypt from 'bcryptjs'
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-
   async create(createUserDto: CreateUserDto) {
     // 检查用户名是否已存在
-    const existingUser = await this.prisma.user.findFirst({
+    const existingUser = await this.prisma.tb_user.findFirst({
       where: {
         OR: [{ username: createUserDto.username }, { email: createUserDto.email }],
       },
@@ -24,7 +23,7 @@ export class UserService {
     // 加密密码
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10)
 
-    const user = await this.prisma.user.create({
+    const user = await this.prisma.tb_user.create({
       data: {
         ...createUserDto,
         password: hashedPassword,
@@ -59,7 +58,7 @@ export class UserService {
     }
 
     const [users, total] = await Promise.all([
-      this.prisma.user.findMany({
+      this.prisma.tb_user.findMany({
         where,
         skip,
         take: limit,
@@ -77,7 +76,7 @@ export class UserService {
           updated_at: true,
         },
       }),
-      this.prisma.user.count({ where }),
+      this.prisma.tb_user.count({ where }),
     ])
 
     return {
@@ -90,7 +89,7 @@ export class UserService {
   }
 
   async find_one(id: number) {
-    const user = await this.prisma.user.findFirst({
+    const user = await this.prisma.tb_user.findFirst({
       where: { id },
       select: {
         id: true,
@@ -115,7 +114,7 @@ export class UserService {
   }
 
   async find_by_username(username: string) {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.tb_user.findUnique({
       where: { username },
     })
 
@@ -127,7 +126,7 @@ export class UserService {
   }
 
   async find_by_email(email: string) {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.tb_user.findUnique({
       where: { email },
     })
 
@@ -146,7 +145,7 @@ export class UserService {
       updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10)
     }
 
-    const user = await this.prisma.user.update({
+    const user = await this.prisma.tb_user.update({
       where: { id },
       data: updateUserDto,
       select: {
@@ -168,7 +167,7 @@ export class UserService {
 
   async remove(id: number) {
     await this.find_one(id) // 检查用户是否存在
-    await this.prisma.user.delete({
+    await this.prisma.tb_user.delete({
       where: { id },
     })
   }
@@ -177,164 +176,4 @@ export class UserService {
     return await bcrypt.compare(plainPassword, hashedPassword)
   }
 
-  async get_user_stats(user_id: number) {
-    // 首先检查用户是否存在
-    await this.find_one(user_id)
-
-    const [article_count, comment_count, total_likes, total_views] = await Promise.all([
-      this.prisma.article.count({
-        where: { author_id: user_id, is_active: true },
-      }),
-      this.prisma.comment.count({
-        where: { author_id: user_id, is_active: true },
-      }),
-      this.prisma.article
-        .aggregate({
-          where: { author_id: user_id, is_active: true },
-          _sum: { like_count: true },
-        })
-        .then((result) => result._sum.like_count || 0),
-      this.prisma.article
-        .aggregate({
-          where: { author_id: user_id, is_active: true },
-          _sum: { view_count: true },
-        })
-        .then((result) => result._sum.view_count || 0),
-    ])
-
-    return {
-      article_count,
-      comment_count,
-      total_likes,
-      total_views,
-    }
-  }
-
-  async get_user_articles(user_id: number, page: number = 1, limit: number = 10) {
-    // 首先检查用户是否存在
-    await this.find_one(user_id)
-
-    const skip = (page - 1) * limit
-
-    const [articles, total] = await Promise.all([
-      this.prisma.article.findMany({
-        where: { author_id: user_id, is_active: true },
-        skip,
-        take: limit,
-        orderBy: { created_at: 'desc' },
-        include: {
-          category: true,
-          tags: true,
-          _count: {
-            select: { comments: true },
-          },
-        },
-      }),
-      this.prisma.article.count({
-        where: { author_id: user_id, is_active: true },
-      }),
-    ])
-
-    return {
-      data: articles,
-      total,
-      page,
-      limit,
-      total_pages: Math.ceil(total / limit),
-    }
-  }
-
-  async get_user_comments(user_id: number, page: number = 1, limit: number = 10) {
-    // 首先检查用户是否存在
-    await this.find_one(user_id)
-
-    const skip = (page - 1) * limit
-
-    const [comments, total] = await Promise.all([
-      this.prisma.comment.findMany({
-        where: { author_id: user_id, is_active: true },
-        skip,
-        take: limit,
-        orderBy: { created_at: 'desc' },
-        include: {
-          article: {
-            select: {
-              id: true,
-              title: true,
-              slug: true,
-            },
-          },
-        },
-      }),
-      this.prisma.comment.count({
-        where: { author_id: user_id, is_active: true },
-      }),
-    ])
-
-    return {
-      data: comments,
-      total,
-      page,
-      limit,
-      total_pages: Math.ceil(total / limit),
-    }
-  }
-
-  async search_users(search: string, page: number = 1, limit: number = 10) {
-    // 参数验证
-    if (!search || search.trim().length === 0) {
-      throw new Error('搜索关键词不能为空')
-    }
-
-    if (page < 1) page = 1
-    if (limit < 1 || limit > 100) limit = 10
-
-    const skip = (page - 1) * limit
-    const searchTerm = search.trim()
-
-    const where = {
-      is_active: true,
-      OR: [
-        { username: { contains: searchTerm } },
-        { nickname: { contains: searchTerm } },
-        { email: { contains: searchTerm } }
-      ],
-    }
-
-    const [users, total] = await Promise.all([
-      this.prisma.user.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { created_at: 'desc' },
-        select: {
-          id: true,
-          username: true,
-          email: true,
-          nickname: true,
-          avatar: true,
-          bio: true,
-          role: true,
-          is_active: true,
-          created_at: true,
-          updated_at: true,
-          _count: {
-            select: {
-              articles: true,
-              comments: true,
-            },
-          },
-        },
-      }),
-      this.prisma.user.count({ where }),
-    ])
-
-    return {
-      data: users,
-      total,
-      page,
-      limit,
-      total_pages: Math.ceil(total / limit),
-    }
-  }
 }

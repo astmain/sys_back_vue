@@ -7,18 +7,18 @@ import { knife4jSetup } from 'nestjs-knife4j2'
 export async function swagger_knife4j2(app) {
   // Swagger API文档配置
   const config = new DocumentBuilder()
-    .setTitle('博客系统API')
-    .setDescription('基于NestJS的博客系统API文档')
+    .setTitle('博客系统API0')
+    .setDescription('基于NestJS的博客系统API文档0')
     .setVersion('1.0')
-    .addTag('认证', '用户认证相关接口')
+    .addTag('博客系统API0', '用户认证相关接口')
     .addGlobalParameters({
-      name: 'Authorization',
+      name: 'token',
       in: 'header',
-      description: 'Authorization',
+      description: 'token',
       required: true,
       schema: {
         type: 'string',
-        default: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5fZG9lIiwic3ViIjoxLCJpYXQiOjE3NTc0MjU3NjgsImV4cCI6MTc1ODAzMDU2OH0.FRejQzYYlAJoUXX4ba5lvsEwxJy3GP1oB3BHh_lKO18',
+        default: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5fZG9lIiwic3ViIjoxLCJpYXQiOjE3NTc0MjU3NjgsImV4cCI6MTc1ODAzMDU2OH0.FRejQzYYlAJoUXX4ba5lvsEwxJy3GP1oB3BHh_lKO18',
         // default: '',
       },
     })
