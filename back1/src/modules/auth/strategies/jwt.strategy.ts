@@ -1,8 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { Injectable, UnauthorizedException } from '@nestjs/common'
+import { PassportStrategy } from '@nestjs/passport'
+import { ExtractJwt, Strategy } from 'passport-jwt'
+import { ConfigService } from '@nestjs/config'
+import { PrismaService } from '../../../prisma/prisma.service'
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: configService.get<string>('JWT_SECRET') || 'default-jwt-secret-key',
-    });
+    })
   }
 
   async validate(payload: any) {
@@ -29,13 +29,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         bio: true,
         role: true,
         is_active: true,
-      }
-    });
+      },
+    })
 
     if (!user || !user.is_active) {
-      throw new UnauthorizedException('用户不存在或已被禁用');
+      throw new UnauthorizedException('用户不存在或已被禁用')
     }
 
-    return user;
+    return user
   }
 }

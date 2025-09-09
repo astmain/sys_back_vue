@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger'
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, ParseIntPipe } from '@nestjs/common'
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create_user.dto'
 import { UpdateUserDto } from './dto/update_user.dto'
@@ -51,5 +51,41 @@ export class UserController {
   @ApiResponse({ status: 404, description: '用户不存在' })
   remove(@Param('id') id: string) {
     return this.userService.remove(+id)
+  }
+
+  @Get(':id/stats')
+  @ApiOperation({ summary: '获取用户统计信息' })
+  @ApiResponse({ status: 200, description: '获取用户统计成功' })
+  @ApiResponse({ status: 404, description: '用户不存在' })
+  get_user_stats(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.get_user_stats(id)
+  }
+
+  @Get(':id/articles')
+  @ApiOperation({ summary: '获取用户文章列表' })
+  @ApiQuery({ name: 'page', required: false, description: '页码', example: 1 })
+  @ApiQuery({ name: 'limit', required: false, description: '每页数量', example: 10 })
+  @ApiResponse({ status: 200, description: '获取用户文章成功' })
+  get_user_articles(@Param('id', ParseIntPipe) id: number, @Query('page', new ParseIntPipe({ optional: true })) page: number = 1, @Query('limit', new ParseIntPipe({ optional: true })) limit: number = 10) {
+    return this.userService.get_user_articles(id, page, limit)
+  }
+
+  @Get(':id/comments')
+  @ApiOperation({ summary: '获取用户评论列表' })
+  @ApiQuery({ name: 'page', required: false, description: '页码', example: 1 })
+  @ApiQuery({ name: 'limit', required: false, description: '每页数量', example: 10 })
+  @ApiResponse({ status: 200, description: '获取用户评论成功' })
+  get_user_comments(@Param('id', ParseIntPipe) id: number, @Query('page', new ParseIntPipe({ optional: true })) page: number = 1, @Query('limit', new ParseIntPipe({ optional: true })) limit: number = 10) {
+    return this.userService.get_user_comments(id, page, limit)
+  }
+
+  @Get('search')
+  @ApiOperation({ summary: '搜索用户' })
+  @ApiQuery({ name: 'search', required: true, description: '搜索关键词' })
+  @ApiQuery({ name: 'page', required: false, description: '页码', example: 1 })
+  @ApiQuery({ name: 'limit', required: false, description: '每页数量', example: 10 })
+  @ApiResponse({ status: 200, description: '搜索用户成功' })
+  search_users(@Query('search') search: string, @Query('page', new ParseIntPipe({ optional: true })) page: number = 1, @Query('limit', new ParseIntPipe({ optional: true })) limit: number = 10) {
+    return this.userService.search_users(search, page, limit)
   }
 }

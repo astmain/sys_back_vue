@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger'
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, ParseIntPipe } from '@nestjs/common'
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger'
 import { CategoryService } from './category.service'
 import { CreateCategoryDto } from './dto/create_category.dto'
 import { UpdateCategoryDto } from './dto/update_category.dto'
@@ -63,5 +63,20 @@ export class CategoryController {
   @ApiResponse({ status: 409, description: '该分类下还有文章，无法删除' })
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id)
+  }
+
+  @Get('statistics')
+  @ApiOperation({ summary: '获取分类统计信息' })
+  @ApiResponse({ status: 200, description: '获取成功' })
+  get_category_statistics() {
+    return this.categoryService.get_category_statistics()
+  }
+
+  @Get('popular')
+  @ApiOperation({ summary: '获取热门分类' })
+  @ApiQuery({ name: 'limit', required: false, description: '数量限制', example: 10 })
+  @ApiResponse({ status: 200, description: '获取成功' })
+  get_popular_categories(@Query('limit', new ParseIntPipe({ optional: true })) limit: number = 10) {
+    return this.categoryService.get_popular_categories(limit)
   }
 }
