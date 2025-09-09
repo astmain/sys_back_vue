@@ -1,11 +1,20 @@
-import { Controller, Get, Inject } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiOkResponse } from '@nestjs/swagger'
+import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
+import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_Auth'
 import { PrismaClient, tb_user as Tb_user } from '@prisma/client'
 
 import { db } from './App_Prisma'
+
+class Tb_user_Dto {
+  @ApiProperty({ description: '用户名' })
+  username: string
+  @ApiProperty({ description: '邮箱' })
+  email: string
+  @ApiProperty({ description: '密码' })
+  password: string
+}
 
 @ApiTags('首页')
 @Api_public()
@@ -57,7 +66,7 @@ export class App_Controller {
       db.tb_user.count({}),
     ])
 
-    return { code: 200, msg: '健康检查', result: { users, total } }
+    return { code: 200, msg: '分页功能', result: { users, total } }
   }
 
   @Get('save_user')
@@ -65,12 +74,11 @@ export class App_Controller {
   async save_user() {
     const one = await db.tb_user.create({
       data: {
-        username: 'test' + dayjs().unix(),
-        email: 'test@example.com' + dayjs().unix(),
+        phone: '15160315110' + dayjs().unix(),
         password: '123456',
       },
     })
 
-    return { code: 200, msg: '健康检查', result: { one } }
+    return { code: 200, msg: '保存用户', result: { one } }
   }
 }

@@ -9,14 +9,8 @@ datasource db {
 
 model tb_user {
   id         Int      @id @default(autoincrement())
-  username   String   @unique
-  email      String   @unique
+  phone      String   @unique
   password   String
-  nickname   String?
-  avatar     String?
-  bio        String?
-  role       String   @default("user")
-  is_active  Boolean  @default(true)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }

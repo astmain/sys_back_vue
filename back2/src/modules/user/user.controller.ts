@@ -41,7 +41,7 @@ export class UserController {
   @ApiSuccessResponse(UserResponseDto, '获取用户成功')
   @ApiNotFoundResponse()
   @ApiInternalServerErrorResponse()
-  async find_one(@Param('id', ParseIntPipe) id: number): Promise<UserResponseDto> {
+  async find_one(@Param('id', ParseIntPipe) id: number) {
     return this.userService.find_one(id)
   }
 

@@ -6,8 +6,8 @@ import { Plugins } from './Plugins/index'
 async function bootstrap() {
   const app = await NestFactory.create(App_Module)
 
-  // 全局响应拦截器
-  app.useGlobalInterceptors(new ResponseInterceptor())
+  // // 全局响应拦截器
+  // app.useGlobalInterceptors(new ResponseInterceptor())
 
   // 全局异常过滤器
   app.useGlobalFilters(new AllExceptionsFilter())
