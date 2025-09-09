@@ -32,7 +32,7 @@ export class PaginatedResponseDto<T> {
   @ApiProperty({ description: '响应消息', example: '获取列表成功' })
   message: string
 
-  @ApiProperty({ description: '响应时间戳', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '响应时间戳', example: '2024-01-01 00:00:00.000' })
   timestamp: string
 }
 
@@ -56,10 +56,10 @@ export class UserResponseDto {
   @ApiProperty({ description: '个人简介', example: '这是一个用户简介', required: false })
   bio?: string
 
-  @ApiProperty({ description: '创建时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '创建时间', example: '2024-01-01 00:00:00.000' })
   created_at: string
 
-  @ApiProperty({ description: '更新时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '更新时间', example: '2024-01-01 00:00:00.000' })
   updated_at: string
 }
 
@@ -98,10 +98,10 @@ export class ArticleResponseDto {
   @ApiProperty({ description: '标签列表', type: 'array', items: { type: 'object' }, required: false })
   tags?: any[]
 
-  @ApiProperty({ description: '创建时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '创建时间', example: '2024-01-01 00:00:00.000' })
   created_at: string
 
-  @ApiProperty({ description: '更新时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '更新时间', example: '2024-01-01 00:00:00.000' })
   updated_at: string
 }
 
@@ -122,10 +122,10 @@ export class CategoryResponseDto {
   @ApiProperty({ description: '文章数量', example: 10 })
   article_count: number
 
-  @ApiProperty({ description: '创建时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '创建时间', example: '2024-01-01 00:00:00.000' })
   created_at: string
 
-  @ApiProperty({ description: '更新时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '更新时间', example: '2024-01-01 00:00:00.000' })
   updated_at: string
 }
 
@@ -146,10 +146,10 @@ export class TagResponseDto {
   @ApiProperty({ description: '文章数量', example: 5 })
   article_count: number
 
-  @ApiProperty({ description: '创建时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '创建时间', example: '2024-01-01 00:00:00.000' })
   created_at: string
 
-  @ApiProperty({ description: '更新时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '更新时间', example: '2024-01-01 00:00:00.000' })
   updated_at: string
 }
 
@@ -173,10 +173,10 @@ export class CommentResponseDto {
   @ApiProperty({ description: '文章信息', type: 'object' })
   article: any
 
-  @ApiProperty({ description: '创建时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '创建时间', example: '2024-01-01 00:00:00.000' })
   created_at: string
 
-  @ApiProperty({ description: '更新时间', example: '2024-01-01T00:00:00.000Z' })
+  @ApiProperty({ description: '更新时间', example: '2024-01-01 00:00:00.000' })
   updated_at: string
 }
 
