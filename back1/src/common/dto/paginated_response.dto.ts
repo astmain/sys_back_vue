@@ -63,6 +63,19 @@ export class UserResponseDto {
   updated_at: string
 }
 
+// 用户服务层返回类型（包含 Date 类型）
+export class UserServiceDto {
+  id: number
+  username: string
+  email: string
+  role: string
+  avatar?: string
+  bio?: string
+  is_active: boolean
+  created_at: Date
+  updated_at: Date
+}
+
 // 文章相关响应示例
 export class ArticleResponseDto {
   @ApiProperty({ description: '文章ID', example: 1 })
