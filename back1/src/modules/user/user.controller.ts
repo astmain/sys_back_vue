@@ -39,6 +39,50 @@ export class UserController {
     return this.userService.find_all()
   }
 
+
+  /*
+
+  我希望能created_at和updated_at 时间格式是 YYYY-MM-DD HH:mm:ss.ms 
+ 下面是获取所有用户 的 响应数据
+    {
+    "success": true,
+    "data": [
+      {
+        "id": 1,
+        "username": "john_doe",
+        "email": "john@example.com",
+        "nickname": "John Doe",
+        "avatar": null,
+        "bio": "这是一个用户简介",
+        "role": "user",
+        "is_active": true,
+        "created_at": "2025-09-09T09:45:59.834Z",
+        "updated_at": "2025-09-09T09:45:59.834Z"
+      },
+      {
+        "id": 2,
+        "username": "john_doe1",
+        "email": "john@example1.com",
+        "nickname": "John Doe",
+        "avatar": null,
+        "bio": "这是一个用户简介",
+        "role": "user",
+        "is_active": true,
+        "created_at": "2025-09-09T11:15:01.138Z",
+        "updated_at": "2025-09-09T11:15:01.138Z"
+      }
+    ],
+    "message": "操作成功",
+    "timestamp": "2025-09-09T11:31:18.535Z"
+  }
+  
+  */ 
+
+
+
+
+
+
   @Get(':id')
   @ApiOperation({ summary: '根据ID获取用户' })
   @ApiSuccessResponse(UserResponseDto, '获取用户成功')
