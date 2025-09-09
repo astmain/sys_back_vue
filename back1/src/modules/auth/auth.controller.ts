@@ -3,7 +3,6 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagg
 import { AuthService } from './auth.service'
 import { LoginDto } from './dto/login.dto'
 import { RegisterDto } from './dto/register.dto'
-import { LocalAuthGuard } from './guards/local_auth.guard'
 import { JwtAuthGuard } from './guards/jwt_auth.guard'
 import { 
   ApiLoginSuccessResponse, 
