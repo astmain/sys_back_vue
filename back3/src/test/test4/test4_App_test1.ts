@@ -1,9 +1,10 @@
-import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
-import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
+import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty, ApiBody, ApiExtraModels } from '@nestjs/swagger'
+import { /*接口*/ Controller, Get, Inject, Body } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
 
 import { VO_Dynamic1 } from './VO_Dynamic1' // VO
+import { dto1 as dto1_1 } from './dto1/dto1'
 
 // 用户数据DTO
 class Dto_one1 {
@@ -30,6 +31,7 @@ class type_aaa {
 
 @Api_public()
 @ApiTags('🟪test4_App_test1')
+@ApiExtraModels(dto1_1)
 @Controller('test4_App_test1')
 export class test4_App_test1 {
   @Get('one1')
@@ -39,7 +41,9 @@ export class test4_App_test1 {
       { key: 'aaa', type: type_aaa },
     ]),
   })
-  async one1() {
+
+  // 动态创建 DTO 使用 type_aaa
+  async one1(@Body() body: dto1_1) {
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
 
     return { code: 200, msg: '成111功', result: { one111: one, aaa: { name_aaa: '111' } } }

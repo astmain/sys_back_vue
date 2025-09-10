@@ -1,6 +1,5 @@
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { knife4jSetup } from 'nestjs-knife4j2'
-// 自定义
 
 //  配置:swagger文档nest-knife4j
 
@@ -11,6 +10,8 @@ export async function swagger_knife4j2(app) {
     .setDescription('基于NestJS的博客系统API文档')
     .setVersion('1.0')
     .addTag('认证', '用户认证相关接口')
+    .addTag('🟪test4_App_test1', '测试模块1 - 使用dto1_module1模型')
+    .addTag('🟪test4_App_test2', '测试模块2 - 使用dto1_module2模型')
     .addGlobalParameters({
       name: 'token',
       in: 'header',
@@ -25,6 +26,7 @@ export async function swagger_knife4j2(app) {
 
     .build()
 
+  // 创建Swagger文档
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document)
 
