@@ -25,7 +25,7 @@ class Dto_one1 {
   updated_at: Date
 }
 
-// 工厂函数VO 我的 return { code: 200, msg: '成功', result: { one1: one } }
+// 工厂函数VO  我的返回数据是 { code: 200, msg: '成功', result: { one1: one } }   one1是key  value是one .这样工厂函数VO  需要扩展可以传入key
 function VO<T>(dataType: new () => T) {
   // 通用响应DTO - 包含code和msg
   class Base_Response_Dto<T = any> {
