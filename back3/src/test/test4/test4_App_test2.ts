@@ -24,11 +24,11 @@ class Dto_one2 {
 }
 
 
-// test4_App_test2.ts中的type_aaa被test4_App_test1.ts中的type_aaa覆盖了
-class type_aaa {
-  @ApiProperty({ description: 'name_aaa2', example: 'aaa111' })
+// 重命名为type_aaa2避免与test4_App_test1.ts中的type_aaa冲突
+class type_aaa2 {
+  @ApiProperty({ description: 'name_aaa2', example: 'aaa_11' })
   name_aaa: number
-  @ApiProperty({ description: 'name_bbb', example: 'aaa222' })
+  @ApiProperty({ description: 'name_bbb2', example: 'bbb_22' })
   name_bbb: number
 }
 
@@ -40,7 +40,7 @@ export class test4_App_test2 {
   @ApiOkResponse({
     type: VO_Dynamic1([
       { key: 'one111', type: Dto_one2 },
-      { key: 'aaa', type: type_aaa },
+      { key: 'aaa', type: type_aaa2 },
     ]),
   })
   async one1() {

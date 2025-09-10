@@ -24,7 +24,7 @@ class Dto_one1 {
 }
 
 class type_aaa {
-  @ApiProperty({ description: 'name_aaa', example: '111-1' })
+  @ApiProperty({ description: 'name_aaa1', example: 'aaa_1' })
   name_aaa: number
 }
 
