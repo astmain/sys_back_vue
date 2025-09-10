@@ -5,12 +5,12 @@ import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_Auth'
 import { PrismaClient, tb_user as Tb_user } from '@prisma/client'
 
-import { VO } from './VO_Dynamic' // VO
-
 import { db } from './App_Prisma'
 
+import { VO } from './VO_Dynamic' // VO
+
 // 用户数据DTO
-class Dto_one2 {
+class Dto_one4 {
   @ApiProperty({ description: '用户ID', example: 1 })
   id: number
 
@@ -27,16 +27,15 @@ class Dto_one2 {
   updated_at: Date
 }
 
-
 @Api_public()
-@ApiTags('App_test2')
-@Controller('App_test2')
-export class App_test2 {
+@ApiTags('App_test4')
+@Controller('App_test4')
+export class App_test4 {
   @Get('one1')
-  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one2, 'one222') })
+  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one4, 'data4') })
   async one1() {
     const one = await db.tb_user.findFirst({ where: { password: '123456' } })
 
-    return { code: 200, msg: '成功', result: { one22: one } }
+    return { code: 200, msg: '成功1', result: { data: one } }
   }
 }
