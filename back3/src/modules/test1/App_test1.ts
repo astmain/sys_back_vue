@@ -59,8 +59,8 @@ function VO<T>(dataType: new () => T) {
 }
 
 @Api_public()
-@ApiTags('App_test1')
-@Controller('App_test1')
+@ApiTags('test1/App_test1')
+@Controller('test1/App_test1')
 export class App_test1 {
   @Get('one1')
   @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one1) })

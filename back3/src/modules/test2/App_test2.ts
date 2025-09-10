@@ -1,16 +1,14 @@
+import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
 import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
-import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty, ApiExtraModels } from '@nestjs/swagger'
-import { JwtService } from '@nestjs/jwt'
-import dayjs from 'dayjs' // const dayjs = require('dayjs')
-import { Api_public } from '@src/App_Auth'
-import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
-
-import { db } from '@src/App_Prisma'
+import { /*api开发*/ Api_public } from '@src/App_Auth'
+import { /*数据库*/ db } from '@src/App_Prisma'
 
 import { VO } from '@src/VO_Dynamic' // VO
 
+
+
 // 用户数据DTO
-class Dto_one3 {
+class Dto_one2 {
   @ApiProperty({ description: '用户ID', example: 1 })
   id: number
 
@@ -27,15 +25,16 @@ class Dto_one3 {
   updated_at: Date
 }
 
+
 @Api_public()
-@ApiTags('App_test3')
-@Controller('App_test3')
-export class App_test3 {
+@ApiTags('🟩test2/App_test2') 
+@Controller('test2/App_test2')
+export class App_test2 {
   @Get('one1')
-  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one3, 'data') })
+  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one2, 'one222') })
   async one1() {
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
 
-    return { code: 200, msg: '成功1', result: { data: one } }
+    return { code: 200, msg: '成功', result: { one22: one } }
   }
 }

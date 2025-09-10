@@ -29,8 +29,8 @@ class Dto_one2 {
 
 
 @Api_public()
-@ApiTags('App_test2')
-@Controller('App_test2')
+@ApiTags('test1/App_test2')
+@Controller('test1/App_test2')
 export class App_test2 {
   @Get('one1')
   @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one2, 'one222') })

@@ -18,11 +18,16 @@ import { App_Prisma } from './App_Prisma'
   controllers: [
     // 首页
     require('@src/App_Controller').App_Controller,
-    // test(测试功能)
-    require('@src/modules/test/App_test1').App_test1,
-    require('@src/modules/test/App_test2').App_test2,
-    require('@src/modules/test/App_test3').App_test3,
-    require('@src/modules/test/App_test4').App_test4,
+    // test1(测试功能)
+    require('@src/modules/test1/App_test1').App_test1,
+    require('@src/modules/test1/App_test2').App_test2,
+    require('@src/modules/test1/App_test3').App_test3,
+    require('@src/modules/test1/App_test4').App_test4,
+    // test1(测试功能)
+    require('@src/modules/test2/App_test1').App_test1,
+    require('@src/modules/test2/App_test2').App_test2,
+    require('@src/modules/test2/App_test3').App_test3,
+    require('@src/modules/test2/App_test4').App_test4,
   ],
   providers: [],
 })
