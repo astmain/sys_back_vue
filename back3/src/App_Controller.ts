@@ -143,12 +143,12 @@ export class App_Controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-      db.tb_test1.findMany({ 
-        skip, 
-        take: page_size, 
-        orderBy: { created_at: 'desc' } 
-      }), 
-      db.tb_test1.count({})
+      db.tb_test1.findMany({
+        skip,
+        take: page_size,
+        orderBy: { created_at: 'desc' },
+      }),
+      db.tb_test1.count({}),
     ])
 
     return new User_Pages_Response_Dto('用户分页功能', users, total, page, page_size)
@@ -163,12 +163,12 @@ export class App_Controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [data, total] = await Promise.all([
-      db.tb_test1.findMany({ 
-        skip, 
-        take: page_size, 
-        orderBy: { created_at: 'desc' } 
-      }), 
-      db.tb_test1.count({})
+      db.tb_test1.findMany({
+        skip,
+        take: page_size,
+        orderBy: { created_at: 'desc' },
+      }),
+      db.tb_test1.count({}),
     ])
 
     return new Pages_Response_Dto('通用分页功能', data, total, page, page_size)
@@ -183,12 +183,12 @@ export class App_Controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-      db.tb_test1.findMany({ 
-        skip, 
-        take: page_size, 
-        orderBy: { created_at: 'desc' } 
-      }), 
-      db.tb_test1.count({})
+      db.tb_test1.findMany({
+        skip,
+        take: page_size,
+        orderBy: { created_at: 'desc' },
+      }),
+      db.tb_test1.count({}),
     ])
 
     // 创建嵌套的分页结果
@@ -208,5 +208,48 @@ export class App_Controller {
     })
 
     return new Base_Response_Dto(200, '保存用户', { one })
+  }
+
+  @Get('save_tb_test1')
+  @ApiOperation({ summary: '保存tb_test1' })
+  @ApiOkResponse({ description: '保存tb_test1', type: Base_Response_Dto })
+  async save_tb_test1() {
+    await db.tb_test1.deleteMany()
+    const one = await db.tb_test1.createMany({
+      data: [
+        { phone: '1-1', password: '123456' },
+        { phone: '1-2', password: '123456' },
+        { phone: '1-3', password: '123456' },
+        { phone: '1-4', password: '123456' },
+        { phone: '1-5', password: '123456' },
+        { phone: '1-6', password: '123456' },
+        { phone: '1-7', password: '123456' },
+        { phone: '1-8', password: '123456' },
+        { phone: '1-9', password: '123456' },
+        { phone: '1-10', password: '123456' },
+        { phone: '2-1', password: '123456' },
+        { phone: '2-2', password: '123456' },
+        { phone: '2-3', password: '123456' },
+        { phone: '2-4', password: '123456' },
+        { phone: '2-5', password: '123456' },
+        { phone: '2-6', password: '123456' },
+        { phone: '2-7', password: '123456' },
+        { phone: '2-8', password: '123456' },
+        { phone: '2-9', password: '123456' },
+        { phone: '2-10', password: '123456' },
+        { phone: '3-1', password: '123456' },
+        { phone: '3-2', password: '123456' },
+        { phone: '3-3', password: '123456' },
+        { phone: '3-4', password: '123456' },
+        { phone: '3-5', password: '123456' },
+        { phone: '3-6', password: '123456' },
+        { phone: '3-7', password: '123456' },
+        { phone: '3-8', password: '123456' },
+        { phone: '3-9', password: '123456' },
+        { phone: '3-10', password: '123456' },
+      ],
+    })
+
+    return { code: 200, msg: '保存tb_test1', result: one }
   }
 }

@@ -3,7 +3,7 @@ import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
 
-import { VO } from '@src/VO_Dynamic' // VO
+import { VO } from './VO_Dynamic' // VO
 
 
 
@@ -27,8 +27,8 @@ class Dto_one2 {
 
 
 @Api_public()
-@ApiTags('🟩test2/App_test2') 
-@Controller('test2/App_test2')
+@ApiTags('🟦test3/App_test2')   
+@Controller('test3/App_test2')
 export class App_test2 {
   @Get('one1')
   @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one2, 'one222') })

@@ -3,10 +3,10 @@ import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
 
-import { VO } from '@src/VO_Dynamic' // VO
+import { VO } from './VO_Dynamic' // VO
 
 // 用户数据DTO
-class Dto_one3 {
+class Dto_one1 {
   @ApiProperty({ description: '用户ID', example: 1 })
   id: number
 
@@ -24,14 +24,14 @@ class Dto_one3 {
 }
 
 @Api_public()
-@ApiTags('🟩test2/App_test3')
-@Controller('test2/App_test3')
-export class App_test3 {
+@ApiTags('🟦test3/App_test1')
+@Controller('test3/App_test1')
+export class App_test1 {
   @Get('one1')
-  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one3, 'data') })
+  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one1, 'one111') })
   async one1() {
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
 
-    return { code: 200, msg: '成功1', result: { data: one } }
+    return { code: 200, msg: '成功', result: { one22: one } }
   }
 }

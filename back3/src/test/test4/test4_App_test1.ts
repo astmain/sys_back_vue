@@ -3,10 +3,10 @@ import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
 
-import { VO } from '@src/VO_Dynamic' // VO
+import { VO_Dynamic1 } from './VO_Dynamic1' // VO
 
 // 用户数据DTO
-class Dto_one4 {
+class Dto_one1 {
   @ApiProperty({ description: '用户ID', example: 1 })
   id: number
 
@@ -23,14 +23,25 @@ class Dto_one4 {
   updated_at: Date
 }
 
+class type_aaa {
+  @ApiProperty({ description: 'name_aaa', example: '111-1' })
+  name_aaa: number
+}
+
 @Api_public()
-@ApiTags('🟩test2/App_test4')
-@Controller('test2/App_test4')
-export class App_test4 {
+@ApiTags('🟪test4_App_test1')
+@Controller('test4_App_test1')
+export class test4_App_test1 {
   @Get('one1')
-  @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one4, 'data4') })
+  @ApiOkResponse({
+    type: VO_Dynamic1([
+      { key: 'one111', type: Dto_one1 },
+      { key: 'aaa', type: type_aaa },
+    ]),
+  })
   async one1() {
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
-    return { code: 200, msg: '成功1', result: { data: one } }
+
+    return { code: 200, msg: '成111功', result: { one111: one, aaa: { name_aaa: '111' } } }
   }
 }
