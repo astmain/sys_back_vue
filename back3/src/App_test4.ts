@@ -35,7 +35,6 @@ export class App_test4 {
   @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one4, 'data4') })
   async one1() {
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
-
     return { code: 200, msg: '成功1', result: { data: one } }
   }
 }
