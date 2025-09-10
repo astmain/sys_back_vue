@@ -23,3 +23,4 @@ https://lanhuapp.com/web/#/item/project/detailDetach?pid=d61bb38c-7c54-444d-bcaf
 - primsa的schema.prisma文件定义的数据库结构,但是dto没办法复用
 - 和axios配合code,msg,result statusCode,不匹配
 - 数据时间格式问题
+- 类名相同出现覆盖的问题(dto和Controller都存在这个问题)需要检查
