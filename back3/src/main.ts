@@ -1,3 +1,4 @@
+import 'module-alias/register'//使用Node.js中注册模块别名(全局)
 import { NestFactory } from '@nestjs/core'
 import { App_Module } from './App_Module'
 import { ResponseInterceptor } from './common/interceptors/response.interceptor'

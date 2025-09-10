@@ -2,12 +2,12 @@ import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
 import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty, ApiExtraModels } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
-import { Api_public } from './App_Auth'
+import { Api_public } from '@src/App_Auth'
 import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
 
-import { db } from './App_Prisma'
+import { db } from '@src/App_Prisma'
 
-import { VO } from './VO_Dynamic' // VO
+import { VO } from '@src/VO_Dynamic' // VO
 
 // 用户数据DTO
 class Dto_one3 {
