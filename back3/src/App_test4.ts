@@ -3,7 +3,7 @@ import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty, ApiExtraM
 import { JwtService } from '@nestjs/jwt'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_Auth'
-import { PrismaClient, tb_user as Tb_user } from '@prisma/client'
+import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
 
 import { db } from './App_Prisma'
 
@@ -34,7 +34,7 @@ export class App_test4 {
   @Get('one1')
   @ApiOkResponse({ description: '用户分页功能', type: VO(Dto_one4, 'data4') })
   async one1() {
-    const one = await db.tb_user.findFirst({ where: { password: '123456' } })
+    const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
 
     return { code: 200, msg: '成功1', result: { data: one } }
   }

@@ -3,7 +3,7 @@ import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@n
 import { JwtService } from '@nestjs/jwt'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_Auth'
-import { PrismaClient, tb_user as Tb_user } from '@prisma/client'
+import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
 
 import { db } from './App_Prisma'
 
@@ -143,12 +143,12 @@ export class App_Controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-      db.tb_user.findMany({ 
+      db.tb_test1.findMany({ 
         skip, 
         take: page_size, 
         orderBy: { created_at: 'desc' } 
       }), 
-      db.tb_user.count({})
+      db.tb_test1.count({})
     ])
 
     return new User_Pages_Response_Dto('用户分页功能', users, total, page, page_size)
@@ -163,12 +163,12 @@ export class App_Controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [data, total] = await Promise.all([
-      db.tb_user.findMany({ 
+      db.tb_test1.findMany({ 
         skip, 
         take: page_size, 
         orderBy: { created_at: 'desc' } 
       }), 
-      db.tb_user.count({})
+      db.tb_test1.count({})
     ])
 
     return new Pages_Response_Dto('通用分页功能', data, total, page, page_size)
@@ -183,12 +183,12 @@ export class App_Controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-      db.tb_user.findMany({ 
+      db.tb_test1.findMany({ 
         skip, 
         take: page_size, 
         orderBy: { created_at: 'desc' } 
       }), 
-      db.tb_user.count({})
+      db.tb_test1.count({})
     ])
 
     // 创建嵌套的分页结果
@@ -200,7 +200,7 @@ export class App_Controller {
   @ApiOperation({ summary: '保存用户' })
   @ApiOkResponse({ description: '保存用户', type: Base_Response_Dto })
   async save_user() {
-    const one = await db.tb_user.create({
+    const one = await db.tb_test1.create({
       data: {
         phone: '15160315110' + dayjs().unix(),
         password: '123456',

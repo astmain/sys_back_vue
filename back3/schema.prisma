@@ -7,6 +7,15 @@ datasource db {
   url      = "file:./sqlite.db"
 }
 
+model tb_test1 {
+  id         Int      @id @default(autoincrement())
+  phone      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+
 model tb_user {
   id         Int      @id @default(autoincrement())
   phone      String   @unique

@@ -3,11 +3,11 @@ import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@n
 import { JwtService } from '@nestjs/jwt'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_Auth'
-import { PrismaClient, tb_user as Tb_user } from '@prisma/client'
+import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
 
 import { db } from './App_Prisma'
 
-class Tb_user_Dto {
+class tb_test1_Dto {
   @ApiProperty({ description: '用户名' })
   username: string
   @ApiProperty({ description: '邮箱' })
@@ -58,12 +58,12 @@ export class App_Controller {
     const limit = 10
     const skip = (1 - 1) * limit
     const [users, total] = await Promise.all([
-      db.tb_user.findMany({
+      db.tb_test1.findMany({
         skip,
         take: limit,
         orderBy: { created_at: 'desc' },
       }),
-      db.tb_user.count({}),
+      db.tb_test1.count({}),
     ])
 
     return { code: 200, msg: '分页功能', result: { users, total } }
@@ -72,7 +72,7 @@ export class App_Controller {
   @Get('save_user')
   @ApiOperation({ summary: '保存用户' })
   async save_user() {
-    const one = await db.tb_user.create({
+    const one = await db.tb_test1.create({
       data: {
         phone: '15160315110' + dayjs().unix(),
         password: '123456',
