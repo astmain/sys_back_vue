@@ -11,12 +11,12 @@ export function ApiPost(label: string, description?: string, Res_type?: any) {
   return function (target: object, propertyKey: string, descriptor: PropertyDescriptor) {
     // 使用 applyDecorators 组合多个装饰器
     const decorators = applyDecorators(
+      ApiOkResponse({ description: '操作成功', type: Res_type }),
       Post(propertyKey), // 使用方法名作为路由路径
       ApiOperation({
         summary: label,
         description: `<h2 style="color: rgb(73, 204, 144) ;">[${label}]</h2>${description || ''}`,
       }),
-      ApiOkResponse({ description: '操作成功', type: Res_type }),
     )
 
     // 应用装饰器到目标方法

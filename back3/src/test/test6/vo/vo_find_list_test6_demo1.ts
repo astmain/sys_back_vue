@@ -25,7 +25,7 @@ export class item {
 export class list {
   @ApiProperty({ description: '用户列表', type: [item] })
   @IsArray()
-  @Type(() => item) // item[]
+  @Type(() => item)
   @ValidateNested({ each: true })
   list: item[]
 }
@@ -34,14 +34,16 @@ export class list {
 export class vo_find_list_test6_demo11 {
   @ApiProperty({ description: '状态码', example: 200 })
   @IsNumber()
+  @IsNotEmpty()
   code: number
 
   @ApiProperty({ description: '响应消息', example: '操作成功' })
   @IsString()
+  @IsNotEmpty()
   msg: string
 
   @ApiProperty({ description: '响应数据' })
   @ValidateNested()
-  @Type(() => list)
+  // @Type(() => list)
   result: list
 }
