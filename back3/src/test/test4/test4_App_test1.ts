@@ -12,7 +12,7 @@ export class dto1 {
 @Controller('test4_App_test1')
 export class test4_App_test1 {
   @Get('one1')
-  async one1(@Body() body: dto1) {
+  async one1(@Body() body: dto1) {  //我的@Body() body: dto1  被覆盖了
     console.log(body)
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
     return { code: 200, msg: '成111功', result: { one111: one, aaa: { name_aaa: '111' } } }

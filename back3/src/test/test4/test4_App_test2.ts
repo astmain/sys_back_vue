@@ -6,6 +6,8 @@ import { /*数据库*/ db } from '@src/App_Prisma'
 export class dto1 {
   @ApiProperty({ description: 'name_aaa2', example: 'a222' })
   name_aaa2: string = 'a222'
+  @ApiProperty({ description: 'name_bbb2', example: 'b222' })
+  name_bbb2: string = 'b222'
 }
 
 @Api_public()
