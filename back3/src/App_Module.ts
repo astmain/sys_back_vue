@@ -30,6 +30,7 @@ import { App_Controller } from '@src/App_Controller'
     require('@src/test/test5/test5_demo2').test5_demo2,
     require('@src/test/test5/test5_demo3').test5_demo3,
     require('@src/test/test5/test5_demo4').test5_demo4,
+    require('@src/test/test5/test5_demo5').test5_demo5,
     // test4(测试功能)
     // require('@src/test/test4/test4_App_test1').test4_App_test1,
     // require('@src/test/test4/test4_App_test2').test4_App_test2,

@@ -2,8 +2,12 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { knife4jSetup } from 'nestjs-knife4j2'
 
 //  配置:swagger文档nest-knife4j
-
+// import { patchNestJsSwagger } from 'nestjs-zod/openapi';
 export async function swagger_knife4j2(app) {
+
+    // 一定要在 createDocument 之前调用
+    // patchNestJsSwagger();
+
   // Swagger API文档配置
   const config = new DocumentBuilder()
     .setTitle('api')

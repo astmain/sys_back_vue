@@ -46,7 +46,7 @@ export class AppAuthorized implements CanActivate {
     // 判断token是否存在
     if (!token) {
       console.log(`验证失败:AppAuthorized---222---token---空:`, token)
-      throw new UnauthorizedException()
+      throw new UnauthorizedException("验证失败:token空")
     } else {
       // console.log(`AppAuthorized---333---token---存在:`, token)
     }
@@ -61,7 +61,7 @@ export class AppAuthorized implements CanActivate {
       request['user_id'] = payload.id
     } catch (error) {
       console.log(`AppAuthorized---555---error:`, error)
-      throw new UnauthorizedException()
+      throw new UnauthorizedException("验证失败:token无效")
     }
 
     //放行
