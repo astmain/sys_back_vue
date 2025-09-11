@@ -6,7 +6,7 @@ import { knife4jSetup } from 'nestjs-knife4j2'
 export async function swagger_knife4j2(app) {
   // Swagger API文档配置
   const config = new DocumentBuilder()
-    .setTitle('博客系统API')
+    .setTitle('api')
     .setDescription('基于NestJS的博客系统API文档')
     .setVersion('1.0')
     .addTag('认证', '用户认证相关接口')

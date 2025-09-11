@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import { DiscoveryService } from '@nestjs/core'
 import { App_Auth_Module } from './App_Auth'
 import { PrismaModule } from './prisma/prisma.module'
 import { UserModule } from './modules/user/user.module'
 import { App_Prisma } from './App_Prisma'
-
+import { RouteDupCheckerService } from './checker'
+import { DtoDupCheckerService } from './checker_dto'
 
 @Module({
   imports: [
@@ -47,6 +49,6 @@ import { App_Prisma } from './App_Prisma'
     require('@src/test/test3/App_test3').App_test3,
     require('@src/test/test3/App_test4').App_test4,
   ],
-  providers: [],
+  providers: [DiscoveryService, RouteDupCheckerService, DtoDupCheckerService],
 })
 export class App_Module {}
