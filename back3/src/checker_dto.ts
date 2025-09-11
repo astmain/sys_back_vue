@@ -46,11 +46,11 @@ export class DtoDupCheckerService implements OnModuleInit {
   private scanDirectory(dir: string, dtoMap: Map<string, { file: string; className: string; line: number }[]>) {
     try {
       const files = fs.readdirSync(dir)
-      
+
       for (const file of files) {
         const filePath = path.join(dir, file)
         const stat = fs.statSync(filePath)
-        
+
         if (stat.isDirectory()) {
           this.scanDirectory(filePath, dtoMap)
         } else if (file.endsWith('.ts') && !file.endsWith('.d.ts')) {
@@ -66,32 +66,32 @@ export class DtoDupCheckerService implements OnModuleInit {
     try {
       const content = fs.readFileSync(filePath, 'utf-8')
       const lines = content.split('\n')
-      
+
       // 查找 export class 定义
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim()
-        
+
         // 匹配 export class ClassName 模式
         const classMatch = line.match(/^export\s+class\s+(\w+)/)
         if (classMatch) {
           const className = classMatch[1]
-          
+
           // 跳过控制器类（通常以 Controller 结尾或包含 App_）
           if (this.isControllerClass(className)) {
             continue
           }
-          
+
           // 跳过内置类型
           if (this.isBuiltInType(className)) {
             continue
           }
-          
+
           const relativePath = path.relative(process.cwd(), filePath)
           const list = dtoMap.get(className) ?? []
-          list.push({ 
-            file: relativePath, 
+          list.push({
+            file: relativePath,
             className: className,
-            line: i + 1
+            line: i + 1,
           })
           dtoMap.set(className, list)
         }
@@ -102,18 +102,11 @@ export class DtoDupCheckerService implements OnModuleInit {
   }
 
   private isControllerClass(className: string): boolean {
-    return className.endsWith('Controller') || 
-           className.includes('App_') ||
-           className.includes('test') && className.includes('_')
+    return className.endsWith('Controller') || className.includes('App_') || (className.includes('test') && className.includes('_'))
   }
 
   private isBuiltInType(typeName: string): boolean {
-    const builtInTypes = [
-      'String', 'Number', 'Boolean', 'Object', 'Array', 'Date', 'Function',
-      'RegExp', 'Error', 'Promise', 'Map', 'Set', 'WeakMap', 'WeakSet',
-      'Symbol', 'BigInt', 'Request', 'Response', 'NextFunction',
-      'Module', 'Service', 'Guard', 'Interceptor', 'Filter', 'Pipe'
-    ]
+    const builtInTypes = ['String', 'Number', 'Boolean', 'Object', 'Array', 'Date', 'Function', 'RegExp', 'Error', 'Promise', 'Map', 'Set', 'WeakMap', 'WeakSet', 'Symbol', 'BigInt', 'Request', 'Response', 'NextFunction', 'Module', 'Service', 'Guard', 'Interceptor', 'Filter', 'Pipe']
     return builtInTypes.includes(typeName) || typeName.startsWith('_')
   }
 }

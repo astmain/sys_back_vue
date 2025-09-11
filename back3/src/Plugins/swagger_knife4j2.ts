@@ -9,9 +9,9 @@ export async function swagger_knife4j2(app) {
     .setTitle('api')
     .setDescription('基于NestJS的博客系统API文档')
     .setVersion('1.0')
-    .addTag('认证', '用户认证相关接口')
-    .addTag('🟪test4_App_test1', '测试模块1 - 使用dto1_module1模型')
-    .addTag('🟪test4_App_test2', '测试模块2 - 使用dto1_module2模型')
+    .addTag('项目介绍', '介绍')
+    // .addTag('🟪test4_App_test1', '测试模块1 - 使用dto1_module1模型')
+    // .addTag('🟪test4_App_test2', '测试模块2 - 使用dto1_module2模型')
     .addGlobalParameters({
       name: 'token',
       in: 'header',

@@ -11,7 +11,7 @@ async function bootstrap() {
   // app.useGlobalInterceptors(new ResponseInterceptor())
 
   // 全局异常过滤器
-  app.useGlobalFilters(new AllExceptionsFilter())
+  // app.useGlobalFilters(new AllExceptionsFilter())
 
   await Plugins.filter_cors(app) // CORS配置(跨域请求)
   await Plugins.filter_dto(app) // dto配置(全局验证管道)

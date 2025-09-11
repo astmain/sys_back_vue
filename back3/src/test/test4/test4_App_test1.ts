@@ -3,14 +3,9 @@ import { /*接口*/ Controller, Get, Inject, Body } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
 
-export class dto1 {
+export class test4_dto1 {
   @ApiProperty({ description: 'name_aaa1', example: 'a111' })
   name_aaa1: string = 'a111'
-}
-
-class CreateDtoInline {
-  name_aaa1: string
-  age?: number
 }
 
 @Api_public()
@@ -37,7 +32,7 @@ export class test4_App_test1 {
   //     required: ['name_aaa1'],
   //   },
   // })
-  async one1(@Body() body: dto1) {
+  async one1(@Body() body: test4_dto1) {
     const one = await db.tb_test1.findFirst({ where: { password: '123456' } })
     return { code: 200, msg: '成111功', result: { one111: one, aaa: { name_aaa: '111' } } }
   }
