@@ -26,22 +26,9 @@ export function ApiPost(label: string, description?: string, Res_type?: any) {
   }
 }
 
-// Serialize(序列化)
-import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common'
-import { Observable, map } from 'rxjs'
-
-export function Serialize(dto: any) {
-  class SerializeInterceptor implements NestInterceptor {
-    intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-      return next.handle().pipe(map((data) => plainToInstance(dto, data, { excludeExtraneousValues: true })))
-    }
-  }
-  return UseInterceptors(new SerializeInterceptor())
-}
-
 // dto
 // 默认排除所有属性
-export class test8_dto1 {
+export class test9_dto1 {
   @ApiProperty({ description: '用户ID', example: 1 })
   @Expose()
   @IsNumber()
@@ -124,28 +111,14 @@ export class test8_dto1 {
 // 导入严格类型检查工具
 
 @Api_public()
-@ApiTags('test8_demo1')
-@Controller('test8_demo1')
-@Serialize(test8_dto1)
+@ApiTags('test9_demo1')
+@Controller('test9_demo1')
 @UseInterceptors(new ClassSerializerInterceptor(new Reflector(), { excludeExtraneousValues: true }))
-export class test8_demo1 {
-  @ApiPost('查询_用户信息_列表', '', test8_dto1)
-  // @UseInterceptors(ClassSerializerInterceptor)
-  // @UseInterceptors(new ClassSerializerInterceptor(new Reflector(), { excludeExtraneousValues: true }))
-  // async find_list_test6_demo1(@Body() body: any): Promise<test8_dto1[]> {
-  async find_list_test6_demo1(@Body() body: any) {
+export class test9_demo1 {
+  @ApiPost('查询_用户信息_列表', '', test9_dto1)
+  async find_list_test6_demo1(@Body() body: any): Promise<test9_dto1[]> {
     const list = await db.tb_test1.findMany({ where: { password: '123456' } })
 
-    // let one = new test8_dto1(1, '15160315110', '123456', false, true, true, true, '.png', '三角', '3k以下', [], [], [])
-
-    let one = { id: 1, phone: '15160315110', password: '123456', is_delete: false, is_check: true, is_active: true, is_public: true, type_format: '.png', type_area: '三角' }
-
-    // const plainUser = plainToInstance(test8_dto1, one, {
-    //   excludeExtraneousValues: true,
-    // })
-    // console.log(`111---plainUser:`, plainUser)
-
-    // return plainToInstance(test8_dto1, list, { excludeExtraneousValues: true })
-    return one
+    return list
   }
 }
