@@ -57,7 +57,7 @@
     "alwaysStrict": true, // 以严格模式解析并为每个源文件添加 "use strict"
     "noImplicitOverride": true, // 确保重写成员标记为 override
     "noPropertyAccessFromIndexSignature": true, // 禁止通过索引签名访问属性
-    "noUncheckedIndexedAccess": true // 在索引签名结果中包含 undefined
+    "noUncheckedIndexedAccess": true ,// 在索引签名结果中包含 undefined
 
     // 路径别名
     "paths": {
