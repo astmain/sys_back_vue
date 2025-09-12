@@ -1,8 +1,7 @@
-import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty, ApiBody, ApiExtraModels } from '@nestjs/swagger'
-import { /*接口*/ Controller, Get, Inject, Body, Post } from '@nestjs/common'
+import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
+import { /*接口*/ Controller, Body, Post } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
-import { IsString } from 'class-validator'
 
 import { applyDecorators } from '@nestjs/common'
 
@@ -35,7 +34,9 @@ export class test6_dto3 {
 
 // vo
 import { vo_remove_test7_demo1 } from './vo/vo_remove_test7_demo1'
-import { vo_find_list_test7_demo1 } from './vo/vo_find_list_test7_demo1'
+import { vo_find_list_test7_demo1, item } from './vo/vo_find_list_test7_demo1'
+
+// 导入严格类型检查工具
 
 @Api_public()
 @ApiTags('test7_demo1')
@@ -50,31 +51,20 @@ export class test7_demo1 {
 
   @ApiPost('查询_用户信息_列表', '', vo_find_list_test7_demo1)
   async find_list_test6_demo1(@Body() body: any): Promise<vo_find_list_test7_demo1> {
-    const list = await db.tb_test1.findMany({ where: { password: '123456' } })
+    const list = await db.tb_test1.findMany({
+      where: { password: '123456' },
+      select: {
+        id: true,
+        phone: true,
+        password: true,
+        is_delete: true,
+      },
+    })
 
-    console.log(`111---list:`, list)
-    return { code: 200, msg: '成111功', result: { list: list } }
-    // 下面是我返回的数据 为什么有多余的字段is_active,list_extend,created_at ,但是Promise<vo_find_list_test7_demo1>没有检验出来
-    let result的数据 = {
-      list: [
-        {
-          id: 214,
-          phone: '1-1',
-          password: '123456',
-          is_delete: false,
-          is_check: true,
-          is_active: true,
-          is_public: true,
-          list_file: [],
-          list_img: [],
-          list_extend: [],
-          type_format: '.png',
-          type_area: '三角',
-          type_point: '3k以下',
-          created_at: '2025-09-11T16:57:10.847Z',
-          updated_at: '2025-09-11T16:57:10.847Z',
-        },
-      ],
+    return {
+      code: 200,
+      msg: '成111功',
+      result: { list: list },
     }
   }
 

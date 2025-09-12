@@ -6,7 +6,7 @@ export class remove_test7_demo1 {
   @IsArray()
 //   @IsNotEmpty()
 //   @IsNumber({}, { each: true })
-  ids: number[]
+  ids!: number[]
 }
 
 

@@ -8,20 +8,20 @@ export class ids {
   // @IsNotEmpty({ message: 'ids should not be empty' })
   // @IsNumber({}, { each: true, message: 'each value in ids must be a number' })
   // @Type(() => Number)
-  ids: number[]
+  ids!: number[]
 }
 
 export class vo_remove_test7_demo1 {
   @ApiProperty({ description: '状态码', example: 200 })
   @IsNumber()
-  code: number
+  code!: number
 
   @ApiProperty({ description: '响应消息', example: '操作成功' })
   @IsString()
-  msg: string
+  msg!: string
 
   @ApiProperty({ description: '响应数据', type: ids })
   // @ValidateNested()
   @Type(() => ids)
-  result: ids
+  result!: ids
 }
