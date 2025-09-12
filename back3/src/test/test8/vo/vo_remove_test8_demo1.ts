@@ -11,7 +11,7 @@ export class ids {
   ids!: number[]
 }
 
-export class vo_remove_test7_demo1 {
+export class vo_remove_test8_demo1 {
   @ApiProperty({ description: '状态码', example: 200 })
   @IsNumber()
   code!: number
