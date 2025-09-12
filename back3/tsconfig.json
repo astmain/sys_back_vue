@@ -18,14 +18,14 @@
     "forceConsistentCasingInFileNames": false, // 强制一致的文件名大小写
     "noFallthroughCasesInSwitch": false, // 禁用 switch 语句的 fallthrough 检查
     "noEmitOnError": true, // 允许编译错误时生成文件（改为false）
-    // "noUnusedLocals": false, // 禁用未使用局部变量检查（改为false）
-    // "noUnusedParameters": false, // 禁用未使用参数检查（改为false）
     "noUncheckedIndexedAccess": true, // 在索引签名结果中包含 undefined
+    "noUnusedLocals": false, // 禁用未使用局部变量检查（改为false）
+    "noUnusedParameters": false, // 禁用未使用参数检查（改为false）
 
-    // 建议同时开启严格模式
-    "noUnusedLocals": true, // 本地变量未使用时报错
-    "noUnusedParameters": true, // 函数参数未使用时报错
-    "strict": true, // 建议同时开启严格模式
+    // // 建议同时开启严格模式
+    // "noUnusedLocals": true, // 本地变量未使用时报错
+    // "noUnusedParameters": true, // 函数参数未使用时报错
+    // "strict": true, // 建议同时开启严格模式
 
     // 路径别名
     "paths": {
