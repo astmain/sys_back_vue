@@ -109,7 +109,7 @@ export class test9_dto1 {
 }
 
 // 导入严格类型检查工具
-
+import { db_page } from './db_page'
 @Api_public()
 @ApiTags('test9_demo1')
 @Controller('test9_demo1')
@@ -118,7 +118,16 @@ export class test9_demo1 {
   @ApiPost('查询_用户信息_列表', '', test9_dto1)
   async find_list_test6_demo1(@Body() body: any): Promise<test9_dto1[]> {
     const list = await db.tb_test1.findMany({ where: { password: '123456' } })
+    let currentPage = 1
+    let pageSize = 10
+    let res = await db_page(
+      db.tb_test1,
+      { where: { is_active: true }, orderBy: { created_at: 'desc' }, select: { id: true, phone: true } }, //
+      { mode: 'page', currentPage, pageSize },
+    )
 
-    return list
+    console.log(`111---222:`, res)
+
+    return res.list
   }
 }
