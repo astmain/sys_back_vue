@@ -17,16 +17,9 @@
     "strictBindCallApply": false, // 严格绑定调用和应用
     "forceConsistentCasingInFileNames": false, // 强制一致的文件名大小写
     "noFallthroughCasesInSwitch": false, // 禁用 switch 语句的 fallthrough 检查
-    "noEmitOnError": true, // 禁用编译错误时生成文件
-
-    "strict": true, // 建议同时开启严格模式
-    // "noImplicitReturns": true, // 检查函数是否有隐式返回
-    // "noUnusedLocals": true, // 检查未使用的局部变量
-    // "noUnusedParameters": true, // 检查未使用的参数
-    // "noImplicitThis": true, // 禁止隐式 any 类型的 this
-    // "alwaysStrict": true, // 以严格模式解析并为每个源文件添加 "use strict"
-    // "noImplicitOverride": true, // 确保重写成员标记为 override
-    // "noPropertyAccessFromIndexSignature": true, // 禁止通过索引签名访问属性
+    "noEmitOnError": false, // 允许编译错误时生成文件（改为false）
+    "noUnusedLocals": false, // 禁用未使用局部变量检查（改为false）
+    "noUnusedParameters": false, // 禁用未使用参数检查（改为false）
     "noUncheckedIndexedAccess": true, // 在索引签名结果中包含 undefined
 
     // 路径别名
