@@ -25,7 +25,7 @@ export function ApiPost(label: string, description?: string, Res_type?: any) {
 }
 
 // dto
-import { remove_test6_demo1 } from './dto/remove_test6_demo1'
+import { remove_test7_demo1 } from './dto/remove_test7_demo1'
 export class test6_dto3 {
   @ApiProperty({ description: 'name_aaa2', example: 'a222' })
   name_aaa2: string = 'a222'
@@ -34,13 +34,13 @@ export class test6_dto3 {
 }
 
 // vo
-import { vo_remove_test6_demo1 } from './vo/vo_remove_test6_demo1'
-import { vo_find_list_test6_demo11 } from './vo/vo_find_list_test6_demo1'
+import { vo_remove_test7_demo1 } from './vo/vo_remove_test7_demo1'
+import { vo_find_list_test7_demo1 } from './vo/vo_find_list_test7_demo1'
 
 @Api_public()
-@ApiTags('test6_demo1')
-@Controller('test6_demo1')
-export class test6_demo1 {
+@ApiTags('test7_demo1')
+@Controller('test7_demo1')
+export class test7_demo1 {
   @ApiPost('查询_用户信息_单个', '', test6_dto3)
   async find_one_test6_demo1(@Body() body: any) {
     console.log(`111---222:`, 1111)
@@ -48,13 +48,13 @@ export class test6_demo1 {
     return { code: 200, msg: '成111功', result: { one } }
   }
 
-  @ApiPost('查询_用户信息_列表', '', vo_find_list_test6_demo11)
-  async find_list_test6_demo1(@Body() body: any): Promise<vo_find_list_test6_demo11> {
+  @ApiPost('查询_用户信息_列表', '', vo_find_list_test7_demo1)
+  async find_list_test6_demo1(@Body() body: any): Promise<vo_find_list_test7_demo1> {
     const list = await db.tb_test1.findMany({ where: { password: '123456' } })
-    // return { code: 200, msg: '成111功', result: { list } } //我应该怎么写 vo_find_list_test6_demo1
+
     console.log(`111---list:`, list)
     return { code: 200, msg: '成111功', result: { list: list } }
-
+    // 下面是我返回的数据 为什么有多余的字段is_active,list_extend,created_at ,但是Promise<vo_find_list_test7_demo1>没有检验出来
     let result的数据 = {
       list: [
         {
@@ -85,8 +85,8 @@ export class test6_demo1 {
     return { code: 200, msg: '成111功', result: { name_aaa: '111' } }
   }
 
-  @ApiPost('删除_用户信息', '', vo_remove_test6_demo1)
-  async remove_test6_demo1(@Body() body: remove_test6_demo1): Promise<vo_remove_test6_demo1> {
+  @ApiPost('删除_用户信息', '', vo_remove_test7_demo1)
+  async remove_test6_demo1(@Body() body: remove_test7_demo1): Promise<vo_remove_test7_demo1> {
     // await db.tb_test1.deleteMany({ where: { id: { in: body.ids } } }) // 批量物理删除
     await db.tb_test1.updateMany({ where: { id: { in: body.ids } }, data: { is_delete: true } }) // 批量逻辑删除
     return { code: 200, msg: '成111功', result: body }

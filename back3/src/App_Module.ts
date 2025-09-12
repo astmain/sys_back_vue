@@ -25,9 +25,11 @@ import { App_Controller } from '@src/App_Controller'
     // 首页
     App_Controller,
 
+    // test7(测试功能)
+    require('@src/test/test7/test7_demo1').test7_demo1,
 
-        // test6(测试功能)
-        require('@src/test/test6/test6_demo1').test6_demo1,
+    // test6(测试功能)
+    require('@src/test/test6/test6_demo1').test6_demo1,
 
     // test5(测试功能)
     require('@src/test/test5/test5_demo1').test5_demo1,

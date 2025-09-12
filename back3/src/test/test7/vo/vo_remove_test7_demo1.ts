@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator'
 import { Type, Transform } from 'class-transformer'
 
-export class remove_test6_demo1 {
+export class ids {
   @ApiProperty({ description: '(vo)ids', example: [1, 2, 3] })
   @IsArray({ message: 'ids must be an array' })
   // @IsNotEmpty({ message: 'ids should not be empty' })
@@ -11,7 +11,7 @@ export class remove_test6_demo1 {
   ids: number[]
 }
 
-export class vo_remove_test6_demo1 {
+export class vo_remove_test7_demo1 {
   @ApiProperty({ description: '状态码', example: 200 })
   @IsNumber()
   code: number
@@ -20,8 +20,8 @@ export class vo_remove_test6_demo1 {
   @IsString()
   msg: string
 
-  @ApiProperty({ description: '响应数据', type: remove_test6_demo1 })
+  @ApiProperty({ description: '响应数据', type: ids })
   // @ValidateNested()
-  @Type(() => remove_test6_demo1)
-  result: remove_test6_demo1
+  @Type(() => ids)
+  result: ids
 }

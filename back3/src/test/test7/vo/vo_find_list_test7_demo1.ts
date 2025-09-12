@@ -31,7 +31,7 @@ export class list {
 }
 
 // 列表查询的响应VO类
-export class vo_find_list_test6_demo11 {
+export class vo_find_list_test7_demo1 {
   @ApiProperty({ description: '状态码', example: 200 })
   @IsNumber()
   @IsNotEmpty()

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsNotEmpty, IsNumber } from 'class-validator'
 
-export class remove_test6_demo1 {
+export class remove_test7_demo1 {
   @ApiProperty({ description: 'ids', example: [1, 2, 3] })
   @IsArray()
 //   @IsNotEmpty()
