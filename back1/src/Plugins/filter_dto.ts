@@ -6,7 +6,13 @@ export async function filter_dto(app) {
   let config_dto = new ValidationPipe({
     whitelist: true, // 自动去掉 DTO 里没有声明的字段
     forbidNonWhitelisted: true, // 有未知字段会抛错
-    transform: true, // 自动类型转换
+    transform: false, // 启用自动类型转换
+    transformOptions: {
+      // 保留默认值，不覆盖已存在的属性
+      // strategy: 'excludeAll', // 只转换明确传递的属性
+      // strategy: 'excludeAll', // 只转换明确传递的属性
+      // enableImplicitConversion: false, // 禁用隐式转换
+    },
 
     // exceptionFactory: (errors) => {
     //   let aaa = errors

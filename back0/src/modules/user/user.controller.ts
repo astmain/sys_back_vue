@@ -1,55 +1,68 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger'
+import { /*接口*/  Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, ParseIntPipe, UseInterceptors } from '@nestjs/common'
+import { /*文档*/  ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create_user.dto'
 import { UpdateUserDto } from './dto/update_user.dto'
-import { JwtAuthGuard } from '../auth/guards/jwt_auth.guard'
 
-@ApiTags('用户管理')
-@Controller('users')
+import { ApiSuccessResponse, ApiCreatedResponse, ApiPaginatedResponse, ApiBadRequestResponse, ApiUnauthorizedResponse, ApiNotFoundResponse, ApiConflictResponse, ApiInternalServerErrorResponse } from '../../common/decorators/api_response.decorator'
+import { UserResponseDto, UserServiceDto, ArticleResponseDto, CommentResponseDto } from '../../common/dto/paginated_response.dto'
+import { ProcessTimeFields } from '../../common/decorators/process_time_fields.decorator'
+import { TimeFieldsInterceptor } from '../../common/interceptors/time_fields.interceptor'
+
+@ApiTags('用户')
+@Controller('user')
+@UseInterceptors(TimeFieldsInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @ProcessTimeFields()
   @ApiOperation({ summary: '创建用户' })
-  @ApiResponse({ status: 200, description: '用户创建成功' })
-  @ApiResponse({ status: 409, description: '用户名或邮箱已存在' })
+  @ApiCreatedResponse(UserResponseDto, '用户创建成功')
+  @ApiBadRequestResponse()
+  @ApiConflictResponse()
+  @ApiInternalServerErrorResponse()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto)
   }
 
   @Get()
+  @ProcessTimeFields()
   @ApiOperation({ summary: '获取所有用户' })
-  @ApiResponse({ status: 200, description: '获取用户列表成功' })
+  @ApiPaginatedResponse(UserResponseDto, '获取用户列表成功')
+  @ApiInternalServerErrorResponse()
   find_all() {
     return this.userService.find_all()
   }
 
   @Get(':id')
+  @ProcessTimeFields()
   @ApiOperation({ summary: '根据ID获取用户' })
-  @ApiResponse({ status: 200, description: '获取用户成功' })
-  @ApiResponse({ status: 404, description: '用户不存在' })
-  find_one(@Param('id') id: string) {
-    return this.userService.find_one(+id)
+  @ApiSuccessResponse(UserResponseDto, '获取用户成功')
+  @ApiNotFoundResponse()
+  @ApiInternalServerErrorResponse()
+  async find_one(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.find_one(id)
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
   @ApiOperation({ summary: '更新用户信息' })
-  @ApiResponse({ status: 200, description: '用户更新成功' })
-  @ApiResponse({ status: 404, description: '用户不存在' })
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto)
+  @ApiSuccessResponse(UserResponseDto, '用户更新成功')
+  @ApiBadRequestResponse()
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
+  @ApiInternalServerErrorResponse()
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(id, updateUserDto)
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
   @ApiOperation({ summary: '删除用户' })
-  @ApiResponse({ status: 200, description: '用户删除成功' })
-  @ApiResponse({ status: 404, description: '用户不存在' })
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id)
+  @ApiSuccessResponse(UserResponseDto, '用户删除成功')
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
+  @ApiInternalServerErrorResponse()
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.remove(id)
   }
 }
