@@ -27,7 +27,7 @@ export function ApiPost(label: string, description?: string, Res_type?: any) {
 
 @Api_public()
 @ApiTags('test10_demo1')
-@Controller('test10_demo1')
+@Controller('test10_demo1')//我想封装一个Api_controller装饰器,装饰直接使用当前的类名
 export class test10_demo1 {
   @ApiPost('查询_用户信息_列表', '')
   async find_list_test6_demo1(@Body() body: any) {
