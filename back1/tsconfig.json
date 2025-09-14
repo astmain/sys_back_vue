@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs", // Node.js 的模块系统
+    "module": "NodeNext", // Node.js 的模块系统
+    "moduleResolution": "NodeNext", // Node.js 的模块系统
     "declaration": true, // 声明文件
     "removeComments": true, // 移除注释
     "emitDecoratorMetadata": true, // 装饰器元数据
