@@ -5,6 +5,7 @@ import { /*数据库*/ db } from '@src/App_Prisma'
 import { IsNumber, IsString, IsBoolean, IsDate, IsArray } from 'class-validator'
 import { Type, Transform, Exclude, Expose, plainToInstance } from 'class-transformer'
 import { Reflector } from '@nestjs/core'
+import { db_page } from '@src/Plugins/db_page'
 
 import { applyDecorators } from '@nestjs/common'
 
@@ -108,8 +109,8 @@ export class test9_dto1 {
   list_file!: any
 }
 
-// 导入严格类型检查工具
-import { db_page } from './db_page'
+
+
 @Api_public()
 @ApiTags('test9_demo1')
 @Controller('test9_demo1')

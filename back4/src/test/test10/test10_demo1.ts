@@ -2,6 +2,7 @@ import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty, ApiHidePr
 import { /*接口*/ Controller, Body, Post, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common'
 import { /*api开发*/ Api_public } from '@src/App_Auth'
 import { /*数据库*/ db } from '@src/App_Prisma'
+import { /*控制器装饰器*/ Api_controller } from '@src/Plugins/Api_controller'
 
 import { applyDecorators } from '@nestjs/common'
 
@@ -26,8 +27,7 @@ export function ApiPost(label: string, description?: string, Res_type?: any) {
 // 导入严格类型检查工具
 
 @Api_public()
-@ApiTags('test10_demo1')
-@Controller('test10_demo1')//我想封装一个Api_controller装饰器,装饰直接使用当前的类名
+@Api_controller('test10_demo1控制器')
 export class test10_demo1 {
   @ApiPost('查询_用户信息_列表', '')
   async find_list_test6_demo1(@Body() body: any) {
