@@ -24,10 +24,17 @@ import { App_Controller } from '@src/App_Controller'
   controllers: [
     // 首页
     App_Controller,
+    // test9(测试功能)
+    require('@src/test/test9/test9_demo1').test9_demo1,
 
+    // test8(测试功能)
+    require('@src/test/test8/test8_demo1').test8_demo1,
 
-        // test6(测试功能)
-        require('@src/test/test6/test6_demo1').test6_demo1,
+    // test7(测试功能)
+    require('@src/test/test7/test7_demo1').test7_demo1,
+
+    // test6(测试功能)
+    require('@src/test/test6/test6_demo1').test6_demo1,
 
     // test5(测试功能)
     require('@src/test/test5/test5_demo1').test5_demo1,

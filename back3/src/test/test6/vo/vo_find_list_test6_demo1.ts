@@ -44,6 +44,6 @@ export class vo_find_list_test6_demo11 {
 
   @ApiProperty({ description: '响应数据' })
   @ValidateNested()
-  // @Type(() => list)
+  @Type(() => list)
   result: list
 }
