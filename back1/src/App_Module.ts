@@ -24,6 +24,10 @@ import { App_Controller } from '@src/App_Controller'
   controllers: [
     // 首页
     App_Controller,
+    // demo1(示例1)
+    require('@src/demo/demo1/demo1').demo1,
+
+
     // test10(测试功能)
     require('@src/test/test10/test10_demo1').test10_demo1,
     // test9(测试功能)
