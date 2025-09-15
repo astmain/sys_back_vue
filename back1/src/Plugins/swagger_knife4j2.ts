@@ -4,14 +4,14 @@ import { knife4jSetup } from 'nestjs-knife4j2'
 //  配置:swagger文档nest-knife4j
 // import { patchNestJsSwagger } from 'nestjs-zod/openapi';
 export async function swagger_knife4j2(app) {
-
-    // 一定要在 createDocument 之前调用
-    // patchNestJsSwagger();
+  // 一定要在 createDocument 之前调用
+  // patchNestJsSwagger();
 
   // Swagger API文档配置
   const config = new DocumentBuilder()
     .setTitle('api')
-    .setDescription('基于NestJS的博客系统API文档')
+    .setTitle(process.env.VITE_title)
+    .setDescription(process.env.VITE_description)
     .setVersion('1.0')
     .addTag('项目介绍', '介绍')
     // .addTag('🟪test4_App_test1', '测试模块1 - 使用dto1_module1模型')
@@ -37,7 +37,7 @@ export async function swagger_knife4j2(app) {
   // Knife4j2 增强文档配置
   await knife4jSetup(app, [
     {
-      name: '博客系统API v1.0',
+      name: process.env.VITE_title,
       url: '/api-json',
       swaggerVersion: '3.0',
       location: '/api-json',

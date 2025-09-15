@@ -86,4 +86,4 @@ export class AppAuthorized implements CanActivate {
     },
   ],
 })
-export class App_Auth_Module {}
+export class App_auth_Module {}
