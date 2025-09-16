@@ -26,8 +26,46 @@ export class user {
 
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user) {
-    let one = await db.auth_user.findUnique({ where: body })
-    return { code: 200, msg: '成功:查询-用户-详情', result: one }
+    let one = await db.auth_user.findUnique({
+      where: body,
+      include: {
+        role_on_user: {
+          include: {
+            auth_role: {
+              include: {
+                // 菜单权限
+                menu_permiss: {
+                  include: {
+                    auth_menu: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    })
+
+    const userRoles = await db.role_on_user.findMany({
+      where: { user_id:1},
+      include: {
+        auth_role: {
+          include: {
+            menu_permiss: {
+              include: {
+                auth_menu: true,
+              },
+            },
+          },
+        },
+      },
+    })
+
+
+
+
+
+    return { code: 200, msg: '成功:查询-用户-详情', result: {one,userRoles} }
   }
 
   // ==================== RBAC 权限管理 ====================
@@ -330,14 +368,28 @@ export class user {
       await db.role_on_permiss.createMany({ data: viewerRolePermiss })
     }
 
-    return {
-      code: 200,
-      msg: '成功:初始化RBAC数据',
-      result: {
-        roles: createdRoles.count,
-        permissions: createdPermissions.count,
-      },
-    }
+    // 初始化菜单
+    await db.auth_menu.deleteMany()
+    const menus = [{ id: 1, name: '首页', path: '/', component: 'Home', icon: 'home', sort: 0, parent_id: null, level: 1, is_show: true, is_cache: false, remark: '首页' }]
+    await db.auth_menu.createMany({ data: menus })
+    const menuPermiss = menus.map((menu) => ({
+      menu_id: menu.id,
+      role_id: 1,
+    }))
+    await db.auth_menu_permiss.createMany({ data: menuPermiss })
+
+    // 设置user_id的角色
+    await db.role_on_user.deleteMany({ where: { user_id: 1 } }) // 先删除用户现有的角色
+
+    let 手动设置用户角色 = [
+      { user_id: 1, role_id: 1 },
+      { user_id: 1, role_id: 2 },
+      { user_id: 1, role_id: 3 },
+    ]
+
+    const result = await db.role_on_user.createMany({ data: 手动设置用户角色 })
+
+    return { code: 200, msg: '成功:初始化RBAC数据', result: { roles: createdRoles.count, permissions: createdPermissions.count } }
   }
 
   // ==================== 菜单管理接口 ====================

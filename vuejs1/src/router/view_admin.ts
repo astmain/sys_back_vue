@@ -16,4 +16,6 @@ export const view_admin: RouteRecordRaw[] = [
     name: '文件系统',
     component: () => import('../view/admin/file_sys/file_sys.vue'),
   },
+
+  
 ]

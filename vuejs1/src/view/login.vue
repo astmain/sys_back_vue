@@ -4,13 +4,13 @@
       <h2>back_oss_demo</h2>
       <el-form :model="login_form" :rules="login_rules" ref="login_form_ref">
         <el-form-item prop="username">
-          <el-input v-model="login_form.username" placeholder="请输入账号" />
+          <el-input v-model="login_form.phone" placeholder="请输入账号" />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="login_form.password" type="password" placeholder="请输入密码" @keyup.enter="handle_login" />
+          <el-input v-model="login_form.password" type="password" placeholder="请输入密码" @keyup.enter="handle_login_api" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handle_login" style="width: 100%"> 登录 </el-button>
+          <el-button type="primary" @click="handle_login_api" style="width: 100%"> 登录 </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -21,21 +21,22 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
+import { api } from '@src/api'
 
 // 类型定义
 interface LoginForm {
-  username: string
+  phone: string
   password: string
 }
 
 // 响应式数据
 const login_form = reactive<LoginForm>({
-  username: '15160315110',
+  phone: '15160315110',
   password: '123456',
 })
 
 const login_rules: FormRules = {
-  username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+  phone: [{ required: true, message: '请输入账号', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 }
 
@@ -52,9 +53,9 @@ const handle_login = async (): Promise<void> => {
   try {
     const valid = await login_form_ref.value.validate()
     if (valid) {
-      if (login_form.username === '15160315110' && login_form.password === '123456') {
+      if (login_form.phone === '15160315110' && login_form.password === '123456') {
         localStorage.setItem('is_authenticated', 'true')
-        localStorage.setItem('username', login_form.username)
+        localStorage.setItem('username', login_form.phone)
         ElMessage.success('登录成功')
         router.push('/view/admin/file_sys')
       } else {
@@ -63,6 +64,24 @@ const handle_login = async (): Promise<void> => {
     }
   } catch (error) {
     console.error('表单验证失败:', error)
+  }
+}
+
+async function handle_login_api() {
+  if (!login_form_ref.value) return
+  const valid = await login_form_ref.value.validate()
+  if (valid) {
+    const res: any = await api.auth.login(login_form)
+    console.log('api.auth.login---res', res)
+    if (res.code === 200) {
+      localStorage.setItem('token', res.result.token)
+      const res2: any = await api.user.find_one_user({ id: res.result.id })
+      console.log('api.user.find_one_user---res2', res2)
+
+      // router.push('/view/admin/file_sys')
+    } else {
+      ElMessage.error(res.msg)
+    }
   }
 }
 </script>

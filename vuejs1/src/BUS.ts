@@ -12,7 +12,7 @@ export const useBUS = defineStore('BUS_defineStore', {
     VITE_url_app_list: [] as any[],
     token: '',
     model: model(),
-    url_api_curr: { name: '3000', url: 'http://127.0.0.1:3000' },
+    url_api_curr: { name: '8001', url: 'http://127.0.0.1:8001' },
     url_api_list: [
       { name: '3000', url: 'http://127.0.0.1:3000' },
       { name: '3001', url: 'http://127.0.0.1:3001' },
@@ -21,21 +21,8 @@ export const useBUS = defineStore('BUS_defineStore', {
     ],
   }),
   persist: [
-    { pick: ['count', 'web_type', 'VITE_url_app_run', 'VITE_url_app_list', 'token','url_api_curr'], storage: localStorage },
+    { pick: ['count', 'web_type', 'VITE_url_app_run', 'VITE_url_app_list', 'token', 'url_api_curr'], storage: localStorage },
 
-    // {
-    //   key: 'url_api_curr',
-    //   pick: ['url_api_curr'],
-    //   storage: localStorage,
-    //   serializer: { serialize: (value: any) => value['url_api_curr'], deserialize: (value: any) => value['url_api_curr'] },
-    // },
-
-    // {
-    //   key: 'url_api_list',
-    //   pick: ['url_api_list'],
-    //   storage: localStorage,
-    //   serializer: { serialize: (value: any) => value['url_api_list'], deserialize: (value: any) => value['url_api_list'] },
-    // },
 
     {
       key: 'token',
