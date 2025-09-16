@@ -6,6 +6,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "make_all": "pnpm i"
 
   },
   "dependencies": {

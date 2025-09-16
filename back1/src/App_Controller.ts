@@ -1,6 +1,7 @@
-import { /*接口*/ Controller, Get, Inject } from '@nestjs/common'
+import { /*接口*/ Controller, Get, Inject,Res } from '@nestjs/common'
 import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
+import { /*环境变量*/ check_env } from '@src/Plugins/check_env'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_auth'
 import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
@@ -110,6 +111,16 @@ type User_Pages_Response_Type = Pages_Response_Dto<Pages_Result_Dto<User_Respons
 @Api_public()
 @Controller()
 export class App_controller {
+
+
+  @Get()
+  async api(@Res() res) {
+    const { env_curr } = check_env()
+    // return { code: 200, msg: '首页api', result: { check_env } }
+    return res.redirect(process.env.VITE_url_app_run + '/doc.html')
+  }
+
+
   @ApiOperation({ summary: 'token生成' })
   @Get('token_make')
   token_make() {
