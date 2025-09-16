@@ -27,8 +27,6 @@ const env_file_path = process.env.npm_lifecycle_script
 
 export function check_env() {
   let env_curr = dotenv.config({ path: path.join(process.cwd(), env_file_path) }).parsed
-  // console.log('env_curr111---:', env_curr)
-
   let env_err_list = []
   for (let i = 0; i < env_rule.length; i++) {
     let rule = env_rule[i]
@@ -39,12 +37,10 @@ export function check_env() {
     }
   }
 
-
-
   if (env_err_list.length > 0) {
-    const msg_err = `缺少环境变量---请检查文件[${env_file_path}]` +    JSON.stringify(env_err_list,null ,2)
+    const msg_err = `缺少环境变量---请检查文件[${env_file_path}]` + JSON.stringify(env_err_list, null, 2)
     throw new Error(msg_err)
   }
 
-  return {env_curr}
+  return { env_curr }
 }
