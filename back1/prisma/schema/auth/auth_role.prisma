@@ -4,4 +4,7 @@ model auth_role {
     remark          String?
     role_on_permiss role_on_permiss[]
     role_on_user    role_on_user[]
+    
+    // 添加菜单权限关联
+    menu_permiss    auth_menu_permiss[]
 }

@@ -10,6 +10,7 @@ import { /*dto*/ tb_user } from './dto/tb_user'
 import { /*dto*/ find_list_user } from './dto/find_list_user'
 import { /*dto*/ find_one_user } from './dto/find_one_user'
 import { auth_role_dto, auth_permiss_dto, create_role_dto, create_permiss_dto, assign_user_role_dto, assign_role_permiss_dto, find_list_role_dto, find_list_permiss_dto, find_user_roles_dto, find_role_permiss_dto, check_permission_dto } from './dto/rbac_dto'
+import { create_menu_dto, find_list_menu_dto, find_one_menu_dto, update_menu_dto, assign_role_menu_dto, find_role_menu_dto, find_user_menu_dto } from './dto/menu_dto'
 
 @Api_Controller('用户管理')
 export class user {
@@ -32,7 +33,7 @@ export class user {
   // ==================== RBAC 权限管理 ====================
 
   // 角色管理
-  @Api_Post('角色-创建')
+  @Api_Post('🟩角色-创建')
   async create_role(@Body() body: create_role_dto) {
     const role = await db.auth_role.create({ data: body })
     return { code: 200, msg: '成功:创建角色', result: role }
@@ -59,7 +60,7 @@ export class user {
   }
 
   // 权限管理
-  @Api_Post('权限-创建')
+  @Api_Post('🟩权限-创建')
   async create_permiss(@Body() body: create_permiss_dto) {
     const permiss = await db.auth_permiss.create({ data: body })
     return { code: 200, msg: '成功:创建权限', result: permiss }
@@ -85,7 +86,7 @@ export class user {
   }
 
   // 用户角色分配
-  @Api_Post('用户角色-分配')
+  @Api_Post('🟩用户角色-分配')
   async assign_user_role(@Body() body: assign_user_role_dto) {
     try {
       // 验证用户是否存在
@@ -97,14 +98,14 @@ export class user {
       // 验证角色是否存在
       const roles = await db.auth_role.findMany({ where: { id: { in: body.role_ids } } })
       if (roles.length !== body.role_ids.length) {
-        const existingRoleIds = roles.map(role => role.id)
-        const missingRoleIds = body.role_ids.filter(id => !existingRoleIds.includes(id))
+        const existingRoleIds = roles.map((role) => role.id)
+        const missingRoleIds = body.role_ids.filter((id) => !existingRoleIds.includes(id))
         return { code: 400, msg: `以下角色不存在: ${missingRoleIds.join(', ')}`, result: null }
       }
 
       // 先删除用户现有的角色
       await db.role_on_user.deleteMany({ where: { user_id: body.user_id } })
-      
+
       // 添加新的角色
       const roleAssignments = body.role_ids.map((role_id) => ({
         user_id: body.user_id,
@@ -122,9 +123,7 @@ export class user {
   async find_user_roles(@Body() body: find_user_roles_dto) {
     const userRoles = await db.role_on_user.findMany({
       where: { user_id: body.user_id },
-      include: {
-        auth_role: true,
-      },
+      include: { auth_role: true },
     })
     return { code: 200, msg: '成功:查询用户角色', result: userRoles }
   }
@@ -142,14 +141,14 @@ export class user {
       // 验证权限是否存在
       const permissions = await db.auth_permiss.findMany({ where: { id: { in: body.permiss_ids } } })
       if (permissions.length !== body.permiss_ids.length) {
-        const existingPermissIds = permissions.map(permiss => permiss.id)
-        const missingPermissIds = body.permiss_ids.filter(id => !existingPermissIds.includes(id))
+        const existingPermissIds = permissions.map((permiss) => permiss.id)
+        const missingPermissIds = body.permiss_ids.filter((id) => !existingPermissIds.includes(id))
         return { code: 400, msg: `以下权限不存在: ${missingPermissIds.join(', ')}`, result: null }
       }
 
       // 先删除角色现有的权限
       await db.role_on_permiss.deleteMany({ where: { role_id: body.role_id } })
-      
+
       // 添加新的权限
       const permissAssignments = body.permiss_ids.map((permiss_id) => ({
         role_id: body.role_id,
@@ -175,7 +174,7 @@ export class user {
   }
 
   // 权限检查
-  @Api_Post('用户权限-检查')
+  @Api_Post('🟩用户权限-检查')
   async check_user_permission(@Body() body: check_permission_dto) {
     // 查询用户的所有角色
     const userRoles = await db.role_on_user.findMany({
@@ -246,7 +245,7 @@ export class user {
   }
 
   // 初始化RBAC数据
-  @Api_Post('RBAC-初始化')
+  @Api_Post('🟩RBAC-初始化')
   async init_rbac_data() {
     // 清空现有数据
     await db.role_on_user.deleteMany()
@@ -338,6 +337,182 @@ export class user {
         roles: createdRoles.count,
         permissions: createdPermissions.count,
       },
+    }
+  }
+
+  // ==================== 菜单管理接口 ====================
+
+  @Api_Post('创建-菜单')
+  async create_menu(@Body() body: create_menu_dto) {
+    try {
+      const menu = await db.auth_menu.create({
+        data: {
+          name: body.name,
+          path: body.path,
+          component: body.component,
+          icon: body.icon,
+          sort: body.sort || 0,
+          parent_id: body.parent_id,
+          level: body.level || 1,
+          is_show: body.is_show !== undefined ? body.is_show : true,
+          is_cache: body.is_cache !== undefined ? body.is_cache : false,
+          remark: body.remark,
+        },
+      })
+      return { code: 200, message: '菜单创建成功', data: menu }
+    } catch (error) {
+      return { code: 500, message: '菜单创建失败', error: error.message }
+    }
+  }
+
+  @Api_Post('查询-菜单-详情')
+  async find_one_menu(@Body() body: find_one_menu_dto) {
+    try {
+      const menu = await db.auth_menu.findUnique({ where: { id: body.id } })
+      if (!menu) {
+        return { code: 404, message: '菜单不存在' }
+      }
+      return { code: 200, message: '查询成功', data: menu }
+    } catch (error) {
+      return { code: 500, message: '查询失败', error: error.message }
+    }
+  }
+
+  @Api_Post('更新-菜单')
+  async update_menu(@Body() body: update_menu_dto) {
+    try {
+      const updateData: any = {}
+      if (body.name) updateData.name = body.name
+      if (body.path !== undefined) updateData.path = body.path
+      if (body.component !== undefined) updateData.component = body.component
+      if (body.icon !== undefined) updateData.icon = body.icon
+      if (body.sort !== undefined) updateData.sort = body.sort
+      if (body.parent_id !== undefined) updateData.parent_id = body.parent_id
+      if (body.level !== undefined) updateData.level = body.level
+      if (body.is_show !== undefined) updateData.is_show = body.is_show
+      if (body.is_cache !== undefined) updateData.is_cache = body.is_cache
+      if (body.remark !== undefined) updateData.remark = body.remark
+
+      const menu = await db.auth_menu.update({
+        where: { id: body.id },
+        data: updateData,
+      })
+      return { code: 200, message: '菜单更新成功', data: menu }
+    } catch (error) {
+      return { code: 500, message: '菜单更新失败', error: error.message }
+    }
+  }
+
+  @Api_Post('删除-菜单')
+  async delete_menu(@Body() body: find_one_menu_dto) {
+    try {
+      // 检查是否有子菜单
+      const children = await db.auth_menu.findMany({
+        where: { parent_id: body.id },
+      })
+      if (children.length > 0) {
+        return { code: 400, message: '该菜单下还有子菜单，无法删除' }
+      }
+
+      // 检查是否有角色关联
+      const roleMenus = await db.auth_menu_permiss.findMany({
+        where: { menu_id: body.id },
+      })
+      if (roleMenus.length > 0) {
+        return { code: 400, message: '该菜单已被角色使用，无法删除' }
+      }
+
+      await db.auth_menu.delete({
+        where: { id: body.id },
+      })
+      return { code: 200, message: '菜单删除成功' }
+    } catch (error) {
+      return { code: 500, message: '菜单删除失败', error: error.message }
+    }
+  }
+
+  @Api_Post('分配-角色菜单权限')
+  async assign_role_menu(@Body() body: assign_role_menu_dto) {
+    try {
+      // 先删除该角色的所有菜单权限
+      await db.auth_menu_permiss.deleteMany({
+        where: { role_id: body.role_id },
+      })
+
+      // 添加新的菜单权限
+      if (body.menu_ids.length > 0) {
+        const menuPermiss = body.menu_ids.map((menu_id) => ({
+          role_id: body.role_id,
+          menu_id: menu_id,
+        }))
+        await db.auth_menu_permiss.createMany({
+          data: menuPermiss,
+        })
+      }
+
+      return { code: 200, message: '角色菜单权限分配成功' }
+    } catch (error) {
+      return { code: 500, message: '角色菜单权限分配失败', error: error.message }
+    }
+  }
+
+  @Api_Post('查询-角色菜单权限')
+  async find_role_menu(@Body() body: find_role_menu_dto) {
+    try {
+      const roleMenus = await db.auth_menu_permiss.findMany({
+        where: { role_id: body.role_id },
+        include: {
+          auth_menu: true,
+        },
+      })
+      return { code: 200, message: '查询成功', data: roleMenus }
+    } catch (error) {
+      return { code: 500, message: '查询失败', error: error.message }
+    }
+  }
+
+  @Api_Post('查询-用户菜单')
+  async find_user_menu(@Body() body: find_user_menu_dto) {
+    try {
+      // 通过用户角色查询菜单权限
+      const userRoles = await db.role_on_user.findMany({
+        where: { user_id: body.user_id },
+        include: {
+          auth_role: {
+            include: {
+              menu_permiss: {
+                include: {
+                  auth_menu: true,
+                },
+              },
+            },
+          },
+        },
+      })
+
+      // 提取所有菜单并去重
+      const menus = []
+      const menuMap = new Map()
+
+      userRoles.forEach((userRole) => {
+        userRole.auth_role.menu_permiss.forEach((menuPermiss) => {
+          const menu = menuPermiss.auth_menu
+          if (!menuMap.has(menu.id)) {
+            menuMap.set(menu.id, menu)
+            menus.push(menu)
+          }
+        })
+      })
+
+      // 按层级和排序字段排序
+      menus.sort((a, b) => {
+        if (a.level !== b.level) return a.level - b.level
+        return a.sort - b.sort
+      })
+
+      return { code: 200, message: '查询成功', data: menus }
+    } catch (error) {
+      return { code: 500, message: '查询失败', error: error.message }
     }
   }
 }
