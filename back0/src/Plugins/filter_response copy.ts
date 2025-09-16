@@ -1,28 +1,40 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
-import dayjs from 'dayjs'
 
 export interface Response<T> {
   code: number
   result: T
   msg: string
-  timestamp: string
+  timestamp1: string
+  timestamp2: string
 }
 
 /**
- * 将 Date 对象或 ISO 字符串格式化为 YYYY-MM-DD HH:mm:ss SSS 格式
+ * 日期时间格式化工具函数
+ */
+
+/**
+ * 将 Date 对象或 ISO 字符串格式化为 YYYY-MM-DD HH:mm:ss.ms 格式
  * @param date Date 对象或 ISO 字符串
  * @returns 格式化后的时间字符串
  */
 export function format_date_time(date: Date | string): string {
-  const dayjs_obj = dayjs(date)
+  const date_obj = typeof date === 'string' ? new Date(date) : date
 
-  if (!dayjs_obj.isValid()) {
+  if (isNaN(date_obj.getTime())) {
     return date.toString() // 如果日期无效，返回原字符串
   }
 
-  return dayjs_obj.format('YYYY-MM-DD HH:mm:ss SSS')
+  const year = date_obj.getFullYear()
+  const month = String(date_obj.getMonth() + 1).padStart(2, '0')
+  const day = String(date_obj.getDate()).padStart(2, '0')
+  const hours = String(date_obj.getHours()).padStart(2, '0')
+  const minutes = String(date_obj.getMinutes()).padStart(2, '0')
+  const seconds = String(date_obj.getSeconds()).padStart(2, '0')
+  const milliseconds = String(date_obj.getMilliseconds()).padStart(3, '0')
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
 }
 
 /**
@@ -79,7 +91,9 @@ export class filter_response_func<T> implements NestInterceptor<T, Response<T>> 
           msg: formatted_data?.msg,
           result: formatted_data?.result,
 
-          timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss SSS'),
+          // timestamp: new Date().toLocaleString(),
+          timestamp1: new Date().toLocaleString(),
+          timestamp2: new Date().toISOString(),
         }
       }),
     )

@@ -1,0 +1,10 @@
+model auth_role {
+    id              Int               @id @default(autoincrement())
+    name            String            @unique // 如 "admin", "editor"
+    remark          String?
+    role_on_permiss role_on_permiss[]
+    role_on_user    role_on_user[]
+    
+    // 添加菜单权限关联
+    menu_permiss    auth_menu_permiss[]
+}

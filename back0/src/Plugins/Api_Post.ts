@@ -11,7 +11,7 @@ export function Api_Post(label: string, description?: string, Res_type?: any) {
         Post(propertyKey), // 使用方法名作为路由路径
         ApiOperation({
           summary: label,
-          description: `<h2 style="color: rgb(73, 204, 144) ;">[${label}]</h2>${description || ''}`,
+          description: `<h3 style="color: rgb(73, 204, 144) ;">[${label}]</h3>${description || ''}`,
         }),
       )
   
