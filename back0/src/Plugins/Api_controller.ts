@@ -2,16 +2,17 @@ import { applyDecorators } from '@nestjs/common'
 import { Controller } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
-/**
- * Api_controller装饰器
- * 自动使用类名作为控制器路径，并添加ApiTags
- * @param description 可选的控制器描述，如果不提供则使用类名
- * @returns 装饰器函数
- */
-export function Api_controller(description?: string) {
+const dict_class = new Set()
+
+export function Api_Controller(description?: string) {
   return function <T extends { new (...args: any[]): {} }>(target: T) {
     // 获取类名
     const class_name = target.name
+    if (!dict_class.has(class_name)) {
+      dict_class.add(class_name)
+    } else {
+      throw new Error(`类  ${class_name}   已经存在`)
+    }
 
     // 使用applyDecorators组合多个装饰器
     const decorators = applyDecorators(
