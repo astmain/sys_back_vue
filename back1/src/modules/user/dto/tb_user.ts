@@ -27,6 +27,8 @@ export class tb_user implements Prisma.tb_userGetPayload<{}> {
   @IsString()
   avatar: string
 
+  
+
   @ApiProperty({ description: '用户地址', example: '[]' })
   @IsString()
   list_address: string
