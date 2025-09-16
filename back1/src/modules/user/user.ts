@@ -29,7 +29,7 @@ export class user {
   }
 
 
-  
+  // 帮我根据prisma/schema/auth中的表结构写 rbac 的权限管理
 
 
 
