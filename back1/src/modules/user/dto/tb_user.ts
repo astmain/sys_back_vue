@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, IsDate, IsNumber } from 'class-validator'
+import { IsString, IsDate, IsNumber, IsArray } from 'class-validator'
 import { Prisma } from '@prisma/client'
+import { Exclude, Expose } from 'class-transformer'
 
 export class tb_user implements Prisma.tb_userGetPayload<{}> {
-  @ApiProperty({ description: '用户ID', example: 123456 })
+  @ApiProperty({ description: '用户ID', example: 1 })
   @IsNumber()
   id: number
 
@@ -27,21 +28,21 @@ export class tb_user implements Prisma.tb_userGetPayload<{}> {
   @IsString()
   avatar: string
 
-  
-
   @ApiProperty({ description: '用户地址', example: '[]' })
-  @IsString()
-  list_address: string
+  @IsArray()
+  list_address: Prisma.JsonValue
 
   @ApiProperty({ description: '用户联系人', example: '[]' })
-  @IsString()
-  list_contacts: string
+  @IsArray()
+  list_contacts: Prisma.JsonValue
 
   @ApiProperty({ description: '更新时间', example: '2025-09-09T16:26:16.793Z' })
   @IsDate()
+  @Exclude()
   updated_at: Date
 
   @ApiProperty({ description: '创建时间', example: '2025-09-09T16:26:16.793Z' })
   @IsDate()
+  @Expose()
   created_at: Date
 }
