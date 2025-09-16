@@ -7,15 +7,18 @@
   "license": "MIT",
   "scripts": {
     "开发": "==================================================",
-    "dev:make": "     pnpm i  &&  pnpm dev:generate   &&   pnpm dev:push",
+    "make": "     pnpm i  &&  pnpm dev:generate   &&   pnpm dev:push",
     "dev": "          dotenv -e .env.dev --        nest start --watch",
-    "dev:generate": " dotenv -e .env.dev --        prisma generate",
-    "dev:push": "     dotenv -e .env.dev --        prisma db push",
-    "dev:migrate": "  dotenv -e .env.dev --        prisma migrate dev",
-    "dev:studio": "   dotenv -e .env.dev --        prisma studio",
+    "dev:generate": " dotenv -e .env.dev --        prisma generate      --schema=prisma/schema",
+    "dev:push": "     dotenv -e .env.dev --        prisma db push       --schema=prisma/schema",
+    "dev:migrate": "  dotenv -e .env.dev --        prisma migrate dev   --schema=prisma/schema",
+    "dev:studio": "   dotenv -e .env.dev --        prisma studio        --schema=prisma/schema",
     "生成": "==================================================",
     "prod": "        dotenv -e .env.prod --        nest start --watch",
     "pnpm": "pnpm i  "
+  },
+  "prisma": {
+    "schema": "prisma/schema"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

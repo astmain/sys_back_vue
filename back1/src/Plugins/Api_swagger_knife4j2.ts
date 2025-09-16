@@ -10,8 +10,8 @@ export async function Api_swagger_knife4j2(app) {
   // Swagger API文档配置
   const config = new DocumentBuilder()
     .setTitle('api')
-    .setTitle(process.env.VITE_title)
-    .setDescription(process.env.VITE_description)
+    .setTitle(process.env.VITE_project_name)
+    .setDescription(process.env.VITE_project_remark)
     .setVersion('1.0')
     .addTag('项目介绍', '介绍')
     // .addTag('🟪test4_App_test1', '测试模块1 - 使用dto1_module1模型')
@@ -37,7 +37,7 @@ export async function Api_swagger_knife4j2(app) {
   // Knife4j2 增强文档配置
   await knife4jSetup(app, [
     {
-      name: process.env.VITE_title,
+      name: process.env.VITE_project_name,
       url: '/api-json',
       swaggerVersion: '3.0',
       location: '/api-json',

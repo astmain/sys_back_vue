@@ -8,11 +8,10 @@ export function Api_Controller(description?: string) {
   return function <T extends { new (...args: any[]): {} }>(target: T) {
     // 获取类名
     const class_name = target.name
-
-    if (dict_class.has(class_name)) {
+    if (!dict_class.has(class_name)) {
       dict_class.add(class_name)
     } else {
-      throw new Error(`类${class_name}已经存在`)
+      throw new Error(`类  ${class_name}   已经存在`)
     }
 
     // 使用applyDecorators组合多个装饰器
