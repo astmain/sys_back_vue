@@ -13,5 +13,5 @@ model role_on_user {
     user_id   Int
     role_id   Int
 
-    @@unique([user_id, role_id]) // 添加唯一约束，防止重复分配
+    // @@unique([user_id, role_id]) // 添加唯一约束，防止重复分配
 }
