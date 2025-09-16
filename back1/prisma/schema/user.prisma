@@ -1,0 +1,13 @@
+model tb_user {
+    id            Int      @id @default(autoincrement())
+    name          String
+    tel           String   @unique
+    password      String
+    status        String   @default("new")
+    avatar        String   @default("https://cdn.jsdelivr.net/gh/astmain/filestore@master/blank.jpg")
+    list_address  Json     @default("[]")
+    list_contacts Json     @default("[]")
+    updated_at    DateTime @updatedAt
+    created_at    DateTime @default(now())
+    //   tb_depart_role tb_depart_role[]
+}

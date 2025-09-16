@@ -14,9 +14,8 @@
     "dev:migrate": "  dotenv -e .env.dev --        prisma migrate dev",
     "dev:studio": "   dotenv -e .env.dev --        prisma studio",
     "生成": "==================================================",
-    "prod":  "        dotenv -e .env.prod --        nest start --watch",
+    "prod": "        dotenv -e .env.prod --        nest start --watch",
     "pnpm": "pnpm i  "
-
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -31,6 +30,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dayjs": "1.11.18",
+    "dotenv": "^17.2.2",
     "dotenv-cli": "^9.0.0",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",
