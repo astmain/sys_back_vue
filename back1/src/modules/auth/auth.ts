@@ -6,7 +6,6 @@ import { Api_public } from '@src/App_Auth'
 import { Body } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { ApiProperty } from '@nestjs/swagger'
-import { tb_test1, Prisma } from '@prisma/client' //我想用这个类型 创建一个DTO_TEST1,应该怎么做
 import { IsString } from 'class-validator'
 
 export class login {

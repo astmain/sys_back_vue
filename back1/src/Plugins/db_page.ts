@@ -1,6 +1,18 @@
 // 博客代码 https://chatgpt.com/share/68c3ea93-6614-800c-a045-954810faca90
 import { Prisma } from '@prisma/client'
 
+import { ApiProperty } from '@nestjs/swagger'
+import { IsNumber } from 'class-validator'
+
+export class dto_page {
+  @ApiProperty({ description: '当前页码', example: 1 })
+  @IsNumber()
+  currentPage: number // 从 1 开始
+  @ApiProperty({ description: '每页条数', example: 10 })
+  @IsNumber()
+  pageSize: number // 每页条数
+}
+
 /** 页码式分页参数 */
 export type PagePagination = {
   mode: 'page'
@@ -58,6 +70,10 @@ export async function db_page<T, A extends FindManyArgs>(model: { findMany(args:
   if (pagination.mode === 'page') {
     const { currentPage, pageSize } = pagination
     const page = currentPage //hook常量
+    console.log(`111---222:`, baseArgs)
+    console.log(`111---222:`, baseArgs)
+    delete baseArgs.where.pageSize
+    delete baseArgs.where.currentPage
     const [data, total] = await Promise.all([
       model.findMany({
         ...baseArgs,
