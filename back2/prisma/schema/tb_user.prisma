@@ -1,8 +1,8 @@
 model tb_user {
     id            Int      @id @default(autoincrement())
     name          String
-    phone         String   @unique
-    password      String   @default("123456")
+    tel           String   @unique
+    password      String
     status        String   @default("new")
     avatar        String   @default("https://cdn.jsdelivr.net/gh/astmain/filestore@master/blank.jpg")
     list_address  Json     @default("[]")
