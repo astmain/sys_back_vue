@@ -1,4 +1,4 @@
-model tb_user {
+model auth_user {
     id            Int      @id @default(autoincrement())
     name          String
     phone         String   @unique
@@ -9,5 +9,7 @@ model tb_user {
     list_contacts Json     @default("[]")
     updated_at    DateTime @updatedAt
     created_at    DateTime @default(now())
-    //   tb_depart_role tb_depart_role[]
+
+    // 添加用户-角色关系
+    role_on_user role_on_user[]
 }

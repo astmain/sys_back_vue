@@ -22,7 +22,7 @@ export class login {
 export class auth {
   @Api_Post('登陆')
   async login(@Body() body: login) {
-    let one = await db.tb_user.findFirst({ where: { phone: body.phone, password: body.password } })
+    let one = await db.auth_user.findFirst({ where: { phone: body.phone, password: body.password } })
     if (!one) return { code: 400, msg: '登录失败', result: { token: '123456' } }
     const payload = { name: one?.name, id: one?.id, user: one.phone }
     const my_jwt_service = new JwtService()
@@ -53,8 +53,8 @@ export class auth {
       { id: 18, name: '李18', phone: '15160315018' },
       { id: 19, name: '李19', phone: '15160315019' },
     ]
-    await db.tb_user.deleteMany()
-    const user = await db.tb_user.createMany({ data: tb_user })
+    await db.auth_user.deleteMany()
+    const user = await db.auth_user.createMany({ data: tb_user })
     return { code: 200, msg: '成功:初始化数据', result: { user: user.count } }
   }
 }

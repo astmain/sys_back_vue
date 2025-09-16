@@ -3,7 +3,7 @@ import { IsString, IsDate, IsNumber, IsArray } from 'class-validator'
 import { Prisma } from '@prisma/client'
 import { Exclude, Expose } from 'class-transformer'
 
-export class tb_user implements Prisma.tb_userGetPayload<{}> {
+export class tb_user implements Prisma.auth_userGetPayload<{}> {
   @ApiProperty({ description: '用户ID', example: 1 })
   @IsNumber()
   id: number

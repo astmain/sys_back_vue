@@ -17,16 +17,22 @@ export class user {
     let where: any = { ...body }
     where.phone = { contains: body.phone || '' }
     where.name = { contains: body.name || '' }
-    let res = await db_page_find_many(db.tb_user, { where: where, orderBy: { created_at: 'desc' } })
+    let res = await db_page_find_many(db.auth_user, { where: where, orderBy: { created_at: 'desc' } })
     console.log(`111---222:`, res)
     return { code: 200, msg: '成功:查询-用户-列表', result: res }
   }
 
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user) {
-    let one = await db.tb_user.findUnique({ where: body })
+    let one = await db.auth_user.findUnique({ where: body })
     return { code: 200, msg: '成功:查询-用户-详情', result: one }
   }
+
+
+  
+
+
+
 }
 
 @Module({
