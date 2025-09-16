@@ -256,20 +256,20 @@ export class user {
 
     // 创建权限
     const permissions = [
-      { id: 1, action: 'create:user', remark: '创建用户' },
-      { id: 2, action: 'read:user', remark: '查看用户' },
-      { id: 3, action: 'update:user', remark: '更新用户' },
-      { id: 4, action: 'delete:user', remark: '删除用户' },
-      { id: 5, action: 'create:role', remark: '创建角色' },
-      { id: 6, action: 'read:role', remark: '查看角色' },
-      { id: 7, action: 'update:role', remark: '更新角色' },
-      { id: 8, action: 'delete:role', remark: '删除角色' },
-      { id: 9, action: 'create:permiss', remark: '创建权限' },
-      { id: 10, action: 'read:permiss', remark: '查看权限' },
-      { id: 11, action: 'update:permiss', remark: '更新权限' },
-      { id: 12, action: 'delete:permiss', remark: '删除权限' },
-      { id: 13, action: 'assign:user_role', remark: '分配用户角色' },
-      { id: 14, action: 'assign:role_permiss', remark: '分配角色权限' },
+      { id: 1, action: 'user:create', remark: '创建用户' },
+      { id: 2, action: 'user:read', remark: '查看用户' },
+      { id: 3, action: 'user:update', remark: '更新用户' },
+      { id: 4, action: 'user:delete', remark: '删除用户' },
+      { id: 5, action: 'role:create', remark: '创建角色' },
+      { id: 6, action: 'role:read', remark: '查看角色' },
+      { id: 7, action: 'role:update', remark: '更新角色' },
+      { id: 8, action: 'role:delete', remark: '删除角色' },
+      { id: 9, action: 'permiss:create', remark: '创建权限' },
+      { id: 10, action: 'permiss:read', remark: '查看权限' },
+      { id: 11, action: 'permiss:update', remark: '更新权限' },
+      { id: 12, action: 'permiss:delete', remark: '删除权限' },
+      { id: 13, action: 'user_role:assign', remark: '分配用户角色' },
+      { id: 14, action: 'role_permiss:assign', remark: '分配角色权限' },
     ]
     await db.auth_permiss.deleteMany()
     const createdPermissions = await db.auth_permiss.createMany({ data: permissions })
@@ -300,7 +300,7 @@ export class user {
     const editorPermissions = await db.auth_permiss.findMany({
       where: {
         action: {
-          in: ['create:user', 'read:user', 'update:user', 'read:role', 'read:permiss'],
+          in: ['user:create', 'user:read', 'user:update', 'role:read', 'permiss:read'],
         },
       },
     })
@@ -318,7 +318,7 @@ export class user {
     const viewerPermissions = await db.auth_permiss.findMany({
       where: {
         action: {
-          in: ['read:user', 'read:role', 'read:permiss'],
+          in: ['user:read', 'role:read', 'permiss:read'],
         },
       },
     })

@@ -41,7 +41,7 @@ export class rbac_example {
   }
 
   // 需要特定权限
-  @RequirePermissions('create:user', 'update:user')
+  @RequirePermissions('user:create', 'user:update')
   @Api_Post('权限控制接口')
   async permission_controlled_endpoint() {
     return { code: 200, msg: '需要创建或更新用户权限', result: null }
@@ -62,7 +62,7 @@ export class rbac_example {
 
   // 组合权限要求
   @RequireRoles('admin')
-  @RequirePermissions('delete:user')
+  @RequirePermissions('user:delete')
   @Api_Post('组合权限接口')
   async combined_permission_endpoint() {
     return { code: 200, msg: '需要admin角色且具有删除用户权限', result: null }
@@ -128,14 +128,14 @@ export class rbac_example {
     const hasEditorRole = await this.rbacService.check_user_role(user_id, 'editor')
     
     // 检查是否有特定权限
-    const canCreateUser = await this.rbacService.check_user_permission(user_id, 'create:user')
-    const canDeleteUser = await this.rbacService.check_user_permission(user_id, 'delete:user')
+    const canCreateUser = await this.rbacService.check_user_permission(user_id, 'user:create')
+    const canDeleteUser = await this.rbacService.check_user_permission(user_id, 'user:delete')
     
     // 检查是否有任一权限
-    const hasAnyUserPermission = await this.rbacService.has_any_permission(user_id, ['create:user', 'read:user', 'update:user'])
+    const hasAnyUserPermission = await this.rbacService.has_any_permission(user_id, ['user:create', 'user:read', 'user:update'])
     
     // 检查是否有所有权限
-    const hasAllUserPermissions = await this.rbacService.has_all_permissions(user_id, ['read:user', 'update:user'])
+    const hasAllUserPermissions = await this.rbacService.has_all_permissions(user_id, ['user:read', 'user:update'])
     
     return { 
       code: 200, 
@@ -160,7 +160,7 @@ export class rbac_example {
  *    - @Public() - 公开接口，无需权限验证
  *    - @RequireAdmin() - 需要管理员权限
  *    - @RequireRoles('admin', 'editor') - 需要指定角色之一
- *    - @RequirePermissions('create:user', 'update:user') - 需要指定权限之一
+ *    - @RequirePermissions('user:create', 'user:update') - 需要指定权限之一
  * 
  * 2. 预定义装饰器使用：
  *    - @RBAC_DECORATORS.USER_READ() - 用户读取权限

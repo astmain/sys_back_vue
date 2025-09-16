@@ -71,7 +71,7 @@ export class ExampleController {
   }
 
   // 需要特定权限
-  @RequirePermissions('create:user', 'update:user')
+  @RequirePermissions('user:create', 'user:update')
   @Api_Post('用户管理接口')
   async userManageEndpoint() {
     return { msg: '需要用户管理权限' }
@@ -123,7 +123,7 @@ export class ExampleController {
 @RequireRoles('admin', 'editor')
 
 // 需要指定权限
-@RequirePermissions('create:user', 'update:user')
+@RequirePermissions('user:create', 'user:update')
 ```
 
 ### 预定义装饰器
@@ -152,7 +152,7 @@ import { RBAC_DECORATORS } from './rbac_decorators'
 ```typescript
 // 需要管理员角色且具有删除用户权限
 @RequireRoles('admin')
-@RequirePermissions('delete:user')
+@RequirePermissions('user:delete')
 @Api_Post('删除用户接口')
 async deleteUser() {
   // 实现逻辑
@@ -170,7 +170,7 @@ export class SomeService {
 
   async someMethod(user_id: number) {
     // 检查用户权限
-    const canCreate = await this.rbacService.check_user_permission(user_id, 'create:user')
+    const canCreate = await this.rbacService.check_user_permission(user_id, 'user:create')
     
     // 获取用户所有权限
     const permissions = await this.rbacService.get_user_permissions(user_id)
@@ -180,9 +180,9 @@ export class SomeService {
     
     // 批量权限检查
     const results = await this.rbacService.check_user_permissions_batch(user_id, [
-      'create:user',
-      'update:user',
-      'delete:user'
+      'user:create',
+      'user:update',
+      'user:delete'
     ])
   }
 }
@@ -196,16 +196,16 @@ export class SomeService {
 ```
 
 ### 常用权限
-- `create:user` - 创建用户
-- `read:user` - 查看用户
-- `update:user` - 更新用户
-- `delete:user` - 删除用户
-- `create:role` - 创建角色
-- `read:role` - 查看角色
-- `update:role` - 更新角色
-- `delete:role` - 删除角色
-- `assign:user_role` - 分配用户角色
-- `assign:role_permiss` - 分配角色权限
+- `user:create` - 创建用户
+- `user:read` - 查看用户
+- `user:update` - 更新用户
+- `user:delete` - 删除用户
+- `role:create` - 创建角色
+- `role:read` - 查看角色
+- `role:update` - 更新角色
+- `role:delete` - 删除角色
+- `user_role:assign` - 分配用户角色
+- `role_permiss:assign` - 分配角色权限
 
 ## 角色说明
 

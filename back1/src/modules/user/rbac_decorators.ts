@@ -9,7 +9,7 @@ export const PUBLIC_KEY = 'is_public'
 /**
  * 权限装饰器 - 要求用户具有指定权限之一
  * @param permissions 权限列表
- * @example @RequirePermissions(['create:user', 'update:user'])
+ * @example @RequirePermissions(['user:create', 'user:update'])
  */
 export const RequirePermissions = (...permissions: string[]) => SetMetadata(PERMISSIONS_KEY, permissions)
 
@@ -35,32 +35,32 @@ export const Public = () => SetMetadata(PUBLIC_KEY, true)
 /**
  * 用户管理权限装饰器
  */
-export const RequireUserPermissions = () => RequirePermissions('create:user', 'read:user', 'update:user', 'delete:user')
+export const RequireUserPermissions = () => RequirePermissions('user:create', 'user:read', 'user:update', 'user:delete')
 
 /**
  * 角色管理权限装饰器
  */
-export const RequireRolePermissions = () => RequirePermissions('create:role', 'read:role', 'update:role', 'delete:role')
+export const RequireRolePermissions = () => RequirePermissions('role:create', 'role:read', 'role:update', 'role:delete')
 
 /**
  * 权限管理权限装饰器
  */
-export const RequirePermissionPermissions = () => RequirePermissions('create:permiss', 'read:permiss', 'update:permiss', 'delete:permiss')
+export const RequirePermissionPermissions = () => RequirePermissions('permiss:create', 'permiss:read', 'permiss:update', 'permiss:delete')
 
 /**
  * 分配权限装饰器
  */
-export const RequireAssignPermissions = () => RequirePermissions('assign:user_role', 'assign:role_permiss')
+export const RequireAssignPermissions = () => RequirePermissions('user_role:assign', 'role_permiss:assign')
 
 /**
  * 只读权限装饰器
  */
-export const RequireReadPermissions = () => RequirePermissions('read:user', 'read:role', 'read:permiss')
+export const RequireReadPermissions = () => RequirePermissions('user:read', 'role:read', 'permiss:read')
 
 /**
  * 写权限装饰器
  */
-export const RequireWritePermissions = () => RequirePermissions('create:user', 'update:user', 'delete:user', 'create:role', 'update:role', 'delete:role')
+export const RequireWritePermissions = () => RequirePermissions('user:create', 'user:update', 'user:delete', 'role:create', 'role:update', 'role:delete')
 
 /**
  * 组合权限装饰器 - 要求用户具有所有指定权限
@@ -159,29 +159,29 @@ export const RBAC_DECORATORS = {
   ADMIN: RequireAdmin,
   
   // 用户管理
-  USER_READ: () => RequirePermissions('read:user'),
-  USER_CREATE: () => RequirePermissions('create:user'),
-  USER_UPDATE: () => RequirePermissions('update:user'),
-  USER_DELETE: () => RequirePermissions('delete:user'),
+  USER_READ: () => RequirePermissions('user:read'),
+  USER_CREATE: () => RequirePermissions('user:create'),
+  USER_UPDATE: () => RequirePermissions('user:update'),
+  USER_DELETE: () => RequirePermissions('user:delete'),
   USER_MANAGE: RequireUserPermissions,
   
   // 角色管理
-  ROLE_READ: () => RequirePermissions('read:role'),
-  ROLE_CREATE: () => RequirePermissions('create:role'),
-  ROLE_UPDATE: () => RequirePermissions('update:role'),
-  ROLE_DELETE: () => RequirePermissions('delete:role'),
+  ROLE_READ: () => RequirePermissions('role:read'),
+  ROLE_CREATE: () => RequirePermissions('role:create'),
+  ROLE_UPDATE: () => RequirePermissions('role:update'),
+  ROLE_DELETE: () => RequirePermissions('role:delete'),
   ROLE_MANAGE: RequireRolePermissions,
   
   // 权限管理
-  PERMISSION_READ: () => RequirePermissions('read:permiss'),
-  PERMISSION_CREATE: () => RequirePermissions('create:permiss'),
-  PERMISSION_UPDATE: () => RequirePermissions('update:permiss'),
-  PERMISSION_DELETE: () => RequirePermissions('delete:permiss'),
+  PERMISSION_READ: () => RequirePermissions('permiss:read'),
+  PERMISSION_CREATE: () => RequirePermissions('permiss:create'),
+  PERMISSION_UPDATE: () => RequirePermissions('permiss:update'),
+  PERMISSION_DELETE: () => RequirePermissions('permiss:delete'),
   PERMISSION_MANAGE: RequirePermissionPermissions,
   
   // 分配权限
-  ASSIGN_USER_ROLE: () => RequirePermissions('assign:user_role'),
-  ASSIGN_ROLE_PERMISSION: () => RequirePermissions('assign:role_permiss'),
+  ASSIGN_USER_ROLE: () => RequirePermissions('user_role:assign'),
+  ASSIGN_ROLE_PERMISSION: () => RequirePermissions('role_permiss:assign'),
   ASSIGN_MANAGE: RequireAssignPermissions,
   
   // 角色权限

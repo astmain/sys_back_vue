@@ -26,7 +26,7 @@ export class auth_permiss_dto {
   @IsNumber()
   id: number
 
-  @ApiProperty({ description: '权限动作', example: 'create:user' })
+  @ApiProperty({ description: '权限动作', example: 'user:create' })
   @IsString()
   action: string
 
@@ -80,7 +80,7 @@ export class create_role_dto {
 
 // 创建权限DTO
 export class create_permiss_dto {
-  @ApiProperty({ description: '权限动作', example: 'create:user' })
+  @ApiProperty({ description: '权限动作', example: 'user:create' })
   @IsString()
   action: string
 
@@ -140,7 +140,7 @@ export class check_permission_dto {
   @IsNumber()
   user_id: number
 
-  @ApiProperty({ description: '权限动作', example: 'create:user' })
+  @ApiProperty({ description: '权限动作', example: 'user:create' })
   @IsString()
   action: string
 }

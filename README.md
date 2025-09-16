@@ -35,3 +35,10 @@ https://lanhuapp.com/web/#/item/project/detailDetach?pid=d61bb38c-7c54-444d-bcaf
 - rxjs 用于构建异步和事件驱动程序的库。
 - reflect-metadata 实现元编程的库，提供元数据反射API，可以在运行时检查和操作对象的元数据
 - @nestjs/platform-express Nest的Express平台适配器，提供中间件、路由等功能
+
+
+## 权限控制
+rbac
+Casbin + Prisma   https://www.tongyi.com/qianwen/?st=null&sessionId=d70560ffae3b435f91edf095c92c0900
+
+
