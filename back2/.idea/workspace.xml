@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change beforePath="$PROJECT_DIR$/.env.dev" beforeDir="false" afterPath="$PROJECT_DIR$/.env.dev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/sys_permiss.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_permiss.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prisma/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/sqlite.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plugins/filter_request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/filter_request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plugins/filter_response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/filter_response.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +109,7 @@
       <updated>1758073886063</updated>
       <workItem from="1758073887573" duration="4135000" />
       <workItem from="1758078180527" duration="7869000" />
-      <workItem from="1758106637928" duration="337000" />
+      <workItem from="1758106637928" duration="2978000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -137,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758106571688</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1">
+      <option name="closed" value="true" />
+      <created>1758106995652</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1758106995652</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
