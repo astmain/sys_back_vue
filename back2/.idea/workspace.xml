@@ -5,28 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_depart.prisma" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_menu.prisma" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_permiss.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_menu.prisma" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_on.prisma" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_permiss.prisma" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_role.prisma" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_user.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_user.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/sqlite.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.dev" beforeDir="false" afterPath="$PROJECT_DIR$/.env.dev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/sqlite.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Plugins/filter_request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/filter_request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Plugins/filter_response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/filter_response.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/RBAC_README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/find_list_user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/find_one_user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/menu_dto.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/rbac_dto.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/tb_user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_decorators.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_example.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_guard.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,31 +43,31 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/BBB/sys_back_vue/back2/prisma/schema/auth",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "npm.make.executor": "Run",
-    "settings.editor.selected.configurable": "editing.templates",
-    "ts.external.directory.path": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/BBB/sys_back_vue/back2/prisma/schema/auth&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.make.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\BBB\sys_back_vue\back2\prisma\schema\auth" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.make">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -107,8 +90,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.make" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.make" />
       </list>
     </recent_temporary>
   </component>
@@ -127,7 +110,8 @@
       <option name="presentableId" value="Default" />
       <updated>1758073886063</updated>
       <workItem from="1758073887573" duration="4135000" />
-      <workItem from="1758078180527" duration="7801000" />
+      <workItem from="1758078180527" duration="7869000" />
+      <workItem from="1758106637928" duration="337000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -137,7 +121,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758073924310</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1">
+      <option name="closed" value="true" />
+      <created>1758106564513</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1758106564513</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1">
+      <option name="closed" value="true" />
+      <created>1758106571688</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1758106571688</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
