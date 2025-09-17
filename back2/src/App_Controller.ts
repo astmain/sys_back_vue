@@ -1,11 +1,9 @@
-import { /*接口*/ Controller, Get, Inject,Res } from '@nestjs/common'
+import { /*接口*/ Controller, Get, Res } from '@nestjs/common'
 import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
 import { /*环境变量*/ check_env } from '@src/Plugins/check_env'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_auth'
-import { PrismaClient, tb_test1 as tb_test1 } from '@prisma/client'
-
 import { db } from './App_prisma'
 
 // 通用响应基础类
@@ -154,12 +152,13 @@ export class App_controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-      db.tb_test1.findMany({
+
+      db.test1.findMany({
         skip,
         take: page_size,
         orderBy: { created_at: 'desc' },
       }),
-      db.tb_test1.count({}),
+      db.test1.count({}),
     ])
 
     return new User_Pages_Response_Dto('用户分页功能', users, total, page, page_size)
@@ -174,12 +173,12 @@ export class App_controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [data, total] = await Promise.all([
-      db.tb_test1.findMany({
+      db.test1.findMany({
         skip,
         take: page_size,
         orderBy: { created_at: 'desc' },
       }),
-      db.tb_test1.count({}),
+      db.test1.count({}),
     ])
 
     return new Pages_Response_Dto('通用分页功能', data, total, page, page_size)
@@ -194,12 +193,12 @@ export class App_controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-      db.tb_test1.findMany({
+      db.test1.findMany({
         skip,
         take: page_size,
         orderBy: { created_at: 'desc' },
       }),
-      db.tb_test1.count({}),
+      db.test1.count({}),
     ])
 
     // 创建嵌套的分页结果
@@ -214,7 +213,7 @@ export class App_controller {
   @ApiOperation({ summary: '保存用户' })
   @ApiOkResponse({ description: '保存用户', type: Base_Response_Dto })
   async save_user() {
-    const one = await db.tb_test1.create({
+    const one = await db.test1.create({
       data: {
         phone: '15160315110' + dayjs().unix(),
         password: '123456',
@@ -224,12 +223,12 @@ export class App_controller {
     return new Base_Response_Dto(200, '保存用户', { one })
   }
 
-  @Get('save_tb_test1')
-  @ApiOperation({ summary: '保存tb_test1' })
-  @ApiOkResponse({ description: '保存tb_test1', type: Base_Response_Dto })
-  async save_tb_test1() {
-    await db.tb_test1.deleteMany()
-    const one = await db.tb_test1.createMany({
+  @Get('save_test1')
+  @ApiOperation({ summary: '保存test1' })
+  @ApiOkResponse({ description: '保存test1', type: Base_Response_Dto })
+  async save_test1() {
+    await db.test1.deleteMany()
+    const one = await db.test1.createMany({
       data: [
         { phone: '1-1', password: '123456' },
         { phone: '1-2', password: '123456' },
@@ -264,6 +263,6 @@ export class App_controller {
       ],
     })
 
-    return { code: 200, msg: '保存tb_test1', result: one }
+    return { code: 200, msg: '保存test1', result: one }
   }
 }

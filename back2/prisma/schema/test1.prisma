@@ -1,4 +1,4 @@
-model tb_test1 {
+model test1 {
   id          Int      @id @default(autoincrement())
   phone       String   @unique
   password    String
