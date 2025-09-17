@@ -72,16 +72,11 @@ export class filter_response_func<T> implements NestInterceptor<T, Response<T>> 
       map((data) => {
         // 格式化响应数据中的时间字段
         const formatted_data = format_object_dates(data)
-        console.log(`formatted_data:`, formatted_data)
-
-        return {
-          code: formatted_data?.code,
-          msg: formatted_data?.msg,
-          result: formatted_data?.result,
-
-          timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss SSS'),
-        }
-      }),
+        // console.log(`formatted_data:`, formatted_data)
+        const res_response = { code: formatted_data?.code, msg: formatted_data?.msg, result: formatted_data?.result, timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss SSS') }
+        console.log(`filter_response:`, res_response)
+        return res_response
+      })
     )
   }
 }

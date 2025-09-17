@@ -12,6 +12,6 @@ export async function filter_request(app: INestApplication) {
 function filter_request_func(req: Request, res: Response, next: NextFunction) {
   const fullUrl = req.originalUrl
   const method = req.method // 获取请求方法
-  console.log(Color.purple + `[${method}] ${fullUrl}     `, Color.reset)
+  console.log(Color.purple + `filter_request: ===================== [${method}] ${fullUrl} =====================`, Color.reset)
   next()
 }

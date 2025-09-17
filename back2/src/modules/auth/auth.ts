@@ -69,8 +69,6 @@ export class auth {
       { id: 3002, name: '主管', is_depart: false, parent_id: 3 }
     ]
     const depart = await db.sys_depart.createMany({ data: depart_list })
-
-
     // ==================== 关联 ====================
 
 
