@@ -5,17 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd9e650f-3918-4a58-b966-fd09e8528ed2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/sqlite.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/config_cli/auto-imports.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/config_cli/auto-imports.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/config_cli/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/config_cli/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/src/BUS.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/src/BUS.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/src/auto-imports.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/src/auto-imports.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/src/router/view_admin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/src/router/view_admin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/src/view/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/src/view/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs1/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.cursor_history.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.cursorrules" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.npmrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.prettierrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/auto-imports.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/auto_plus.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/components.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/config_build.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/env/dev" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/env/dokcer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/BUS.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/Pluguns/axios_api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/Pluguns/check_env.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/auto-imports.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/config/axios_instance.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/config/env_config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/layout/dialog_switch_api.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/layout/layout_container.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/router/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/router/view_admin.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/router/view_shop.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/types/spark-md5.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/Menu1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/file_sys copy.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/file_sys.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/tool_upload.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/order.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/user.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/login.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/WechatPayQrcode.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/Zoom_cart.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/Zoom_order.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/Zoom_product.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model_3d.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/print_3d.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/旧的代码index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/tsconfig.node.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/vite.config.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,19 +98,30 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
+    "npm.make.executor": "Run",
     "npm.prod.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\AAA\\sys_back_vue\\back1\\node_modules\\prettier",
+    "prettierjs.PrettierConfiguration.Package": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\prettier",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "ts.external.directory.path": "C:\\AAA\\sys_back_vue\\back1\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.make">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="make" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="make" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -91,6 +139,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.make" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.prod" />
       </list>
@@ -116,6 +165,7 @@
       <workItem from="1758038458170" duration="244000" />
       <workItem from="1758038718894" duration="1913000" />
       <workItem from="1758041384322" duration="2094000" />
+      <workItem from="1758070088468" duration="744000" />
     </task>
     <servers />
   </component>
