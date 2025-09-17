@@ -60,7 +60,7 @@ export class auth {
       { id: 3001, name: '客服部-职员', is_depart: false, parent_id: 3 },
       { id: 3002, name: '客服部-主管', is_depart: false, parent_id: 3 },
       { id: 4001, name: '客服部-职员', is_depart: false, parent_id: 3 },
-      { id: 4002, name: '财务部-主管', is_depart: false, parent_id: 3 },
+      { id: 4002, name: '财务部-主管', is_depart: false, parent_id: 3 }
     ]
     const depart = await db.sys_depart.createMany({ data: depart_list })
     // ==================== 菜单 ====================
@@ -108,7 +108,7 @@ export class auth {
       { depart_id: 4002, menu_id: 6, create: true, delete: true, update: true, find: true, view: true },/*财务部-主管*/
       { depart_id: 4002, menu_id: 9, create: true, delete: true, update: true, find: true, view: true },
       { depart_id: 4002, menu_id: 2, create: true, delete: true, update: true, find: true, view: true },//系统管理
-      { depart_id: 4002, menu_id: 3, create: true, delete: true, update: true, find: true, view: true }, //用户管理
+      { depart_id: 4002, menu_id: 3, create: true, delete: true, update: true, find: true, view: true } //用户管理
     ]
     for (let i = 0; i < sys_permiss.length; i++) {
       sys_permiss[i]['id'] = i + 1
@@ -116,13 +116,38 @@ export class auth {
 
     const permiss = await db.sys_permiss.createMany({ data: sys_permiss })
     // ==================== 关联[用户][部门] ====================
-    await db.sys_user.update({ where: { id: 1 }, data: { sys_depart: { connect: [{ id: 1 }] } } })
-    await db.sys_user.update({ where: { id: 2 }, data: { sys_depart: { connect: [{ id: 1 }] } } })
-    await db.sys_user.update({ where: { id: 3 }, data: { sys_depart: { connect: [{ id: 1 }] } } })
-    await db.sys_user.update({ where: { id: 4 }, data: { sys_depart: { connect: [{ id: 1 }] } } })
-    await db.sys_user.update({ where: { id: 5 }, data: { sys_depart: { connect: [{ id: 1 }] } } })
+    await db.sys_user.update({ where: { id: 1 }, data: { sys_depart: { connect: [{ id: 1 }, { id: 1001 }] } } })
+    await db.sys_user.update({ where: { id: 2 }, data: { sys_depart: { connect: [{ id: 1 }, { id: 1001 }] } } })
+    await db.sys_user.update({ where: { id: 3 }, data: { sys_depart: { connect: [{ id: 1 }, { id: 1001 }] } } })
+    await db.sys_user.update({ where: { id: 4 }, data: { sys_depart: { connect: [{ id: 1 }, { id: 1001 }] } } })
+    await db.sys_user.update({ where: { id: 5 }, data: { sys_depart: { connect: [{ id: 1 }, { id: 1001 }] } } })
     // user_id=1管理多个部门
-    await db.sys_user.update({ where: { id: 1 }, data: { sys_depart: { connect: [{ id: 1001 }, { id: 1002 }] } } })
+    await db.sys_user.update({
+      where: { id: 1 }, data: {
+        sys_depart: {
+          connect: [
+            { id: 1 }, { id: 1001 },
+            { id: 2 }, { id: 2001 }, { id: 2002 },
+            { id: 3 }, { id: 3001 }, { id: 3002 },
+            // { id: 4 }, { id: 4001 }, { id: 4002 }
+          ]
+        }
+      }
+    })
+
+
+    // { id: 1, name: '用户部', is_depart: true },
+    // { id: 2, name: '技术部', is_depart: true },
+    // { id: 3, name: '客服部', is_depart: true },
+    // { id: 4, name: '财务部', is_depart: true },
+    // { id: 1001, name: 'vip1', is_depart: false, parent_id: 1 },
+    // { id: 1002, name: 'vip2', is_depart: false, parent_id: 1 },
+    // { id: 2001, name: '技术部-职员', is_depart: false, parent_id: 2 },
+    // { id: 2002, name: '技术部-主管', is_depart: false, parent_id: 2 },
+    // { id: 3001, name: '客服部-职员', is_depart: false, parent_id: 3 },
+    // { id: 3002, name: '客服部-主管', is_depart: false, parent_id: 3 },
+    // { id: 4001, name: '客服部-职员', is_depart: false, parent_id: 3 },
+    // { id: 4002, name: '财务部-主管', is_depart: false, parent_id: 3 }
 
 
     return { code: 200, msg: '成功:初始化数据', result: { user: user.count, menu: menu.count, depart: depart.count, permiss: permiss.count } }

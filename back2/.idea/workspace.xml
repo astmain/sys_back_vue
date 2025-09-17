@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/sys_permiss.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_permiss.prisma" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prisma/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/sqlite.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App_Module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,27 +42,28 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/BBB/sys_back_vue/back2/prisma/schema/auth&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.make.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/BBB/sys_back_vue/back2/src/modules/user",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "npm.make.executor": "Run",
+    "settings.editor.selected.configurable": "editing.templates",
+    "ts.external.directory.path": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BBB\sys_back_vue\back2\src\modules\user" />
       <recent name="D:\BBB\sys_back_vue\back2\prisma\schema\auth" />
     </key>
   </component>
@@ -109,7 +111,7 @@
       <updated>1758073886063</updated>
       <workItem from="1758073887573" duration="4135000" />
       <workItem from="1758078180527" duration="7869000" />
-      <workItem from="1758106637928" duration="2978000" />
+      <workItem from="1758106637928" duration="4740000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -143,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758106995652</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1">
+      <option name="closed" value="true" />
+      <created>1758109747034</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1758109747034</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
