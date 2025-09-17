@@ -4,55 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd9e650f-3918-4a58-b966-fd09e8528ed2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.cursor_history.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.cursorrules" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.npmrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/.prettierrc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/auto-imports.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/auto_plus.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/components.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/config_cli/config_build.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/env/dev" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/env/dokcer" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/BUS.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/Pluguns/axios_api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/Pluguns/check_env.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/auto-imports.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/config/axios_instance.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/config/env_config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/layout/dialog_switch_api.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/layout/layout_container.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/router/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/router/view_admin.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/router/view_shop.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/types/spark-md5.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/Menu1.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/file_sys copy.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/file_sys.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/file_sys/tool_upload.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/order.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/admin/user.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/login.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/WechatPayQrcode.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/Zoom_cart.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/Zoom_order.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/Zoom_product.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model/model.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/model_3d.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/print_3d.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/src/view/shop/旧的代码index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/tsconfig.node.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs1 copy/vite.config.ts" beforeDir="false" />
+    <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
+      <change afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_depart.prisma" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_menu.prisma" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_permiss.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_menu.prisma" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_on.prisma" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_permiss.prisma" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_role.prisma" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/auth/auth_user.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema/auth/sys_user.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/sqlite.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App_Module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/RBAC_README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/find_list_user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/find_one_user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/menu_dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/rbac_dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/dto/tb_user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_decorators.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_example.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_guard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/rbac_service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +51,7 @@
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="32lUdmdAA4I21M3FolR97TwMnAz" />
+  <component name="ProjectId" id="32o53TevDRmzLbNsSAFKHeETdRS" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -92,6 +66,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/BBB/sys_back_vue/back2/prisma/schema/auth",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -99,13 +74,16 @@
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
     "npm.make.executor": "Run",
-    "npm.prod.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.selected.configurable": "editing.templates",
     "ts.external.directory.path": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BBB\sys_back_vue\back2\prisma\schema\auth" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.make">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -127,21 +105,10 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="prod" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="prod" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="npm.make" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.prod" />
       </list>
     </recent_temporary>
   </component>
@@ -154,49 +121,32 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fd9e650f-3918-4a58-b966-fd09e8528ed2" name="Changes" comment="" />
-      <created>1757994741774</created>
+      <changelist id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="" />
+      <created>1758073886063</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1757994741774</updated>
-      <workItem from="1757994742909" duration="1787000" />
-      <workItem from="1758038061134" duration="198000" />
-      <workItem from="1758038324384" duration="113000" />
-      <workItem from="1758038458170" duration="244000" />
-      <workItem from="1758038718894" duration="1913000" />
-      <workItem from="1758041384322" duration="2094000" />
-      <workItem from="1758070088468" duration="744000" />
+      <updated>1758073886063</updated>
+      <workItem from="1758073887573" duration="4135000" />
+      <workItem from="1758078180527" duration="7801000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <option name="closed" value="true" />
+      <created>1758073924310</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1758073924310</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>
