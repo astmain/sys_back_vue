@@ -53,14 +53,14 @@ export class auth {
       { id: 2, name: '技术部', is_depart: true },
       { id: 3, name: '客服部', is_depart: true },
       { id: 4, name: '财务部', is_depart: true },
-      { id: 1001, name: 'vip1', is_depart: false, parent_id: 1 },
-      { id: 1002, name: 'vip2', is_depart: false, parent_id: 1 },
+      { id: 1001, name: '用户部-普通', is_depart: false, parent_id: 1 },
+      { id: 1002, name: '用户部-贵宾', is_depart: false, parent_id: 1 },
       { id: 2001, name: '技术部-职员', is_depart: false, parent_id: 2 },
       { id: 2002, name: '技术部-主管', is_depart: false, parent_id: 2 },
       { id: 3001, name: '客服部-职员', is_depart: false, parent_id: 3 },
       { id: 3002, name: '客服部-主管', is_depart: false, parent_id: 3 },
-      { id: 4001, name: '客服部-职员', is_depart: false, parent_id: 3 },
-      { id: 4002, name: '财务部-主管', is_depart: false, parent_id: 3 }
+      { id: 4001, name: '财务部-职员', is_depart: false, parent_id: 4 },
+      { id: 4002, name: '财务部-主管', is_depart: false, parent_id: 4 }
     ]
     const depart = await db.sys_depart.createMany({ data: depart_list })
     // ==================== 菜单 ====================

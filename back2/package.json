@@ -15,7 +15,11 @@
     "dev:studio": "   dotenv -e .env.dev --        prisma studio        --schema=prisma/schema",
     "生成": "==================== 生成 ====================",
     "prod": "        dotenv -e .env.prod --        nest start --watch",
-    "pnpm": "pnpm i  "
+    "pnpm": "pnpm i  ",
+    "test1": "==================== test1 ====================",
+    "test1:make": "     pnpm test1:generate  &&  test1:push",
+    "test1:generate": " prisma generate          --schema=test1/table.prisma",
+    "test1:push": "     prisma push              --schema=test1/table.prisma"
   },
   "prisma": {
     "schema": "prisma/schema"

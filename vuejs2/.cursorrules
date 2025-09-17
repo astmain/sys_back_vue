@@ -5,8 +5,13 @@
 # 安装包方式:
 - 使用pnpm安装包,不要使用npm
 
-# 命名规范:
+# 命名规范js和ts和json,jsx,tsx,vue,html,css:
 - 函数名,方法名,变量名,文件名,目录名,使用下划线命名法
+
+# 规范prisma:
+- prisma的表名,字段名,使用下划线命名法,表名使用小写,字段名使用小写,不要使用 @@map
+- 表不需要有下面的字段created_at,updated_at,status,last_login_at,email,is_deleted
+
 
 # 不要是用的技术:
 - 不要使用element-plus/icons-vue
