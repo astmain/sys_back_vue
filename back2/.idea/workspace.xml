@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/test1/table.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test1/table.prisma" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test1/table.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test2/table2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test2/table2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test2/table2.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/.cursor_history.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/.cursorrules" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/.cursorrules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/config_cli/auto-imports.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/config_cli/auto-imports.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/auto-imports.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/auto-imports.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test1/table.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/test1/table.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +124,7 @@
       <workItem from="1758073887573" duration="4135000" />
       <workItem from="1758078180527" duration="7869000" />
       <workItem from="1758106637928" duration="4740000" />
-      <workItem from="1758114379874" duration="3762000" />
+      <workItem from="1758114379874" duration="5118000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
