@@ -1,0 +1,15 @@
+model auth_user {
+    id            Int      @id @default(autoincrement())
+    name          String
+    phone         String   @unique
+    password      String   @default("123456")
+    status        String   @default("new")
+    avatar        String   @default("https://cdn.jsdelivr.net/gh/astmain/filestore@master/blank.jpg")
+    list_address  Json     @default("[]")
+    list_contacts Json     @default("[]")
+    updated_at    DateTime @updatedAt
+    created_at    DateTime @default(now())
+
+    // 添加用户-角色关系
+    role_on_user role_on_user[]
+}

@@ -1,0 +1,21 @@
+VITE_env_path ="/env/dokcer"
+
+
+# 请求地址
+VITE_api_url_real = 'http://127.0.0.1:6001'
+VITE_api_url_dev = 'http://127.0.0.1:6001'
+VITE_api_url_inner= 'http://192.168.0.250:6001'
+VITE_api_url_pro= 'https://server.oss.yun3d.com'  #域名必须使用 https
+# VITE_api_url_dev = 'https://server.oss.yun3d.com'   #域名必须使用 https
+#VITE_api_url_dev = 'http://192.168.0.250:60001'
+
+
+
+# 去我们官网的的请求复制token
+VITE_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1MTYwMzE1MTEwIiwicGhvbmUiOiIxNTE2MDMxNTExMCIsImlkIjoxLCJyb2xlSWRzIjpbXSwiZGVwYXJ0bWVudCI6W251bGxdLCJpYXQiOjE3NTYzNjE5MTIsImV4cCI6MTc1NjQ0ODMxMn0.kYhJ8MsNYJ3izGd91383L203xQoFLhqa6bxePXLCz0A"
+
+
+
+
+
+
