@@ -22,45 +22,67 @@ export class login {
 export class auth {
   @Api_Post('登陆')
   async login(@Body() body: login) {
-    let one = await db.auth_user.findFirst({ where: { phone: body.phone, password: body.password } })
+    let one = await db.sys_user.findFirst({ where: { phone: body.phone, password: body.password } })
     if (!one) return { code: 400, msg: '登录失败', result: { token: '123456' } }
-    const payload = { name: one?.name, id: one?.id, user: one.phone }
+    const payload = { id: one?.id, user: one.phone }
     const my_jwt_service = new JwtService()
     const token = my_jwt_service.sign(payload, { secret: process.env.VITE_jwt_secret })
-    return { code: 200, msg: '登录成功', result: { token: token, name: one.name, id: one.id, user: one.phone, avatar: one.avatar } }
+    return { code: 200, msg: '登录成功', result: { token: token, id: one.id, user: one.phone } }
   }
 
   @Api_Post('初始化数据')
   async register(@Body() body: login) {
-    let tb_user = [
+    // ==================== 删除 ====================
+    await db.sys_user.deleteMany()
+    await db.sys_menu.deleteMany()
+    await db.sys_depart.deleteMany()
+    await db.sys_permiss.deleteMany()
+    // ==================== 用户 ====================
+    let user_list = [
       { id: 1, name: '许鹏', phone: '15160315110' },
       { id: 2, name: '二狗', phone: '15160315002' },
       { id: 3, name: '张三', phone: '15160315003' },
       { id: 4, name: '李四', phone: '15160315004' },
-      { id: 5, name: '王五', phone: '15160315005' },
-      { id: 6, name: '赵六', phone: '15160315006' },
-      { id: 7, name: '孙七', phone: '15160315007' },
-      { id: 8, name: '王八', phone: '15160315008' },
-      { id: 9, name: '陈九', phone: '15160315009' },
-      { id: 10, name: '十分', phone: '15160315010' },
-      { id: 11, name: '十一', phone: '15160315011' },
-      { id: 12, name: '许12', phone: '15160315012' },
-      { id: 13, name: '张13', phone: '15160315013' },
-      { id: 14, name: '张14', phone: '15160315014' },
-      { id: 15, name: '张15', phone: '15160315015' },
-      { id: 16, name: '李16', phone: '15160315016' },
-      { id: 17, name: '李17', phone: '15160315017' },
-      { id: 18, name: '李18', phone: '15160315018' },
-      { id: 19, name: '李19', phone: '15160315019' },
+      { id: 5, name: '王五', phone: '15160315005' }
     ]
-    await db.auth_user.deleteMany()
-    const user = await db.auth_user.createMany({ data: tb_user })
-    return { code: 200, msg: '成功:初始化数据', result: { user: user.count } }
+    const user = await db.sys_user.createMany({ data: user_list })
+    // ==================== 菜单 ====================
+    let menu_list = [
+      { id: 1, name: '首页', path: '/home' },
+      { id: 2, name: '系统管理', path: '/sys' },
+      { id: 3, name: '用户管理', path: '/user', kind: 'com', parent_id: 2 },
+      { id: 4, name: '菜单管理', path: '/menu', kind: 'com', parent_id: 2 },
+      { id: 5, name: '部门管理', path: '/depart', kind: 'com', parent_id: 2 }
+    ]
+    const menu = await db.sys_menu.createMany({ data: menu_list })
+    // ==================== 部门 ====================
+    let depart_list = [
+      { id: 1, name: '用户', is_depart: true },
+      { id: 2, name: '技术部', is_depart: true },
+      { id: 3, name: '客服部', is_depart: true },
+      { id: 4, name: '财务部', is_depart: true },
+      { id: 1001, name: 'vip1', is_depart: false, parent_id: 1 },
+      { id: 1002, name: 'vip2', is_depart: false, parent_id: 1 },
+      { id: 2001, name: '职员', is_depart: false, parent_id: 2 },
+      { id: 2002, name: '主管', is_depart: false, parent_id: 2 },
+      { id: 3001, name: '职员', is_depart: false, parent_id: 3 },
+      { id: 3002, name: '主管', is_depart: false, parent_id: 3 }
+    ]
+    const depart = await db.sys_depart.createMany({ data: depart_list })
+
+
+    // ==================== 关联 ====================
+
+
+
+
+    return { code: 200, msg: '成功:初始化数据', result: { user: user.count, menu: menu.count, depart: depart.count } }
   }
 }
 
 @Module({
   controllers: [auth],
-  providers: [],
+  providers: []
 })
-export class auth_Module {}
+export class auth_Module {
+}

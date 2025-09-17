@@ -1,0 +1,15 @@
+// sys_role_menu (角色-菜单关联表): role_id 关联 sys_role.id, menu_id 关联 sys_menu.id (定义角色权限)。
+
+model sys_permiss {
+  id     Int    @id @default(autoincrement())
+  name   String
+  remark String @default("")
+
+  create Boolean @default(true)
+  delete Boolean @default(true)
+  update Boolean @default(true)
+  find   Boolean @default(true)
+  view   Boolean @default(true)
+
+  sys_menu sys_menu[]
+}

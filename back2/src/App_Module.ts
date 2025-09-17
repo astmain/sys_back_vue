@@ -4,7 +4,7 @@ import { App_prisma_Module } from '@src/App_prisma'
 import { App_controller } from '@src/App_controller'
 import { auth_Module } from '@src/modules/auth/auth'
 // 业务
-import { user_Module } from '@src/modules/user/user'
+// import { user_Module } from '@src/modules/user/user'
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { user_Module } from '@src/modules/user/user'
     App_prisma_Module, //数据库
     auth_Module, //业务模块
     // 业务模块========================================
-    user_Module,
+    // user_Module,
   ],
   controllers: [App_controller],
   providers: [],

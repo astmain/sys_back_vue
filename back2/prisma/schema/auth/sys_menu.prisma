@@ -1,0 +1,17 @@
+// sys_menu (菜单表): 存储菜单/权限项信息 (名称、路由、图标、类型、排序、父ID等)。
+model sys_menu {
+  id      Int     @id @default(autoincrement())
+  name    String
+  path    String
+  kind    String  @default("dir")
+  is_show Boolean @default(true)
+
+  // 树状形结构
+  parent_id Int?
+  parent    sys_menu?  @relation("_self_sys_menu", fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: Cascade) //自关联数据
+  children  sys_menu[] @relation("_self_sys_menu")
+
+  // 关联
+  sys_depart  sys_depart[]
+  sys_permiss sys_permiss[]
+}

@@ -1,0 +1,11 @@
+// sys_user (用户表): 存储用户账号信息 (用户名、密码、昵称、邮箱、手机、部门ID、状态等)。
+
+model sys_user {
+  id       Int    @id @default(autoincrement())
+  name     String
+  phone    String
+  password String @default("123456")
+
+  // 关联
+  sys_depart sys_depart[]
+}
