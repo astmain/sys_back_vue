@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1" />
+    <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
+      <change afterPath="$PROJECT_DIR$/src/modules/user/dto/find_one_user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.dev" beforeDir="false" afterPath="$PROJECT_DIR$/.env.dev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -52,8 +65,8 @@
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;npm.make.executor&quot;: &quot;Run&quot;,
     &quot;npm.test1:make.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\AAA\\sys_back_vue\\back2\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -65,7 +78,7 @@
       <recent name="D:\BBB\sys_back_vue\back2\prisma\schema\auth" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.test1:make">
+  <component name="RunManager" selected="npm.make">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -98,9 +111,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.test1:make" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.make" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.test1:make" />
       </list>
     </recent_temporary>
   </component>
@@ -124,6 +137,8 @@
       <workItem from="1758114379874" duration="7139000" />
       <workItem from="1758154718338" duration="6000" />
       <workItem from="1758154774011" duration="2000" />
+      <workItem from="1758471186248" duration="869000" />
+      <workItem from="1758472326103" duration="1478000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />

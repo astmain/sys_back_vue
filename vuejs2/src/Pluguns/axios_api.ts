@@ -17,7 +17,7 @@ const axios_instance = axios.create({
 axios_instance.interceptors.request.use(
   (config) => {
     // config.url = (window as any).BUS.url_api_curr.url + config.url
-    config.url = 'http://127.0.0.1:3001' + config.url
+    config.url = 'http://127.0.0.1:3002' + config.url
     config.headers['token'] = localStorage.getItem('token')
     // config.headers['token'] = import.meta.env.VITE_jwt_token_swagger
     // config.headers['token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1MTYwMzE1MTEwIiwicGhvbmUiOiIxNTE2MDMxNTExMCIsImlkIjoxLCJyb2xlSWRzIjpbXSwiaWF0IjoxNzU3OTIyODkxLCJleHAiOjE3NTgwMDkyOTF9.FWURZZuZE8ziD7fDc4nB-5KMgvbixUVP5DtTOj9axls'
