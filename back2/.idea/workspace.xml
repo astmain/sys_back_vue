@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change beforePath="$PROJECT_DIR$/sqlite.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/table/config.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/table/config.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +135,7 @@
       <workItem from="1758154774011" duration="2000" />
       <workItem from="1758471186248" duration="869000" />
       <workItem from="1758472326103" duration="1478000" />
-      <workItem from="1758474313562" duration="366000" />
+      <workItem from="1758474313562" duration="400000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
