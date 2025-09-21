@@ -26,11 +26,12 @@ export class user {
     let id_list: any = await get_all_ids({ table_name: 'sys_menu', ids: menu_perm_ids })
     console.log(`id_list---`, id_list)
 
-    let ids = id_list.map(item => item.id)
+    let ids = id_list.map(item => item.id +"")
+    console.log(`ids---`,             )
 
 
-    let menu_list = await db.sys_menu.findMany({ where: { id: id_list.map(o=>o.id) } })
-    // console.log(`menu_list---`, menu_list)
+    let menu_list = await db.sys_menu.findMany({ where: { id: {in:ids} } })
+    console.log(`menu_list---`, menu_list)
 
 
     return { code: 200, msg: '成功:获取用', result: {} }
