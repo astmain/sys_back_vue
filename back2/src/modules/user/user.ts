@@ -34,7 +34,11 @@ export class user {
     console.log(`menu_list---`, menu_list)
 
 
-    return { code: 200, msg: '成功:获取用', result: {} }
+    let menu_tree = build_tree(menu_list)
+    console.log(`111---menu_tree:`, menu_tree)
+
+
+    return { code: 200, msg: '成功:获取用', result: menu_tree }
 
   }
 
@@ -87,4 +91,19 @@ async function get_all_ids({ table_name, ids }: { table_name: string, ids: strin
   return result
 
 }
+
+
+// 构建菜单树的递归函数
+function build_tree(menus: any, parent_id: string | null = null) {
+  const filtered_menus = menus.filter(menu => {
+    const menu_parent_id = menu.parent_id || null
+    return menu_parent_id === parent_id
+  })
+
+  return filtered_menus.map(menu => ({
+    ...menu,
+    children: build_tree(menus, menu.id)
+  }))
+}
+
 
