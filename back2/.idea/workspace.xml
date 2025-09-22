@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
+      <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/table/rbac.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/table/rbac.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/table/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/table/sqlite.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs2/src/config/env_config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vuejs2/src/router/view_admin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/router/view_admin.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,26 +52,26 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/AAA/sys_back_vue/back2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.make.executor&quot;: &quot;Run&quot;,
-    &quot;npm.test1:make.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\AAA\\sys_back_vue\\back2\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/AAA/sys_back_vue/back2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "npm.make.executor": "Run",
+    "npm.test1:make.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\AAA\sys_back_vue\back2" />
@@ -136,6 +142,7 @@
       <workItem from="1758471186248" duration="869000" />
       <workItem from="1758472326103" duration="1478000" />
       <workItem from="1758474313562" duration="570000" />
+      <workItem from="1758500286507" duration="3757000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />

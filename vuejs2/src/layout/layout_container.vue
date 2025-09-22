@@ -83,7 +83,7 @@ const handle_switch_admin = (): void => {
 }
 
 const handle_logout = (): void => {
-  localStorage.removeItem('is_authenticated')
+  localStorage.removeItem('token')
   localStorage.removeItem('username')
   localStorage.removeItem('current_layout')
   ElMessage.success('已退出登录')

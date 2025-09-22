@@ -30,7 +30,11 @@ export class user {
     console.log(`ids---`)
 
 
-    let menu_list = await db.sys_menu.findMany({ where: { id: { in: ids } } })
+    let menu_perm_list = await db.sys_menu.findMany({ where: { id: { in: ids } } })
+    console.log(`menu_perm_list---`, menu_perm_list)
+
+
+    let menu_list = await db.sys_menu.findMany({ where: { type: { in: ['menu', 'dir'] }, id: { in: ids } } })
     console.log(`menu_list---`, menu_list)
 
 

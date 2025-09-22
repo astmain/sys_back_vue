@@ -1,6 +1,13 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw, type Router } from 'vue-router'
 import { view_admin } from './view_admin'
 import { view_shop } from './view_shop'
+
+// 扩展Router类型
+declare module 'vue-router' {
+  interface Router {
+    reloadRouter(): void
+  }
+}
 
 const routes: RouteRecordRaw[] = [
   {
@@ -28,17 +35,27 @@ const router = createRouter({
   routes,
 })
 
+// 向 router 上添加一个，重新实例化 VueRouter 的方法
+router.reloadRouter = function () {
+  // 在Vue Router 4中，需要重新创建路由实例
+  const newRouter = createRouter({
+    history: createWebHistory(),
+    routes,
+  })
+  // 替换当前路由的matcher
+  ;(router as any).matcher = (newRouter as any).matcher
+}
+
 // 路由守卫
 router.beforeEach((to, from, next) => {
-  const is_authenticated = localStorage.getItem('is_authenticated')
-
-  if (to.meta.requiresAuth && !is_authenticated) {
+  const token = localStorage.getItem('token')
+  if (to.meta.requiresAuth && !token) {
     next('/login')
-  } else if (to.path === '/login' && is_authenticated) {
+  } else if (to.path === '/login' && token) {
     next('/view/shop/print_3d')
   } else {
     next()
   }
 })
 
-export default router 
+export default router

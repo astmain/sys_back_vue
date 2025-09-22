@@ -62,68 +62,51 @@ export class auth {
       await db.sys_menu.createMany({
         data: [
           // 一级菜单
-          { id: 'menu_1', name: '首页', path: '/home', remark: '系统首页' },
-          { id: 'menu_2', name: '系统设置', path: '/system', remark: '系统设置模块' },
-          { id: 'menu_3', name: '商城管理', path: '/mall', remark: '商城管理模块' },
+          { id: 'menu_1', name: '首页', path: '/home', type: 'menu' },
+          { id: 'menu_2', name: '系统设置', path: '/system', type: 'dir' },
+          { id: 'menu_3', name: '商城管理', path: '/mall', type: 'dir' },
           // 系统设置-子菜单
-          { id: 'sub_2001', name: '组织人员', path: '/system/user', parent_id: 'menu_2', remark: '组织人员管理' },
-          { id: 'sub_2002', name: '组织管理', path: '/system/depart', parent_id: 'menu_2', remark: '组织部门管理' },
+          { id: 'sub_2001', name: '组织人员', path: '/system/user', type: 'menu', parent_id: 'menu_2' },
+          { id: 'sub_2002', name: '组织管理', path: '/system/depart', type: 'menu', parent_id: 'menu_2' },
           // 商城管理-子菜单
-          { id: 'sub_3001', name: '订单管理', path: '/mall/order', parent_id: 'menu_3', remark: '订单管理' },
-          { id: 'sub_3002', name: '商品管理', path: '/mall/product', parent_id: 'menu_3', remark: '商品管理' },
-          { id: 'sub_3003', name: '财务管理', path: '/mall/finance', parent_id: 'menu_3', remark: '财务管理' }
+          { id: 'sub_3001', name: '订单管理', path: '/mall/order', type: 'menu', parent_id: 'menu_3' },
+          { id: 'sub_3002', name: '商品管理', path: '/mall/product', type: 'menu', parent_id: 'menu_3' },
+          { id: 'sub_3003', name: '财务管理', path: '/mall/finance', type: 'menu', parent_id: 'menu_3' }
         ]
       })
 
       // ================================== 部门/角色-管理-菜单 ==================================
-      // 客户普通-管理
-      // 客户高级-管理
-      /* 首页*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1001' } }, parent_id: 'menu_1', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 首页*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1002' } }, parent_id: 'menu_1', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      // 客户普通    // 客户高级
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1001' } }, /* 首页*/ parent_id: 'menu_1', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1002' } }, /* 首页*/ parent_id: 'menu_1', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
 
-      // 技术职员-管理
-      /* 组织人员*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 组织管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 订单管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 商品管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      // 技术职员
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, /* 组织人员*/ parent_id: 'sub_2001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, /* 组织管理*/ parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, /* 订单管理*/ parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, /* 财务管理*/ parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, /* 财务管理*/ parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
 
-      // 技术主管-管理
-      /* 组织人员*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 组织管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 订单管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 商品管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 财务管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      // 技术主管
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, /* 组织人员*/ parent_id: 'sub_2001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, /* 组织管理*/ parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, /* 订单管理*/ parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, /* 财务管理*/ parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2002' } }, /* 财务管理*/ parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
 
-      // 财务职员-管理
-      /* 订单管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 商品管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 财务管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      // 财务职员
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, /* 组织人员*/ parent_id: 'sub_2001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, /* 组织管理*/ parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, /* 订单管理*/ parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, /* 财务管理*/ parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3001' } }, /* 财务管理*/ parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
 
-      // 财务主管-管理
-      /* 组织人员*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 组织管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 订单管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 商品管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      /* 财务管理*/
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      // 财务主管
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, /* 组织人员*/ parent_id: 'sub_2001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, /* 组织管理*/ parent_id: 'sub_2002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, /* 订单管理*/ parent_id: 'sub_3001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, /* 财务管理*/ parent_id: 'sub_3002', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_3002' } }, /* 财务管理*/ parent_id: 'sub_3003', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
 
       // ================================== 用户 关连 部门/角色 ==================================
       //             //客户普通     //客户高级   // 技术职员    // 技术主管   // 财务职员   // 财务主管
