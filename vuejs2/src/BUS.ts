@@ -8,6 +8,7 @@ export const useBUS = defineStore('BUS_defineStore', {
   state: () => ({
     count: 0,
     web_type: 'admin',
+    menu_true: [] as any[],
     VITE_url_app_run: '',
     VITE_url_app_list: [] as any[],
     token: '',
@@ -21,7 +22,7 @@ export const useBUS = defineStore('BUS_defineStore', {
     ],
   }),
   persist: [
-    { pick: ['count', 'web_type', 'VITE_url_app_run', 'VITE_url_app_list', 'token', 'url_api_curr'], storage: localStorage },
+    { pick: ['count','menu_true', 'web_type', 'VITE_url_app_run', 'VITE_url_app_list', 'token', 'url_api_curr'], storage: localStorage },
 
 
     {

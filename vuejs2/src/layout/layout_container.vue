@@ -26,7 +26,7 @@
         <el-aside width="200px" style="background: #304156; height: 100%" class="admin_aside">
           <el-menu :default-active="active_menu" style="border: none" router background-color="#304156" text-color="#bfcbd9" active-text-color="#409eff">
             <!-- 动态渲染 view_admin 菜单 -->
-            <template v-for="item in view_admin" :key="item.path">
+            <template v-for="item in BUS.menu_true" :key="item.path">
               <!-- 如果有子菜单 -->
               <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
                 <template #title>
@@ -79,53 +79,7 @@ const username = ref<string>(localStorage.getItem('username') || '用户')
 // 路由
 const router = useRouter()
 const route = useRoute()
-console.log('router', router)
-console.log(
-  'router.options.routes',
-  router.options.routes.find((item: any) => item.path === '/view')
-)
 
-const aaa: any = router.options.routes.find((item: any) => item.path === '/view')
-console.log('aaa', aaa.children.find((item: any) => item.path === '/view/admin').children)
-
-const view_admin = [
-  {
-    name: '首页',
-    path: '/view/admin/home',
-  },
-  {
-    name: '系统设置',
-    path: '/view/admin/system',
-    children: [
-      {
-        name: '用户管理',
-        path: '/view/admin/system/user',
-      },
-      {
-        name: '部门管理',
-        path: '/view/admin/system/depart',
-      },
-    ],
-  },
-  {
-    name: '商城管理',
-    path: '/view/admin/shop',
-    children: [
-      {
-        name: '商品管理',
-        path: '/view/admin/shop/product',
-      },
-      {
-        name: '订单管理',
-        path: '/view/admin/shop/order',
-      },
-      {
-        name: '财务管理',
-        path: '/view/admin/shop/finance',
-      },
-    ],
-  },
-]
 
 // 计算属性
 const active_menu = computed(() => route.path)
@@ -138,7 +92,7 @@ const handle_switch_shop = (): void => {
 
 const handle_switch_admin = (): void => {
   BUS.web_type = 'admin'
-  router.push('/view/admin/home')
+  router.push('/home')
 }
 
 const handle_logout = (): void => {

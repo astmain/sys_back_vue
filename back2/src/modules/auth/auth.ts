@@ -64,14 +64,14 @@ export class auth {
           // 一级菜单
           { id: 'menu_1', name: '首页', path: '/home', type: 'menu' },
           { id: 'menu_2', name: '系统设置', path: '/system', type: 'dir' },
-          { id: 'menu_3', name: '商城管理', path: '/mall', type: 'dir' },
+          { id: 'menu_3', name: '商城管理', path: '/shop', type: 'dir' },
           // 系统设置-子菜单
-          { id: 'sub_2001', name: '组织人员', path: '/system/user', type: 'menu', parent_id: 'menu_2' },
-          { id: 'sub_2002', name: '组织管理', path: '/system/depart', type: 'menu', parent_id: 'menu_2' },
+          { id: 'sub_2001', name: '用户管理', path: '/system/user', type: 'menu', parent_id: 'menu_2' },
+          { id: 'sub_2002', name: '部门管理', path: '/system/depart', type: 'menu', parent_id: 'menu_2' },
           // 商城管理-子菜单
-          { id: 'sub_3001', name: '订单管理', path: '/mall/order', type: 'menu', parent_id: 'menu_3' },
-          { id: 'sub_3002', name: '商品管理', path: '/mall/product', type: 'menu', parent_id: 'menu_3' },
-          { id: 'sub_3003', name: '财务管理', path: '/mall/finance', type: 'menu', parent_id: 'menu_3' }
+          { id: 'sub_3001', name: '订单管理', path: '/shop/order', type: 'menu', parent_id: 'menu_3' },
+          { id: 'sub_3002', name: '商品管理', path: '/shop/product', type: 'menu', parent_id: 'menu_3' },
+          { id: 'sub_3003', name: '财务管理', path: '/shop/finance', type: 'menu', parent_id: 'menu_3' }
         ]
       })
 

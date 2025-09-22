@@ -10,39 +10,15 @@ declare module 'vue-router' {
 }
 
 const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    redirect: '/login',
-  },
-  {
-    name: '登录',
-    path: '/login',
-    component: () => import('../view/login.vue'),
-  },
+  { path: '/', redirect: '/login' },
+  { name: '登录', path: '/login', component: () => import('../view/login.vue') },
   {
     name: 'view',
     path: '/view',
     component: () => import('../layout/layout_container.vue'),
     children: [
-      // ...view_shop, //商城门户
-      // ...view_admin, //后台管理
-      {
-        name: 'view_shop',
-        path: '/view/shop',
-        children: [
-          ...view_shop, //商城门户
-        ],
-      },
-
-
-
-      {
-        name: 'view_admin',
-        path: '/view/admin',
-        children: [
-          ...view_admin, //后台管理
-        ],
-      },
+      ...view_shop, //商城门户
+      ...view_admin, //后台管理
     ],
   },
 ]
