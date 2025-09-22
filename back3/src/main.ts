@@ -5,8 +5,7 @@ import { Plugins } from './Plugins/index'
 
 async function bootstrap() {
   const app = await NestFactory.create(App_Module)
-
-  // 插件配置
+  // ==================== 插件配置 ====================
   const { env_curr } = Plugins.check_env() //检查环境变量
   await Plugins.Api_swagger_knife4j2(app) //文档配置(swagger_knife4j2)
   await Plugins.filter_cors(app) // CORS配置(跨域请求)
