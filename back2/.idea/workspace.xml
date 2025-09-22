@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change beforePath="$PROJECT_DIR$/src/modules/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/table/rbac.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/table/rbac.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/table/sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/table/sqlite.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/config/env_config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/router/view_admin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/router/view_admin.ts" afterDir="false" />
-    </list>
+    <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +134,7 @@
       <workItem from="1758471186248" duration="869000" />
       <workItem from="1758472326103" duration="1478000" />
       <workItem from="1758474313562" duration="570000" />
-      <workItem from="1758500286507" duration="3757000" />
+      <workItem from="1758500286507" duration="5621000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
