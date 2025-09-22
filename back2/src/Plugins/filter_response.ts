@@ -68,6 +68,7 @@ export function format_object_dates(obj: any): any {
 @Injectable()
 export class filter_response_func<T> implements NestInterceptor<T, Response<T>> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
+    console.log(`111---`, 111)
     return next.handle().pipe(
       map((data) => {
         // 格式化响应数据中的时间字段

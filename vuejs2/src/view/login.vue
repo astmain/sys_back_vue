@@ -22,124 +22,125 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { api } from '@src/api'
+import { generateRoutes, type MenuItem } from '@/router/view_admin'
 
+// 菜单数据类型定义（与view_admin.ts中的类型保持一致）
 
-
-const menu1=[
-    {
-        "id": "menu_1",
-        "name": "首页",
-        "path": "/home",
-        "remark": null,
-        "type": "menu",
-        "is_permiss": false,
-        "is_view": false,
-        "is_find": false,
-        "is_save": false,
-        "is_del": false,
-        "parent_id": null,
-        "children": []
-    },
-    {
-        "id": "menu_2",
-        "name": "系统设置",
-        "path": "/system",
-        "remark": null,
-        "type": "dir",
-        "is_permiss": false,
-        "is_view": false,
-        "is_find": false,
-        "is_save": false,
-        "is_del": false,
-        "parent_id": null,
-        "children": [
-            {
-                "id": "sub_2001",
-                "name": "组织人员",
-                "path": "/system/user",
-                "remark": null,
-                "type": "menu",
-                "is_permiss": false,
-                "is_view": false,
-                "is_find": false,
-                "is_save": false,
-                "is_del": false,
-                "parent_id": "menu_2",
-                "children": []
-            },
-            {
-                "id": "sub_2002",
-                "name": "组织管理",
-                "path": "/system/depart",
-                "remark": null,
-                "type": "menu",
-                "is_permiss": false,
-                "is_view": false,
-                "is_find": false,
-                "is_save": false,
-                "is_del": false,
-                "parent_id": "menu_2",
-                "children": []
-            }
-        ]
-    },
-    {
-        "id": "menu_3",
-        "name": "商城管理",
-        "path": "/mall",
-        "remark": null,
-        "type": "dir",
-        "is_permiss": false,
-        "is_view": false,
-        "is_find": false,
-        "is_save": false,
-        "is_del": false,
-        "parent_id": null,
-        "children": [
-            {
-                "id": "sub_3001",
-                "name": "订单管理",
-                "path": "/mall/order",
-                "remark": null,
-                "type": "menu",
-                "is_permiss": false,
-                "is_view": false,
-                "is_find": false,
-                "is_save": false,
-                "is_del": false,
-                "parent_id": "menu_3",
-                "children": []
-            },
-            {
-                "id": "sub_3002",
-                "name": "商品管理",
-                "path": "/mall/product",
-                "remark": null,
-                "type": "menu",
-                "is_permiss": false,
-                "is_view": false,
-                "is_find": false,
-                "is_save": false,
-                "is_del": false,
-                "parent_id": "menu_3",
-                "children": []
-            },
-            {
-                "id": "sub_3003",
-                "name": "财务管理",
-                "path": "/mall/finance",
-                "remark": null,
-                "type": "menu",
-                "is_permiss": false,
-                "is_view": false,
-                "is_find": false,
-                "is_save": false,
-                "is_del": false,
-                "parent_id": "menu_3",
-                "children": []
-            }
-        ]
-    }
+let list_data_menu: MenuItem[] = [
+  {
+    id: 'menu_1',
+    name: '首页',
+    path: '/view/admin/home',
+    remark: null,
+    type: 'menu',
+    is_permiss: false,
+    is_view: false,
+    is_find: false,
+    is_save: false,
+    is_del: false,
+    parent_id: null,
+    children: [],
+  },
+  {
+    id: 'menu_2',
+    name: '系统设置',
+    path: '/view/admin/system',
+    remark: null,
+    type: 'dir',
+    is_permiss: false,
+    is_view: false,
+    is_find: false,
+    is_save: false,
+    is_del: false,
+    parent_id: null,
+    children: [
+      {
+        id: 'sub_2001',
+        name: '用户管理',
+        path: '/view/admin/system/user',
+        remark: null,
+        type: 'menu',
+        is_permiss: false,
+        is_view: false,
+        is_find: false,
+        is_save: false,
+        is_del: false,
+        parent_id: 'menu_2',
+        children: [],
+      },
+      {
+        id: 'sub_2002',
+        name: '组织管理',
+        path: '/view/admin/system/depart',
+        remark: null,
+        type: 'menu',
+        is_permiss: false,
+        is_view: false,
+        is_find: false,
+        is_save: false,
+        is_del: false,
+        parent_id: 'menu_2',
+        children: [],
+      },
+    ],
+  },
+  {
+    id: 'menu_3',
+    name: '商城管理',
+    path: '/view/admin/shop',
+    remark: null,
+    type: 'dir',
+    is_permiss: false,
+    is_view: false,
+    is_find: false,
+    is_save: false,
+    is_del: false,
+    parent_id: null,
+    children: [
+      {
+        id: 'sub_3001',
+        name: '订单管理',
+        path: '/view/admin/shop/order',
+        remark: null,
+        type: 'menu',
+        is_permiss: false,
+        is_view: false,
+        is_find: false,
+        is_save: false,
+        is_del: false,
+        parent_id: 'menu_3',
+        children: [],
+      },
+      {
+        id: 'sub_3002',
+        name: '商品管理',
+        path: '/view/admin/shop/product',
+        remark: null,
+        type: 'menu',
+        is_permiss: false,
+        is_view: false,
+        is_find: false,
+        is_save: false,
+        is_del: false,
+        parent_id: 'menu_3',
+        children: [],
+      },
+      {
+        id: 'sub_3003',
+        name: '财务管理',
+        path: '/view/admin/shop/finance',
+        remark: null,
+        type: 'menu',
+        is_permiss: false,
+        is_view: false,
+        is_find: false,
+        is_save: false,
+        is_del: false,
+        parent_id: 'menu_3',
+        children: [],
+      },
+    ],
+  },
 ]
 
 // 类型定义
@@ -165,6 +166,28 @@ const login_form_ref = ref<FormInstance>()
 // 路由
 const router = useRouter()
 
+// 动态添加路由的函数
+function addDynamicRoutes(menuItems: MenuItem[]) {
+  try {
+    // 生成路由
+    const dynamicRoutes = generateRoutes(menuItems)
+
+    // 获取现有的 admin 路由配置
+    const adminRoute = router.getRoutes().find((route) => route.name === 'view_admin')
+
+    if (adminRoute) {
+      // 动态添加子路由
+      dynamicRoutes.forEach((route) => {
+        router.addRoute('view_admin', route)
+      })
+      console.log('动态路由添加成功:', dynamicRoutes)
+    } else {
+      console.error('未找到 view_admin 路由配置')
+    }
+  } catch (error) {
+    console.error('添加动态路由失败:', error)
+  }
+}
 
 async function handle_login_api() {
   if (!login_form_ref.value) return
@@ -177,7 +200,11 @@ async function handle_login_api() {
       const res2: any = await api.user.find_one_user({ id: res.result.id })
       console.log('api.user.find_one_user---res2', res2)
 
-      // router.push('/view/admin/file_sys')
+      // 动态生成并添加路由
+      addDynamicRoutes(list_data_menu)
+
+      // 跳转到首页
+      router.push('/view/admin/home')
     } else {
       ElMessage.error(res.msg)
     }

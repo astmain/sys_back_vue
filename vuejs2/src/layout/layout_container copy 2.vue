@@ -25,24 +25,12 @@
       <div v-show="BUS.web_type === 'admin'">
         <el-aside width="200px" style="background: #304156; height: 100%" class="admin_aside">
           <el-menu :default-active="active_menu" style="border: none" router background-color="#304156" text-color="#bfcbd9" active-text-color="#409eff">
-            <!-- 动态渲染 view_admin 菜单 -->
-            <template v-for="item in view_admin" :key="item.path">
-              <!-- 如果有子菜单 -->
-              <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
-                <template #title>
-                  <span>{{ item.name }}</span>
-                </template>
-                <el-menu-item v-for="child in item.children" :key="child.path" :index="child.path">
-                  <span>{{ child.name }}</span>
-                </el-menu-item>
-              </el-sub-menu>
-              <!-- 如果没有子菜单 -->
-              <el-menu-item v-else :index="item.path">
-                <span>{{ item.name }}</span>
-              </el-menu-item>
-            </template>
-
-            <!-- 保留原有的文件系统菜单 -->
+            <!--            <el-menu-item index="/view/admin/users">-->
+            <!--              <span>用户管理</span>-->
+            <!--            </el-menu-item>-->
+            <!--            <el-menu-item index="/view/admin/orders">-->
+            <!--              <span>订单管理</span>-->
+            <!--            </el-menu-item>-->
             <el-menu-item index="/view/admin/file_sys">
               <span>文件系统</span>
             </el-menu-item>

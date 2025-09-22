@@ -109,8 +109,6 @@ type User_Pages_Response_Type = Pages_Response_Dto<Pages_Result_Dto<User_Respons
 @Api_public()
 @Controller()
 export class App_controller {
-
-
   @Get()
   async api(@Res() res) {
     const { env_curr } = check_env()
