@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f04ca9f2-042d-436b-82fe-b91acf0b78f6" name="Changes" comment="1">
-      <change beforePath="$PROJECT_DIR$/src/App_Controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plugins/filter_response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/filter_response.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/config_cli/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/layout/layout_container.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/layout/layout_container.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/router/view_admin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/router/view_admin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vuejs2/src/view/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vuejs2/src/view/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/user/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/user.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +62,7 @@
     "npm.make.executor": "Run",
     "npm.test1:make.executor": "Run",
     "settings.editor.selected.configurable": "preferences.keymap",
-    "ts.external.directory.path": "D:\\BBB\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\AAA\\sys_back_vue\\back2\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -80,7 +74,7 @@
       <recent name="D:\BBB\sys_back_vue\back2\prisma\schema\auth" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.make">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -113,8 +107,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.make" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.test1:make" />
       </list>
     </recent_temporary>
