@@ -19,11 +19,18 @@
       >
       </el-tree>
     </nav>
-    <nav style="flex: 1" class="uno_card">
-      <el-table :data="user_list" style="width: 100%">
+    <nav style="flex: 1; padding: 0 !important" class="uno_card">
+      <el-table :data="user_list" style="width: 100%; height: 100%" stripe :header-cell-style="{ background: '#f4f4f5', color: '#606266' }">
+        <el-table-column type="index" width="66" label="序号" />
         <el-table-column prop="name" label="姓名" />
         <el-table-column prop="phone" label="手机号" />
         <el-table-column prop="depart_id" label="部门" />
+        <el-table-column label="操作">
+          <template #default="scope">
+            <el-button type="primary" link @click="">修改</el-button>
+            <el-button link @click="() => 1">删除</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </nav>
   </el-main>
