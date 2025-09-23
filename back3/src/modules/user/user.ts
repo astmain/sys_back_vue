@@ -1,20 +1,22 @@
-import { Body, Module } from '@nestjs/common'
+import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 
 
 import { db } from '@src/App_Prisma'
+import  _ from 'lodash'
 
 
 // ==================== dto ====================
 import { find_one_user } from './dto/find_one_user'
+import { find_list_user } from './dto/find_list_user'
 
 @Api_public()
 @Api_Controller('用户')
 export class user {
   @Api_Post('查询-用户-详情')
-  async find_one_user(@Body() body: find_one_user) {
+  async find_one_user(@Body() body: find_one_user, @Req() req: any) {
     console.log(`body---`, body)
 
     // 部门对于菜单
@@ -41,9 +43,58 @@ export class user {
     let menu_tree = build_tree(menu_list)
     console.log(`111---menu_tree:`, menu_tree)
 
+    let user = await db.sys_user.findFirst({ where: { id: req.user_id } })
 
-    return { code: 200, msg: '成功:获取用', result: menu_tree }
 
+    return { code: 200, msg: '成功', result: { menu_tree, user } }
+
+  }
+
+
+  @Api_Post('查询-部门-树')
+  async find_tree_depart(@Req() req: any) {
+    let depart_tree = await db.sys_depart.findFirst({ where: { id: 'depart_0' }, include: { children: { include: { children: { include: { children: true } } } } } })
+    return { code: 200, msg: '<UNK>', result: { depart_tree: [depart_tree] } }
+  }
+
+  @Api_Post('查询-用户-列表')
+  async find_list_user(@Body() body: find_list_user, @Req() req: any) {
+    console.log(`body---`, body)
+    // let user_list = await db.sys_user.findMany()
+    let list1 = await db.sys_depart.findFirst({ where: { id: 'depart_0' }, include: { children: { include: { children: { include: { children: true } } } } } })
+
+
+    console.log(`111---list1`, JSON.parse(JSON.stringify(list1)))
+
+    let depart_id = body.depart_id
+
+    const query = `
+        WITH RECURSIVE department_tree AS (SELECT id, name, parent_id
+                                           FROM sys_depart
+                                           WHERE id = '${depart_id}'
+
+                                           UNION ALL
+
+                                           SELECT d.id, d.name, d.parent_id
+                                           FROM sys_depart d
+                                                    INNER JOIN department_tree t ON d.parent_id = t.id)
+        SELECT *
+        FROM department_tree;
+    `
+
+    const depart_list: any = await db.$queryRawUnsafe(query)
+    console.log(`depart_list---`, depart_list)
+
+    const depart_ids = depart_list.map(item => item.id)
+    console.log(`depart_ids---`, depart_ids)
+
+    let sys_user111 = await db.sys_depart.findMany({ where: { id: { in: depart_ids } }, include: { sys_user: true } })
+
+
+    let user_list = sys_user111.map(item => item.sys_user).flat()
+    user_list = _.uniqWith(user_list, _.isEqual)
+
+    return { code: 200, msg: '成功', result: { user_list, list1, depart_list, sys_user111 } }
   }
 
 }

@@ -29,6 +29,7 @@ const router = createRouter({
       component: () => import("../layout/layout.vue"),
       children: [...view_admin, ...view_shop],
     },
+    { path: "/:pathMatch(.*)*", name: "page404", component: () => import("../layout/page404.vue") }, // 404页面路由 - 必须放在最后，用于捕获所有未匹配的路径
   ],
 })
 

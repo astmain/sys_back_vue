@@ -26,7 +26,7 @@
         <el-aside width="200px" style="background: #304156; height: 100%" class="admin_aside">
           <el-menu :default-active="active_menu" style="border: none" router background-color="#304156" text-color="#bfcbd9" active-text-color="#409eff">
             <!-- 动态渲染 view_admin 菜单 -->
-            <template v-for="item in BUS.menu_true" :key="item.path">
+            <template v-for="item in BUS.menu_tree" :key="item.path">
               <!-- 如果有子菜单 -->
               <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
                 <template #title>

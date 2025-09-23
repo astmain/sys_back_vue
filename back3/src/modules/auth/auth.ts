@@ -41,10 +41,12 @@ export class auth {
       // 2. 创建部门/角色
       await db.sys_depart.createMany({
         data: [
+          // 总公司
+          { id: 'depart_0', name: '总公司', is_depart: true, remark: '' },
           // 部门
-          { id: 'depart_1', name: '客户部', is_depart: true, remark: '' },
-          { id: 'depart_2', name: '技术部', is_depart: true, remark: '' },
-          { id: 'depart_3', name: '财务部', is_depart: true, remark: '' },
+          { id: 'depart_1', name: '客户部', is_depart: true, parent_id: 'depart_0', remark: '' },
+          { id: 'depart_2', name: '技术部', is_depart: true, parent_id: 'depart_0', remark: '' },
+          { id: 'depart_3', name: '财务部', is_depart: true, parent_id: 'depart_0', remark: '' },
           //
           { id: 'role_1001', name: '客户普通', is_depart: false, parent_id: 'depart_1', remark: '' },
           { id: 'role_1002', name: '客户高级', is_depart: false, parent_id: 'depart_1', remark: '' },

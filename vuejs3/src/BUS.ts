@@ -5,7 +5,8 @@ export const use_BUS = defineStore("localStorage_BUS", {
     count: 0,
     control_button: { show: true, top: 500, left: 100 },
     web_type: "admin",
-    menu_true: [] as any[],
+    menu_tree: [] as any[],
+    user: {},
     VITE_url_app_run: "",
     VITE_url_app_list: [] as any[],
     token: "",
@@ -19,7 +20,7 @@ export const use_BUS = defineStore("localStorage_BUS", {
     ],
   }),
   persist: [
-    { pick: ["count", "control_button", "menu_true", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },
+    { pick: ["count", "control_button", "menu_tree", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },
 
     {
       key: "token",
@@ -45,9 +46,5 @@ export const use_BUS = defineStore("localStorage_BUS", {
 
 export const BUS = use_BUS()
 
-// 我像监听 control_button 的变化
-BUS.$subscribe((args, state) => {
-  if (args.events && Array.isArray(args.events) && args.events.some((event: any) => event.key === "control_button")) {
-    console.log("control_button 变化", args.events)
-  }
-})
+//@ts-ignore
+window.BUS = BUS

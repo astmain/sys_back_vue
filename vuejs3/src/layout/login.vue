@@ -61,7 +61,7 @@ async function handle_login_api() {
       BUS.token = res.result.token
       const res2: any = await api.user.find_one_user({ id: res.result.id })
       console.log("api.user.find_one_user---res2", res2)
-      BUS.menu_true = res2.result
+      BUS.menu_tree = res2.result.menu_tree
       // 跳转到首页
       router.push("/home")
       console.log("router.push(/home)")
