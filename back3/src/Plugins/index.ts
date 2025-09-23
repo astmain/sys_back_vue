@@ -6,7 +6,7 @@ import { filter_request } from './filter_request'
 import { filter_response } from './filter_response'
 
 // 配置:函数
-export const Plugins = {
+export const plugins = {
   Api_swagger_knife4j2,
   filter_cors,
   filter_dto,

@@ -1,7 +1,7 @@
 import { /*接口*/ Controller, Get, Res } from '@nestjs/common'
 import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
-import { /*环境变量*/ check_env } from '@src/Plugins/check_env'
+import { /*环境变量*/ check_env } from '@src/plugins/check_env'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_auth'
 import { db } from './App_prisma'
@@ -111,11 +111,8 @@ type User_Pages_Response_Type = Pages_Response_Dto<Pages_Result_Dto<User_Respons
 export class App_controller {
   @Get()
   async api(@Res() res) {
-    const { env_curr } = check_env()
-    // return { code: 200, msg: '首页api', result: { check_env } }
     return res.redirect(process.env.VITE_url_app_run + '/doc.html')
   }
-
 
   @ApiOperation({ summary: 'token生成' })
   @Get('token_make')
@@ -150,7 +147,6 @@ export class App_controller {
     const page_size = 10
     const skip = (page - 1) * page_size
     const [users, total] = await Promise.all([
-
       db.test1.findMany({
         skip,
         take: page_size,
@@ -203,8 +199,6 @@ export class App_controller {
     const nested_result = new Pages_Result_Dto(users, total, page, page_size)
     return new Pages_Response_Dto('嵌套泛型分页功能', [nested_result], 1, page, page_size)
   }
-
-
 
   // 1111
   @Get('save_user')

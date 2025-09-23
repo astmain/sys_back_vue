@@ -1,6 +1,6 @@
 import { Body, Module } from '@nestjs/common'
-import { Api_Controller } from '@src/Plugins/Api_Controller'
-import { Api_Post } from '@src/Plugins/Api_Post'
+import { Api_Controller } from '@src/plugins/Api_Controller'
+import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 
 
