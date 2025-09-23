@@ -1,4 +1,5 @@
 <template>
+  <control_button />
   <el-container style="height: 100vh">
     <el-header style="width: 100vw; height: 60px; background: #304156; color: #fff">
       <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60px; justify-content: space-between">
@@ -69,6 +70,8 @@ import { ElMessage } from "element-plus"
 import { BUS } from "@/BUS"
 import dialog_switch_api from "./dialog_switch_api.vue"
 import { axios_api } from "@/plugins/axios_api"
+
+import /*组件*/ control_button from "./control_button.vue"
 
 const dialog_switch_api_ref = ref<InstanceType<typeof dialog_switch_api> | null>(null)
 

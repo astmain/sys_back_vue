@@ -1,12 +1,10 @@
 <template>
-  <router-view />
+    <router-view />
 </template>
 
 <script setup lang="ts">
 
 </script>
-
-
 
 <style>
 .el-main {
@@ -31,7 +29,7 @@
 
 html {
   height: 100vh !important;
-  width:100vw !important;
+  width: 100vw !important;
   padding: 0 !important;
   margin: 0 !important;
   overflow-x: hidden;
@@ -40,12 +38,11 @@ html {
 
 body {
   height: 100vh !important;
-  width:100vw !important;
+  width: 100vw !important;
   padding: 0 !important;
   margin: 0 !important;
   overflow-x: hidden;
   overflow-y: hidden;
-
 }
 
 h1,

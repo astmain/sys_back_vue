@@ -1,4 +1,5 @@
 <template>
+  <control_button />
   <div class="login_container">
     <div class="login_box">
       <h2>back_oss_demo</h2>
@@ -23,6 +24,7 @@ import { useRouter } from "vue-router"
 import { ElMessage, type FormInstance, type FormRules } from "element-plus"
 import { api } from "@/api"
 import { BUS } from "@/BUS"
+import /*组件*/ control_button from "./control_button.vue"
 
 // 类型定义
 interface LoginForm {

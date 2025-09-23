@@ -28,7 +28,8 @@ export default defineConfig({
 
   //服务
   server: {
+    host: "0.0.0.0",
     open: true,
-    port: 30001,
+    port: 8080,
   },
 });
