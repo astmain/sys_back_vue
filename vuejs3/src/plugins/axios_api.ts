@@ -35,9 +35,11 @@ axios_instance.interceptors.response.use(
     return response.data
   },
   (error) => {
-    // 可统一处理错误
-    // alert(error.message)
-    // console.log(error.response)
+    if (error.code === "ERR_NETWORK") {
+      showNotification("失败:网络连接", "error")
+      console.error("失败:网络连接", error)
+      return Promise.reject(error)
+    }
     // return Promise.reject(error)
 
     // console.log('error.response.data:', error.response.data)
@@ -60,3 +62,68 @@ declare global {
 }
 
 window.axios_api = axios_api
+
+function showNotification(message: string, type = "info", duration = 3000) {
+  // 检查是否已添加样式
+  if (!document.getElementById("showNotification")) {
+    const style = document.createElement("style")
+    style.id = "showNotification"
+    style.textContent = `
+          /* 消息提示样式 */
+          .notification {
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              background-color: #333;
+              color: white;
+              padding: 12px 20px;
+              border-radius: 4px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              z-index: 1000;
+              opacity: 0;
+              transform: translateY(-20px);
+              transition: opacity 0.3s ease, transform 0.3s ease;
+          }
+
+          .notification.show {
+              opacity: 1;
+              transform: translateY(0);
+          }
+
+          .notification.success {
+              background-color: #4CAF50;
+          }
+
+          .notification.error {
+              background-color: #f44336;
+          }
+
+          .notification.info {
+              background-color: #2196F3;
+          }
+      `
+    document.head.appendChild(style)
+  }
+
+  // 创建提示元素
+  const notification = document.createElement("div")
+  notification.className = `notification ${type}`
+  notification.textContent = message
+
+  // 添加到页面
+  document.body.appendChild(notification)
+
+  // 触发显示动画
+  setTimeout(() => {
+    notification.classList.add("show")
+  }, 100)
+
+  // 设置自动消失
+  setTimeout(() => {
+    notification.classList.remove("show")
+    // 动画结束后移除元素
+    setTimeout(() => {
+      if (notification.parentNode) document.body.removeChild(notification)
+    }, 3000)
+  }, duration)
+}
