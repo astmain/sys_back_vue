@@ -1,5 +1,5 @@
 <template>
-  <control_button />
+  <env_control />
   <el-container style="height: 100vh">
     <el-header style="width: 100vw; height: 60px; background: #304156; color: #fff">
       <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 60px; justify-content: space-between">
@@ -55,25 +55,18 @@
       </el-main>
     </el-container>
     <div style="height: 50px; background: #304156; color: #fff">
-      {{ BUS.url_api_curr.url }}
-      <el-button @click="switch_api"> 测试api切换</el-button>
-      <el-button @click="test_axios"> 测试axios</el-button>
+      {{ BUS.url_api_curr }}
     </div>
   </el-container>
-  <dialog_switch_api ref="dialog_switch_api_ref" />
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue"
+import { ref, computed } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { ElMessage } from "element-plus"
 import { BUS } from "@/BUS"
-import dialog_switch_api from "./dialog_switch_api.vue"
-import { axios_api } from "@/plugins/axios_api"
 
-import /*组件*/ control_button from "./control_button.vue"
-
-const dialog_switch_api_ref = ref<InstanceType<typeof dialog_switch_api> | null>(null)
+import /*组件*/ env_control from "./env_control.vue"
 
 // 响应式数据
 const username = ref<string>(localStorage.getItem("username") || "用户")
@@ -103,18 +96,6 @@ const handle_logout = (): void => {
   ElMessage.success("已退出登录")
   router.push("/login")
 }
-
-function switch_api(): void {
-  dialog_switch_api_ref.value?.open()
-}
-
-async function test_axios() {
-  let res = await axios_api.get("")
-  console.log("res", res)
-}
-
-// 生命周期
-onMounted(() => {})
 </script>
 
 <style scoped></style>
