@@ -15,9 +15,9 @@ async function bootstrap() {
 
   // 监听端口
   await app.listen(Number(process.env.VITE_port))
-  console.log(`应用运行在: http://localhost:${Number(process.env.VITE_port)}`)
-  console.log(`Knife4j2 API文档地址: http://localhost:${Number(process.env.VITE_port)}/doc.html`)
-  console.log(`env_curr---`, env_curr)
+  console.log(`env_curr.VITE_port---`, env_curr.VITE_port)
+  console.log(`env_curr.VITE_url_app_run---`, env_curr.VITE_url_app_run)
+
 }
 
 bootstrap()
