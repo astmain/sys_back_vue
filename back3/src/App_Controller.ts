@@ -109,6 +109,7 @@ type User_Pages_Response_Type = Pages_Response_Dto<Pages_Result_Dto<User_Respons
 @Api_public()
 @Controller()
 export class App_controller {
+  @ApiOperation({ summary: '首页文档', description: '首页文档:' + process.env.VITE_url_app_run })
   @Get()
   async api(@Res() res) {
     return res.redirect(process.env.VITE_url_app_run + '/doc.html')
