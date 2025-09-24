@@ -15,12 +15,13 @@ import { find_list_user } from './dto/find_list_user'
 export class user {
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user, @Req() req: any) {
+    console.log(`body---`, body)
     // 部门对于菜单
     let depart_menu = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } }, include: { sys_menu: true } })
     console.log(`depart_menu---`, JSON.stringify(depart_menu, null, 2))
     let menu_perm_ids = [...new Set(depart_menu.flatMap((o) => o.sys_menu.map((menu) => menu.id)))]
     console.log(`menu_perm_ids---`, menu_perm_ids)
-    let id_list: any = await db_find_ids_self_and_parent({ table_name: 'sys_menu', ids: menu_perm_ids })
+    let id_list: any = await get_all_ids({ table_name: 'sys_menu', ids: menu_perm_ids })
     console.log(`id_list---`, id_list)
     let ids = id_list.map((item) => item.id + '')
     console.log(`ids---`)
@@ -44,20 +45,28 @@ export class user {
   async find_list_user(@Body() body: find_list_user, @Req() req: any) {
     console.log(`body---`, body)
     // 通过depart_id找到所有的父子级id和parent_id
-    const depart_list_id_AND_parent_id = await db_find_ids_self_and_children({ db, table_name: 'sys_depart', id: body.depart_id })
+    const depart_list_id_AND_parent_id: any = await db.$queryRawUnsafe(`
+        WITH RECURSIVE department_tree AS (SELECT id, parent_id
+                                           FROM sys_depart
+                                           WHERE id = '${body.depart_id}'
+
+                                           UNION ALL
+
+                                           SELECT d.id, d.parent_id
+                                           FROM sys_depart d INNER JOIN department_tree t ON d.parent_id = t.id)
+        SELECT *
+        FROM department_tree;
+    `)
     console.log(`depart_list_id_AND_parent_id---`, depart_list_id_AND_parent_id)
     // 得到所有的部门ids
     const depart_ids = depart_list_id_AND_parent_id.map((item) => item.id)
-    // console.log(`depart_ids---`, depart_ids)
-    // // 得到部门中所有的用户
-    // let sys_user = await db.sys_depart.findMany({ where: { id: { in: depart_ids } }, include: { sys_user: true } })
-    // // 数据扁平化得到所有的用户
-    // let user_list = sys_user.map((item) => item.sys_user).flat()
-    // user_list = _.uniqWith(user_list, _.isEqual)
-    // return { code: 200, msg: '成功', result: { user_list, sys_user } }
-
-    let user_list = await db.sys_user.findMany({ where: { sys_depart: { some: { id: { in: depart_ids } } } }, include: { sys_depart: true } })
-    return { code: 200, msg: '成功', result: { user_list } }
+    console.log(`depart_ids---`, depart_ids)
+    // 得到部门中所有的用户
+    let sys_user = await db.sys_depart.findMany({ where: { id: { in: depart_ids } }, include: { sys_user: true } })
+    // 数据扁平化得到所有的用户
+    let user_list = sys_user.map((item) => item.sys_user).flat()
+    user_list = _.uniqWith(user_list, _.isEqual)
+    return { code: 200, msg: '成功', result: { user_list, sys_user } }
   }
 }
 
@@ -67,7 +76,42 @@ export class user {
 })
 export class user_Module {}
 
+async function get_all_ids({ table_name, ids }: { table_name: string; ids: string[] }) {
+  // 测试数据
+  // const menu_ids = ['688c6044-3b97-4568-8eac-2a3944a75676', '0038b708-e300-44f1-a83e-4f12b7ad188a', '1b911e93-6dd1-4285-8dfd-c199d65a3dde', '836e17d5-cf5b-4d25-b679-50a27492f5ed', 'f159741a-ffb1-41fd-abb4-fd0a3bd40f2b']
 
+  // const table_name = 'sys_menu'
+
+  // 测试递归SQL语句
+  const recursive_sql = `
+      WITH RECURSIVE menu_hierarchy AS (SELECT id,parent_id,
+                                               0 as level
+                                        FROM ${table_name}
+                                        WHERE id IN (${ids.map((id) => `'${id}'`).join(',')})
+
+                                        UNION ALL
+
+
+                                        SELECT m.id,
+                                               m.parent_id,
+                                               mh.level + 1
+                                        FROM ${table_name} m
+                                                 INNER JOIN menu_hierarchy mh ON m.id = mh.parent_id
+                                        WHERE mh.level < 10)
+      SELECT DISTINCT id
+      FROM menu_hierarchy
+      ORDER BY id
+  `
+
+  // console.log(`执行的SQL:`, recursive_sql)
+
+  const result = await db.$queryRawUnsafe(recursive_sql)
+  // console.log(`查询结果11112:`, result)
+
+  let id_list = result
+
+  return result
+}
 
 // 构建菜单树的递归函数
 function build_tree(menus: any, parent_id: string | null = null) {
@@ -80,35 +124,4 @@ function build_tree(menus: any, parent_id: string | null = null) {
     ...menu,
     children: build_tree(menus, menu.id),
   }))
-}
-
-// 通过id找到自身id和子级id
-async function db_find_ids_self_and_children({ db, table_name, id }: { db: any; table_name: string; id: any }) {
-  const result = await db.$queryRawUnsafe(`
-        WITH RECURSIVE tb_temp AS 
-        ( SELECT id, parent_id FROM ${table_name}  WHERE id = '${id}'
-
-          UNION ALL
-
-          SELECT t1.id, t1.parent_id  FROM ${table_name} t1 INNER JOIN tb_temp t2 ON t1.parent_id = t2.id
-        )
-          SELECT   DISTINCT id  FROM tb_temp;
-    `)
-  return result
-}
-
-
-// 通过id找到自身id和父亲级id
-async function db_find_ids_self_and_parent({ table_name, ids }: { table_name: string; ids: string[] }) {
-  const result = await db.$queryRawUnsafe(`
-      WITH RECURSIVE tb_temp AS 
-      ( SELECT id,parent_id, 0 as level FROM ${table_name} WHERE id IN (${ids.map((id) => `'${id}'`).join(',')})
-
-        UNION ALL
-
-        SELECT m.id,m.parent_id,mh.level + 1  AS level FROM ${table_name} m INNER JOIN tb_temp mh ON m.id = mh.parent_id WHERE mh.level < 10
-      )
-        SELECT DISTINCT id FROM tb_temp ORDER BY id
-  `)
-  return result
 }

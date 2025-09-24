@@ -50,7 +50,7 @@ export default defineConfig({
 
   //服务
   server: {
-    host: "0.0.0.0",
+    host: "127.0.0.1",
     open: true,
     port: 8080,
   },
