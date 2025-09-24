@@ -36,7 +36,18 @@ export class user {
 
   @Api_Post('查询-部门-树')
   async find_tree_depart(@Req() req: any) {
-    let depart_tree = await db.sys_depart.findFirst({ where: { id: 'depart_0' }, include: { children: { include: { children: { include: { children: true } } } } } })
+    let depart_tree = await db.sys_depart.findFirst({
+      where: { id: 'depart_0' },
+      include: {
+        parent: true,
+        children: {
+          include: {
+            parent: true,
+            children: { include: { parent: true, children: true } },
+          },
+        },
+      },
+    })
     return { code: 200, msg: '成功', result: { depart_tree: [depart_tree] } }
   }
 
@@ -56,7 +67,13 @@ export class user {
     // user_list = _.uniqWith(user_list, _.isEqual)
     // return { code: 200, msg: '成功', result: { user_list, sys_user } }
 
-    let user_list = await db.sys_user.findMany({ where: { sys_depart: { some: { id: { in: depart_ids } } } }, include: { sys_depart: true } })
+    // 通过部门depart_ids找到所有的用户
+    //                    操作表sys_user                 关联表sys_depart,some 表示"至少有一个"（存在性查询）
+    // let user_list = await db.sys_user.findMany({ where: { sys_depart: { some: { id: { in: depart_ids } } } }, include: { sys_depart: true } })
+    let user_list = await db.sys_user.findMany({
+      where: { sys_depart: { some: { id: { in: depart_ids } } } },
+      include: { sys_depart: { include: { parent: true } } },
+    })
     return { code: 200, msg: '成功', result: { user_list } }
   }
 }
@@ -66,8 +83,6 @@ export class user {
   providers: [],
 })
 export class user_Module {}
-
-
 
 // 构建菜单树的递归函数
 function build_tree(menus: any, parent_id: string | null = null) {
@@ -96,7 +111,6 @@ async function db_find_ids_self_and_children({ db, table_name, id }: { db: any; 
     `)
   return result
 }
-
 
 // 通过id找到自身id和父亲级id
 async function db_find_ids_self_and_parent({ table_name, ids }: { table_name: string; ids: string[] }) {

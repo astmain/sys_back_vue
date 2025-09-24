@@ -19,10 +19,10 @@ const virtual_field_extension = Prisma.defineExtension({
 
     // 用户表的虚拟字段
     sys_user: {
-      full_depart_name: {
-        needs: { name: true },
+      full_depart_name: {//我希望用户表的虚拟字段是sys_depart的full_depart_name,用户关联了多个部门,所有返回的是数组
+        needs: { name: true, password: true },
         compute(o) {
-          return (o as any).sys_depart?.map((depart: any) => depart.full_depart_name) || []
+          return o.name
         },
       },
     },
