@@ -5,6 +5,7 @@ model sys_user {
   id         String       @id @default(uuid())
   phone      String       @unique
   password   String       @default("123456")
+  avatar     String       @default("https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png")
   name       String
   remark     String?
   sys_depart sys_depart[]
