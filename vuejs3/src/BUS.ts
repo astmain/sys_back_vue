@@ -9,6 +9,7 @@ export const use_BUS = defineStore("localStorage_BUS", {
     user: {},
     depart_tree: [] as any[],
     VITE_url_app_run: "",
+
     VITE_url_app_list: [] as any[],
     token: "",
     url_api_curr: { name: "3002", url: "http://127.0.0.1:3002", remark: "" },
@@ -19,6 +20,11 @@ export const use_BUS = defineStore("localStorage_BUS", {
       { name: "8001", url: "http://127.0.0.1:8001/api", remark: "" },
       { name: "server.oss", url: "https://server.oss.yun3d.com", remark: "" },
     ],
+
+    // 全局api
+    func: {
+      tree_left_click: () => {}, //让tree_left_click是一个函数
+    },
   }),
   persist: [
     { pick: ["count", "control_button", "menu_tree", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },

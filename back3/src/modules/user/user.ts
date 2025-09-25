@@ -10,12 +10,13 @@ import _ from 'lodash'
 import { find_one_user } from './dto/find_one_user'
 import { find_list_user } from './dto/find_list_user'
 import { save_user } from './dto/save_user'
+import { remove_ids_user } from './dto/remove_ids_user'
 
 @Api_public()
 @Api_Controller('用户')
 export class user {
   @Api_Post('查询-用户-详情')
-  async find_one_user(@Body() body: find_one_user, @Req() req: any) {
+  async find_one_user(@Body() body: find_one_user) {
     // 部门对于菜单
     let depart_menu = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } }, include: { sys_menu: true } })
     console.log(`depart_menu---`, JSON.stringify(depart_menu, null, 2))
@@ -31,15 +32,13 @@ export class user {
     console.log(`menu_list---`, menu_list)
     let menu_tree = build_tree(menu_list)
     console.log(`111---menu_tree:`, menu_tree)
-    let user = await db.sys_user.findFirst({ where: { id: req.user_id } })
+    let user = await db.sys_user.findFirst({ where: { id: body.id } })
 
-
-    let depart_role_list = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } }})
+    let depart_role_list = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } } })
     let depart_role_ids = depart_role_list.map((item) => item.id)
 
-    return { code: 200, msg: '成功', result: { menu_tree, user,depart_role_ids } }
+    return { code: 200, msg: '成功', result: { menu_tree, user, depart_role_ids } }
   }
-
 
   @Api_Post('查询-部门-树')
   async find_tree_depart(@Req() req: any) {
@@ -85,13 +84,16 @@ export class user {
   }
   @Api_Post('保存-用户')
   async save_user(@Body() body: save_user, @Req() req: any) {
-    console.log(`body---`, body)
-    return { code: 200, msg: '成功', result: { body } }
+    let { depart_role_ids, ...data } = body
+    await db.sys_user.update({ where: { id: body.id }, data: { ...data, sys_depart: { set: depart_role_ids.map((id) => ({ id })) } } })
+    return { code: 200, msg: '成功', result: {} }
   }
 
-
-
-
+  @Api_Post('删除-用户')
+  async remove_ids_user(@Body() body: remove_ids_user, @Req() req: any) {
+    await db.sys_user.deleteMany({ where: { id: { in: body.ids } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
 }
 
 @Module({

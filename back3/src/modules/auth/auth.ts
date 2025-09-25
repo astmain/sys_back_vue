@@ -31,7 +31,7 @@ export class auth {
   }
 
   @Api_Post('初始化数据')
-  async register(@Body() body: login) {
+  async init_data(@Body() body: login) {
     try {
       // 清空现有数据
       await db.sys_menu.deleteMany()

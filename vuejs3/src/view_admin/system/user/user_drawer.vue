@@ -2,16 +2,16 @@
   <ElDrawer ref="drawer" v-model="drawer_show" :title="drawer_title" size="500px" destroy-on-close>
     <el-form label-width="60px" label-position="left">
       <el-form-item label="头像">
-        <img :src="drawer_data.avatar" alt="" class="w-20 h-20" />
+        <img :src="user.avatar" alt="" class="w-20 h-20" />
       </el-form-item>
       <el-form-item label="姓名">
-        <el-input v-model="drawer_data.name" />
+        <el-input v-model="user.name" />
       </el-form-item>
       <el-form-item label="电话">
-        <el-input v-model="drawer_data.phone" />
+        <el-input v-model="user.phone" />
       </el-form-item>
       <el-form-item label="性别">
-        <el-radio-group v-model="drawer_data.gender" fill="#006eff">
+        <el-radio-group v-model="user.gender" fill="#006eff">
           <el-radio-button label="男" value="男" />
           <el-radio-button label="女" value="女" />
           <el-radio-button label="未知" value="未知" />
@@ -19,7 +19,7 @@
       </el-form-item>
 
       <el-form-item label="备注">
-        <el-input type="textarea" v-model="drawer_data.remark" :rows="3" />
+        <el-input type="textarea" v-model="user.remark" :rows="3" />
       </el-form-item>
 
       <el-form-item label="部门树">
@@ -41,54 +41,42 @@ import { api } from "@/api"
 import { ElMessage } from "element-plus"
 let drawer_show = ref(false)
 let drawer_title = ref("")
-let drawer_data = ref({} as any)
+let user = ref({} as any)
 let depart_role_ids = ref([])
 let ElTreeRef = ref()
 
 // 打开交互窗口
-async function open(data: any) {
-  drawer_data.value = data
-  console.log("drawer_data.value", drawer_data.value)
-  drawer_show.value = true
-  let res: any = await api.user.find_one_user({ id: drawer_data.value.id })
+async function open(id: string) {
+  depart_role_ids.value = [] //清空选中的树节点
+  let res: any = await api.user.find_one_user({ id })
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   console.log("res", res)
   depart_role_ids.value = res.result.depart_role_ids
+  user.value = res.result.user
+  drawer_show.value = true
 }
 
+// 提交保存
 async function submit() {
-  console.log("depart_role_ids.value", depart_role_ids.value)
-  // 我想得到 ElTreeRef,选中的id
-  const checked_ids = ElTreeRef.value.getCheckedKeys()
-  console.log("checked_ids", checked_ids)
   console.log("ElTreeRef.value", ElTreeRef.value.getCheckedNodes())
   let ids = ElTreeRef.value
     .getCheckedNodes()
     .filter((o: any) => !o.is_depart)
     .map((o: any) => o.id)
 
-  console.log("ids", ids)
+  // console.log("ids", ids)
+  // 表单数据
+  let form = { id: user.value.id, name: user.value.name, phone: user.value.phone, gender: user.value.gender, remark: user.value.remark, depart_role_ids: ids }
 
-
-
-  let form={
-    id:drawer_data.value.id,
-    name:drawer_data.value.name,
-    phone:drawer_data.value.phone,
-    gender:drawer_data.value.gender,
-    remark:drawer_data.value.remark,
-    depart_role_ids:ids
-  }
   let res: any = await api.user.save_user(form)
   if (res.code != 200) return ElMessage.error(res.msg)
   ElMessage.success("保存成功")
   drawer_show.value = false
-
+  BUS.func.tree_left_click() //调用全局BUS函数
 }
 
-defineExpose({
-  open,
-})
+// 暴露方法给父组件调用
+defineExpose({ open })
 </script>
 
 <style scoped></style>

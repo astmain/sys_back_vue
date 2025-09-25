@@ -5,7 +5,7 @@
     <nav style="" class="uno_card">
       <el-tree
         class="user_tree_left"
-        ref="ele-tree"
+        ref="ElTreeRef"
         style="width: 250px; height: auto; overflow: auto"
         :data="tree_depart.data"
         :props="{ label: 'name' }"
@@ -35,14 +35,14 @@
         <el-table-column prop="full_depart_name" label="部门" width="auto" />
         <el-table-column label="操作" width="200">
           <template #default="scope">
-            <el-button type="primary" link @click="user_drawer_ref.open(scope.row)">修改</el-button>
-            <el-button link @click="() => 1">删除</el-button>
+            <el-button type="primary" link @click="user_drawer_ref.open(scope.row.id)">修改</el-button>
+            <el-button link @click="remove_ids_user([scope.row.id])">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </nav>
   </el-main>
-  <user_drawer ref="user_drawer_ref" />
+  <user_drawer ref="UserDrawerRef" />
 </template>
 
 <script setup lang="ts">
@@ -53,6 +53,8 @@ import { ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
 
 const user_drawer_ref = ref()
+let ElTreeRefCurrNode = ref()
+const ElTreeRef = ref()
 
 const tree_depart = ref({
   data: [] as any[],
@@ -61,9 +63,11 @@ const tree_depart = ref({
 
 const user_list = ref([] as any[])
 
-async function tree_left_click(node: any) {
-  console.log("tree_left_click", node)
-  let res: any = await api.user.find_list_user({ depart_id: node.id })
+BUS.func.tree_left_click = tree_left_click //全局BUS函数
+// 用户管理树点击事件查询用户列表
+async function tree_left_click() {
+  ElTreeRefCurrNode.value = ElTreeRef.value.getCurrentNode()
+  let res: any = await api.user.find_list_user({ depart_id: ElTreeRefCurrNode.value.id })
   console.log("api.user.find_list_user---res", res)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   user_list.value = res.result.user_list
@@ -71,6 +75,12 @@ async function tree_left_click(node: any) {
 
 function tree_ritht_click(node: any) {
   console.log(node)
+}
+
+async function remove_ids_user(ids: string[]) {
+  let res: any = await api.user.remove_ids_user({ ids })
+  if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+  tree_left_click()
 }
 
 onMounted(async () => {
