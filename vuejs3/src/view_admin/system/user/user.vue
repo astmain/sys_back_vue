@@ -42,6 +42,7 @@
   </el-main>
   <user_drawer ref="user_drawer_ref" />
   <Menu1 ref="Menu1Ref" :menu_list="menu_list" @menu-click="switch_menu" />
+  <depart_dialog ref="depart_dialog_ref" />
 </template>
 
 <script setup lang="ts">
@@ -51,24 +52,27 @@ import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
+import depart_dialog from "./depart_dialog.vue"
 import Menu1 from "./Menu1.vue"
 
+// ==================== 元素绑定ref ====================
 const user_drawer_ref = ref()
 const Menu1Ref = ref()
-let ElTreeRefCurrNode = ref()
+const depart_dialog_ref = ref()
 const ElTreeRef = ref()
-
+// ==================== 响应式数据 ====================
+const ElTreeRefCurrNode = ref()
+const user_list = ref([] as any[])
 const menu_list = ref([
-  { label: "修改", action: "修改" },
-  { label: "删除", action: "删除" },
+  { label: "新增部门", action: "新增部门" },
+  { label: "修改部门", action: "修改部门" },
+  { label: "删除部门", action: "删除部门" },
 ])
 
 const tree_depart = ref({
   data: [] as any[],
   currentNodeKey: undefined,
 })
-
-const user_list = ref([] as any[])
 
 // ✅用户管理树点击事件查询用户列表
 async function tree_left_click() {
@@ -82,15 +86,33 @@ async function tree_left_click() {
 BUS.func.tree_left_click = tree_left_click //全局BUS函数
 
 // ✅右键点击事件
-function tree_ritht_click(event: MouseEvent, data: any) {
-  console.log("tree_right_click", event, data) //有打印数据,但是菜单没有显示
+function tree_ritht_click(event: MouseEvent, node: any) {
   event.preventDefault()
   Menu1Ref.value.show_menu(event)
+  ElTreeRefCurrNode.value = node
 }
 
 // ✅菜单-选择器
 async function switch_menu(item: any) {
-  console.log("item", item)
+  console.log("switch_menu---switch_menu", item)
+  console.log("switch_menu---ElTreeRefCurrNode", JSON.parse(JSON.stringify(ElTreeRefCurrNode.value)))
+
+  let title_prefix = item.is_depart ? "部门" : "角色"
+
+  switch (item.action) {
+    case "新增部门":
+      depart_dialog_ref.value.title = "新增" + title_prefix
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      break
+    case "修改部门":
+      depart_dialog_ref.value.title = "修改" + title_prefix
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      break
+    case "删除部门":
+      depart_dialog_ref.value.title = "删除" + title_prefix
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      break
+  }
 }
 
 // ✅删除用户
