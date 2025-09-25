@@ -8,8 +8,8 @@
         ref="ele-tree"
         style="width: 250px; height: auto; overflow: auto"
         :data="tree_depart.data"
-        :props="tree_depart.props"
-        :node-key="tree_depart.props.nodeKey"
+        :props="{ label: 'name' }"
+        node-key="id"
         :current-node-key="tree_depart.currentNodeKey"
         :expand-on-click-node="false"
         highlight-current
@@ -48,6 +48,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
 import { api } from "@/api"
+import { BUS } from "@/BUS"
 import { ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
 
@@ -56,10 +57,6 @@ const user_drawer_ref = ref()
 const tree_depart = ref({
   data: [] as any[],
   currentNodeKey: undefined,
-  props: {
-    nodeKey: "id",
-    label: "name",
-  },
 })
 
 const user_list = ref([] as any[])
@@ -80,17 +77,9 @@ onMounted(async () => {
   let res: any = await api.user.find_tree_depart()
   console.log("api.user.find_tree_depart---res", res)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
-
   tree_depart.value.data = res.result.depart_tree
   console.log("tree_depart.value.data", JSON.parse(JSON.stringify(res.result.depart_tree)))
-
-  //   tree_depart.value.data = res.result.depart_tree
-  //   console.log("tree_depart.value.data", JSON.parse(JSON.stringify(res.result.depart_tree)))
-  // }
-  //     name: "Level one 1",
-  //     children: [],
-  //   },
-  // ]
+  BUS.depart_tree = res.result.depart_tree
 })
 </script>
 

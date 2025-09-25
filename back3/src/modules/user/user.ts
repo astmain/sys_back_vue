@@ -31,8 +31,14 @@ export class user {
     let menu_tree = build_tree(menu_list)
     console.log(`111---menu_tree:`, menu_tree)
     let user = await db.sys_user.findFirst({ where: { id: req.user_id } })
-    return { code: 200, msg: '成功', result: { menu_tree, user } }
+
+
+    let depart_role_list = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } }})
+    let depart_role_ids = depart_role_list.map((item) => item.id)
+
+    return { code: 200, msg: '成功', result: { menu_tree, user,depart_role_ids } }
   }
+
 
   @Api_Post('查询-部门-树')
   async find_tree_depart(@Req() req: any) {
@@ -74,8 +80,18 @@ export class user {
       where: { sys_depart: { some: { id: { in: depart_ids } } } },
       include: { sys_depart: { include: { parent: true } } },
     })
+
+
+
+
+
+
     return { code: 200, msg: '成功', result: { user_list } }
   }
+
+
+
+
 }
 
 @Module({

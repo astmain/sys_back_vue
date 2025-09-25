@@ -7,6 +7,7 @@ export const use_BUS = defineStore("localStorage_BUS", {
     web_type: "admin",
     menu_tree: [] as any[],
     user: {},
+    depart_tree: [] as any[],
     VITE_url_app_run: "",
     VITE_url_app_list: [] as any[],
     token: "",
