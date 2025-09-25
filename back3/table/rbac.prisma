@@ -8,7 +8,7 @@ model sys_user {
   avatar     String       @default("https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png")
   gender     String       @default("未知") //男,女,未知
   name       String
-  remark     String?
+  remark     String       @default("")
   sys_depart sys_depart[]
 }
 

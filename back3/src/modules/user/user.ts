@@ -9,6 +9,7 @@ import _ from 'lodash'
 // ==================== dto ====================
 import { find_one_user } from './dto/find_one_user'
 import { find_list_user } from './dto/find_list_user'
+import { save_user } from './dto/save_user'
 
 @Api_public()
 @Api_Controller('用户')
@@ -80,13 +81,12 @@ export class user {
       where: { sys_depart: { some: { id: { in: depart_ids } } } },
       include: { sys_depart: { include: { parent: true } } },
     })
-
-
-
-
-
-
     return { code: 200, msg: '成功', result: { user_list } }
+  }
+  @Api_Post('保存-用户')
+  async save_user(@Body() body: save_user, @Req() req: any) {
+    console.log(`body---`, body)
+    return { code: 200, msg: '成功', result: { body } }
   }
 
 

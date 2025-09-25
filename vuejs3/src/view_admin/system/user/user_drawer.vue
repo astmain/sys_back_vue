@@ -24,12 +24,12 @@
 
       <el-form-item label="部门树">
         <!-- <el-tree :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox check-strictly :default-checked-keys="depart_menu_ids" /> -->
-        <el-tree :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox :default-checked-keys="depart_role_ids" />
+        <el-tree ref="ElTreeRef" :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox :default-checked-keys="depart_role_ids" />
       </el-form-item>
     </el-form>
 
     <template #footer>
-      <el-button type="primary" @click="">确定</el-button>
+      <el-button type="primary" @click="submit">确定</el-button>
     </template>
   </ElDrawer>
 </template>
@@ -43,7 +43,7 @@ let drawer_show = ref(false)
 let drawer_title = ref("")
 let drawer_data = ref({} as any)
 let depart_role_ids = ref([])
-
+let ElTreeRef = ref()
 
 // 打开交互窗口
 async function open(data: any) {
@@ -54,6 +54,36 @@ async function open(data: any) {
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   console.log("res", res)
   depart_role_ids.value = res.result.depart_role_ids
+}
+
+async function submit() {
+  console.log("depart_role_ids.value", depart_role_ids.value)
+  // 我想得到 ElTreeRef,选中的id
+  const checked_ids = ElTreeRef.value.getCheckedKeys()
+  console.log("checked_ids", checked_ids)
+  console.log("ElTreeRef.value", ElTreeRef.value.getCheckedNodes())
+  let ids = ElTreeRef.value
+    .getCheckedNodes()
+    .filter((o: any) => !o.is_depart)
+    .map((o: any) => o.id)
+
+  console.log("ids", ids)
+
+
+
+  let form={
+    id:drawer_data.value.id,
+    name:drawer_data.value.name,
+    phone:drawer_data.value.phone,
+    gender:drawer_data.value.gender,
+    remark:drawer_data.value.remark,
+    depart_role_ids:ids
+  }
+  let res: any = await api.user.save_user(form)
+  if (res.code != 200) return ElMessage.error(res.msg)
+  ElMessage.success("保存成功")
+  drawer_show.value = false
+
 }
 
 defineExpose({
