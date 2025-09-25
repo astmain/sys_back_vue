@@ -1,6 +1,4 @@
 <template>
-  <div>用户管理</div>
-
   <el-main style="display: flex; flex-direction: row; gap: 10px">
     <nav style="" class="uno_card">
       <el-tree
@@ -42,7 +40,8 @@
       </el-table>
     </nav>
   </el-main>
-  <user_drawer ref="UserDrawerRef" />
+  <user_drawer ref="user_drawer_ref" />
+  <Menu1 ref="Menu1Ref" :menu_list="menu_list" @menu-click="switch_menu" />
 </template>
 
 <script setup lang="ts">
@@ -52,10 +51,17 @@ import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
+import Menu1 from "./Menu1.vue"
 
 const user_drawer_ref = ref()
+const Menu1Ref = ref()
 let ElTreeRefCurrNode = ref()
 const ElTreeRef = ref()
+
+const menu_list = ref([
+  { label: "修改", action: "修改" },
+  { label: "删除", action: "删除" },
+])
 
 const tree_depart = ref({
   data: [] as any[],
@@ -64,20 +70,30 @@ const tree_depart = ref({
 
 const user_list = ref([] as any[])
 
-BUS.func.tree_left_click = tree_left_click //全局BUS函数
-// 用户管理树点击事件查询用户列表
+// ✅用户管理树点击事件查询用户列表
 async function tree_left_click() {
+  Menu1Ref.value.hide_menu()
   ElTreeRefCurrNode.value = ElTreeRef.value.getCurrentNode()
   let res: any = await api.user.find_list_user({ depart_id: ElTreeRefCurrNode.value.id })
   console.log("api.user.find_list_user---res", res)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   user_list.value = res.result.user_list
 }
+BUS.func.tree_left_click = tree_left_click //全局BUS函数
 
-function tree_ritht_click(node: any) {
-  console.log(node)
+// ✅右键点击事件
+function tree_ritht_click(event: MouseEvent, data: any) {
+  console.log("tree_right_click", event, data) //有打印数据,但是菜单没有显示
+  event.preventDefault()
+  Menu1Ref.value.show_menu(event)
 }
 
+// ✅菜单-选择器
+async function switch_menu(item: any) {
+  console.log("item", item)
+}
+
+// ✅删除用户
 async function remove_ids_user(ids: string[]) {
   if (!(await plugin_confirm())) return
   let res: any = await api.user.remove_ids_user({ ids })
