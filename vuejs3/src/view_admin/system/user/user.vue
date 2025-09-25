@@ -22,24 +22,36 @@
     <nav style="flex: 1; padding: 0 !important" class="uno_card">
       <el-table :data="user_list" style="width: 100%; height: 100%" show-overflow-tooltip stripe :header-cell-style="{ background: '#f4f4f5', color: '#606266' }">
         <el-table-column type="index" width="66" label="序号" />
-        <el-table-column prop="name" label="姓名" width="100" />
+        <el-table-column prop="avatar" label="姓名" width="110">
+          <template #default="scope">
+            <div class="flex items-center gap-2">
+              <img :src="scope.row.avatar" alt="" class="w-[24px] rounded-full" />
+              <span>{{ scope.row.name }}</span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="gender" label="性别" width="80" />
         <el-table-column prop="phone" label="手机号" width="150" />
         <el-table-column prop="full_depart_name" label="部门" width="auto" />
         <el-table-column label="操作" width="200">
           <template #default="scope">
-            <el-button type="primary" link @click="">修改</el-button>
+            <el-button type="primary" link @click="user_drawer_ref.open(scope.row)">修改</el-button>
             <el-button link @click="() => 1">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </nav>
   </el-main>
+  <user_drawer ref="user_drawer_ref" />
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
 import { api } from "@/api"
 import { ElMessage } from "element-plus"
+import user_drawer from "./user_drawer.vue"
+
+const user_drawer_ref = ref()
 
 const tree_depart = ref({
   data: [] as any[],
