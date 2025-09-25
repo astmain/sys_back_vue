@@ -49,6 +49,7 @@
 import { onMounted, ref } from "vue"
 import { api } from "@/api"
 import { BUS } from "@/BUS"
+import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
 
@@ -78,6 +79,7 @@ function tree_ritht_click(node: any) {
 }
 
 async function remove_ids_user(ids: string[]) {
+  if (!(await plugin_confirm())) return
   let res: any = await api.user.remove_ids_user({ ids })
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   tree_left_click()
