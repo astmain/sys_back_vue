@@ -24,7 +24,7 @@
         <el-table-column type="index" width="66" label="序号" />
         <el-table-column prop="name" label="姓名" />
         <el-table-column prop="phone" label="手机号" />
-        <el-table-column prop="depart_id" label="部门" />
+        <el-table-column prop="full_depart_name" label="部门" class-name="depart_column" show-overflow-tooltip /> //放在数据上显示
         <el-table-column label="操作">
           <template #default="scope">
             <el-button type="primary" link @click="">修改</el-button>
@@ -82,4 +82,11 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.depart_column .cell) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+</style>

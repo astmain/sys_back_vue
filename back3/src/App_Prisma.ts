@@ -7,9 +7,9 @@ const virtual_field_extension = Prisma.defineExtension({
     // 部门表的虚拟字段
     sys_depart: {
       full_depart_name: {
-        needs: { name: true, parent_id: true },
+        needs: { name: true, parent_id: true ,id:true},
         compute(o) {
-          if (o.parent_id) {
+          if (o.parent_id && o.id != 'role_1001') {
             return `${(o as any).parent?.name || '未知父级'}_${o.name}` // 这里需要查询时包含 parent 关系
           }
           return o.name
@@ -22,7 +22,8 @@ const virtual_field_extension = Prisma.defineExtension({
       full_depart_name: {
         needs: { name: true },
         compute(o) {
-          return (o as any).sys_depart?.map((depart: any) => depart.full_depart_name) || []
+          let result = (o as any).sys_depart?.map((depart: any) => depart.full_depart_name) || []
+          return result
         },
       },
     },
