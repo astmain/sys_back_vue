@@ -41,7 +41,7 @@
     </nav>
   </el-main>
   <user_drawer ref="user_drawer_ref" />
-  <Menu1 ref="Menu1Ref" :menu_list="menu_list" @menu-click="switch_menu" />
+  <Menu1 ref="Menu1Ref" :menu_list="menu_curr_list" @menu-click="switch_menu" />
   <depart_dialog ref="depart_dialog_ref" />
 </template>
 
@@ -63,10 +63,22 @@ const ElTreeRef = ref()
 // ==================== 响应式数据 ====================
 const ElTreeRefCurrNode = ref()
 const user_list = ref([] as any[])
-const menu_list = ref([
-  { label: "新增部门", action: "新增部门" },
-  { label: "修改部门", action: "修改部门" },
-  { label: "删除部门", action: "删除部门" },
+
+// 右键菜单当前列表
+const menu_curr_list = ref([] as any[])
+
+// 右键菜单部门列表
+const menu_depart_list = ref([
+  { is_depart: true, label: "新增部门", action: "新增部门" },
+  { is_depart: true, label: "重命名部门", action: "重命名部门" },
+  { is_depart: true, label: "删除部门", action: "删除部门" },
+  { is_depart: true, label: "新增角色", action: "新增角色" },
+])
+
+// 右键菜单角色列表
+const menu_role_list = ref([
+  { is_depart: false, label: "修改角色", action: "修改角色" },
+  { is_depart: false, label: "删除角色", action: "删除角色" },
 ])
 
 const tree_depart = ref({
@@ -86,30 +98,36 @@ async function tree_left_click() {
 BUS.func.tree_left_click = tree_left_click //全局BUS函数
 
 // ✅右键点击事件
-function tree_ritht_click(event: MouseEvent, node: any) {
+function tree_ritht_click(event: MouseEvent, item: any) {
   event.preventDefault()
   Menu1Ref.value.show_menu(event)
-  ElTreeRefCurrNode.value = node
+  ElTreeRefCurrNode.value = item
+  menu_curr_list.value = item.is_depart ? menu_depart_list.value : menu_role_list.value
 }
 
 // ✅菜单-选择器
 async function switch_menu(item: any) {
   console.log("switch_menu---switch_menu", item)
   console.log("switch_menu---ElTreeRefCurrNode", JSON.parse(JSON.stringify(ElTreeRefCurrNode.value)))
-
-  let title_prefix = item.is_depart ? "部门" : "角色"
-
-  switch (item.action) {
+  depart_dialog_ref.value.title = item.label
+  switch (item) {
+    // 部门
     case "新增部门":
-      depart_dialog_ref.value.title = "新增" + title_prefix
       depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
       break
-    case "修改部门":
-      depart_dialog_ref.value.title = "修改" + title_prefix
+    case "重命名部门":
       depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
       break
     case "删除部门":
-      depart_dialog_ref.value.title = "删除" + title_prefix
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      break
+    case "新增角色":
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      break
+    // 角色
+    case "修改角色":
+      break
+    case "删除角色":
       depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
       break
   }
@@ -123,21 +141,19 @@ async function remove_ids_user(ids: string[]) {
   tree_left_click()
 }
 
-onMounted(async () => {
+// ✅查询部门树
+async function find_tree_depart() {
   let res: any = await api.user.find_tree_depart()
   console.log("api.user.find_tree_depart---res", res)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   tree_depart.value.data = res.result.depart_tree
   console.log("tree_depart.value.data", JSON.parse(JSON.stringify(res.result.depart_tree)))
   BUS.depart_tree = res.result.depart_tree
+}
+
+onMounted(async () => {
+  await find_tree_depart()
 })
 </script>
 
-<style scoped>
-:deep(.depart_column .cell) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 200px;
-}
-</style>
+<style scoped></style>

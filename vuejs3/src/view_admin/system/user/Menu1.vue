@@ -1,7 +1,7 @@
 <template>
   <div v-show="visible" class="context-menu-container" :style="{ left: position.x + 'px', top: position.y + 'px' }" @contextmenu.prevent>
     <div class="context-menu">
-      <div v-for="(item, idx) in menu_list" :key="idx" class="menu-item" @click="on_menu_click(item)">
+      <div v-for="(item, idx) in menu_list" :key="idx" class="menu-item" @click="menu_click(item)">
         {{ item.label }}
       </div>
     </div>
@@ -11,13 +11,10 @@
 <script setup lang="tsx">
 import { ref, defineProps, defineEmits, defineExpose, onMounted, onBeforeUnmount } from "vue"
 
-interface MenuItem {
-  label: string
-  action: string
-}
+
 
 const props = defineProps<{
-  menu_list: MenuItem[]
+  menu_list: any[]
 }>()
 
 const emit = defineEmits(["menu-click"])
@@ -35,7 +32,7 @@ function hide_menu() {
   visible.value = false
 }
 
-function on_menu_click(item: MenuItem) {
+function menu_click(item: any) {
   emit("menu-click", item)
   hide_menu()
 }

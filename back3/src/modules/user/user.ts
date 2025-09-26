@@ -19,7 +19,7 @@ export class user {
   async find_one_user(@Body() body: find_one_user) {
     // 部门对于菜单
     let depart_menu = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } }, include: { sys_menu: true } })
-    console.log(`depart_menu---`, JSON.stringify(depart_menu, null, 2))
+    // console.log(`depart_menu---`, JSON.stringify(depart_menu, null, 2))
     let menu_perm_ids = [...new Set(depart_menu.flatMap((o) => o.sys_menu.map((menu) => menu.id)))]
     // console.log(`menu_perm_ids---`, menu_perm_ids)
     let id_list: any = await db_find_ids_self_and_parent({ table_name: 'sys_menu', ids: menu_perm_ids })
@@ -57,10 +57,10 @@ export class user {
 
   @Api_Post('查询-用户-列表')
   async find_list_user(@Body() body: find_list_user, @Req() req: any) {
-    console.log(`body---`, body)
+    // console.log(`body---`, body)
     // 通过depart_id找到所有的父子级id和parent_id
     const depart_list_id_AND_parent_id = await db_find_ids_self_and_children({ db, table_name: 'sys_depart', id: body.depart_id })
-    console.log(`depart_list_id_AND_parent_id---`, depart_list_id_AND_parent_id)
+    // console.log(`depart_list_id_AND_parent_id---`, depart_list_id_AND_parent_id)
     // 得到所有的部门ids
     const depart_ids = depart_list_id_AND_parent_id.map((item) => item.id)
     // console.log(`depart_ids---`, depart_ids)
