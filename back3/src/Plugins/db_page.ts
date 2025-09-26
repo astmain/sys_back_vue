@@ -70,8 +70,8 @@ export async function db_page<T, A extends FindManyArgs>(model: { findMany(args:
   if (pagination.mode === 'page') {
     const { currentPage, pageSize } = pagination
     const page = currentPage //hook常量
-    console.log(`111---222:`, baseArgs)
-    console.log(`111---222:`, baseArgs)
+    // console.log(`111---222:`, baseArgs)
+    // console.log(`111---222:`, baseArgs)
     delete baseArgs.where.pageSize
     delete baseArgs.where.currentPage
     const [data, total] = await Promise.all([

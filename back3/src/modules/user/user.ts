@@ -21,22 +21,20 @@ export class user {
     let depart_menu = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } }, include: { sys_menu: true } })
     console.log(`depart_menu---`, JSON.stringify(depart_menu, null, 2))
     let menu_perm_ids = [...new Set(depart_menu.flatMap((o) => o.sys_menu.map((menu) => menu.id)))]
-    console.log(`menu_perm_ids---`, menu_perm_ids)
+    // console.log(`menu_perm_ids---`, menu_perm_ids)
     let id_list: any = await db_find_ids_self_and_parent({ table_name: 'sys_menu', ids: menu_perm_ids })
-    console.log(`id_list---`, id_list)
+    // console.log(`id_list---`, id_list)
     let ids = id_list.map((item) => item.id + '')
-    console.log(`ids---`)
+    // console.log(`ids---`)
     let menu_perm_list = await db.sys_menu.findMany({ where: { id: { in: ids } } })
-    console.log(`menu_perm_list---`, menu_perm_list)
+    // console.log(`menu_perm_list---`, menu_perm_list)
     let menu_list = await db.sys_menu.findMany({ where: { type: { in: ['menu', 'dir'] }, id: { in: ids } } })
-    console.log(`menu_list---`, menu_list)
+    // console.log(`menu_list---`, menu_list)
     let menu_tree = build_tree(menu_list)
-    console.log(`111---menu_tree:`, menu_tree)
+    // console.log(`111---menu_tree:`, menu_tree)
     let user = await db.sys_user.findFirst({ where: { id: body.id } })
-
     let depart_role_list = await db.sys_depart.findMany({ where: { sys_user: { some: { id: body.id } } } })
     let depart_role_ids = depart_role_list.map((item) => item.id)
-
     return { code: 200, msg: '成功', result: { menu_tree, user, depart_role_ids } }
   }
 
