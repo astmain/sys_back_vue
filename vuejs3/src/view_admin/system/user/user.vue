@@ -71,7 +71,13 @@ const menu_curr_list = ref([] as any[])
 const menu_depart_list = ref([
   {
     label: "新增部门",
-    click: (item: any) => {
+    click: async (item: any) => {
+
+
+    let res: any = await api.depart.menu_premiss_tree()
+    if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+    console.log("api.depart.menu_premiss_tree---res", res)
+
       depart_dialog_ref.value.open()
       depart_dialog_ref.value.title = item.label
       let form = ref({ name: "", parent_id: ElTreeRefCurrNode?.value?.id, role1: "职员", role2: "主管" })
