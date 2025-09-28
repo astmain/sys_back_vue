@@ -75,8 +75,8 @@ const menu_depart_list = ref([
     action: "新增部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      depart_dialog_ref.value.func = function () {
+      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
       }
     },
@@ -87,8 +87,8 @@ const menu_depart_list = ref([
     action: "重命名部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      depart_dialog_ref.value.func = function () {
+      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
       }
     },
@@ -98,8 +98,8 @@ const menu_depart_list = ref([
     action: "删除部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      depart_dialog_ref.value.func = function () {
+      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
       }
     },
@@ -109,8 +109,8 @@ const menu_depart_list = ref([
     action: "新增角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      depart_dialog_ref.value.func = function () {
+      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.callback = function () {
         console.log("新增角色111")
       }
     },
@@ -124,8 +124,8 @@ const menu_role_list = ref([
     action: "修改角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      depart_dialog_ref.value.func = function () {
+      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.callback = function () {
         console.log("修改角色111")
       }
     },
@@ -135,8 +135,8 @@ const menu_role_list = ref([
     action: "删除角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      depart_dialog_ref.value.func = function () {
+      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.callback = function () {
         console.log("删除角色111")
       }
     },
