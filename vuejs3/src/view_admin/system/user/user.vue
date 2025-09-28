@@ -45,7 +45,7 @@
   <depart_dialog ref="depart_dialog_ref" />
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { onMounted, ref } from "vue"
 import { api } from "@/api"
 import { BUS } from "@/BUS"
@@ -70,21 +70,19 @@ const menu_curr_list = ref([] as any[])
 // 右键菜单部门列表
 const menu_depart_list = ref([
   {
-    is_depart: true,
     label: "新增部门",
-    action: "新增部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open()
+
+      depart_dialog_ref.value.form_view =()=> <>aaaa</>
       depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
       }
+      depart_dialog_ref.value.open()
     },
   },
   {
-    is_depart: true,
     label: "重命名部门",
-    action: "重命名部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.open()
@@ -95,7 +93,6 @@ const menu_depart_list = ref([
   },
   {
     label: "删除部门",
-    action: "删除部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.open()
@@ -106,7 +103,6 @@ const menu_depart_list = ref([
   },
   {
     label: "新增角色",
-    action: "新增角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.open()
@@ -121,7 +117,6 @@ const menu_depart_list = ref([
 const menu_role_list = ref([
   {
     label: "修改角色",
-    action: "修改角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.open()
@@ -132,7 +127,6 @@ const menu_role_list = ref([
   },
   {
     label: "删除角色",
-    action: "删除角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.open()
