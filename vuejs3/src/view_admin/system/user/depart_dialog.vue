@@ -4,7 +4,8 @@
       <el-button type="primary" @click="submit">确定</el-button>
     </template>
 
-    {{ form_view() }}
+    
+    <form_view></form_view>
   </el-dialog>
 </template>
 
