@@ -5,16 +5,17 @@ import { App_controller } from '@src/App_controller'
 import { auth_Module } from '@src/modules/auth/auth'
 // 业务
 import { user_Module } from '@src/modules/user/user'
+import { depart_Module } from '@src/modules/depart/depart'
 
 @Module({
   imports: [
     App_auth_Module, //身份验证(基础)
     App_prisma_Module, //数据库(基础)
     auth_Module, //业务模块(基础)
-    user_Module //用户模块
+    user_Module, //用户模块
+    depart_Module, //部门模块
   ],
   controllers: [App_controller],
-  providers: []
+  providers: [],
 })
-export class App_Module {
-}
+export class App_Module {}

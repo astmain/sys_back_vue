@@ -74,22 +74,30 @@ const menu_depart_list = ref([
     click: (item: any) => {
       depart_dialog_ref.value.open()
       depart_dialog_ref.value.title = item.label
-      let form = ref({ name: "", parent_id: ElTreeRefCurrNode?.value?.id })
+      let form = ref({ name: "", parent_id: ElTreeRefCurrNode?.value?.id, role1: "职员", role2: "主管" })
       depart_dialog_ref.value.form_view = () => {
         return (
-          <el-form>
-            <el-form-item label={item.label + "名称"} prop="name">
+          <el-form model={form.value} label-width="120px">
+            <el-form-item label={"父级id"} prop="parent_id">
+              <el-input v-model={form.value.parent_id} />
+            </el-form-item>
+            <el-form-item label={"名称"} prop="name">
               <el-input v-model={form.value.name} />
+            </el-form-item>
+
+            <el-form-item label={"职员名称"} prop="role1">
+              <el-input v-model={form.value.role1} />
+            </el-form-item>
+            <el-form-item label={"主管名称"} prop="role2">
+              <el-input v-model={form.value.role2} />
             </el-form-item>
           </el-form>
         )
       }
       depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
-
         console.log("form", form.value)
       }
-
     },
   },
   {
