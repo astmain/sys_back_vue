@@ -19,6 +19,7 @@ import { api } from "@/api"
 import { ElMessage } from "element-plus"
 let show = ref(false)
 let title = ref("")
+let func = ref(async () => {})
 
 // 打开交互窗口
 async function open(id: string) {
@@ -27,10 +28,12 @@ async function open(id: string) {
 }
 
 // 提交保存
-async function submit() {}
+async function submit() {
+  func.value()
+}
 
 // 暴露方法给父组件调用
-defineExpose({ open, title })
+defineExpose({ open, title, submit, func })
 </script>
 
 <style scoped></style>

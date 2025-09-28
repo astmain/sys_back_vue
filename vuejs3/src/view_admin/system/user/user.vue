@@ -41,7 +41,7 @@
     </nav>
   </el-main>
   <user_drawer ref="user_drawer_ref" />
-  <Menu1 ref="Menu1Ref" :menu_list="menu_curr_list" @menu-click="switch_menu" />
+  <Menu1 ref="Menu1Ref" :menu_list="menu_curr_list" />
   <depart_dialog ref="depart_dialog_ref" />
 </template>
 
@@ -69,16 +69,78 @@ const menu_curr_list = ref([] as any[])
 
 // 右键菜单部门列表
 const menu_depart_list = ref([
-  { is_depart: true, label: "新增部门", action: "新增部门" },
-  { is_depart: true, label: "重命名部门", action: "重命名部门" },
-  { is_depart: true, label: "删除部门", action: "删除部门" },
-  { is_depart: true, label: "新增角色", action: "新增角色" },
+  {
+    is_depart: true,
+    label: "新增部门",
+    action: "新增部门",
+    click: (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      depart_dialog_ref.value.func = function () {
+        console.log("新增部门111")
+      }
+    },
+  },
+  {
+    is_depart: true,
+    label: "重命名部门",
+    action: "重命名部门",
+    click: (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      depart_dialog_ref.value.func = function () {
+        console.log("新增部门111")
+      }
+    },
+  },
+  {
+    label: "删除部门",
+    action: "删除部门",
+    click: (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      depart_dialog_ref.value.func = function () {
+        console.log("新增部门111")
+      }
+    },
+  },
+  {
+    label: "新增角色",
+    action: "新增角色",
+    click: (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      depart_dialog_ref.value.func = function () {
+        console.log("新增角色111")
+      }
+    },
+  },
 ])
 
 // 右键菜单角色列表
 const menu_role_list = ref([
-  { is_depart: false, label: "修改角色", action: "修改角色" },
-  { is_depart: false, label: "删除角色", action: "删除角色" },
+  {
+    label: "修改角色",
+    action: "修改角色",
+    click: (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      depart_dialog_ref.value.func = function () {
+        console.log("修改角色111")
+      }
+    },
+  },
+  {
+    label: "删除角色",
+    action: "删除角色",
+    click: (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
+      depart_dialog_ref.value.func = function () {
+        console.log("删除角色111")
+      }
+    },
+  },
 ])
 
 const tree_depart = ref({
@@ -103,34 +165,6 @@ function tree_ritht_click(event: MouseEvent, item: any) {
   Menu1Ref.value.show_menu(event)
   ElTreeRefCurrNode.value = item
   menu_curr_list.value = item.is_depart ? menu_depart_list.value : menu_role_list.value
-}
-
-// ✅菜单-选择器
-async function switch_menu(item: any) {
-  console.log("switch_menu---switch_menu", item)
-  console.log("switch_menu---ElTreeRefCurrNode", JSON.parse(JSON.stringify(ElTreeRefCurrNode.value)))
-  depart_dialog_ref.value.title = item.label
-  switch (item) {
-    // 部门
-    case "新增部门":
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      break
-    case "重命名部门":
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      break
-    case "删除部门":
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      break
-    case "新增角色":
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      break
-    // 角色
-    case "修改角色":
-      break
-    case "删除角色":
-      depart_dialog_ref.value.open(ElTreeRefCurrNode.value.id)
-      break
-  }
 }
 
 // ✅删除用户

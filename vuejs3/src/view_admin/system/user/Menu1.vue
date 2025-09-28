@@ -1,7 +1,7 @@
 <template>
   <div v-show="visible" class="context-menu-container" :style="{ left: position.x + 'px', top: position.y + 'px' }" @contextmenu.prevent>
     <div class="context-menu">
-      <div v-for="(item, idx) in menu_list" :key="idx" class="menu-item" @click="menu_click(item)">
+      <div v-for="(item, idx) in menu_list" :key="idx" class="menu-item" @click="item.click(item)">
         {{ item.label }}
       </div>
     </div>
@@ -32,10 +32,6 @@ function hide_menu() {
   visible.value = false
 }
 
-function menu_click(item: any) {
-  emit("menu-click", item)
-  hide_menu()
-}
 
 onMounted(() => {
   window.addEventListener("click", () => {
