@@ -8,7 +8,8 @@ import { IsString, IsNotEmpty, IsNumber } from 'class-validator'
 
 
 
-// 我想使用drizzle 
+
+
 // DTO类
 export class CreateTest1Dto {
   @ApiProperty({ description: '名称' ,example: '张三' })

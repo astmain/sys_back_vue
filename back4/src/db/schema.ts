@@ -1,10 +1,10 @@
-import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core'
+import { pgTable, serial, varchar, timestamp } from 'drizzle-orm/pg-core'
 
-export const tb_test1 = sqliteTable('tb_test1', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  name: text('name', { length: 255 }).notNull(),
-  created_at: text('created_at'),
-  updated_at: text('updated_at'),
+export const tb_test1 = pgTable('tb_test1', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  created_at: timestamp('created_at', { withTimezone: false, mode: 'string' }),
+  updated_at: timestamp('updated_at', { withTimezone: false, mode: 'string' }),
 })
 
 
