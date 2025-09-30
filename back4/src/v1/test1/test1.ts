@@ -8,20 +8,18 @@ import { IsString, IsNotEmpty, IsNumber } from 'class-validator'
 
 // DTO类
 export class CreateTest1Dto {
-  @ApiProperty({ description: '名称' })
+  @ApiProperty({ description: '名称' ,example: '张三' })
   @IsString()
-  @IsNotEmpty()
   name: string
 }
 
 export class UpdateTest1Dto {
-  @ApiProperty({ description: 'ID' })
+  @ApiProperty({ description: 'ID' ,example: 1 })
   @IsNumber()
   id: number
 
-  @ApiProperty({ description: '名称' })
+  @ApiProperty({ description: '名称' ,example: '张三' })
   @IsString()
-  @IsNotEmpty()
   name: string
 }
 

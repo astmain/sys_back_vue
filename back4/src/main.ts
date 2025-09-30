@@ -5,9 +5,7 @@ import { plugins } from './plugins/index'
 import { init_database } from './db/index'
 
 async function bootstrap() {
-  // ==================== 数据库初始化 ====================
   await init_database()
-  
   const app = await NestFactory.create(App_Module)
   // ==================== 插件配置 ====================
   const { env_curr } = plugins.check_env() //检查环境变量

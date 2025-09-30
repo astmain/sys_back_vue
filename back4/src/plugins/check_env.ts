@@ -20,18 +20,13 @@ let env_rule = [
 
 // ()公共正则匹配npm运行的脚本指令
 const env_file_path = process.env.npm_lifecycle_script
-  ?.match(/dotenv.*?(?=\s*--)/)?.[0]
-  ?.replace('dotenv', '')
-  ?.replace('-e', '')
-  ?.replace(/\s+/g, '') || '.env.dev'
+  .match(/dotenv.*?(?=\s*--)/)[0]
+  .replace('dotenv', '')
+  .replace('-e', '')
+  .replace(/\s+/g, '')
 
 export function check_env() {
-  console.log('env_file_path', env_file_path)
-  console.log('env_file_path', path.join(process.cwd(), env_file_path))
-  let env_curr = dotenv.config({ path: "D:\\BBB\\sys_back_vue\\back4\\.env.dev" }).parsed
-  // let env_curr2 = dotenv.config({ path: path.join(process.cwd(), env_file_path) })
-  console.log('env_curr', env_curr)
-  // console.log('env_curr2', env_curr2)
+  let env_curr = dotenv.config({ path: path.join(process.cwd(), env_file_path) }).parsed
   let env_err_list = []
   for (let i = 0; i < env_rule.length; i++) {
     let rule = env_rule[i]
