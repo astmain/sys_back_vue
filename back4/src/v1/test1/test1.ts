@@ -3,26 +3,22 @@ import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@n
 import { Api_public } from '@src/App_Auth'
 import { db } from '@src/db/index'
 import { tb_test1 } from '@src/db/schema'
-import { eq, desc } from 'drizzle-orm'
+import { eq, desc, sql } from 'drizzle-orm'
 import { IsString, IsNotEmpty, IsNumber } from 'class-validator'
-
-
-
-
 
 // DTO类
 export class CreateTest1Dto {
-  @ApiProperty({ description: '名称' ,example: '张三' })
+  @ApiProperty({ description: '名称', example: '张三' })
   @IsString()
   name: string
 }
 
 export class UpdateTest1Dto {
-  @ApiProperty({ description: 'ID' ,example: 1 })
+  @ApiProperty({ description: 'ID', example: 1 })
   @IsNumber()
   id: number
 
-  @ApiProperty({ description: '名称' ,example: '张三' })
+  @ApiProperty({ description: '名称', example: '张三' })
   @IsString()
   name: string
 }
@@ -35,12 +31,14 @@ export class test1 {
   @Post('save')
   async save(@Body() createDto: CreateTest1Dto) {
     try {
-      const result = await db.insert(tb_test1).values({
-        name: createDto.name,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      }).returning()
-      
+      const result = await db
+        .insert(tb_test1)
+        .values({
+          name: createDto.name,
+          // created_at / updated_at 由数据库默认值自动生成
+        })
+        .returning()
+
       return { code: 200, msg: '保存成功', result: result[0] }
     } catch (error) {
       return { code: 500, msg: '保存失败', error: error.message }
@@ -50,44 +48,42 @@ export class test1 {
   @ApiOperation({ summary: '查询列表' })
   @Post('find_list')
   async find_list() {
-    try {
-      const result = await db.select().from(tb_test1).orderBy(desc(tb_test1.created_at))
-      return { code: 200, msg: '查询成功', result }
-    } catch (error) {
-      return { code: 500, msg: '查询失败', error: error.message }
-    }
+    const list1 = await db.select().from(tb_test1).orderBy(desc(tb_test1.created_at))
+    const list2 = await db.query.tb_test1.findMany({ orderBy: (t, { desc }) => [desc(t.created_at)] })
+    return { code: 200, msg: '查询成功', result: { list1, list2 } }
   }
 
   @ApiOperation({ summary: '根据ID查询' })
   @Post('find_by_id')
   async find_by_id(@Body() body: { id: number }) {
-    try {
-      const result = await db.select().from(tb_test1).where(eq(tb_test1.id, body.id))
-      if (result.length === 0) {
-        return { code: 404, msg: '数据不存在' }
-      }
-      return { code: 200, msg: '查询成功', result: result[0] }
-    } catch (error) {
-      return { code: 500, msg: '查询失败', error: error.message }
-    }
+    const [one1] = await db.select().from(tb_test1).where(eq(tb_test1.id, 999)).limit(1)
+    const one2 = await db.query.tb_test1.findFirst({
+      where: (t, { eq }) => eq(t.id, 999),
+    })
+
+    console.log('one1:', one1)
+    console.log('one2:', one2)
+
+    return { code: 200, msg: '查询成功', result: { one1, one2 } }
   }
 
   @ApiOperation({ summary: '更新数据' })
   @Post('update')
   async update(@Body() updateDto: UpdateTest1Dto) {
     try {
-      const result = await db.update(tb_test1)
+      const result = await db
+        .update(tb_test1)
         .set({
           name: updateDto.name,
-          updated_at: new Date().toISOString(),
+          updated_at: sql`now()`, // 由数据库生成当前时间
         })
         .where(eq(tb_test1.id, updateDto.id))
         .returning()
-      
+
       if (result.length === 0) {
         return { code: 404, msg: '数据不存在' }
       }
-      
+
       return { code: 200, msg: '更新成功', result: result[0] }
     } catch (error) {
       return { code: 500, msg: '更新失败', error: error.message }
@@ -98,14 +94,12 @@ export class test1 {
   @Post('delete')
   async delete(@Body() body: { id: number }) {
     try {
-      const result = await db.delete(tb_test1)
-        .where(eq(tb_test1.id, body.id))
-        .returning()
-      
+      const result = await db.delete(tb_test1).where(eq(tb_test1.id, body.id)).returning()
+
       if (result.length === 0) {
         return { code: 404, msg: '数据不存在' }
       }
-      
+
       return { code: 200, msg: '删除成功', result: result[0] }
     } catch (error) {
       return { code: 500, msg: '删除失败', error: error.message }

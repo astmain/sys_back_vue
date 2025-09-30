@@ -4,6 +4,7 @@
   "description": "后端基座",
   "author": "许鹏",
   "private": true,
+  
   "license": "MIT",
   "prisma": {
     "schema": "table"
@@ -79,9 +80,7 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },
-  "_moduleAliases": {
-    "@src": "./dist"
-  },
+
   "jest": {
     "moduleFileExtensions": [
       "js",

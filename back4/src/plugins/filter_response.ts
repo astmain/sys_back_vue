@@ -22,7 +22,7 @@ export function format_date_time(date: Date | string): string {
     return date.toString() // 如果日期无效，返回原字符串
   }
 
-  return dayjs_obj.format('YYYY-MM-DD HH:mm:ss SSS')
+  return dayjs_obj.format('YYYY-MM-DD HH:mm:ss.SSS')
 }
 
 /**
@@ -77,6 +77,12 @@ export class filter_response_func<T> implements NestInterceptor<T, Response<T>> 
         // console.log(`filter_response:`,  JSON.stringify(res_response,null,2))
         return res_response
       })
+
+
+
+      // map((data) => {
+      //   return data
+      // })
     )
   }
 }

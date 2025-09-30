@@ -1,8 +1,9 @@
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 import * as schema from './schema'
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres'
 
-export let db: ReturnType<typeof drizzle>
+export let db: NodePgDatabase<typeof schema>
 init_database()
 export async function init_database() {
   if (db) return
@@ -14,18 +15,15 @@ export async function init_database() {
   const database = 'back'
   const ssl = false
 
-  const pool = new Pool({ host, port, user, password, database, ssl })
-  db = drizzle(pool, { schema })
-
-  // 确保表存在（无迁移时的兜底创建）
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS tb_test1 (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      created_at TIMESTAMP NULL,
-      updated_at TIMESTAMP NULL
-    );
-  `)
+  const pool = new Pool({ host, port, user, password, database, ssl, options: '-c timezone=Asia/Shanghai' })
+  db = drizzle(pool, {
+    schema,
+    logger: {
+      logQuery(query, params) {
+        console.log('[SQL]', query, params)
+      },
+    },
+  })
 }
 
 export { schema }
