@@ -4,24 +4,18 @@ import { Api_public } from '@src/App_Auth'
 import { db } from '@src/db/index'
 import { tb_test1 } from '@src/db/schema'
 import { eq, desc } from 'drizzle-orm'
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator'
 
 // DTO类
 export class CreateTest1Dto {
   @ApiProperty({ description: '名称' })
-  @IsString()
-  @IsNotEmpty()
   name: string
 }
 
 export class UpdateTest1Dto {
   @ApiProperty({ description: 'ID' })
-  @IsNumber()
   id: number
 
   @ApiProperty({ description: '名称' })
-  @IsString()
-  @IsNotEmpty()
   name: string
 }
 
