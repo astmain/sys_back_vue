@@ -86,6 +86,10 @@ https://lanhuapp.com/web/#/item/project/detailDetach?pid=d61bb38c-7c54-444d-bcaf
 rbac https://lxblog.com/qianwen/share?shareId=ab38b776-33a8-401c-8994-25833f301769
 Casbin + Prisma https://www.tongyi.com/qianwen/?st=null&sessionId=d70560ffae3b435f91edf095c92c0900
 
-订单
-客服-1
-mq
+
+
+
+
+# drizzle
+https://orm.drizzle.team/docs/valibot
+课程 https://www.bilibili.com/video/BV1WuHQz9E5F?p=3

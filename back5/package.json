@@ -1,5 +1,5 @@
 {
-  "name": "back4",
+  "name": "back5",
   "version": "1.0.0",
   "description": "后端基座",
   "author": "许鹏",
@@ -10,22 +10,18 @@
   },
   "scripts": {
     "开发": "==================== 开发 ====================",
-    "make": "         pnpm i  &&  pnpm dev:generate   &&   pnpm dev:push",
+    "make": "     pnpm i  &&  pnpm dev:generate   &&   pnpm dev:push",
     "dev": "          dotenv -e .env.dev --        nest start --watch",
     "dev:generate": " dotenv -e .env.dev --        prisma generate      --schema=table",
     "dev:push": "     dotenv -e .env.dev --        prisma db push       --schema=table",
     "dev:migrate": "  dotenv -e .env.dev --        prisma migrate dev   --schema=table",
     "dev:studio": "   dotenv -e .env.dev --        prisma studio        --schema=table",
-    "drizzle": "==================== Drizzle ====================",
-    "db:generate": "  drizzle-kit generate",
-    "db:migrate": "   drizzle-kit migrate",
-    "db:studio": "    drizzle-kit studio",
     "生成": "==================== 生成 ====================",
     "prod": "         dotenv -e .env.prod --        nest start --watch",
     "pnpm": "pnpm i  "
   },
+
   "dependencies": {
-    "@libsql/client": "^0.15.15",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
@@ -40,7 +36,6 @@
     "dayjs": "1.11.18",
     "dotenv": "^17.2.2",
     "dotenv-cli": "^9.0.0",
-    "drizzle-orm": "^0.44.5",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",
     "nestjs-knife4j2": "^1.0.7",
@@ -61,7 +56,6 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "drizzle-kit": "^0.31.5",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
