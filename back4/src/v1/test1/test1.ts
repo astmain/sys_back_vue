@@ -31,14 +31,7 @@ export class test1 {
   @Post('save')
   async save(@Body() createDto: CreateTest1Dto) {
     try {
-      const result = await db
-        .insert(tb_test1)
-        .values({
-          name: createDto.name,
-          // created_at / updated_at 由数据库默认值自动生成
-        })
-        .returning()
-
+      const result = await db .insert(tb_test1) .values({ name: createDto.name,}) .returning()
       return { code: 200, msg: '保存成功', result: result[0] }
     } catch (error) {
       return { code: 500, msg: '保存失败', error: error.message }
