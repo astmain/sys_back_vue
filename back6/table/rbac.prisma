@@ -1,0 +1,46 @@
+//表结构视图 https://prisma-editor.bahumaish.com/schema/17244
+
+// 1. 用户表
+model sys_user {
+  id         String       @id @default(uuid())
+  phone      String       @unique
+  password   String       @default("123456")
+  avatar     String       @default("https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png")
+  gender     String       @default("未知") //男,女,未知
+  name       String
+  remark     String       @default("")
+  sys_depart sys_depart[]
+}
+
+// 2. 组织表 (既表示部门又表示角色)
+model sys_depart {
+  id        String       @id @default(uuid())
+  name      String
+  remark    String?
+  primary   Boolean      @default(true) //主要部门
+  parent_id String? // 自关联
+  is_depart Boolean      @default(true) // 是否是组织，如果为false就相当于角色
+  parent    sys_depart?  @relation("self_sys_depart", fields: [parent_id], references: [id])
+  children  sys_depart[] @relation("self_sys_depart")
+  sys_user  sys_user[]
+  sys_menu  sys_menu[]
+}
+
+// 3. 菜单表
+model sys_menu {
+  id     String  @id @default(uuid())
+  name   String
+  path   String?
+  remark String?
+  type   String  @default("permiss") //目录-dir,菜单-menu,按钮-button,权限-permiss
+
+  is_permiss Boolean      @default(false)
+  is_view    Boolean      @default(false)
+  is_find    Boolean      @default(false)
+  is_save    Boolean      @default(false)
+  is_del     Boolean      @default(false)
+  parent_id  String? // 自关联
+  parent     sys_menu?    @relation("self_sys_menu", fields: [parent_id], references: [id])
+  children   sys_menu[]   @relation("self_sys_menu")
+  sys_depart sys_depart[]
+}
