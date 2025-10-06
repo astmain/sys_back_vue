@@ -100,29 +100,19 @@ const menu_depart_list = ref([
               <el-input v-model={form.value.role2} />
             </el-form-item>
             <>
-            <el-tree
-        class="user_tree_left"
-        ref="ElTreeRef"
-        style="width: 250px; height: auto; overflow: auto"
-        
 
-        node-key="id"
-
-        highlight-current
-        default-expand-all
- 
-      >
-      </el-tree>
-            
+            {/*        
+        :data="tree_depart.data"
+        :props="{ label: 'name' }"
+        应该怎么绑定
+         */}
+              <el-tree class="user_tree_left" ref="ElTreeRef" style="width: 250px; height: auto; overflow: auto" 
+              node-key="id"
+       
+       
+               highlight-current default-expand-all></el-tree>
             </>
           </el-form>
-
-
-
-
-
-
-
         )
       }
       depart_dialog_ref.value.callback = function () {
