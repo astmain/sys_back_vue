@@ -6,6 +6,7 @@ import { auth_Module } from '@src/modules/auth/auth'
 // 业务
 import { user_Module } from '@src/modules/user/user'
 import { depart_Module } from '@src/modules/depart/depart'
+import { menu_Module } from '@src/modules/menu/menu'
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { depart_Module } from '@src/modules/depart/depart'
     auth_Module, //业务模块(基础)
     user_Module, //用户模块
     depart_Module, //部门模块
+    menu_Module, //菜单模块
   ],
   controllers: [App_controller],
   providers: [],

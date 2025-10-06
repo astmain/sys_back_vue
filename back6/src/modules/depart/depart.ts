@@ -29,12 +29,7 @@ export class depart {
   }
 
   @Api_Post('查询-菜单权限树')
-  async find_tree_menu_permiss(@Req() req: any) {
-    // let tree = await db.sys_menu.findFirst({ where: { id: 'depart_0' }, include: { children: true } })
-    let menu_premiss_tree = await db.sys_menu.findMany({ where: { type: { in: ['menu', 'dir'] } } }) //{ in: ['menu', 'dir'] }
-    menu_premiss_tree = util_build_tree(menu_premiss_tree)
-    return { code: 200, msg: '成功', result: { menu_premiss_tree } }
-  }
+  async find_tree_menu_permiss(@Req() req: any) {}
 }
 
 @Module({
