@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, IsNumber } from 'class-validator'
+import { IsString, IsNumber, IsNotEmpty } from 'class-validator'
 
 // ==================== vo ====================
 export class VO_create_menu {
@@ -31,18 +31,40 @@ export class VO_find_menu {
 
 // ==================== dto ====================
 export class DTO_create_menu {
+  @ApiProperty({ description: '菜单id', example: 'menu_1', required: false })
+  @IsString()
+  @IsNotEmpty()
+  id: string
+
   @ApiProperty({ description: '菜单名称', example: '菜单1' })
   @IsString()
+  @IsNotEmpty()
   name: string
 
   @ApiProperty({ description: '菜单路径', example: 'menu_1' })
   @IsString()
+  @IsNotEmpty()
   path: string
 
   @ApiProperty({ description: '菜单父id', example: 'menu_1' })
   @IsString()
   parent_id: string
 }
+
+// ==================== zod ====================
+import { createZodDto } from 'nestjs-zod'
+import { z } from 'zod'
+
+const ZOD_find_menu_Schema = z
+  .object({
+    id: z.number().describe('菜单id').optional(),
+    name: z.string().describe('菜单名称'), // 不写 .optional() 就是必须的
+  })
+  .strict()
+
+// class is required for using DTO as a type
+export class ZOD_VO_find_menu extends createZodDto(ZOD_find_menu_Schema) {}
+export class ZOD_DTO_find_menu extends createZodDto(ZOD_find_menu_Schema) {}
 
 // ==================== 接口规范 ====================
 interface service_type {
