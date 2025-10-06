@@ -17,6 +17,8 @@ export let api = {
 
   depart:{
     menu_premiss_tree: () => axios_api.post("/depart/menu_premiss_tree"),
+    find_tree_menu_permiss: () => axios_api.post("/depart/find_tree_menu_permiss"),
+
 
   }
 }

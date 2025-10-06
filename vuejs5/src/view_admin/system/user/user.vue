@@ -72,11 +72,13 @@ const menu_depart_list = ref([
   {
     label: "新增部门",
     click: async (item: any) => {
+      let res: any = await api.depart.menu_premiss_tree()
+      if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+      console.log("api.depart.menu_premiss_tree---res", res)
 
-
-    let res: any = await api.depart.menu_premiss_tree()
-    if (res.code != 200) return ElMessage.error(res.msg) //前置判断
-    console.log("api.depart.menu_premiss_tree---res", res)
+      // find_tree_menu_permiss
+      let res2 = await api.depart.find_tree_menu_permiss()
+      console.log(`111---res2:`, res2)
 
       depart_dialog_ref.value.open()
       depart_dialog_ref.value.title = item.label
@@ -87,7 +89,7 @@ const menu_depart_list = ref([
             <el-form-item label={"父级id"} prop="parent_id">
               <el-input v-model={form.value.parent_id} />
             </el-form-item>
-            <el-form-item label={"名称"} prop="name">
+            <el-form-item label={"部门名称"} prop="name">
               <el-input v-model={form.value.name} />
             </el-form-item>
 
@@ -97,7 +99,30 @@ const menu_depart_list = ref([
             <el-form-item label={"主管名称"} prop="role2">
               <el-input v-model={form.value.role2} />
             </el-form-item>
+            <>
+            <el-tree
+        class="user_tree_left"
+        ref="ElTreeRef"
+        style="width: 250px; height: auto; overflow: auto"
+        
+
+        node-key="id"
+
+        highlight-current
+        default-expand-all
+ 
+      >
+      </el-tree>
+            
+            </>
           </el-form>
+
+
+
+
+
+
+
         )
       }
       depart_dialog_ref.value.callback = function () {

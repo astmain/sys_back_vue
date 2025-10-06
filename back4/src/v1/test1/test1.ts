@@ -31,7 +31,7 @@ export class test1 {
   @Post('save')
   async save(@Body() createDto: CreateTest1Dto) {
     try {
-      const result = await db .insert(tb_test1) .values({ name: createDto.name,}) .returning()
+      const result = await db.insert(tb_test1).values({ name: createDto.name }).returning()
       return { code: 200, msg: '保存成功', result: result[0] }
     } catch (error) {
       return { code: 500, msg: '保存失败', error: error.message }
@@ -64,15 +64,7 @@ export class test1 {
   @Post('update')
   async update(@Body() updateDto: UpdateTest1Dto) {
     try {
-      const result = await db
-        .update(tb_test1)
-        .set({
-          name: updateDto.name,
-          updated_at: sql`now()`, // 由数据库生成当前时间
-        })
-        .where(eq(tb_test1.id, updateDto.id))
-        .returning()
-
+      const result = await db.update(tb_test1).set({ name: updateDto.name }).where(eq(tb_test1.id, updateDto.id)).returning()
       if (result.length === 0) {
         return { code: 404, msg: '数据不存在' }
       }

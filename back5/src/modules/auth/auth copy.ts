@@ -60,6 +60,7 @@ export class auth {
       })
 
       // 3. 创建基础菜单
+
       await db.sys_menu.createMany({
         data: [
           // 一级菜单
@@ -78,8 +79,8 @@ export class auth {
 
       // ================================== 部门/角色-管理-菜单 ==================================
       // 客户普通    // 客户高级
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1001' } }, /* 首页*/ parent_id: 'menu_1', name: '客户普通/权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
-      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1002' } }, /* 首页*/ parent_id: 'menu_1', name: '客户高级/权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1001' } }, /* 首页*/ parent_id: 'menu_1', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
+      await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_1002' } }, /* 首页*/ parent_id: 'menu_1', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })
 
       // 技术职员
       await db.sys_menu.create({ data: { sys_depart: { connect: { id: 'role_2001' } }, /* 组织人员*/ parent_id: 'sub_2001', name: '权限', path: '', is_permiss: true, is_view: true, is_find: true, is_save: true, is_del: true } })

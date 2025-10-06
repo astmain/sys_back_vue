@@ -63,17 +63,6 @@ export class user {
     // console.log(`depart_list_id_AND_parent_id---`, depart_list_id_AND_parent_id)
     // 得到所有的部门ids
     const depart_ids = depart_list_id_AND_parent_id.map((item) => item.id)
-    // console.log(`depart_ids---`, depart_ids)
-    // // 得到部门中所有的用户
-    // let sys_user = await db.sys_depart.findMany({ where: { id: { in: depart_ids } }, include: { sys_user: true } })
-    // // 数据扁平化得到所有的用户
-    // let user_list = sys_user.map((item) => item.sys_user).flat()
-    // user_list = _.uniqWith(user_list, _.isEqual)
-    // return { code: 200, msg: '成功', result: { user_list, sys_user } }
-
-    // 通过部门depart_ids找到所有的用户
-    //                    操作表sys_user                 关联表sys_depart,some 表示"至少有一个"（存在性查询）
-    // let user_list = await db.sys_user.findMany({ where: { sys_depart: { some: { id: { in: depart_ids } } } }, include: { sys_depart: true } })
     let user_list = await db.sys_user.findMany({
       where: { sys_depart: { some: { id: { in: depart_ids } } } },
       include: { sys_depart: { include: { parent: true } } },
@@ -92,6 +81,8 @@ export class user {
     await db.sys_user.deleteMany({ where: { id: { in: body.ids } } })
     return { code: 200, msg: '成功', result: {} }
   }
+
+
 }
 
 @Module({
