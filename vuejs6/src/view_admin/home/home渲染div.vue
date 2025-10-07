@@ -64,9 +64,35 @@ let tree_menu = ref([
 ])
 
 let render = () => {
-  return <el-tree class="tree_menu" ref="TreeMenuRef" style="width:100%; height: auto; overflow: auto" data={tree_menu.value}
-  
-   props={{ label: "name" }} node-key="id" highlight-current expand-on-click-node={false} default-expand-all></el-tree>
+  return (
+    <>
+      <div class="desc_item flex flex-col" style="dispaly:flex;flex-direction: column">
+        {tree_menu.value.map((o1) => {
+          return (
+            <div style="display:flex">
+              <div style="width:200px;height:50px"> {o1.name} </div>
+              <div>
+                {o1.children.map((o2: any) => {
+                  return o2.type === "menu" ? (
+                    <div style="height:50px ;" class="flex gap-2">
+                      <div> {o2.name}</div>
+                      <div class="flex gap-2">
+                        {o2?.children.map((o3: any) => {
+                          return <span style="">{o3.name}</span>
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    <span style="margin-right:10px">{o2.name}</span>
+                  )
+                })}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </>
+  )
 }
 </script>
 

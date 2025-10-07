@@ -264,7 +264,9 @@ const menu_role_list = ref([
               <div class="desc_item" style={{ display: "flex" }}>
                 <span class="desc_item">
                   <el-checkbox v-model={finance_manage.value} />
-                  {item.name}</span>
+                  {item.name}
+                  
+                  </span>
 
                 <div class="desc_item" style={{ display: "flex", flexDirection: "column" }}>
                   {item.children.map((child: any) => {
