@@ -7,33 +7,28 @@ import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadReque
 import { db } from '@src/App_Prisma'
 import _ from 'lodash'
 
-// ==================== dto ====================
-import { DTO_create_menu } from './service_menu'
-import { VO_create_menu } from './service_menu'
-import { ZOD_DTO_find_menu } from './service_menu'
-
-// ==================== service ====================
-import { service_menu } from './service_menu'
-
-const service = new service_menu()
+// ==================== 插件 ====================
+import { util_build_tree } from '@src/plugins/util_build_tree'
 
 // ==================== controller ====================
 @Api_public()
 @Api_Controller('菜单管理')
 export class menu {
   @Api_Post('新增-菜单')
-  async create_menu(@Body() body: DTO_create_menu) {
-    return { code: 200, msg: '成功', result: await service.create_menu(body) }
-  }
-  @Api_Post('查询-菜单')
-  async find_menu(@Body() body: ZOD_DTO_find_menu) {
-    console.log(`body---`, body)
+  async create_menu() {
     return { code: 200, msg: '成功', result: {} }
+  }
+  @Api_Post('查询-菜单树')
+  async find_tree_menu() {
+    // let menu_tree = await db.sys_menu.findMany({ include: { children: true } })
+    let menu_tree = await db.sys_menu.findMany()
+    menu_tree = util_build_tree(menu_tree)
+    return { code: 200, msg: '成功', result: { menu_tree } }
   }
 }
 
 @Module({
   controllers: [menu],
-  providers: [service_menu],
+  providers: [],
 })
 export class menu_Module {}

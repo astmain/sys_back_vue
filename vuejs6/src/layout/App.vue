@@ -1,10 +1,8 @@
 <template>
-    <router-view />
+  <router-view />
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style>
 .el-main {
@@ -52,5 +50,12 @@ h4,
 h5 {
   padding: 0;
   margin: 0;
+}
+
+/* 清除 ul li 的样式 */
+ul li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 </style>

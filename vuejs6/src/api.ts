@@ -20,5 +20,9 @@ export let api = {
     find_tree_menu_permiss: () => axios_api.post("/depart/find_tree_menu_permiss"),
 
 
-  }
+  },
+
+  menu:{
+    find_tree_menu: () => axios_api.post("/menu/find_tree_menu"),
+  },
 }

@@ -66,6 +66,7 @@ export class auth {
           { id: 'menu_1', name: '首页', path: '/home' },
           { id: 'menu_2', name: '商城管理', path: '/shop' },
           { id: 'menu_3', name: '用户管理', path: '/system/user' },
+          { id: 'menu_4', name: '菜单管理', path: '/system/menu' },
           // 商城管理-子菜单
           { id: 'sub_2001', name: '订单管理', path: '/shop/order', parent_id: 'menu_2' },
           { id: 'sub_2002', name: '商品管理', path: '/shop/product', parent_id: 'menu_2' },

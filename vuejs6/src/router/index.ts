@@ -7,6 +7,7 @@ export const view_admin = [
   // 系统管理
   { name: "用户管理", path: "/system/user", component: () => import("../view_admin/system/user/user.vue") },
   { name: "部门管理", path: "/system/depart", component: () => import("../view_admin/system/depart/depart.vue") },
+  { name: "菜单管理", path: "/system/menu", component: () => import("../view_admin/system/menu/menu.vue") },
   // 商城管理
   { name: "订单管理", path: "/shop/order", component: () => import("../view_admin/shop/order/order.vue") },
   { name: "商品管理", path: "/shop/product", component: () => import("../view_admin/shop/product/product.vue") },
