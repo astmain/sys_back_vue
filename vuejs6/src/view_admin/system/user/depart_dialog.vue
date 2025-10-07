@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="show" :title="title || '未设置标题'" width="650" draggable :close-on-click-modal="false">
+  <el-dialog v-model="show" :title="title || '未设置标题'" width="900" draggable :close-on-click-modal="false">
     <template #footer>
       <el-button type="primary" @click="submit">确定</el-button>
     </template>

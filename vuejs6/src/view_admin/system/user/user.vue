@@ -63,6 +63,7 @@ const ElTreeRef = ref()
 // ==================== 响应式数据 ====================
 const ElTreeRefCurrNode = ref()
 const user_list = ref([] as any[])
+let finance_manage = ref(false)
 
 // 右键菜单当前列表
 const menu_curr_list = ref([] as any[])
@@ -257,17 +258,28 @@ const menu_role_list = ref([
       console.log("tree_menu", tree_menu.value)
 
       depart_dialog_ref.value.render = () => {
-        //递归渲染树形菜单函数
-        const renderTreeMenu = (menuList: any[], level: number = 0) => {
-          return menuList.map((menu) => {
-            return (
-              <el-descriptions>
-                <el-descriptions-item label="名称">{menu.name}</el-descriptions-item>
-              </el-descriptions>
-            )
-          })
-        }
-        return <div>{/* 用el-descriptions 渲染 tree_menu */}</div>
+        return tree_menu.value.map((item: any) => {
+          return (
+            <div>
+              <div class="desc_item" style={{ display: "flex" }}>
+                <span class="desc_item">
+                  <el-checkbox v-model={finance_manage.value} />
+                  {item.name}</span>
+
+                <div class="desc_item" style={{ display: "flex", flexDirection: "column" }}>
+                  {item.children.map((child: any) => {
+                    return (
+                      <div class="desc_item" style={{ padding: "20px" }}>
+                        <el-checkbox v-model={finance_manage.value} />
+                        {child.name}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )
+        })
       }
     },
   },
@@ -330,6 +342,7 @@ onMounted(async () => {
   border-radius: 4px;
   background-color: #45a0ff;
   transition: all 0.3s ease;
+
   &:hover {
     background-color: #79bbff;
   }
@@ -339,9 +352,16 @@ onMounted(async () => {
   box-sizing: border-box;
   padding: 2px 6px;
   font-size: 12px;
+
   &:hover {
     background-color: #f5f7fa;
     color: #409eff;
   }
+}
+
+.desc_item {
+  border: 0.5px solid #e5e5e5;
+  min-height: 40px;
+  min-width: 100px;
 }
 </style>
