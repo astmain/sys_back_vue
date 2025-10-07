@@ -72,7 +72,7 @@ const tree_depart = ref({
   currentNodeKey: undefined,
 })
 
-const tree_menu = ref([])
+const tree_menu = ref([] as any[])
 
 // 右键菜单部门列表
 const menu_depart_list = ref([
@@ -88,10 +88,10 @@ const menu_depart_list = ref([
       console.log(`111---res2:`, res2)
       tree_menu.value = res2.result.menu_premiss_tree
 
-      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.show = true
       depart_dialog_ref.value.title = item.label
       let form = ref({ name: "", parent_id: ElTreeRefCurrNode?.value?.id, role: "职员" })
-      depart_dialog_ref.value.form_view = () => {
+      depart_dialog_ref.value.render = () => {
         return (
           <el-form model={form.value} label-width="120px">
             <el-form-item label={"父级id"} prop="parent_id">
@@ -157,20 +157,12 @@ const menu_depart_list = ref([
     },
   },
   {
-    label: "重命名部门",
+    label: "编辑部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open()
-      depart_dialog_ref.value.callback = function () {
-        console.log("新增部门111")
-      }
-    },
-  },
-  {
-    label: "删除部门",
-    click: (item: any) => {
-      depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open()
+
+      depart_dialog_ref.value.show = true
+
       depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
       }
@@ -180,7 +172,7 @@ const menu_depart_list = ref([
     label: "新增角色",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.show = true
       depart_dialog_ref.value.callback = function () {
         console.log("新增角色111")
       }
@@ -191,22 +183,91 @@ const menu_depart_list = ref([
 // 右键菜单角色列表
 const menu_role_list = ref([
   {
-    label: "修改角色",
-    click: (item: any) => {
+    label: "编辑角色",
+    click: async (item: any) => {
       depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open()
+      depart_dialog_ref.value.show = true
       depart_dialog_ref.value.callback = function () {
-        console.log("修改角色111")
+        depart_dialog_ref.value.show = false
       }
-    },
-  },
-  {
-    label: "删除角色",
-    click: (item: any) => {
-      depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.open()
-      depart_dialog_ref.value.callback = function () {
-        console.log("删除角色111")
+
+      // 渲染表单
+      let res: any = await api.menu.find_tree_menu()
+      tree_menu.value = [
+        {
+          id: "menu_1",
+          name: "首页",
+          path: "/home",
+          remark: null,
+          parent_id: null,
+          children: [],
+        },
+        {
+          id: "menu_2",
+          name: "商城管理",
+          path: "/shop",
+          remark: null,
+          parent_id: null,
+          children: [
+            {
+              id: "sub_2001",
+              name: "订单管理",
+              path: "/shop/order",
+              remark: null,
+              parent_id: "menu_2",
+              children: [],
+            },
+            {
+              id: "sub_2002",
+              name: "商品管理",
+              path: "/shop/product",
+              remark: null,
+              parent_id: "menu_2",
+              children: [],
+            },
+            {
+              id: "sub_2003",
+              name: "财务管理",
+              path: "/shop/finance",
+              remark: null,
+              parent_id: "menu_2",
+              children: [],
+            },
+          ],
+        },
+        {
+          id: "menu_3",
+          name: "用户管理",
+          path: "/system/user",
+          remark: null,
+          parent_id: null,
+          children: [],
+        },
+        {
+          id: "menu_4",
+          name: "菜单管理",
+          path: "/system/menu",
+          remark: null,
+          parent_id: null,
+          children: [],
+        },
+      ]
+
+      tree_menu.value = res.result.menu_tree
+      console.log("tree_menu", tree_menu.value)
+
+      depart_dialog_ref.value.render = () => {
+        //递归渲染树形菜单函数
+        const renderTreeMenu = (menuList: any[], level: number = 0) => {
+          return menuList.map((menu) => {
+            return (
+              <el-descriptions>
+                <el-descriptions-item label="名称">{menu.name}</el-descriptions-item>
+              </el-descriptions>
+            )
+          })
+        }
+        return <div>{/* 用el-descriptions 渲染 tree_menu */}</div>
       }
     },
   },

@@ -1,11 +1,10 @@
 <template>
-  <el-dialog v-model="show" :title="title || '未设置标题'" width="650" draggable>
+  <el-dialog v-model="show" :title="title || '未设置标题'" width="650" draggable :close-on-click-modal="false">
     <template #footer>
       <el-button type="primary" @click="submit">确定</el-button>
     </template>
 
-    
-    <form_view></form_view>
+    <render></render>
   </el-dialog>
 </template>
 
@@ -18,12 +17,7 @@ let show = ref(false)
 let title = ref("")
 let callback = ref(async () => {})
 
-let form_view = ref(() => <></>) // 表单视图
-
-// 打开交互窗口
-async function open() {
-  show.value = true
-}
+let render = ref(() => <></>) // 表单视图
 
 // 提交保存
 async function submit() {
@@ -31,7 +25,7 @@ async function submit() {
 }
 
 // 暴露方法给父组件调用
-defineExpose({ open, title, submit, callback, form_view })
+defineExpose({ show, title, submit, callback, render })
 </script>
 
 <style scoped></style>
