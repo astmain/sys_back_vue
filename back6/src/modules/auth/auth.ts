@@ -76,22 +76,24 @@ export class auth {
 
           // 按钮权限(订单管理)
           { parent_id: 'sub_2001', path: '/shop/order:查看', remark: '权限-订单管理', name: '查看', type: 'button' },
+          { parent_id: 'sub_2001', path: '/shop/order:删除', remark: '权限-订单管理', name: '删除', type: 'button' },
           { parent_id: 'sub_2001', path: '/shop/order:新增', remark: '权限-订单管理', name: '新增', type: 'button' },
           { parent_id: 'sub_2001', path: '/shop/order:修改', remark: '权限-订单管理', name: '修改', type: 'button' },
-          { parent_id: 'sub_2001', path: '/shop/order:删除', remark: '权限-订单管理', name: '删除', type: 'button' },
           { parent_id: 'sub_2001', path: '/shop/order:修改价格', remark: '权限-订单管理', name: '修改价格', type: 'button' },
 
           // 按钮权限(商品管理)
           { parent_id: 'sub_2002', path: '/shop/product:查看', remark: '权限-商品管理', name: '查看', type: 'button' },
+          { parent_id: 'sub_2002', path: '/shop/product:删除', remark: '权限-商品管理', name: '删除', type: 'button' },
           { parent_id: 'sub_2002', path: '/shop/product:新增', remark: '权限-商品管理', name: '新增', type: 'button' },
           { parent_id: 'sub_2002', path: '/shop/product:修改', remark: '权限-商品管理', name: '修改', type: 'button' },
-          { parent_id: 'sub_2002', path: '/shop/product:删除', remark: '权限-商品管理', name: '删除', type: 'button' },
+
 
           // 按钮权限(商品管理)
           { parent_id: 'sub_2003', path: '/shop/finance:查看', remark: '权限-财务管理', name: '查看', type: 'button' },
+          { parent_id: 'sub_2003', path: '/shop/finance:删除', remark: '权限-财务管理', name: '删除', type: 'button' },
           { parent_id: 'sub_2003', path: '/shop/finance:新增', remark: '权限-财务管理', name: '新增', type: 'button' },
           { parent_id: 'sub_2003', path: '/shop/finance:修改', remark: '权限-财务管理', name: '修改', type: 'button' },
-          { parent_id: 'sub_2003', path: '/shop/finance:删除', remark: '权限-财务管理', name: '删除', type: 'button' },
+
         ],
       })
 
@@ -99,7 +101,11 @@ export class auth {
 
 
        // 按钮权限(首页)
-       let 权限_首页 ={ parent_id: 'menu_1', path: '/home:查看', remark: '权限_首页', name: '查看', type: 'button' }
+       let 权限_首页_查看 ={ parent_id: 'menu_1', path: '/home:查看', remark: '权限_首页', name: '查看', type: 'button' }
+       let 权限_首页_删除 ={ parent_id: 'menu_1', path: '/home:查看', remark: '权限_首页', name: '查看', type: 'button' }
+       
+
+
        
 
 
