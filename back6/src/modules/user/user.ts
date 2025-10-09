@@ -21,7 +21,7 @@ export class user {
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user) {
     const user = await db.sys_user.findFirst({ where: { id: body.id } })
-    const menu_list = await db.sys_menu.findMany({ include: { children: true } })
+    const menu_list = await db.sys_menu.findMany({ where: { type: { in: ['menu'] } }, include: { children: true } })
     const menu_tree = util_build_tree(menu_list)
     return { code: 200, msg: '成功', result: { user, menu_tree } }
   }
