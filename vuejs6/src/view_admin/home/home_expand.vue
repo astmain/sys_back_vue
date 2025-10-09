@@ -1,17 +1,28 @@
 <template>
   <div>
-    <el-tree show-checkbox class="tree_menu" ref="TreeMenuRef" style="width: 100%; height: auto; overflow: auto" :data="tree_menu" :props="{ label: 'name' }" node-key="id" highlight-current :default-expand-all="true">
+    <el-tree
+      show-checkbox
+      class="tree_menu"
+      ref="TreeMenuRef"
+      style="width: 100%; height: auto; overflow: auto"
+      :data="tree_menu"
+      :props="{ label: 'name' }"
+      node-key="id"
+      highlight-current
+      :expand-on-click-node="false"
+      :default-expand-all="false"
+      @node-expand="handle_node_expand"
+      @node-collapse="handle_node_collapse"
+    >
       <template #default="{ node, data }">
-        <div :class="data.type === 'button' ? 'ok_button' : 'no_button'">
-          {{ data.name }}
-        </div>
+        <div :class="data.id + ' ' + data.type">{{ data.name }} + {{ node.expanded }}</div>
       </template>
     </el-tree>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 
 let tree_menu = ref([
   {
@@ -65,13 +76,37 @@ let tree_menu = ref([
     ],
   },
 ])
+
+// 树组件引用
+const TreeMenuRef = ref()
+
+// 监听节点展开/折叠事件
+const handle_node_expand = (data, node, instance) => {
+  console.log("节点展开:", data.name, "expanded:", node.expanded, "instance:", instance)
+  if (data.type === "menu") {
+    setTimeout(() => {
+      document.querySelectorAll(" .el-tree-node__children:has(.button):not(.menu)").forEach((item) => {
+        item.style.display = "flex"
+      })
+      document.querySelectorAll(" .el-tree-node__children:has(.menu)").forEach((item) => {
+        item.style.display = ""
+      })
+    }, 100)
+  }
+}
+
+const handle_node_collapse = (data, node, instance) => {
+  console.log("节点折叠:", data.name, "expanded:", node.expanded, "instance:", instance)
+}
+
+// 组件挂载后设置初始状态
 </script>
 <style>
-.el-tree-node__children:has(.ok_button) {
+/* .el-tree-node__children:has(.ok_button) {
   display: flex !important;
 }
 
 .el-tree-node__children:has(.no_button) {
   display: block !important;
-}
+} */
 </style>

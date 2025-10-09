@@ -14,35 +14,35 @@ model sys_user {
 
 // 2. 组织表 (既表示部门又表示角色)
 model sys_depart {
-  id          String        @id @default(uuid())
-  name        String
-  remark      String?
-  primary     Boolean       @default(true) //主要部门
-  parent_id   String? // 自关联
-  is_depart   Boolean       @default(true) // 是否是组织，如果为false就相当于角色
-  parent      sys_depart?   @relation("self_sys_depart", fields: [parent_id], references: [id])
-  children    sys_depart[]  @relation("self_sys_depart")
-  sys_user    sys_user[]
-  sys_permiss sys_permiss[]
+  id        String       @id @default(uuid())
+  name      String
+  remark    String?
+  primary   Boolean      @default(true) //主要部门
+  parent_id String? // 自关联
+  is_depart Boolean      @default(true) // 是否是组织，如果为false就相当于角色
+  parent    sys_depart?  @relation("self_sys_depart", fields: [parent_id], references: [id])
+  children  sys_depart[] @relation("self_sys_depart")
+  sys_user  sys_user[]
 }
 
 // 3. 菜单表
 model sys_menu {
   id        String     @id @default(uuid())
   name      String
-  path      String?
-  remark    String?
+  path      String     @default("")
+  remark    String     @default("")
   parent_id String? // 自关联
+  type      String     @default("menu")
   parent    sys_menu?  @relation("self_sys_menu", fields: [parent_id], references: [id])
   children  sys_menu[] @relation("self_sys_menu")
 }
 
 // 4. 权限表
 model sys_permiss {
-  id         String       @id @default(uuid())
-  name       String
-  remark     String?
-  is_ok      Boolean      @default(false)
-  menu_id    String
-  sys_depart sys_depart[]
+  id      String  @id @default(uuid())
+  name    String  @default("")
+  remark  String  @default("")
+  is_ok   Boolean @default(true)
+  type    String  @default("button")
+  menu_id String  @default("")
 }

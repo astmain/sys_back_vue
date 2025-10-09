@@ -71,8 +71,41 @@ export class auth {
           { id: 'sub_2001', name: '订单管理', path: '/shop/order', parent_id: 'menu_2' },
           { id: 'sub_2002', name: '商品管理', path: '/shop/product', parent_id: 'menu_2' },
           { id: 'sub_2003', name: '财务管理', path: '/shop/finance', parent_id: 'menu_2' },
+
+         
+
+          // 按钮权限(订单管理)
+          { parent_id: 'sub_2001', path: '/shop/order:查看', remark: '权限-订单管理', name: '查看', type: 'button' },
+          { parent_id: 'sub_2001', path: '/shop/order:新增', remark: '权限-订单管理', name: '新增', type: 'button' },
+          { parent_id: 'sub_2001', path: '/shop/order:修改', remark: '权限-订单管理', name: '修改', type: 'button' },
+          { parent_id: 'sub_2001', path: '/shop/order:删除', remark: '权限-订单管理', name: '删除', type: 'button' },
+          { parent_id: 'sub_2001', path: '/shop/order:修改价格', remark: '权限-订单管理', name: '修改价格', type: 'button' },
+
+          // 按钮权限(商品管理)
+          { parent_id: 'sub_2002', path: '/shop/product:查看', remark: '权限-商品管理', name: '查看', type: 'button' },
+          { parent_id: 'sub_2002', path: '/shop/product:新增', remark: '权限-商品管理', name: '新增', type: 'button' },
+          { parent_id: 'sub_2002', path: '/shop/product:修改', remark: '权限-商品管理', name: '修改', type: 'button' },
+          { parent_id: 'sub_2002', path: '/shop/product:删除', remark: '权限-商品管理', name: '删除', type: 'button' },
+
+          // 按钮权限(商品管理)
+          { parent_id: 'sub_2003', path: '/shop/finance:查看', remark: '权限-财务管理', name: '查看', type: 'button' },
+          { parent_id: 'sub_2003', path: '/shop/finance:新增', remark: '权限-财务管理', name: '新增', type: 'button' },
+          { parent_id: 'sub_2003', path: '/shop/finance:修改', remark: '权限-财务管理', name: '修改', type: 'button' },
+          { parent_id: 'sub_2003', path: '/shop/finance:删除', remark: '权限-财务管理', name: '删除', type: 'button' },
         ],
       })
+
+
+
+
+       // 按钮权限(首页)
+       let 权限_首页 ={ parent_id: 'menu_1', path: '/home:查看', remark: '权限_首页', name: '查看', type: 'button' }
+       
+
+
+
+
+
 
       // ================================== 用户表 ==================================
       //             //客户普通     //客户高级   // 技术职员    // 技术主管   // 财务职员   // 财务主管
@@ -87,6 +120,27 @@ export class auth {
       await db.sys_user.create({ data: { id: 'user_4', name: '李四', phone: '15160315004', password: '123456', sys_depart: { connect: ['role_1001', 'role_3002'].map((id) => ({ id })) } } })
       /*王五-客户普通-财务主管*/
       await db.sys_user.create({ data: { id: 'user_5', name: '王五', phone: '15160315005', password: '123456', sys_depart: { connect: ['role_1002', 'role_3002'].map((id) => ({ id })) } } })
+
+      // ================================== 权限-菜单 ==================================
+      // 首页
+      await db.sys_permiss.create({ data: { menu_id: 'menu_1', remark: '菜单-首页', name: '查看' } })
+      await db.sys_permiss.create({ data: { menu_id: 'menu_1', remark: '菜单-首页', name: '删除' } })
+      await db.sys_permiss.create({ data: { menu_id: 'menu_1', remark: '菜单-首页', name: '保存' } })
+
+      // 订单管理
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2001', remark: '菜单-订单管理', name: '查看' } })
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2001', remark: '菜单-订单管理', name: '删除' } })
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2001', remark: '菜单-订单管理', name: '保存' } })
+
+      // 商品管理
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2002', remark: '菜单-商品管理', name: '查看' } })
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2002', remark: '菜单-商品管理', name: '删除' } })
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2002', remark: '菜单-商品管理', name: '保存' } })
+
+      // 订单管理
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2003', remark: '菜单-财务管理', name: '查看' } })
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2003', remark: '菜单-财务管理', name: '删除' } })
+      await db.sys_permiss.create({ data: { menu_id: 'sub_2003', remark: '菜单-财务管理', name: '保存' } })
 
       return { code: 200, msg: '成功:数据库初始化完成', result: {} }
     } catch (error) {
