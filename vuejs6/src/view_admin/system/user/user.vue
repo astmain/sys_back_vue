@@ -222,7 +222,11 @@ const menu_role_list = ref([
               default-expand-all={true} //
               v-slots={{
                 default: ({ node, data }: { node: any; data: any }) => {
-                  return <div class={data.type === "button" ? "ok_button" : "no_button"}>{data.name}</div>
+                  if (data.type === "button") {
+                    return <div class="ok_button ">{data.name}</div>
+                  } else {
+                    return <div class="no_button font-bold text-base">{data.name}</div>
+                  }
                 },
               }}
             ></el-tree>
