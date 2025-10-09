@@ -11,6 +11,8 @@ import { util_build_tree } from '@src/plugins/util_build_tree'
 
 // ==================== dto ====================
 import { add_depart } from './dto/add_depart'
+import { find_depart_menu } from './dto/find_depart_menu'
+import { update_depart_menu } from './dto/update_depart_menu'
 
 @Api_public()
 @Api_Controller('部门管理')
@@ -30,6 +32,32 @@ export class depart {
 
   @Api_Post('查询-菜单权限树')
   async find_tree_menu_permiss(@Req() req: any) {}
+
+  @Api_Post('更新-部门-菜单')
+  async update_depart_menu(@Body() body: update_depart_menu) {
+    console.log('update_depart_menu---body---', body)
+    let nodes_id = body.nodes_id.map((o) => ({ id: o }))
+    await db.sys_depart.update({ where: { id: body.role_id }, data: { sys_menu: { set: nodes_id } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
+
+  @Api_Post('查询-部门-菜单')
+  async find_depart_menu(@Body() body: find_depart_menu) {
+    console.log('find_depart_menu---body---', body)
+    // 查询菜单树
+    let menu_tree = await db.sys_menu.findMany()
+    menu_tree = util_build_tree(menu_tree)
+
+    // 查询部门角色选中的节点
+    const role = await db.sys_depart.findUnique({
+      where: { id: body.role_id },
+      select: { sys_menu: { select: { id: true } } },
+    })
+    const checked_ids = role?.sys_menu?.map((o) => o.id) ?? []
+    console.log('find_depart_menu---checked_ids', checked_ids)
+
+    return { code: 200, msg: '成功', result: { menu_tree ,checked_ids} }
+  }
 }
 
 @Module({

@@ -81,10 +81,10 @@ export class auth {
       await db.sys_menu.createMany({ data: [首页_查看, 首页_删除, 首页_新增, 首页_修改] })
 
       // 按钮权限(用户管理)
-      let 用户管理_查看 = { parent_id: 'sub_2001', path: '/system/user:查看', id: '/system/user:查看', remark: '用户管理_查看', name: '查看', type: 'button' }
-      let 用户管理_删除 = { parent_id: 'sub_2001', path: '/system/user:删除', id: '/system/user:删除', remark: '用户管理_删除', name: '删除', type: 'button' }
-      let 用户管理_新增 = { parent_id: 'sub_2001', path: '/system/user:新增', id: '/system/user:新增', remark: '用户管理_新增', name: '新增', type: 'button' }
-      let 用户管理_修改 = { parent_id: 'sub_2001', path: '/system/user:修改', id: '/system/user:修改', remark: '用户管理_修改', name: '修改', type: 'button' }
+      let 用户管理_查看 = { parent_id: 'menu_3', path: '/system/user:查看', id: '/system/user:查看', remark: '用户管理_查看', name: '查看', type: 'button' }
+      let 用户管理_删除 = { parent_id: 'menu_3', path: '/system/user:删除', id: '/system/user:删除', remark: '用户管理_删除', name: '删除', type: 'button' }
+      let 用户管理_新增 = { parent_id: 'menu_3', path: '/system/user:新增', id: '/system/user:新增', remark: '用户管理_新增', name: '新增', type: 'button' }
+      let 用户管理_修改 = { parent_id: 'menu_3', path: '/system/user:修改', id: '/system/user:修改', remark: '用户管理_修改', name: '修改', type: 'button' }
       await db.sys_menu.createMany({ data: [用户管理_查看, 用户管理_删除, 用户管理_新增, 用户管理_修改] })
 
       // 按钮权限(订单管理)

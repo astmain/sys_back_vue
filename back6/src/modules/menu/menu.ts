@@ -25,6 +25,8 @@ export class menu {
     menu_tree = util_build_tree(menu_tree)
     return { code: 200, msg: '成功', result: { menu_tree } }
   }
+
+
 }
 
 @Module({

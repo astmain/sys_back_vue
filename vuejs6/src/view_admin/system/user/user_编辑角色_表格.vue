@@ -50,7 +50,7 @@ import { onMounted, ref } from "vue"
 import { api } from "@/api"
 import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
-import { dividerProps, ElMessage } from "element-plus"
+import { ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
 import depart_dialog from "./depart_dialog.vue"
 import Menu1 from "./Menu1.vue"
@@ -60,7 +60,6 @@ const user_drawer_ref = ref()
 const Menu1Ref = ref()
 const depart_dialog_ref = ref()
 const ElTreeRef = ref()
-const menu_tree_Ref = ref()
 // ==================== 响应式数据 ====================
 const ElTreeRefCurrNode = ref()
 const user_list = ref([] as any[])
@@ -189,45 +188,100 @@ const menu_role_list = ref([
     click: async (item: any) => {
       depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.show = true
-      depart_dialog_ref.value.callback = async function () {
-        const nodes = menu_tree_Ref.value.getCheckedNodes() //获取选中节点
-        const nodes_id = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
-        console.log("nodes_id", nodes_id)
-        let res: any = await api.depart.update_depart_menu({ role_id: ElTreeRefCurrNode.value.id, nodes_id })
-        if (res.code != 200) return ElMessage.error(res.msg) //前置判断
-        ElMessage.success(res.msg)
+      depart_dialog_ref.value.callback = function () {
         depart_dialog_ref.value.show = false
       }
 
       // 渲染表单
-      let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
+      let res: any = await api.depart.find_depart_menu({role_id:ElTreeRefCurrNode.value.id})
+      // tree_menu.value = [
+      //   {
+      //     id: "menu_1",
+      //     name: "首页",
+      //     path: "/home",
+      //     remark: null,
+      //     parent_id: null,
+      //     children: [],
+      //   },
+      //   {
+      //     id: "menu_2",
+      //     name: "商城管理",
+      //     path: "/shop",
+      //     remark: null,
+      //     parent_id: null,
+      //     children: [
+      //       {
+      //         id: "sub_2001",
+      //         name: "订单管理",
+      //         path: "/shop/order",
+      //         remark: null,
+      //         parent_id: "menu_2",
+      //         children: [],
+      //       },
+      //       {
+      //         id: "sub_2002",
+      //         name: "商品管理",
+      //         path: "/shop/product",
+      //         remark: null,
+      //         parent_id: "menu_2",
+      //         children: [],
+      //       },
+      //       {
+      //         id: "sub_2003",
+      //         name: "财务管理",
+      //         path: "/shop/finance",
+      //         remark: null,
+      //         parent_id: "menu_2",
+      //         children: [],
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     id: "menu_3",
+      //     name: "用户管理",
+      //     path: "/system/user",
+      //     remark: null,
+      //     parent_id: null,
+      //     children: [],
+      //   },
+      //   {
+      //     id: "menu_4",
+      //     name: "菜单管理",
+      //     path: "/system/menu",
+      //     remark: null,
+      //     parent_id: null,
+      //     children: [],
+      //   },
+      // ]
 
       tree_menu.value = res.result.menu_tree
-      let checked_ids = res.result.checked_ids
       console.log("tree_menu", tree_menu.value)
 
       depart_dialog_ref.value.render = () => {
-        return (
-          <div>
-            <el-tree
-              show-checkbox
-              class="menu_tree_Ref"
-              ref={menu_tree_Ref}
-              style="width: 100%; height: auto; overflow: auto"
-              data={tree_menu.value}
-              props={{ label: "name" }}
-              default-checked-keys={checked_ids}
-              node-key="id"
-              highlight-current
-              default-expand-all={true} //
-              v-slots={{
-                default: ({ node, data }: { node: any; data: any }) => {
-                  return <div class={data.type === "button" ? "ok_button" : "no_button"}>{data.name}</div>
-                },
-              }}
-            ></el-tree>
-          </div>
-        )
+        return tree_menu.value.map((item: any) => {
+          return (
+            <div>
+              <div class="desc_item" style={{ display: "flex" }}>
+                <span class="desc_item">
+                  <el-checkbox v-model={finance_manage.value} />
+                  {item.name}
+                  
+                  </span>
+
+                <div class="desc_item" style={{ display: "flex", flexDirection: "column" }}>
+                  {item.children.map((child: any) => {
+                    return (
+                      <div class="desc_item" style={{ padding: "20px" }}>
+                        <el-checkbox v-model={finance_manage.value} />
+                        {child.name}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )
+        })
       }
     },
   },
@@ -311,15 +365,5 @@ onMounted(async () => {
   border: 0.5px solid #e5e5e5;
   min-height: 40px;
   min-width: 100px;
-}
-</style>
-
-<style>
-.el-tree-node__children:has(.ok_button) {
-  display: flex !important;
-}
-
-.el-tree-node__children:has(.no_button) {
-  display: block !important;
 }
 </style>
