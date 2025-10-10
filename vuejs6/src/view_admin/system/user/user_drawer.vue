@@ -23,7 +23,8 @@
       </el-form-item>
 
       <el-form-item label="部门树">
-        <el-tree ref="ElTreeRef" :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox :default-checked-keys="user_depart_role_ids" />
+        <el-tree ref="ElTreeRef" :data="BUS.depart_tree" node-key="id"
+         :props="{ label: 'name' }" :default-expand-all="true" show-checkbox :default-checked-keys="user_depart_role_ids" />
       </el-form-item>
     </el-form>
 

@@ -18,7 +18,8 @@
       </el-tree>
     </nav>
     <nav style="flex: 1; padding: 0 !important" class="uno_card">
-      <el-table :data="user_list" style="width: 100%; height: 100%" show-overflow-tooltip stripe :header-cell-style="{ background: '#f4f4f5', color: '#606266' }">
+      <el-table :data="user_list" style="width: 100%; height: 100%" show-overflow-tooltip stripe 
+      :header-cell-style="{ background: '#f4f4f5', color: '#606266' }">
         <el-table-column type="index" width="60" label="序号" />
         <el-table-column prop="index" width="80" label="状态">
           <template #default="scope">
@@ -49,6 +50,7 @@
   <Menu1 ref="Menu1Ref" :menu_list="menu_curr_list" />
   <depart_dialog ref="depart_dialog_ref" />
   <com_dialog_depart_create ref="ref_com_dialog_depart_create" />
+  <com_dialog_depart_update ref="ref_com_dialog_depart_update" />
 </template>
 
 <script setup lang="tsx">
@@ -61,6 +63,7 @@ import user_drawer from "./user_drawer.vue"
 import depart_dialog from "./depart_dialog.vue"
 import Menu1 from "./Menu1.vue"
 import com_dialog_depart_create from "./com_dialog_depart_create.vue"
+import com_dialog_depart_update from "./com_dialog_depart_update.vue"
 
 // ==================== 元素绑定ref ====================
 const user_drawer_ref = ref()
@@ -68,6 +71,7 @@ const Menu1Ref = ref()
 const depart_dialog_ref = ref()
 const ElTreeRef = ref()
 const ref_com_dialog_depart_create = ref()
+const ref_com_dialog_depart_update = ref()
 // ==================== 响应式数据 ====================
 const ElTreeRefCurrNode = ref()
 const user_list = ref([] as any[])
@@ -87,9 +91,9 @@ const menu_depart_role_list = ref([
   {
     label: "修改部门",
     click: async (item: any) => {
-      ref_com_dialog_depart_create.value.title = item.label
-      ref_com_dialog_depart_create.value.tree_node_curr = ElTreeRefCurrNode.value
-      ref_com_dialog_depart_create.value.open()
+      ref_com_dialog_depart_update.value.title = item.label
+      ref_com_dialog_depart_update.value.tree_node_curr = ElTreeRefCurrNode.value
+      ref_com_dialog_depart_update.value.open()
     },
   },
   {

@@ -16,6 +16,7 @@ import { update_depart_role_menu } from './dto/update_depart_role_menu'
 import { create_depart_menu } from './dto/create_depart_menu'
 import { create_list_depart_role_menu } from './dto/create_list_depart_role_menu'
 import { delete_depart_role_ids } from './dto/delete_depart_role_ids'
+import { update_list_depart_role_menu } from './dto/update_list_depart_role_menu'
 
 @Api_public()
 @Api_Controller('部门管理')
@@ -31,21 +32,40 @@ export class depart {
   async create_depart_menu(@Body() body: create_depart_menu) {
     console.log('create_depart_menu---body---', body)
     // 创建部门
-    const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, type: "depart" } })
+    const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, type: 'depart' } })
     // 创建角色
-    const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: body.role_name, parent_id: depart.id, type: "role", sys_menu: { connect: body.menu_button_ids.map((o) => ({ id: o })) } } })
+    const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: body.role_name, parent_id: depart.id, type: 'role', sys_menu: { connect: body.menu_button_ids.map((o) => ({ id: o })) } } })
     return { code: 200, msg: '成功', result: {} }
   }
 
   @Api_Post('新增-部门-角色-菜单-列表')
   async create_list_depart_role_menu(@Body() body: create_list_depart_role_menu) {
     // console.log('create_depart_menu---body---', JSON.stringify(body, null, 2))
+    /*新增部门*/ const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, type: 'depart' } })
     for (let item of body.role_list) {
-      /*创建部门*/ const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, type: "depart" } })
-      /*创建角色*/ const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: item.name, parent_id: depart.id, type: "role", sys_menu: { connect: item.menu_button_ids.map((o) => ({ id: o })) } } })
+      /*新增角色*/ const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: item.name, parent_id: depart.id, type: 'role', sys_menu: { connect: item.menu_button_ids.map((o) => ({ id: o })) } } })
     }
     return { code: 200, msg: '成功', result: {} }
   }
+
+  @Api_Post('更新-部门-角色-菜单-列表')
+  async update_list_depart_role_menu(@Body() body: update_list_depart_role_menu) {
+    console.log('update_list_depart_role_menu---body---', JSON.stringify(body, null, 2))
+
+    for (let item of body.role_list) {
+      if (item.kind === 'update') {
+        /*更新角色*/ await db.sys_depart.update({ where: { id: item.id }, data: { name: item.name, type: 'role', sys_menu: { set: item.menu_button_ids.map((o) => ({ id: o })) } } })
+      } else if (item.kind === 'create') {
+        /*新增角色*/ await db.sys_depart.create({ data: { parent_id: body.depart_id, id: item.id, name: item.name, type: 'role', sys_menu: { connect: item.menu_button_ids.map((o) => ({ id: o })) } } })
+      } else {
+        return { code: 400, msg: '失败', result: { error: '没有匹配到role_list的kind' } }
+      }
+      console.log(item)
+    }
+    /*更新部门*/ await db.sys_depart.update({ where: { id: body.depart_id }, data: { name: body.depart_name, type: 'depart' } })
+    return { code: 200, msg: '成功', result: {} }
+  }
+
   @Api_Post('删除-部门-角色')
   async delete_depart_role_ids(@Body() body: delete_depart_role_ids) {
     await db.sys_depart.deleteMany({ where: { id: { in: body.ids } } })

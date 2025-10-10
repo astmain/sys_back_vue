@@ -2,16 +2,17 @@
   <el-dialog v-model="show" :title="title || '未设置标题'" width="900" height="900" top="20px" draggable :close-on-click-modal="false">
     <div style="height: 500px; overflow: auto; padding-right: 20px">
       <el-form label-width="120px">
-        <el-form-item label="父级id" prop="parent_id">
-          <el-input v-model="form.depart_parent_id" disabled />
+        <el-form-item label="部门id" prop="name">
+          <el-input v-model="form.depart_id" />
         </el-form-item>
+
         <el-form-item label="部门名称" prop="name">
           <el-input v-model="form.depart_name" />
         </el-form-item>
 
         <el-form-item v-for="(item, i) in form.role_list" :key="i" :label="`${i + 1}角色名称`">
           <el-input v-model="item.name" />
-          <el-tree show-checkbox :ref="item.ref_tree" :class="item.ref_tree" style="width: 100%; height: 200px; overflow: auto" :data="tree_menu" :props="{ label: 'name' }" node-key="id" highlight-current default-expand-all>
+          <el-tree show-checkbox :class="item.id" style="width: 100%; height: 200px; overflow: auto" :data="tree_menu" :default-checked-keys="item.menu_button_ids" :props="{ label: 'name' }" node-key="id" highlight-current default-expand-all>
             <template #default="{ node, data }">
               <div v-if="data.type === 'button'" class="ok_button">{{ data.name }}</div>
               <div v-else class="no_button font-bold text-base">{{ data.name }}</div>
@@ -39,26 +40,53 @@ let tree_menu = ref([]) //树状菜单
 
 let title = ref("") //标题
 let tree_node_curr: any = ref({}) //树状当前节点
-let form = $ref({ depart_parent_id: tree_node_curr.value?.id, depart_name: "", role_list: [{ name: "职员", ref_tree: "ref_tree", menu_button_ids: [] }] })
+let form = $ref({ depart_id: tree_node_curr.value.depart_id, depart_name: "", role_list: [{ name: "职员", id: "ref_tree", kind: "update", menu_button_ids: [] }] })
 let callback = $ref(async () => {}) //回调函数
 let render = $ref(() => <></>) // 渲染组件
 
 // 新增角色
 async function add_role() {
-  form.role_list.push({ name: `职员${new Date().getTime()}`, ref_tree: `ref_tree_${new Date().getTime()}`, menu_button_ids: [] })
+  form.role_list.push({ name: `职员${new Date().getTime()}`, id: `ref_tree_${new Date().getTime()}`, kind: "create", menu_button_ids: [] })
 }
 
 // 提交保存
 async function open() {
   show.value = true
-  form = { depart_parent_id: tree_node_curr.value?.id, depart_name: `部门_${new Date().getTime()}`, role_list: [{ name: "职员", ref_tree: "ref_tree", menu_button_ids: [] }] }
-
+  console.log("tree_node_curr.value.children---", JSON.parse(JSON.stringify(tree_node_curr.value.children)))
+  let role_list: any[] = []
+  for (let index = 0; index < tree_node_curr.value.children.length; index++) {
+    const role = tree_node_curr.value.children[index]
+    console.log("role---", JSON.parse(JSON.stringify(role)))
+    role_list.push({ id: role.id, name: role.name, kind: "update", menu_button_ids: role.menu_button_ids })
+  }
+  form = { depart_id: tree_node_curr.value?.id, depart_name: tree_node_curr.value.name, role_list: role_list }
   let res: any = await api.depart.find_depart_menu({ role_id: tree_node_curr.value.id })
   tree_menu.value = res.result.menu_tree
 }
 
 // 提交保存
 async function submit() {
+  for (let item of form.role_list) {
+    //@ts-ignore
+    let ctx = document.querySelector(`.${item.id}`).__vueParentComponent.ctx
+    item.menu_button_ids = ctx.getCheckedKeys()
+    const nodes = ctx.getCheckedNodes() //获取选中节点
+    item.menu_button_ids = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
+  }
+
+  let data = { depart_id: form.depart_id, depart_name: form.depart_name, role_list: form.role_list }
+  if (form.depart_name.length < 1) return ElMessage.error("部门名称-必须要有")
+  for (let item of form.role_list) {
+    if (item.name.length < 1) return ElMessage.error("角色名称-必须要有")
+    if (item.menu_button_ids.length < 1) return ElMessage.error("菜单按钮-必须要有")
+  }
+  console.log("data---", JSON.parse(JSON.stringify(data)))
+
+  let res: any = await api.depart.update_list_depart_role_menu(data)
+  if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+  ElMessage.success(res.msg)
+  show.value = false
+  BUS.func.find_tree_depart()
 
 }
 

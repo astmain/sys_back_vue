@@ -47,7 +47,23 @@ export class user {
         },
       },
     })
-    return { code: 200, msg: '成功', result: { depart_tree: [depart_tree] } }
+
+    const all_menus = await db.sys_depart.findMany()
+
+    for (let index = 0; index < all_menus.length; index++) {
+      const ele = all_menus[index]
+      // console.log('ele', ele)
+      if (ele.type === 'role') {
+        const role_id = ele.id
+        let menu: any = await db.sys_depart.findUnique({ where: { id: role_id }, select: { sys_menu: true } })
+        // console.log('ele.name', ele.name)
+        // console.log('menu', JSON.stringify(menu, null, 2))
+        all_menus[index]['menu_button_ids'] = menu.sys_menu.map((o) => o.id)
+      }
+    }
+    let tree_menus = util_build_tree(all_menus)
+
+    return { code: 200, msg: '成功', result: { depart_tree: tree_menus, all_menus, tree_menus } }
   }
 
   @Api_Post('查询-用户-列表')
