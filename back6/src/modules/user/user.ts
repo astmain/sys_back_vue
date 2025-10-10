@@ -20,10 +20,17 @@ import { remove_ids_user } from './dto/remove_ids_user'
 export class user {
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user) {
+    // 查询用户
     const user = await db.sys_user.findFirst({ where: { id: body.id } })
+    // 查询菜单树
     const menu_list = await db.sys_menu.findMany({ where: { type: { in: ['menu'] } }, include: { children: true } })
     const menu_tree = util_build_tree(menu_list)
-    return { code: 200, msg: '成功', result: { user, menu_tree } }
+
+    // 查询用户部门角色ids
+    const user_role = await db.sys_user.findFirst({ where: { id: body.id }, include: { sys_depart: true } })
+    const user_depart_role_ids = user_role?.sys_depart?.map((item) => item.id) ?? []
+
+    return { code: 200, msg: '成功', result: { user, menu_tree, user_depart_role_ids } }
   }
 
   @Api_Post('查询-部门-树')
@@ -59,8 +66,8 @@ export class user {
   }
   @Api_Post('保存-用户')
   async save_user(@Body() body: save_user, @Req() req: any) {
-    let { depart_role_ids, ...data } = body
-    await db.sys_user.update({ where: { id: body.id }, data: { ...data, sys_depart: { set: depart_role_ids.map((id) => ({ id })) } } })
+    let { user_depart_role_ids, ...data } = body
+    await db.sys_user.update({ where: { id: body.id }, data: { ...data, sys_depart: { set: user_depart_role_ids.map((id) => ({ id })) } } })
     return { code: 200, msg: '成功', result: {} }
   }
 

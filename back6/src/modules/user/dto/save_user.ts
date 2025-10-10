@@ -26,5 +26,5 @@ export class save_user {
   @ApiProperty({ description: '部门id', example: 'depart_1' })
   @IsArray()
   @IsString({ each: true })
-  depart_role_ids: string[]
+  user_depart_role_ids: string[]
 }

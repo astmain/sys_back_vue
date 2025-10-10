@@ -14,13 +14,8 @@ import { util_build_tree } from '@src/plugins/util_build_tree'
 @Api_public()
 @Api_Controller('菜单管理')
 export class menu {
-  @Api_Post('新增-菜单')
-  async create_menu() {
-    return { code: 200, msg: '成功', result: {} }
-  }
   @Api_Post('查询-菜单树')
   async find_tree_menu() {
-    // let menu_tree = await db.sys_menu.findMany({ include: { children: true } })
     let menu_tree = await db.sys_menu.findMany()
     menu_tree = util_build_tree(menu_tree)
     return { code: 200, msg: '成功', result: { menu_tree } }

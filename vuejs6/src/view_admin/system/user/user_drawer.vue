@@ -23,8 +23,7 @@
       </el-form-item>
 
       <el-form-item label="部门树">
-        <!-- <el-tree :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox check-strictly :default-checked-keys="depart_menu_ids" /> -->
-        <el-tree ref="ElTreeRef" :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox :default-checked-keys="depart_role_ids" />
+        <el-tree ref="ElTreeRef" :data="BUS.depart_tree" node-key="id" :props="{ label: 'name' }" :default-expand-all="true" show-checkbox :default-checked-keys="user_depart_role_ids" />
       </el-form-item>
     </el-form>
 
@@ -42,16 +41,16 @@ import { ElMessage } from "element-plus"
 let drawer_show = ref(false)
 let drawer_title = ref("")
 let user = ref({} as any)
-let depart_role_ids = ref([])
+let user_depart_role_ids = ref([])
 let ElTreeRef = ref()
 
 // 打开交互窗口
 async function open(id: string) {
-  depart_role_ids.value = [] //清空选中的树节点
+  user_depart_role_ids.value = [] //清空选中的树节点
   let res: any = await api.user.find_one_user({ id })
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   console.log("res", res)
-  depart_role_ids.value = res.result.depart_role_ids
+  user_depart_role_ids.value = res.result.user_depart_role_ids
   user.value = res.result.user
   drawer_show.value = true
 }
@@ -66,7 +65,7 @@ async function submit() {
 
   // console.log("ids", ids)
   // 表单数据
-  let form = { id: user.value.id, name: user.value.name, phone: user.value.phone, gender: user.value.gender, remark: user.value.remark, depart_role_ids: ids }
+  let form = { id: user.value.id, name: user.value.name, phone: user.value.phone, gender: user.value.gender, remark: user.value.remark, user_depart_role_ids: ids }
 
   let res: any = await api.user.save_user(form)
   if (res.code != 200) return ElMessage.error(res.msg)

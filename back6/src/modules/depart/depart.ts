@@ -47,16 +47,11 @@ export class depart {
     // 查询菜单树
     let menu_tree = await db.sys_menu.findMany()
     menu_tree = util_build_tree(menu_tree)
-
     // 查询部门角色选中的节点
-    const role = await db.sys_depart.findUnique({
-      where: { id: body.role_id },
-      select: { sys_menu: { select: { id: true } } },
-    })
+    const role = await db.sys_depart.findUnique({ where: { id: body.role_id }, select: { sys_menu: { select: { id: true } } } })
     const checked_ids = role?.sys_menu?.map((o) => o.id) ?? []
     console.log('find_depart_menu---checked_ids', checked_ids)
-
-    return { code: 200, msg: '成功', result: { menu_tree ,checked_ids} }
+    return { code: 200, msg: '成功', result: { menu_tree, checked_ids } }
   }
 }
 
