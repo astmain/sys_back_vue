@@ -10,18 +10,13 @@ import _ from 'lodash'
 import { util_build_tree } from '@src/plugins/util_build_tree'
 
 // ==================== dto ====================
-import { add_depart } from './dto/add_depart'
 import { find_depart_menu } from './dto/find_depart_menu'
-import { update_depart_menu } from './dto/update_depart_menu'
+import { update_depart_role_menu } from './dto/update_depart_role_menu'
+import { create_depart_menu } from './dto/create_depart_menu'
 
 @Api_public()
 @Api_Controller('部门管理')
 export class depart {
-  @Api_Post('新增-部门')
-  async add_depart(@Body() body: add_depart) {
-    console.log('body', body)
-  }
-
   @Api_Post('菜单权限-部门树')
   async menu_premiss_tree() {
     console.log('menu_premiss_tree')
@@ -29,13 +24,16 @@ export class depart {
     menu_premiss_tree = util_build_tree(menu_premiss_tree)
     return { code: 200, msg: '成功', result: { menu_premiss_tree: menu_premiss_tree } }
   }
+  @Api_Post('新增-部门-菜单')
+  async create_depart_menu(@Body() body: create_depart_menu) {
 
-  @Api_Post('查询-菜单权限树')
-  async find_tree_menu_permiss(@Req() req: any) {}
+    return { code: 200, msg: '成功', result: {} }
+  }
 
-  @Api_Post('更新-部门-菜单')
-  async update_depart_menu(@Body() body: update_depart_menu) {
-    console.log('update_depart_menu---body---', body)
+
+  @Api_Post('更新-部门-角色-菜单')
+  async update_depart_role_menu(@Body() body: update_depart_role_menu) {
+    console.log('update_depart_role_menu---body---', body)
     let nodes_id = body.nodes_id.map((o) => ({ id: o }))
     await db.sys_depart.update({ where: { id: body.role_id }, data: { sys_menu: { set: nodes_id } } })
     return { code: 200, msg: '成功', result: {} }

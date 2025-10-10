@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsIn, IsNotEmpty, IsString } from 'class-validator'
 
-export class update_depart_menu {
+export class update_depart_role_menu {
   @ApiProperty({ description: '节点id', example: ['id1', 'id2'] })
   @IsArray()
   nodes_id: string[]

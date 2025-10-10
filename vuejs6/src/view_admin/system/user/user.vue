@@ -170,7 +170,7 @@ const menu_role_list = ref([
         const nodes = menu_tree_Ref.value.getCheckedNodes() //获取选中节点
         const nodes_id = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
         console.log("nodes_id", nodes_id)
-        let res: any = await api.depart.update_depart_menu({ role_id: ElTreeRefCurrNode.value.id, nodes_id })
+        let res: any = await api.depart.update_depart_role_menu({ role_id: ElTreeRefCurrNode.value.id, nodes_id })
         if (res.code != 200) return ElMessage.error(res.msg) //前置判断
         ElMessage.success(res.msg)
         depart_dialog_ref.value.show = false

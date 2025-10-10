@@ -6,10 +6,8 @@ export let api = {
   },
 
   depart: {
-    menu_premiss_tree: () => axios_api.post("/depart/menu_premiss_tree"),
-    find_tree_menu_permiss: () => axios_api.post("/depart/find_tree_menu_permiss"),
     find_depart_menu: ({ role_id }: { role_id: string }) => axios_api.post("/depart/find_depart_menu", { role_id }),
-    update_depart_menu: ({ role_id, nodes_id }: { role_id: string; nodes_id: string[] }) => axios_api.post("/depart/update_depart_menu", { role_id, nodes_id }),
+    update_depart_role_menu: ({ role_id, nodes_id }: { role_id: string; nodes_id: string[] }) => axios_api.post("/depart/update_depart_role_menu", { role_id, nodes_id }),
   },
 
   menu: {
