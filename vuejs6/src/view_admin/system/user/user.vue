@@ -75,7 +75,26 @@ const user_list = ref([] as any[])
 let finance_manage = ref(false)
 
 // 右键菜单当前列表
-const menu_curr_list = ref([] as any[])
+const menu_curr_list = ref([
+  {
+    label: "新增部门",
+    click: async (item: any) => {
+      ref_com_dialog_depart_create.value.title = item.label
+      ref_com_dialog_depart_create.value.tree_node_curr = ElTreeRefCurrNode.value
+      ref_com_dialog_depart_create.value.open()
+    },
+  },
+  {
+    label: "删除",
+    click: async (item: any) => {
+      if (!(await plugin_confirm())) return
+      let res: any = await api.depart.delete_depart_role_ids({ ids: [ElTreeRefCurrNode.value.id] })
+      if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+      ElMessage.success(res.msg)
+      tree_left_click()
+    },
+  },
+])
 
 const tree_depart = ref({
   data: [] as any[],
@@ -85,128 +104,6 @@ const tree_depart = ref({
 const tree_menu = ref([] as any[])
 
 // 右键菜单部门列表
-const menu_depart_list = ref([
-  {
-    label: "新增部门",
-    click: async (item: any) => {
-      ref_com_dialog_depart_create.value.title = item.label
-      ref_com_dialog_depart_create.value.tree_node_curr = ElTreeRefCurrNode.value
-      ref_com_dialog_depart_create.value.open()
-
-      console.log(111)
-    },
-  },
-  {
-    label: "编辑部门",
-    click: async (item: any) => {
-      depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.show = true
-      depart_dialog_ref.value.callback = function () {}
-
-      let form = $ref({ depart_parent_id: ElTreeRefCurrNode?.value?.id, depart_name: ElTreeRefCurrNode.value.name })
-
-      let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
-      tree_menu.value = res.result.menu_tree
-      depart_dialog_ref.value.render = () => {
-        return (
-          <el-form model={form} label-width="120px">
-            <el-form-item label={"父级id"} prop="parent_id">
-              <el-input v-model={form.depart_parent_id} disabled />
-            </el-form-item>
-            <el-form-item label={"部门名称"} prop="name">
-              <el-input v-model={form.depart_name} />
-            </el-form-item>
-            <el-form-item label="角色名称" prop="role">
-              <el-tree
-                show-checkbox
-                class="menu_tree_Ref"
-                ref={menu_tree_Ref}
-                style="width: 100%; height: auto; overflow: auto"
-                data={tree_menu.value}
-                props={{ label: "name" }}
-                node-key="id"
-                highlight-current
-                default-expand-all={true} //
-                v-slots={{
-                  default: ({ node, data }: { node: any; data: any }) => {
-                    if (data.type === "button") {
-                      return <div class="ok_button ">{data.name}</div>
-                    } else {
-                      return <div class="no_button font-bold text-base">{data.name}</div>
-                    }
-                  },
-                }}
-              ></el-tree>
-            </el-form-item>
-          </el-form>
-        )
-      }
-    },
-  },
-  {
-    label: "新增角色",
-    click: (item: any) => {
-      depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.show = true
-      depart_dialog_ref.value.callback = function () {
-        console.log("新增角色111")
-      }
-    },
-  },
-])
-
-// 右键菜单角色列表
-const menu_role_list = ref([
-  {
-    label: "编辑角色",
-    click: async (item: any) => {
-      depart_dialog_ref.value.title = item.label
-      depart_dialog_ref.value.show = true
-      depart_dialog_ref.value.callback = async function () {
-        const nodes = menu_tree_Ref.value.getCheckedNodes() //获取选中节点
-        const nodes_id = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
-        console.log("nodes_id", nodes_id)
-        let res: any = await api.depart.update_depart_role_menu({ role_id: ElTreeRefCurrNode.value.id, nodes_id })
-        if (res.code != 200) return ElMessage.error(res.msg) //前置判断
-        ElMessage.success(res.msg)
-        depart_dialog_ref.value.show = false
-      }
-
-      // 渲染表单
-      let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
-      tree_menu.value = res.result.menu_tree
-      let checked_ids = res.result.checked_ids
-      console.log("tree_menu", tree_menu.value)
-      depart_dialog_ref.value.render = () => {
-        return (
-          <div>
-            <el-tree
-              show-checkbox
-              class="menu_tree_Ref"
-              ref={menu_tree_Ref}
-              style="width: 100%; height: auto; overflow: auto"
-              data={tree_menu.value}
-              props={{ label: "name" }}
-              default-checked-keys={checked_ids}
-              node-key="id"
-              highlight-current
-              default-expand-all={true} //
-              v-slots={{
-                default: ({ node, data }: { node: any; data: any }) => {
-                  if (data.type === "button") {
-                    return <div class="ok_button ">{data.name}</div>
-                  } else {
-                    return <div class="no_button font-bold text-base">{data.name}</div>
-                  }
-                },
-              }}
-            ></el-tree>
-          </div>
-        )
-      }
-    },
-  },
-])
 
 // ✅用户管理树点击事件查询用户列表
 async function tree_left_click() {
@@ -224,7 +121,6 @@ function tree_ritht_click(event: MouseEvent, item: any) {
   event.preventDefault()
   Menu1Ref.value.show_menu(event)
   ElTreeRefCurrNode.value = item
-  menu_curr_list.value = item.is_depart ? menu_depart_list.value : menu_role_list.value
 }
 
 // ✅删除用户

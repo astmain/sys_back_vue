@@ -3,7 +3,6 @@ import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 
-
 import { db } from '@src/App_Prisma'
 import _ from 'lodash'
 
@@ -15,6 +14,8 @@ import { util_uuid9 } from '@src/plugins/util_uuid9'
 import { find_depart_menu } from './dto/find_depart_menu'
 import { update_depart_role_menu } from './dto/update_depart_role_menu'
 import { create_depart_menu } from './dto/create_depart_menu'
+import { create_list_depart_role_menu } from './dto/create_list_depart_role_menu'
+import { delete_depart_role_ids } from './dto/delete_depart_role_ids'
 
 @Api_public()
 @Api_Controller('部门管理')
@@ -33,7 +34,21 @@ export class depart {
     const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, is_depart: true } })
     // 创建角色
     const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: body.role_name, parent_id: depart.id, is_depart: false, sys_menu: { connect: body.menu_button_ids.map((o) => ({ id: o })) } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
 
+  @Api_Post('新增-部门-角色-菜单-列表')
+  async create_list_depart_role_menu(@Body() body: create_list_depart_role_menu) {
+    // console.log('create_depart_menu---body---', JSON.stringify(body, null, 2))
+    for (let item of body.role_list) {
+      /*创建部门*/ const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, is_depart: true } })
+      /*创建角色*/ const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: item.name, parent_id: depart.id, is_depart: false, sys_menu: { connect: item.menu_button_ids.map((o) => ({ id: o })) } } })
+    }
+    return { code: 200, msg: '成功', result: {} }
+  }
+  @Api_Post('删除-部门-角色')
+  async delete_depart_role_ids(@Body() body: delete_depart_role_ids) {
+    await db.sys_depart.deleteMany({ where: { id: { in: body.ids } } })
     return { code: 200, msg: '成功', result: {} }
   }
 

@@ -23,7 +23,7 @@ model sys_depart {
   primary   Boolean      @default(true) //主要部门
   parent_id String? // 自关联
   is_depart Boolean      @default(true) // 是否是组织，如果为false就相当于角色
-  parent    sys_depart?  @relation("self_sys_depart", fields: [parent_id], references: [id])
+  parent    sys_depart?  @relation("self_sys_depart", fields: [parent_id], references: [id], onDelete: Cascade)
   children  sys_depart[] @relation("self_sys_depart")
   sys_user  sys_user[]
   sys_menu  sys_menu[]

@@ -11,7 +11,7 @@
 
         <el-form-item v-for="(item, i) in form.role_list" :key="i" :label="`${i + 1}角色名称`">
           <el-input v-model="item.name" />
-          <el-tree show-checkbox :ref="item.ref_tree" style="width: 100%; height: 200px; overflow: auto" :data="tree_menu" :props="{ label: 'name' }" node-key="id" highlight-current default-expand-all>
+          <el-tree show-checkbox :ref="item.ref_tree" :class="item.ref_tree" style="width: 100%; height: 200px; overflow: auto" :data="tree_menu" :props="{ label: 'name' }" node-key="id" highlight-current default-expand-all>
             <template #default="{ node, data }">
               <div v-if="data.type === 'button'" class="ok_button">{{ data.name }}</div>
               <div v-else class="no_button font-bold text-base">{{ data.name }}</div>
@@ -39,19 +39,19 @@ let tree_menu = ref([]) //树状菜单
 
 let title = ref("") //标题
 let tree_node_curr: any = ref({}) //树状当前节点
-let form = $ref({ depart_parent_id: tree_node_curr.value?.id, depart_name: "", role_list: [{ name: "职员", ref_tree: ref(), menu_button_ids: [] }] })
+let form = $ref({ depart_parent_id: tree_node_curr.value?.id, depart_name: "", role_list: [{ name: "职员", ref_tree: "ref_tree", menu_button_ids: [] }] })
 let callback = $ref(async () => {}) //回调函数
 let render = $ref(() => <></>) // 渲染组件
 
 // 新增角色
 async function add_role() {
-  form.role_list.push({ name: `职员${new Date().getTime()}`, ref_tree: ref(), menu_button_ids: [] })
+  form.role_list.push({ name: `职员${new Date().getTime()}`, ref_tree: `ref_tree_${new Date().getTime()}`, menu_button_ids: [] })
 }
 
 // 提交保存
 async function open() {
   show.value = true
-  form = { depart_parent_id: tree_node_curr.value?.id, depart_name: "", role_list: [{ name: "职员", ref_tree: ref(), menu_button_ids: [] }] }
+  form = { depart_parent_id: tree_node_curr.value?.id, depart_name: `部门_${new Date().getTime()}`, role_list: [{ name: "职员", ref_tree: "ref_tree", menu_button_ids: [] }] }
 
   let res: any = await api.depart.find_depart_menu({ role_id: tree_node_curr.value.id })
   tree_menu.value = res.result.menu_tree
@@ -60,10 +60,25 @@ async function open() {
 // 提交保存
 async function submit() {
   for (let item of form.role_list) {
-    let nodes = item.ref_tree.value.getCheckedNodes()
-    console.log(nodes)
+    //@ts-ignore
+    let ctx = document.querySelector(`.${item.ref_tree}`).__vueParentComponent.ctx
+    item.menu_button_ids = ctx.getCheckedKeys()
+    const nodes = ctx.getCheckedNodes() //获取选中节点
+    item.menu_button_ids = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
   }
-  console.log(form)
+
+  let data = { depart_parent_id: form.depart_parent_id, depart_name: form.depart_name, role_list: form.role_list }
+  if (form.depart_parent_id.length < 1) return ElMessage.error("部门名称-必须要有")
+  if (form.depart_name.length < 1) return ElMessage.error("部门名称-必须要有")
+  for (let item of form.role_list) {
+    if (item.name.length < 1) return ElMessage.error("角色名称-必须要有")
+    if (item.menu_button_ids.length < 1) return ElMessage.error("菜单按钮-必须要有")
+  }
+
+  let res: any = await api.depart.create_list_depart_role_menu(data)
+  if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+  ElMessage.success(res.msg)
+  show.value = false
 }
 
 // 暴露方法给父组件调用
