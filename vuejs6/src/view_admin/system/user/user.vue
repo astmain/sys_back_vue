@@ -19,7 +19,12 @@
     </nav>
     <nav style="flex: 1; padding: 0 !important" class="uno_card">
       <el-table :data="user_list" style="width: 100%; height: 100%" show-overflow-tooltip stripe :header-cell-style="{ background: '#f4f4f5', color: '#606266' }">
-        <el-table-column type="index" width="66" label="序号" />
+        <el-table-column type="index" width="60" label="序号" />
+        <el-table-column prop="index" width="80" label="状态">
+          <template #default="scope">
+            <el-switch v-model="scope.row.status" inline-prompt active-text="启用" inactive-text="禁用" />
+          </template>
+        </el-table-column>
         <el-table-column prop="avatar" label="姓名" width="110">
           <template #default="scope">
             <div class="flex items-center gap-2">
@@ -28,9 +33,9 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="gender" label="性别" width="80" />
-        <el-table-column prop="phone" label="手机号" width="150" />
-        <el-table-column prop="full_depart_name" label="部门" width="auto" />
+        <el-table-column prop="gender" label="性别" width="60" />
+        <el-table-column prop="phone" label="手机号" width="120" />
+        <el-table-column prop="full_depart_name" label="部门" width="300" />
         <el-table-column label="操作" width="200">
           <template #default="scope">
             <el-button type="primary" link @click="user_drawer_ref.open(scope.row.id)">修改</el-button>

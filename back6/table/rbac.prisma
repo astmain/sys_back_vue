@@ -9,6 +9,9 @@ model sys_user {
   gender     String       @default("未知") //男,女,未知
   name       String
   remark     String       @default("")
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+  status     Boolean      @default(true)
   sys_depart sys_depart[]
 }
 
