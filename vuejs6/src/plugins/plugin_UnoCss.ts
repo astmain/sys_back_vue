@@ -1,3 +1,3 @@
 import "uno.css"
 
-export const plugin_UnoCss = ({ app }: { app: any }) => {}
+export const plugin_UnoCss = async ({ app }: { app: any }) => {}

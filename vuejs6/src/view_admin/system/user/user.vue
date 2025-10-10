@@ -22,7 +22,7 @@
         <el-table-column type="index" width="60" label="序号" />
         <el-table-column prop="index" width="80" label="状态">
           <template #default="scope">
-            <el-switch v-model="scope.row.status" inline-prompt active-text="启用" inactive-text="禁用" />
+            <el-switch size="" v-model="scope.row.status" inline-prompt active-text="启用" inactive-text="禁用" />
           </template>
         </el-table-column>
         <el-table-column prop="avatar" label="姓名" width="110">
