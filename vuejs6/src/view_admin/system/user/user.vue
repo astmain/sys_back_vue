@@ -67,15 +67,14 @@ const user_drawer_ref = ref()
 const Menu1Ref = ref()
 const depart_dialog_ref = ref()
 const ElTreeRef = ref()
-const menu_tree_Ref = ref()
 const ref_com_dialog_depart_create = ref()
 // ==================== 响应式数据 ====================
 const ElTreeRefCurrNode = ref()
 const user_list = ref([] as any[])
-let finance_manage = ref(false)
-
 // 右键菜单当前列表
-const menu_curr_list = ref([
+const menu_curr_list = ref([] as any[])
+// 右键菜单部门角色列表
+const menu_depart_role_list = ref([
   {
     label: "新增部门",
     click: async (item: any) => {
@@ -91,7 +90,7 @@ const menu_curr_list = ref([
       let res: any = await api.depart.delete_depart_role_ids({ ids: [ElTreeRefCurrNode.value.id] })
       if (res.code != 200) return ElMessage.error(res.msg) //前置判断
       ElMessage.success(res.msg)
-      tree_left_click()
+      await find_tree_depart()
     },
   },
 ])
@@ -100,10 +99,6 @@ const tree_depart = ref({
   data: [] as any[],
   currentNodeKey: undefined,
 })
-
-const tree_menu = ref([] as any[])
-
-// 右键菜单部门列表
 
 // ✅用户管理树点击事件查询用户列表
 async function tree_left_click() {
@@ -121,6 +116,7 @@ function tree_ritht_click(event: MouseEvent, item: any) {
   event.preventDefault()
   Menu1Ref.value.show_menu(event)
   ElTreeRefCurrNode.value = item
+  menu_curr_list.value = item.is_depart ? menu_depart_role_list.value : menu_depart_role_list.value.filter((item: any) => item.label == "删除")
 }
 
 // ✅删除用户
@@ -129,14 +125,6 @@ async function remove_ids_user(ids: string[]) {
   let res: any = await api.user.remove_ids_user({ ids })
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   tree_left_click()
-}
-
-function btn_click(data: any, field: any) {
-  if (data[field]) {
-    data[field] = !data[field]
-  } else {
-    data[field] = true
-  }
 }
 
 // ✅查询部门树
