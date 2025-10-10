@@ -8,6 +8,7 @@ export let api = {
   depart: {
     find_depart_menu: ({ role_id }: { role_id: string }) => axios_api.post("/depart/find_depart_menu", { role_id }),
     update_depart_role_menu: ({ role_id, nodes_id }: { role_id: string; nodes_id: string[] }) => axios_api.post("/depart/update_depart_role_menu", { role_id, nodes_id }),
+    create_depart_menu: ({ depart_parent_id, depart_name, role_name, menu_button_ids }: { depart_parent_id: string; depart_name: string; role_name: string; menu_button_ids: string[] }) => axios_api.post("/depart/create_depart_menu", { depart_parent_id, depart_name, role_name, menu_button_ids }),
   },
 
   menu: {

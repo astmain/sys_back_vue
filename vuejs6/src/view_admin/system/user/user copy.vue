@@ -48,7 +48,6 @@
   <user_drawer ref="user_drawer_ref" />
   <Menu1 ref="Menu1Ref" :menu_list="menu_curr_list" />
   <depart_dialog ref="depart_dialog_ref" />
-  <com_dialog_depart_create ref="ref_com_dialog_depart_create" />
 </template>
 
 <script setup lang="tsx">
@@ -60,7 +59,6 @@ import { dividerProps, ElMessage } from "element-plus"
 import user_drawer from "./user_drawer.vue"
 import depart_dialog from "./depart_dialog.vue"
 import Menu1 from "./Menu1.vue"
-import com_dialog_depart_create from "./com_dialog_depart_create.vue"
 
 // ==================== 元素绑定ref ====================
 const user_drawer_ref = ref()
@@ -68,7 +66,6 @@ const Menu1Ref = ref()
 const depart_dialog_ref = ref()
 const ElTreeRef = ref()
 const menu_tree_Ref = ref()
-const ref_com_dialog_depart_create = ref()
 // ==================== 响应式数据 ====================
 const ElTreeRefCurrNode = ref()
 const user_list = ref([] as any[])
@@ -89,21 +86,23 @@ const menu_depart_list = ref([
   {
     label: "新增部门",
     click: async (item: any) => {
-      ref_com_dialog_depart_create.value.title = item.label
-      ref_com_dialog_depart_create.value.tree_node_curr = ElTreeRefCurrNode.value
-      ref_com_dialog_depart_create.value.open()
-
-      console.log(111)
-    },
-  },
-  {
-    label: "编辑部门",
-    click: async (item: any) => {
-      depart_dialog_ref.value.title = item.label
       depart_dialog_ref.value.show = true
-      depart_dialog_ref.value.callback = function () {}
-
-      let form = $ref({ depart_parent_id: ElTreeRefCurrNode?.value?.id, depart_name: ElTreeRefCurrNode.value.name })
+      depart_dialog_ref.value.title = item.label
+      let form = $ref({ depart_parent_id: ElTreeRefCurrNode?.value?.id, depart_name: "", role_name: "职员", menu_button_ids: [] })
+      depart_dialog_ref.value.callback = async function () {
+        const nodes = menu_tree_Ref.value.getCheckedNodes() // 获取选中节点
+        form.menu_button_ids = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) // 获取选中节点的id
+        // 判断参数是否正确
+        console.log("form", form)
+        if (form.depart_parent_id.length < 1) return ElMessage.error("部门名称-必须要有")
+        if (form.depart_name.length < 1) return ElMessage.error("部门名称-必须要有")
+        if (form.role_name.length < 1) return ElMessage.error("部门名称-必须要有")
+        if (form.menu_button_ids.length < 1) return ElMessage.error("菜单按钮-必须要有")
+        // 请求接口
+        let res: any = await api.depart.create_depart_menu(form)
+        if (res.code != 200) return ElMessage.error(res.msg) //前置判断
+        depart_dialog_ref.value.show = false
+      }
 
       let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
       tree_menu.value = res.result.menu_tree
@@ -116,7 +115,10 @@ const menu_depart_list = ref([
             <el-form-item label={"部门名称"} prop="name">
               <el-input v-model={form.depart_name} />
             </el-form-item>
-            <el-form-item label="角色名称" prop="role">
+
+            <el-form-item label={"角色名称"} prop="role">
+              <el-input v-model={form.role_name} />
+
               <el-tree
                 show-checkbox
                 class="menu_tree_Ref"
@@ -138,6 +140,61 @@ const menu_depart_list = ref([
                 }}
               ></el-tree>
             </el-form-item>
+          </el-form>
+        )
+      }
+    },
+  },
+  {
+    label: "编辑部门",
+    click: async (item: any) => {
+      depart_dialog_ref.value.title = item.label
+      depart_dialog_ref.value.show = true
+      depart_dialog_ref.value.callback = function () {
+        console.log("新增部门111")
+      }
+
+      let form = $ref({ depart_parent_id: ElTreeRefCurrNode?.value?.id, depart_name: ElTreeRefCurrNode.value.name })
+
+      let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
+      tree_menu.value = res.result.menu_tree
+      depart_dialog_ref.value.render = () => {
+        return (
+          <el-form model={form} label-width="120px">
+            <el-form-item label={"父级id"} prop="parent_id">
+              <el-input v-model={form.depart_parent_id} disabled />
+            </el-form-item>
+            <el-form-item label={"部门名称"} prop="name">
+              <el-input v-model={form.depart_name} />
+            </el-form-item>
+
+  
+
+          <el-form-item label="角色名称" prop="role">
+             <el-tree
+                show-checkbox
+                class="menu_tree_Ref"
+                ref={menu_tree_Ref}
+                style="width: 100%; height: auto; overflow: auto"
+                data={tree_menu.value}
+                props={{ label: "name" }}
+                node-key="id"
+                highlight-current
+                default-expand-all={true} //
+                v-slots={{
+                  default: ({ node, data }: { node: any; data: any }) => {
+                    if (data.type === "button") {
+                      return <div class="ok_button ">{data.name}</div>
+                    } else {
+                      return <div class="no_button font-bold text-base">{data.name}</div>
+                    }
+                  },
+                }}
+              ></el-tree>
+        
+            </el-form-item>
+
+     
           </el-form>
         )
       }

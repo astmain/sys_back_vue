@@ -3,7 +3,6 @@
     <template #footer>
       <el-button type="primary" @click="submit">确定</el-button>
     </template>
-
     <render></render>
   </el-dialog>
 </template>

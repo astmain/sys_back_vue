@@ -1,0 +1,81 @@
+<template>
+  <el-dialog v-model="show" :title="title || '未设置标题'" width="900" height="900" top="20px" draggable :close-on-click-modal="false">
+    <div style="height: 500px; overflow: auto; padding-right: 20px">
+      <el-form label-width="120px">
+        <el-form-item label="父级id" prop="parent_id">
+          <el-input v-model="form.depart_parent_id" disabled />
+        </el-form-item>
+        <el-form-item label="部门名称" prop="name">
+          <el-input v-model="form.depart_name" />
+        </el-form-item>
+
+        <el-form-item v-for="(item, i) in form.role_list" :key="i" :label="`${i + 1}角色名称`">
+          <el-input v-model="item.name" />
+          <el-tree show-checkbox :ref="item.ref_tree" style="width: 100%; height: 200px; overflow: auto" :data="tree_menu" :props="{ label: 'name' }" node-key="id" highlight-current default-expand-all>
+            <template #default="{ node, data }">
+              <div v-if="data.type === 'button'" class="ok_button">{{ data.name }}</div>
+              <div v-else class="no_button font-bold text-base">{{ data.name }}</div>
+            </template>
+          </el-tree>
+        </el-form-item>
+      </el-form>
+
+      <el-button type="primary" @click="add_role">新增角色</el-button>
+    </div>
+
+    <template #footer>
+      <el-button type="primary" @click="submit">确定</el-button>
+    </template>
+  </el-dialog>
+</template>
+
+<script setup lang="tsx">
+import { ref } from "vue"
+import { BUS } from "@/BUS"
+import { api } from "@/api"
+import { ElMessage } from "element-plus"
+let show = ref(false) //显示隐藏
+let tree_menu = ref([]) //树状菜单
+
+let title = ref("") //标题
+let tree_node_curr: any = ref({}) //树状当前节点
+let form = $ref({ depart_parent_id: tree_node_curr.value?.id, depart_name: "", role_list: [{ name: "职员", ref_tree: ref(), menu_button_ids: [] }] })
+let callback = $ref(async () => {}) //回调函数
+let render = $ref(() => <></>) // 渲染组件
+
+// 新增角色
+async function add_role() {
+  form.role_list.push({ name: `职员${new Date().getTime()}`, ref_tree: ref(), menu_button_ids: [] })
+}
+
+// 提交保存
+async function open() {
+  show.value = true
+  form = { depart_parent_id: tree_node_curr.value?.id, depart_name: "", role_list: [{ name: "职员", ref_tree: ref(), menu_button_ids: [] }] }
+
+  let res: any = await api.depart.find_depart_menu({ role_id: tree_node_curr.value.id })
+  tree_menu.value = res.result.menu_tree
+}
+
+// 提交保存
+async function submit() {
+  for (let item of form.role_list) {
+    let nodes = item.ref_tree.value.getCheckedNodes()
+    console.log(nodes)
+  }
+  console.log(form)
+}
+
+// 暴露方法给父组件调用
+defineExpose({ show, title, open, submit, callback, render, tree_node_curr })
+</script>
+
+<style>
+.el-tree-node__children:has(.ok_button) {
+  display: flex !important;
+}
+
+.el-tree-node__children:has(.no_button) {
+  display: block !important;
+}
+</style>

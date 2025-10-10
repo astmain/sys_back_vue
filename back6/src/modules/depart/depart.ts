@@ -3,11 +3,13 @@ import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 
+
 import { db } from '@src/App_Prisma'
 import _ from 'lodash'
 
 // ==================== 插件 ====================
 import { util_build_tree } from '@src/plugins/util_build_tree'
+import { util_uuid9 } from '@src/plugins/util_uuid9'
 
 // ==================== dto ====================
 import { find_depart_menu } from './dto/find_depart_menu'
@@ -26,10 +28,14 @@ export class depart {
   }
   @Api_Post('新增-部门-菜单')
   async create_depart_menu(@Body() body: create_depart_menu) {
+    console.log('create_depart_menu---body---', body)
+    // 创建部门
+    const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, is_depart: true } })
+    // 创建角色
+    const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: body.role_name, parent_id: depart.id, is_depart: false, sys_menu: { connect: body.menu_button_ids.map((o) => ({ id: o })) } } })
 
     return { code: 200, msg: '成功', result: {} }
   }
-
 
   @Api_Post('更新-部门-角色-菜单')
   async update_depart_role_menu(@Body() body: update_depart_role_menu) {
