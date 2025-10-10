@@ -35,6 +35,8 @@ import { ref } from "vue"
 import { BUS } from "@/BUS"
 import { api } from "@/api"
 import { ElMessage } from "element-plus"
+import { util_uuid9 } from "@/plugins/util_uuid9"
+
 let show = ref(false) //显示隐藏
 let tree_menu = ref([]) //树状菜单
 
@@ -46,7 +48,7 @@ let render = $ref(() => <></>) // 渲染组件
 
 // 新增角色
 async function add_role() {
-  form.role_list.push({ name: `职员${new Date().getTime()}`, id: `ref_tree_${new Date().getTime()}`, kind: "create", menu_button_ids: [] })
+  form.role_list.push({ name: `职员${new Date().getTime()}`, id: `role_${util_uuid9()}`, kind: "create", menu_button_ids: [] })
 }
 
 // 提交保存
@@ -87,7 +89,6 @@ async function submit() {
   ElMessage.success(res.msg)
   show.value = false
   BUS.func.find_tree_depart()
-
 }
 
 // 暴露方法给父组件调用
