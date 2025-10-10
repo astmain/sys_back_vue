@@ -8,7 +8,6 @@ import { ElButton } from "element-plus"
 import JSZip from "jszip"
 
 let zip_name = "我的下载.zip"
-
 let list_img_name = "主图"
 let list_img = $ref([
   {
@@ -24,7 +23,6 @@ let list_img = $ref([
     size_format: "91.72 KB",
   },
 ])
-
 let list_video_name = "视频"
 let list_video = [
   {
@@ -39,16 +37,13 @@ const click_download = async () => {
   // 需要先安装 jszip: pnpm add jszip
   const zip = new JSZip()
 
-
-  // 调用main
   await tool_zip_dir_children(list_img_name, list_img)
   await tool_zip_dir_children(list_video_name, list_video)
   await tool_zip_download(zip)
 
-
   // 工具方法zip文件夹
   async function tool_zip_dir_children(dir_name: string, list_children: any[]) {
-    const dir = zip.folder(dir_name)
+    const dir = zip.folder(list_img_name)
     for (const item of list_children) {
       try {
         const response = await fetch(item.url)
