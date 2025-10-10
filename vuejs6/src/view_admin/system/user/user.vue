@@ -86,80 +86,54 @@ const menu_depart_list = ref([
   {
     label: "新增部门",
     click: async (item: any) => {
-      let res: any = await api.depart.menu_premiss_tree()
-      if (res.code != 200) return ElMessage.error(res.msg) //前置判断
-      console.log("api.depart.menu_premiss_tree---res", res)
-
-      // find_tree_menu_permiss
-      let res2: any = await api.depart.find_tree_menu_permiss()
-      console.log(`111---res2:`, res2)
-      tree_menu.value = res2.result.menu_premiss_tree
-
       depart_dialog_ref.value.show = true
       depart_dialog_ref.value.title = item.label
       let form = ref({ name: "", parent_id: ElTreeRefCurrNode?.value?.id, role: "职员" })
+
+      let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
+      tree_menu.value = res.result.menu_tree
       depart_dialog_ref.value.render = () => {
         return (
           <el-form model={form.value} label-width="120px">
             <el-form-item label={"父级id"} prop="parent_id">
-              <el-input v-model={form.value.parent_id} />
+              <el-input v-model={form.value.parent_id} disabled />
             </el-form-item>
             <el-form-item label={"部门名称"} prop="name">
               <el-input v-model={form.value.name} />
             </el-form-item>
 
-            <el-form-item label={"角色名称"} prop="role1">
+            <el-form-item label={"角色名称"} prop="role">
               <el-input v-model={form.value.role} />
-            </el-form-item>
 
-            <>
               <el-tree
-                class="tree_menu"
-                ref="TreeMenuRef"
-                style="width:100%; height: auto; overflow: auto"
+                show-checkbox
+                class="menu_tree_Ref"
+                ref={menu_tree_Ref}
+                style="width: 100%; height: auto; overflow: auto"
                 data={tree_menu.value}
                 props={{ label: "name" }}
                 node-key="id"
                 highlight-current
-                expand-on-click-node={false}
-                default-expand-all
+                default-expand-all={true} //
                 v-slots={{
                   default: ({ node, data }: { node: any; data: any }) => {
-                    return (
-                      <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "14px", paddingRight: "8px" }}>
-                        <span>{data.name}</span>
-
-                        {data.type === "dir" ||
-                          (data.type === "menu" && (
-                            <div style={{ display: "flex", gap: "20px" }}>
-                              <div class={`btn_normal ${data.is_view ? "btn_active" : ""}`} onClick={() => btn_click(data, "is_view")}>
-                                显示
-                              </div>
-                              <div class={`btn_normal ${data.is_save ? "btn_active" : ""}`} onClick={() => btn_click(data, "is_save")}>
-                                保存
-                              </div>
-                              <div class={`btn_normal ${data.is_del ? "btn_active" : ""}`} onClick={() => btn_click(data, "is_del")}>
-                                删除
-                              </div>
-
-                              <div class={`btn_normal ${data.is_find ? "btn_active" : ""}`} onClick={() => btn_click(data, "is_find")}>
-                                查询
-                              </div>
-                            </div>
-                          ))}
-                      </div>
-                    )
+                    if (data.type === "button") {
+                      return <div class="ok_button ">{data.name}</div>
+                    } else {
+                      return <div class="no_button font-bold text-base">{data.name}</div>
+                    }
                   },
                 }}
               ></el-tree>
-            </>
+            </el-form-item>
           </el-form>
         )
       }
-      depart_dialog_ref.value.callback = function () {
-        console.log("新增部门111")
-        console.log("form", form.value)
-        console.log("tree_menu", tree_menu.value)
+      depart_dialog_ref.value.callback = async function () {
+        const nodes = menu_tree_Ref.value.getCheckedNodes() //获取选中节点
+        const nodes_id = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
+        console.log("nodes_id", nodes_id)
+        // let res: any = await api.depart.update_depart_menu({ role_id: ElTreeRefCurrNode.value.id, nodes_id })
       }
     },
   },
@@ -167,9 +141,7 @@ const menu_depart_list = ref([
     label: "编辑部门",
     click: (item: any) => {
       depart_dialog_ref.value.title = item.label
-
       depart_dialog_ref.value.show = true
-
       depart_dialog_ref.value.callback = function () {
         console.log("新增部门111")
       }
@@ -206,11 +178,9 @@ const menu_role_list = ref([
 
       // 渲染表单
       let res: any = await api.depart.find_depart_menu({ role_id: ElTreeRefCurrNode.value.id })
-
       tree_menu.value = res.result.menu_tree
       let checked_ids = res.result.checked_ids
       console.log("tree_menu", tree_menu.value)
-
       depart_dialog_ref.value.render = () => {
         return (
           <div>
