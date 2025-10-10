@@ -23,7 +23,8 @@ export const use_BUS = defineStore("localStorage_BUS", {
 
     // 全局api
     func: {
-      tree_left_click: () => {}, //让tree_left_click是一个函数
+      tree_left_click: () => {}, 
+      find_tree_depart: () => {},
     },
   }),
   persist: [

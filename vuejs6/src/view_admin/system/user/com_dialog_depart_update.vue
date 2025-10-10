@@ -59,27 +59,7 @@ async function open() {
 
 // 提交保存
 async function submit() {
-  for (let item of form.role_list) {
-    //@ts-ignore
-    let ctx = document.querySelector(`.${item.ref_tree}`).__vueParentComponent.ctx
-    item.menu_button_ids = ctx.getCheckedKeys()
-    const nodes = ctx.getCheckedNodes() //获取选中节点
-    item.menu_button_ids = nodes.map((item: any) => (item.type === "button" ? item.id : undefined)).filter((item: any) => item !== undefined) //获取选中节点的id
-  }
 
-  let data = { depart_parent_id: form.depart_parent_id, depart_name: form.depart_name, role_list: form.role_list }
-  if (form.depart_parent_id.length < 1) return ElMessage.error("部门名称-必须要有")
-  if (form.depart_name.length < 1) return ElMessage.error("部门名称-必须要有")
-  for (let item of form.role_list) {
-    if (item.name.length < 1) return ElMessage.error("角色名称-必须要有")
-    if (item.menu_button_ids.length < 1) return ElMessage.error("菜单按钮-必须要有")
-  }
-
-  let res: any = await api.depart.create_list_depart_role_menu(data)
-  if (res.code != 200) return ElMessage.error(res.msg) //前置判断
-  ElMessage.success(res.msg)
-  show.value = false
-  BUS.func.find_tree_depart()
 }
 
 // 暴露方法给父组件调用

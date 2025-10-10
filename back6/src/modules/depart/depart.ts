@@ -31,9 +31,9 @@ export class depart {
   async create_depart_menu(@Body() body: create_depart_menu) {
     console.log('create_depart_menu---body---', body)
     // 创建部门
-    const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, is_depart: true } })
+    const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, type: "depart" } })
     // 创建角色
-    const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: body.role_name, parent_id: depart.id, is_depart: false, sys_menu: { connect: body.menu_button_ids.map((o) => ({ id: o })) } } })
+    const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: body.role_name, parent_id: depart.id, type: "role", sys_menu: { connect: body.menu_button_ids.map((o) => ({ id: o })) } } })
     return { code: 200, msg: '成功', result: {} }
   }
 
@@ -41,8 +41,8 @@ export class depart {
   async create_list_depart_role_menu(@Body() body: create_list_depart_role_menu) {
     // console.log('create_depart_menu---body---', JSON.stringify(body, null, 2))
     for (let item of body.role_list) {
-      /*创建部门*/ const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, is_depart: true } })
-      /*创建角色*/ const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: item.name, parent_id: depart.id, is_depart: false, sys_menu: { connect: item.menu_button_ids.map((o) => ({ id: o })) } } })
+      /*创建部门*/ const depart = await db.sys_depart.create({ data: { id: `depart_${util_uuid9()}`, name: body.depart_name, parent_id: body.depart_parent_id, type: "depart" } })
+      /*创建角色*/ const role = await db.sys_depart.create({ data: { id: `role_${util_uuid9()}`, name: item.name, parent_id: depart.id, type: "role", sys_menu: { connect: item.menu_button_ids.map((o) => ({ id: o })) } } })
     }
     return { code: 200, msg: '成功', result: {} }
   }

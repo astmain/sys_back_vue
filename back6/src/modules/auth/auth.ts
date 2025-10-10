@@ -42,20 +42,20 @@ export class auth {
       await db.sys_depart.createMany({
         data: [
           // 总公司
-          { id: 'depart_0', name: '总公司', is_depart: true, remark: '' },
+          { id: 'depart_0', name: '总公司', type: 'company', remark: '' },
           // 部门
-          { id: 'depart_1', name: '客户部', is_depart: true, parent_id: 'depart_0', remark: '' },
-          { id: 'depart_2', name: '技术部', is_depart: true, parent_id: 'depart_0', remark: '' },
-          { id: 'depart_3', name: '财务部', is_depart: true, parent_id: 'depart_0', remark: '' },
+          { id: 'depart_1', name: '客户部', type: 'depart', parent_id: 'depart_0', remark: '' },
+          { id: 'depart_2', name: '技术部', type: 'depart', parent_id: 'depart_0', remark: '' },
+          { id: 'depart_3', name: '财务部', type: 'depart', parent_id: 'depart_0', remark: '' },
           //
-          { id: 'role_1001', name: '客户普通', is_depart: false, parent_id: 'depart_1', remark: '' },
-          { id: 'role_1002', name: '客户高级', is_depart: false, parent_id: 'depart_1', remark: '' },
+          { id: 'role_1001', name: '客户普通', type: 'role', parent_id: 'depart_1', remark: '' },
+          { id: 'role_1002', name: '客户高级', type: 'role', parent_id: 'depart_1', remark: '' },
           // 技术部角色
-          { id: 'role_2001', name: '技术职员', is_depart: false, parent_id: 'depart_2', remark: '' },
-          { id: 'role_2002', name: '技术主管', is_depart: false, parent_id: 'depart_2', remark: '' },
+          { id: 'role_2001', name: '技术职员', type: 'role', parent_id: 'depart_2', remark: '' },
+          { id: 'role_2002', name: '技术主管', type: 'role', parent_id: 'depart_2', remark: '' },
           // 财务部角色
-          { id: 'role_3001', name: '财务职员', is_depart: false, parent_id: 'depart_3', remark: '' },
-          { id: 'role_3002', name: '财务主管', is_depart: false, parent_id: 'depart_3', remark: '' },
+          { id: 'role_3001', name: '财务职员', type: 'role', parent_id: 'depart_3', remark: '' },
+          { id: 'role_3002', name: '财务主管', type: 'role', parent_id: 'depart_3', remark: '' },
         ],
       })
 
@@ -177,7 +177,7 @@ export class auth {
 
       return { code: 200, msg: '成功:数据库初始化完成', result: {} }
     } catch (error) {
-      return { code: 400, msg: '失败:初始化', result: {} }
+      return { code: 400, msg: '失败:初始化', result: { error } }
     } finally {
       await db.$disconnect()
     }

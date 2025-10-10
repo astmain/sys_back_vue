@@ -83,6 +83,15 @@ const menu_depart_role_list = ref([
       ref_com_dialog_depart_create.value.open()
     },
   },
+
+  {
+    label: "修改部门",
+    click: async (item: any) => {
+      ref_com_dialog_depart_create.value.title = item.label
+      ref_com_dialog_depart_create.value.tree_node_curr = ElTreeRefCurrNode.value
+      ref_com_dialog_depart_create.value.open()
+    },
+  },
   {
     label: "删除",
     click: async (item: any) => {
@@ -116,7 +125,16 @@ function tree_ritht_click(event: MouseEvent, item: any) {
   event.preventDefault()
   Menu1Ref.value.show_menu(event)
   ElTreeRefCurrNode.value = item
-  menu_curr_list.value = item.is_depart ? menu_depart_role_list.value : menu_depart_role_list.value.filter((item: any) => item.label == "删除")
+  if (item.type === "company") {
+    menu_curr_list.value = menu_depart_role_list.value.filter((item: any) => item.label == "新增部门")
+  } else if (item.type === "depart") {
+    menu_curr_list.value = menu_depart_role_list.value.filter((item: any) => item.label == "删除"  ||  item.label == "修改部门" )
+  } else if (item.type === "role") {
+    menu_curr_list.value = menu_depart_role_list.value.filter((item: any) => item.label == "删除")
+  } else {
+    ElMessage.error("没有找到类型")
+    console.log("没有找到类型", item)
+  }
 }
 
 // ✅删除用户
@@ -128,6 +146,7 @@ async function remove_ids_user(ids: string[]) {
 }
 
 // ✅查询部门树
+BUS.func.find_tree_depart = find_tree_depart //全局BUS函数
 async function find_tree_depart() {
   let res: any = await api.user.find_tree_depart()
   console.log("api.user.find_tree_depart---res", res)
