@@ -21,23 +21,33 @@ export class user {
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user) {
     // 查询用户
-    const /*用户信息*/ user = await db.sys_user.findFirst({ where: { id: body.id } })
-
+    const user = await db.sys_user.findFirst({ where: { id: body.id } })
+    // // 查询菜单树
+    // const menu_list = await db.sys_menu.findMany({ where: { type: { in: ['menu'] } }, include: { children: true } })
+    // const menu_tree = util_build_tree(menu_list)
     // 查询用户部门角色ids
-    const /*用户的角色列表*/ user_role = await db.sys_user.findFirst({ where: { id: body.id }, include: { sys_depart: true } })
-    const /*用户部角色ids*/ user_depart_role_ids = user_role?.sys_depart?.map((item) => item.id) ?? []
+    const user_role = await db.sys_user.findFirst({ where: { id: body.id }, include: { sys_depart: true } })
+    const user_depart_role_ids = user_role?.sys_depart?.map((item) => item.id) ?? []
 
-    //查询角色对应的菜单信息
-    const /*角色的权限列表*/ role_permiss_list = await db.sys_menu.findMany({ where: { sys_depart: { some: { id: { in: user_depart_role_ids } } } } })
-    const /*角色的权限列表ids*/ role_permiss_ids = role_permiss_list.map((o) => o.id)
-    const /*角色的菜单和权限父级和自身的ids */ menu_permiss_ids = await db_find_ids_self_and_parent({ table_name: 'sys_menu', ids: role_permiss_ids })
-    const /*角色的菜单和权限列表*/ role_menu_permiss_list = await db.sys_menu.findMany({ where: { id: { in: menu_permiss_ids } } })
-    const /*角色的菜单树*/ role_menu_tree = util_build_tree(role_menu_permiss_list.filter((o) => o.type === 'menu'))
+    //查询角色 "role_1001","role_2001"对于的菜单
+    //查询菜单 对于的角色"role_1001","role_2001"
 
-    // 全部的菜单信息
-    const /*全部的菜单列表*/ all_menu_list = await db.sys_menu.findMany({ include: { children: true } })
-    const /*全部的菜单树*/ all_menu_tree = util_build_tree(all_menu_list.filter((o) => o.type === 'menu'))
-    return { code: 200, msg: '成功', result: { user, user_depart_role_ids, role_menu_tree, all_menu_tree } }
+    const menu_role_data = await db.sys_menu.findMany({
+      where: {
+        sys_depart: {
+          some: {
+            id: { in: ['role_1001', 'role_2001'] },
+          },
+        },
+      },
+    })
+
+    let all_menu_ids = await db_find_ids_self_and_parent({ table_name: 'sys_menu', ids: menu_role_data.map((o) => o.id) })
+    const all_menu_list = await db.sys_menu.findMany({ where: { id: { in: all_menu_ids } } })
+
+    const menu_tree = util_build_tree(all_menu_list)
+
+    return { code: 200, msg: '成功', result: { user, menu_tree, user_depart_role_ids, menu_role_data, all_menu_ids, all_menu_list } }
   }
 
   @Api_Post('查询-部门-树')

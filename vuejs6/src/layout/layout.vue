@@ -15,7 +15,7 @@
         <div style="display: flex; align-items: center; gap: 10px; justify-content: center">
           <el-button :type="BUS.web_type === 'shop' ? 'primary' : ''" @click="handle_switch_shop"> shop</el-button>
           <el-button :type="BUS.web_type === 'admin' ? 'primary' : ''" @click="handle_switch_admin"> admin</el-button>
-          <div style="width: 100px; text-align: center">{{ username }}</div>
+          <div style="width: 100px; text-align: center">{{ BUS?.user?.phone || "无" }}</div>
           <el-button link @click="handle_logout">退出</el-button>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <el-aside width="200px" style="background: #304156; height: 100%" class="admin_aside">
           <el-menu :default-active="active_menu" style="border: none" router background-color="#304156" text-color="#bfcbd9" active-text-color="#409eff">
             <!-- 动态渲染 view_admin 菜单 -->
-            <template v-for="item in BUS.menu_tree" :key="item.path">
+            <template v-for="item in BUS.role_menu_tree" :key="item.path">
               <!-- 如果有子菜单 -->
               <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
                 <template #title>
@@ -68,9 +68,6 @@ import { BUS } from "@/BUS"
 
 import /*组件*/ env_control from "./env_control.vue"
 
-// 响应式数据
-const username = ref<string>(localStorage.getItem("username") || "用户")
-
 // 路由
 const router = useRouter()
 const route = useRoute()
@@ -78,20 +75,21 @@ const route = useRoute()
 // 计算属性
 const active_menu = computed(() => route.path)
 
-// 方法
+// ✅切换商城
 const handle_switch_shop = (): void => {
   BUS.web_type = "shop"
   router.push("/print_3d")
 }
 
+// ✅切换admin
 const handle_switch_admin = (): void => {
   BUS.web_type = "admin"
   router.push("/home")
 }
 
-const handle_logout = (): void => {
-  localStorage.removeItem("token")
-  localStorage.removeItem("username")
+// ✅退出
+function handle_logout() {
+  BUS.token = ""
   localStorage.removeItem("current_layout")
   ElMessage.success("已退出登录")
   router.push("/login")

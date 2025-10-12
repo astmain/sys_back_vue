@@ -5,8 +5,8 @@ export const use_BUS = defineStore("localStorage_BUS", {
     count: 0,
     control_button: { show: true, top: 500, left: 100 },
     web_type: "admin",
-    menu_tree: [] as any[],
-    user: {},
+    role_menu_tree: [] as any[],
+    user: { name: "", phone: "" },
     depart_tree: [] as any[],
     VITE_url_app_run: "",
 
@@ -23,7 +23,7 @@ export const use_BUS = defineStore("localStorage_BUS", {
 
     // 全局api
     func: {
-      tree_left_click: () => {}, 
+      tree_left_click: () => {},
       find_tree_depart: () => {},
     },
   }),

@@ -47,13 +47,13 @@ export class auth {
           { id: 'depart_1', name: '客户部', type: 'depart', parent_id: 'depart_0', remark: '' },
           { id: 'depart_2', name: '技术部', type: 'depart', parent_id: 'depart_0', remark: '' },
           { id: 'depart_3', name: '财务部', type: 'depart', parent_id: 'depart_0', remark: '' },
-          //
+          //角色-客户
           { id: 'role_1001', name: '客户普通', type: 'role', parent_id: 'depart_1', remark: '' },
           { id: 'role_1002', name: '客户高级', type: 'role', parent_id: 'depart_1', remark: '' },
-          // 技术部角色
+          // 角色-技术部
           { id: 'role_2001', name: '技术职员', type: 'role', parent_id: 'depart_2', remark: '' },
           { id: 'role_2002', name: '技术主管', type: 'role', parent_id: 'depart_2', remark: '' },
-          // 财务部角色
+          // 角色-财务部
           { id: 'role_3001', name: '财务职员', type: 'role', parent_id: 'depart_3', remark: '' },
           { id: 'role_3002', name: '财务主管', type: 'role', parent_id: 'depart_3', remark: '' },
         ],
@@ -109,27 +109,17 @@ export class auth {
       let 财务管理_修改 = { parent_id: 'sub_2003', path: '/finance:修改', id: '/finance:修改', remark: '财务管理_修改', name: '修改', type: 'button' }
       await db.sys_menu.createMany({ data: [财务管理_查看, 财务管理_删除, 财务管理_新增, 财务管理_修改] })
 
-      // ================================== 用户表 ==================================
-      //             //客户普通     //客户高级   // 技术职员    // 技术主管   // 财务职员   // 财务主管
-      let 全部权限 = ['role_1001', 'role_1002', 'role_2001', 'role_2002', 'role_3001', 'role_3002'].map((id) => ({ id }))
-      /*许鹏-最高权限*/
-      await db.sys_user.create({ data: { id: 'user_1', name: '许鹏', phone: '15160315110', password: '123456', sys_depart: { connect: 全部权限 } } })
-      /*二狗-客户普通-技术主管*/
-      await db.sys_user.create({ data: { id: 'user_2', name: '二狗', phone: '15160315002', password: '123456', sys_depart: { connect: ['role_1001', 'role_2001'].map((id) => ({ id })) } } })
-      /*张三-客户普通-财务职员*/
-      await db.sys_user.create({ data: { id: 'user_3', name: '张三', phone: '15160315003', password: '123456', sys_depart: { connect: ['role_1001', 'role_3001'].map((id) => ({ id })) } } })
-      /*李四-客户普通-财务主管*/
-      await db.sys_user.create({ data: { id: 'user_4', name: '李四', phone: '15160315004', password: '123456', sys_depart: { connect: ['role_1001', 'role_3002'].map((id) => ({ id })) } } })
-      /*王五-客户普通-财务主管*/
-      await db.sys_user.create({ data: { id: 'user_5', name: '王五', phone: '15160315005', password: '123456', sys_depart: { connect: ['role_1002', 'role_3002'].map((id) => ({ id })) } } })
-
       // ================================== 部门-菜单 ==================================
       //设置 role_2001 关联多个 订单管理_查看 订单管理_删除 订单管理_新增
       // await db.sys_depart.update({ where: { id: '订单管理_查看' }, data: { sys_menu: { connect: { id: 'role_2001' } } } })
 
       // 客户部
+      await db.sys_depart.update({ where: { id: 'role_1001' }, data: { sys_menu: { connect: [首页_查看].map((o) => ({ id: o.id })) } } })
       await db.sys_depart.update({ where: { id: 'role_2001' }, data: { sys_menu: { connect: [首页_查看, 首页_删除, 首页_新增, 首页_修改].map((o) => ({ id: o.id })) } } })
-      await db.sys_depart.update({ where: { id: 'role_2002' }, data: { sys_menu: { connect: [首页_查看, 首页_删除, 首页_新增, 首页_修改].map((o) => ({ id: o.id })) } } })
+
+      // 财务部
+      await db.sys_depart.update({ where: { id: 'role_3001' }, data: { sys_menu: { connect: [财务管理_查看].map((o) => ({ id: o.id })) } } })
+      await db.sys_depart.update({ where: { id: 'role_3002' }, data: { sys_menu: { connect: [财务管理_查看, 财务管理_删除, 财务管理_新增, 财务管理_修改, 商品管理_查看].map((o) => ({ id: o.id })) } } })
 
       // 技术部
       let 技术部_菜单1 = [
@@ -171,9 +161,19 @@ export class auth {
       await db.sys_depart.update({ where: { id: 'role_2001' }, data: { sys_menu: { connect: 技术部_菜单1 } } })
       await db.sys_depart.update({ where: { id: 'role_2002' }, data: { sys_menu: { connect: 技术部_菜单2 } } })
 
-      // 财务部
-      await db.sys_depart.update({ where: { id: 'role_2001' }, data: { sys_menu: { connect: [财务管理_查看, 财务管理_删除, 财务管理_新增, 财务管理_修改].map((o) => ({ id: o.id })) } } })
-      await db.sys_depart.update({ where: { id: 'role_2002' }, data: { sys_menu: { connect: [财务管理_查看, 财务管理_删除, 财务管理_新增, 财务管理_修改].map((o) => ({ id: o.id })) } } })
+      // ================================== 用户表 ==================================
+      //                //客户高级    // 技术主管   // 财务职员   // 财务主管
+      let 全部权限 = ['role_1002', 'role_2002', 'role_3001', 'role_3002'].map((id) => ({ id }))
+      /*许鹏-最高权限*/
+      await db.sys_user.create({ data: { id: 'user_1', name: '许鹏', phone: '15160315110', password: '123456', sys_depart: { connect: 全部权限 } } })
+      /*二狗-客户普通-技术主管*/
+      await db.sys_user.create({ data: { id: 'user_2', name: '二狗', phone: '15160315002', password: '123456', sys_depart: { connect: ['role_1001'].map((id) => ({ id })) } } })
+      /*张三-客户普通-财务职员*/
+      await db.sys_user.create({ data: { id: 'user_3', name: '张三', phone: '15160315003', password: '123456', sys_depart: { connect: ['role_1001', 'role_3001'].map((id) => ({ id })) } } })
+      /*李四-客户普通-财务主管*/
+      await db.sys_user.create({ data: { id: 'user_4', name: '李四', phone: '15160315004', password: '123456', sys_depart: { connect: ['role_1001', 'role_3002'].map((id) => ({ id })) } } })
+      /*王五-客户普通-财务主管*/
+      await db.sys_user.create({ data: { id: 'user_5', name: '王五', phone: '15160315005', password: '123456', sys_depart: { connect: ['role_1001', 'role_3002'].map((id) => ({ id })) } } })
 
       return { code: 200, msg: '成功:数据库初始化完成', result: {} }
     } catch (error) {
