@@ -5,3 +5,11 @@ declare module "vue-drag-resize/src" {
   const VueDragResize: DefineComponent<any, any, any>
   export default VueDragResize
 }
+
+
+
+declare global {
+  interface Document {
+    querySelector<E extends Element = Element>(selectors: string): E
+  }
+}
