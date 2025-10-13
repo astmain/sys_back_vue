@@ -15,6 +15,14 @@ import { find_list_user } from './dto/find_list_user'
 import { save_user } from './dto/save_user'
 import { remove_ids_user } from './dto/remove_ids_user'
 
+// ==================== zod ====================
+import { z } from 'zod'
+import { createZodDto } from 'nestjs-zod'
+import { ZodValidationPipe } from 'nestjs-zod'
+import { find_list_user_schema } from './dto/find_list_user'
+import { i_find_list_user } from './dto/find_list_user'
+class find_list_user_dto extends createZodDto(find_list_user_schema) {}
+
 @Api_public()
 @Api_Controller('用户')
 export class user {
@@ -74,6 +82,10 @@ export class user {
 
   @Api_Post('查询-用户-列表')
   async find_list_user(@Body() body: find_list_user, @Req() req: any) {
+    // async find_list_user(@Body() body: createZodDto(find_list_user_schema), @Req() req: any) {
+    // async find_list_user(@Body() body: find_list_user_dto, @Req() req: any) {
+    // async find_list_user(@Body() body: find_list_user_dto, @Req() req: any) {
+    // async find_list_user(@Body(new ZodValidationPipe(find_list_user_schema)) body: i_find_list_user, @Req() req: any) {
     // console.log(`body---`, body)
     // 通过depart_id找到所有的父子级id和parent_id
     const depart_list_id_AND_parent_id = await db_find_ids_self_and_children({ db, table_name: 'sys_depart', id: body.depart_id })
@@ -84,7 +96,7 @@ export class user {
       where: { sys_depart: { some: { id: { in: depart_ids } } } },
       include: { sys_depart: { include: { parent: true } } },
     })
-    return { code: 200, msg: '成功', result: { user_list } }
+    return { code: 200, msg: '成功', result: { user_list, depart_id: body.depart_id } }
   }
   @Api_Post('保存-用户')
   async save_user(@Body() body: save_user, @Req() req: any) {

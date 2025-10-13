@@ -6,3 +6,12 @@ export class find_list_user {
   @IsString()
   depart_id: string
 }
+
+import { z } from 'zod'
+// import { createZodDto } from 'nestjs-zod'
+
+export const find_list_user_schema = z.object({
+  depart_id: z.string().optional().default('depart_0').describe('部门id'),
+})
+
+export type i_find_list_user = z.infer<typeof find_list_user_schema>

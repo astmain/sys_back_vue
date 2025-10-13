@@ -3,7 +3,7 @@
 
   <!--  -->
   <el-button @click="file_area_click">点击选择文件</el-button>
-  <canvas class="canvas_three_parse" style="width: 100%; height: 300px; border: 1px solid red; box-sizing: border-box" />
+  <canvas id="canvas_three_parse" style="width: 100%; height: 300px; border: 1px solid red; box-sizing: border-box" />
 </template>
 
 <script setup lang="ts">
@@ -21,7 +21,7 @@ async function on_change_file(event: any) {
   try {
     const file = event.target.files[0]
     // 绘制three解析
-    const result = await canvas_three_parse({ canvas: document.querySelector(".canvas_three_parse"), file })
+    const result = await canvas_three_parse({ canvas: document.getElementById("canvas_three_parse"), file })
     console.log(`result:`, result)
 
     // 上传文件

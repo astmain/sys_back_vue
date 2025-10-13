@@ -28,6 +28,7 @@
     "install": "^0.13.0",
     "jszip": "^3.10.1",
     "lodash": "4.17.21",
+    "nestjs-zod": "^5.0.1",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.4.1",
     "spark-md5": "^3.0.2",
@@ -35,7 +36,8 @@
     "vue": "^3.5.18",
     "vue-drag-resize": "^1.5.4",
     "vue-draggable-plus": "^0.6.0",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",

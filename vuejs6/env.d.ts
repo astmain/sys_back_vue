@@ -8,8 +8,3 @@ declare module "vue-drag-resize/src" {
 
 
 
-declare global {
-  interface Document {
-    querySelector<E extends Element = Element>(selectors: string): E
-  }
-}

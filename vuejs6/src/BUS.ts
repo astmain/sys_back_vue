@@ -56,3 +56,18 @@ export const BUS = use_BUS()
 
 //@ts-ignore
 window.BUS = BUS
+
+import { z } from "zod"
+// import { createZodDto } from 'nestjs-zod'
+
+export const find_list_user_schema = z.object({
+  depart_id: z.string().describe("depart_id(部门id)"),
+})
+
+export type i_find_list_user = z.infer<typeof find_list_user_schema>
+
+// export class find_list_user_dto extends createZodDto(find_list_user_schema) {}
+
+let aaa: i_find_list_user
+
+
