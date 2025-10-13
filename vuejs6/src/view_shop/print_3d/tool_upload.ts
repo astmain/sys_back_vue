@@ -64,7 +64,7 @@ export const axios_oss = axios_instance
 let chunk_list_uploaded = [] as any[] //已经上传的分片数组
 
 // ✅上传文件                                                          callback 回调函数自己写
-export async function tool_upload({ file, path_static, callback }: { file: any; path_static: string; callback?: any }) {
+export async function tool_upload({ file, path_static, is_3d_parse = false, callback }: { file: any; path_static: string; is_3d_parse?: boolean; callback?: any }) {
   if (!file) return alert("请选择文件")
   const chunk_size = 1024 * 1024 * 2
   const total_chunks = Math.ceil((file as any).size / chunk_size)
@@ -136,6 +136,7 @@ export async function tool_upload({ file, path_static, callback }: { file: any; 
     fileMD5: file_md5,
     totalChunks: total_chunks,
     path_static: path_static,
+    is_3d_parse: is_3d_parse,
   }
   const merge_res: any = await axios_oss.post("/oss_api/upload_chuck_merge", body)
   console.log(`merge_res:`, merge_res)
