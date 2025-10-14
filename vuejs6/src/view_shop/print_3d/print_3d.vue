@@ -25,7 +25,7 @@ async function on_change_file(event: any) {
     console.log(`result:`, result)
 
     // 上传文件
-    await tool_upload({ file, path_static: "/user/1", is_3d_parse: true, callback })
+    await tool_upload({ file, path_static: "/public/1", is_3d_parse: true, callback })
     function callback(res: any) {
       console.log(`result_upload:`, res)
     }
