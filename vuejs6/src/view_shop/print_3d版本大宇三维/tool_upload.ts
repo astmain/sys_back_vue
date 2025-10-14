@@ -39,7 +39,7 @@ axios_instance.interceptors.request.use(
     //替换自己的token
     config.headers.token = localStorage.getItem("token")
     //封装时可以注释掉
-    config.url = "http://103.119.2.223:3000" + config.url
+    config.url = "https://server.oss.yun3d.com" + config.url
     return config
   },
   (error) => {

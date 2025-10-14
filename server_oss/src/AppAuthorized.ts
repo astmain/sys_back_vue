@@ -67,7 +67,9 @@ export class AppAuthorized implements CanActivate {
  */
 @Module({
   imports: [
-    JwtModule.register({ global: true, secret: process.env.VITE_jwt_secret, signOptions: { expiresIn: process.env.JWT_time_expiresIn } }), //jwt//私钥//24小时*30天
+    // JwtModule.register({ global: true, secret: process.env.VITE_jwt_secret, signOptions: { expiresIn: "1d" } }), //jwt//私钥//24小时*30天
+  // @ts-ignore
+  JwtModule.register({ global: true, secret: process.env.VITE_jwt_secret, signOptions: { expiresIn: process.env.VITE_jwt_time_expiresIn   } }), //jwt//私钥//24小时*30天
   ],
   controllers: [],
   providers: [

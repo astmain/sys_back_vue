@@ -3,7 +3,7 @@ import { defineStore } from "pinia"
 export const use_BUS = defineStore("localStorage_BUS", {
   state: () => ({
     count: 0,
-    user: { name: "", phone: "" },
+    user: { name: "", phone: "" ,avatar:""},
     control_button: { show: true, top: 500, left: 100 },
     web_type: "admin",
     role_menu_tree: [] as any[],
@@ -29,7 +29,7 @@ export const use_BUS = defineStore("localStorage_BUS", {
     },
   }),
   persist: [
-    { pick: ["count", "user", "control_button", "menu_tree", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },
+    { pick: ["count", "user", "control_button", "role_menu_tree", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },
 
     {
       key: "token",

@@ -2,6 +2,11 @@ import { createRouter, createWebHistory } from "vue-router"
 
 // ==================== 后台管理 ====================
 export const view_admin = [
+  
+
+  { name: "个人中心", path: "/user_center", component: () => import("../layout/user_center.vue") },
+
+
   // 首页
   { name: "首页", path: "/home", component: () => import("../view_admin/home/home.vue") },
   // 系统管理

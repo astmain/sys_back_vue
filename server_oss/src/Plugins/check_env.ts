@@ -34,7 +34,7 @@ let rule_env = [
   { name: '应用容器', value: '', doc: true, key: 'VITE_url_app_docker' },
   { name: '应用正式发布', value: '', doc: true, key: 'VITE_url_app_prod' },
   { name: 'jwt密钥', value: '', doc: false, key: 'VITE_jwt_secret' },
-  { name: 'jwt过期时间', value: '', doc: false, key: 'VITE_jwt_time_exp' },
+  { name: 'jwt过期时间', value: '', doc: false, key: 'VITE_jwt_time_expiresIn' },
   { name: 'jwttoken方便swagger调试', value: '', doc: false, key: 'VITE_jwt_token_swagger' },
 ]
 

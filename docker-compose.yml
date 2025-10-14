@@ -1,0 +1,18 @@
+services:
+  #  后端oss==============================  # docker exec -it            docker01_server_oss       sh
+  server_oss:
+    container_name: server_oss
+    image: node:lts-alpine3.22
+    working_dir: /app #指定工作目录app
+    stdin_open: true
+    restart: always
+    tty: true #保持容器运行
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./server_oss:/app #项目文件夹名称映射容器app
+      - ./filestore_oss:/app/filestore_oss # 外部文件夹映射到容器app内部文件夹
+    command: sh -c "npm i pnpm -g && pnpm i -f &&  pnpm docker:generate && pnpm docker:push && pnpm docker"
+
+
+# 
