@@ -3,10 +3,11 @@ import { defineStore } from "pinia"
 export const use_BUS = defineStore("localStorage_BUS", {
   state: () => ({
     count: 0,
+    user: { name: "", phone: "" },
     control_button: { show: true, top: 500, left: 100 },
     web_type: "admin",
     role_menu_tree: [] as any[],
-    user: { name: "", phone: "" },
+
     depart_tree: [] as any[],
     VITE_url_app_run: "",
 
@@ -28,7 +29,7 @@ export const use_BUS = defineStore("localStorage_BUS", {
     },
   }),
   persist: [
-    { pick: ["count", "control_button", "menu_tree", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },
+    { pick: ["count", "user", "control_button", "menu_tree", "web_type", "VITE_url_app_run", "VITE_url_app_list", "token", "url_api_curr"], storage: localStorage },
 
     {
       key: "token",
@@ -69,5 +70,3 @@ export type i_find_list_user = z.infer<typeof find_list_user_schema>
 // export class find_list_user_dto extends createZodDto(find_list_user_schema) {}
 
 let aaa: i_find_list_user
-
-

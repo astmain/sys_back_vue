@@ -1,0 +1,33 @@
+//  prisma使用规范
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" //  使用sqlite时无法用JSON{},只能使用JSON[]
+  url      = "file:./sqlite.db" //  E:/AAA/dayu_sys/dayu_sys02/demo5/make_orm_prisma/sqlite.db
+
+  // provider = "postgresql"
+  // url      = env("VITE_url_db_pg")
+
+  // provider = env("DB_provider")
+  // provider = "sqlite"
+  // url      = env("VITE_url_db_pg")
+}
+
+// 文件表
+model tb_oss {
+  id          Int     @id @default(autoincrement())
+  path1       String //  1级路径
+  path2       Int //2级路径
+  name        String //名称:文件夹名称,文件名称
+  path_static String // 相对路径
+  size        Int     @default(0) //  文件大小
+  suffix      String  @default("") // 文件后缀
+  is_file     Boolean //是否是文件:true是文件,false是文件夹
+  // 约束唯一1级路径+2级路径+路径资源
+  // @@unique([path1, path2, path_static])
+
+  createdAt DateTime @default(now()) //创建时间
+  updatedAt DateTime @updatedAt //修改时间
+}

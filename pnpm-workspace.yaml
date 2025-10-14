@@ -21,6 +21,9 @@ packages:
   - "vuejs7"
   - "vuejs8"
   - "vuejs9"
+  # 服务server_oss
+  - "server_oss"
+
 
   # 工具 =====================================================
   - "Tools"

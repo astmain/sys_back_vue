@@ -31,7 +31,7 @@ import { ref } from "vue"
 import { axios_api } from "@/plugins/axios_api"
 import { VueDraggable } from "vue-draggable-plus"
 
-console.log("axios_api", axios_api)
+
 
 const list = ref([
   { name: "Joao", id: 1 },
