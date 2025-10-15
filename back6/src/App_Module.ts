@@ -7,6 +7,7 @@ import { auth_Module } from '@src/modules/auth/auth'
 import { user_Module } from '@src/modules/user/user'
 import { depart_Module } from '@src/modules/depart/depart'
 import { menu_Module } from '@src/modules/menu/menu'
+import { product_Module } from '@src/modules/product/product'
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { menu_Module } from '@src/modules/menu/menu'
     user_Module, //用户模块
     depart_Module, //部门模块
     menu_Module, //菜单模块
+    product_Module, //菜单模块
   ],
   controllers: [App_controller],
   providers: [],

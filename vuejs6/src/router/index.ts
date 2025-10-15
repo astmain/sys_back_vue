@@ -2,10 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 
 // ==================== 后台管理 ====================
 export const view_admin = [
-  
-
   { name: "个人中心", path: "/user_center", component: () => import("../layout/user_center.vue") },
-
 
   // 首页
   { name: "首页", path: "/home", component: () => import("../view_admin/home/home.vue") },
@@ -23,6 +20,7 @@ export const view_admin = [
 export const view_shop = [
   { name: "3D打印", path: "/print_3d", component: () => import("@/view_shop/print_3d/print_3d.vue") },
   { name: "3D模型", path: "/model_3d", component: () => import("@/view_shop/model_3d/model_3d.vue") },
+  { name: "上传模型", path: "/model_save", component: () => import("@/view_shop/model_3d/model_save.vue") },
 ]
 
 // ==================== 路由配置 ====================

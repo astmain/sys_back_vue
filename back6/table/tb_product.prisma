@@ -1,0 +1,43 @@
+// 模型商品表
+model tb_product {
+    product_id      String @id @default(cuid())
+    user_id         String // 用户id
+    title          String @default("") // 标题
+    remark         String       @default("") // 备注
+
+// 价格
+    price_type     String     @default("price_free") // 价格类型
+    price_free     Int    @default(0) // 免费价格
+    price_personal Int    @default(0) // 个人价格
+    price_company  Int    @default(0) // 企业价格
+    price_extend   Int    @default(0) // 企业扩展价格
+// 
+    main_img       String   @default("")// 主图
+    type_product        String @default("model") // 商品类型
+    type_check        String @default("check_publish") // 审核
+    type_check_remark String @default("")
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+        // 一对一关联
+    arg_product_model  arg_product_model?
+}
+
+
+
+model arg_product_model {
+    arg_product_model_id  String @id @default(cuid())
+    // 列表
+  list_img       Json   @default("[]") // 图片
+  list_wireframe Json   @default("[]") // 线框图
+  list_file      Json   @default("[]") // 文件
+  list_video     Json   @default("[]") // 视频
+  list_extend    Json   @default("[]") // 附件
+    // 判断
+    is_plug_in        Boolean @default(false) // 是否有插件
+    is_plug_in_remark String  @default("") // 插件备注
+
+    // 一对一关联（外键在本表）
+    product_id String  @unique
+    tb_product tb_product @relation(references: [product_id],fields: [arg_product_model_id] )
+}
