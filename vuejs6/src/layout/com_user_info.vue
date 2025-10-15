@@ -38,12 +38,12 @@ function handle_dropdown(command: any) {
   // 个人中心
   else if (command === "user_center") {
     // router.push("/user_center")
-
     console.log("route.path---:", route.path)
     console.log("route.path---:", route.fullPath)
     console.log("route.path---:", location.host)
     // const url = `${location.host}/user_center`
-    window.open("user_center")
+    // window.open("user_center")
+    router.push("/user_center")
   }
 }
 </script>

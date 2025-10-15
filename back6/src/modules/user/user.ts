@@ -14,6 +14,7 @@ import { find_one_user } from './dto/find_one_user'
 import { find_list_user } from './dto/find_list_user'
 import { save_user } from './dto/save_user'
 import { remove_ids_user } from './dto/remove_ids_user'
+import { update_user_info } from './dto/update_user_info'
 
 // ==================== zod ====================
 import { z } from 'zod'
@@ -102,6 +103,12 @@ export class user {
   async save_user(@Body() body: save_user, @Req() req: any) {
     let { user_depart_role_ids, ...data } = body
     await db.sys_user.update({ where: { id: body.id }, data: { ...data, sys_depart: { set: user_depart_role_ids.map((id) => ({ id })) } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
+
+  @Api_Post('保存-用户')
+  async update_user_info(@Body() body: update_user_info, @Req() req: any) {
+    await db.sys_user.update({ where: { id: body.id }, data: body })
     return { code: 200, msg: '成功', result: {} }
   }
 

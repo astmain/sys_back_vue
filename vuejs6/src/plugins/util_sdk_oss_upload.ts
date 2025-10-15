@@ -61,9 +61,13 @@ export const axios_oss = axios_instance
 
 let chunk_list_uploaded = [] as any[] //已经上传的分片数组
 
-// ✅上传文件                                                          callback 回调函数自己写
+// ✅上传文件                                                  callback 回调函数自己写   (file可是File和blob:http)
 export async function util_sdk_oss_upload({ file, path_static, callback }: { file: any; path_static: string; callback?: any }) {
-  if (!file) return alert("请选择文件")
+  console.log("util_sdk_oss_upload---typeof---file", typeof file)
+
+  file = await check_file(file)
+  console.log("222---file:", file)
+
   const chunk_size = 1024 * 1024 * 10
   const total_chunks = Math.ceil((file as any).size / chunk_size)
   // 简单md5: 文件名+大小+lastModified
@@ -143,4 +147,25 @@ export async function util_sdk_oss_upload({ file, path_static, callback }: { fil
     console.error(`没有---callback函数:`, callback)
   }
   return merge_res
+}
+
+// 判断file的类型并且返回file(file可是File和blob:http)
+async function check_file(file: any) {
+  if (Object.prototype.toString.call(file) === "[object File]") {
+    return file
+  } else if (String(file).startsWith("blob:http")) {
+    return await url_to_file(file)
+  } else {
+    throw new Error("file类型错误1")
+  }
+
+  async function url_to_file(url: string, name = "avatar.png") {
+    try {
+      const res = await fetch(url)
+      const blob = await res.blob()
+      return new File([blob], name, { type: blob.type || "image/png" })
+    } catch (error) {
+      throw new Error("file类型错误2")
+    }
+  }
 }
