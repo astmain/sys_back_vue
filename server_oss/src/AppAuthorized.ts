@@ -23,7 +23,7 @@ export class AppAuthorized implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // 得到网络求对象request
     const request = context.switchToHttp().getRequest()
-    const token = request.headers?.token?.replace(/\s/g, '').replace('Bearer', '')
+    const token =  request.headers?.token?.replace(/\s/g, '').replace('Bearer', '')       || request.headers.authorization?.replace(/^Bearer\s+/,'');
     // console.log(`111---token:`, token)
 
     // console.log(`111---context:`, context)

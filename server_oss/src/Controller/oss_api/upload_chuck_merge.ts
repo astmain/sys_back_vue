@@ -9,14 +9,17 @@ import { static_dir } from './app/static_dir'
 import { tool_isok_path } from './tool_isok_path'
 
 // dto 类====================================
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString ,Matches} from 'class-validator'
 import { tool_file_exit_static } from '@src/Controller/oss_api/tool_file_exit_static'
 import { Optional } from '@nestjs/common'
 
 class Api_upload_chuck_merge_dto {
-  @ApiProperty({ description: '路径资源目录', example: '/user/1' }) //格式规范:    "/public/0/公共资源"
+  @ApiProperty({ description: '路径资源目录', example: '/user/1' }) // 格式规范: "/public/0/公共资源"
   @IsString()
   @IsNotEmpty()
+  @Matches(/^\/(public|user)(\/.*|$)/, {
+    message: 'path_static 必须以 "/public" 或 "/user" 开头',
+  })
   path_static: string
 
   @ApiProperty({ description: '文件名', example: '1.png' })
@@ -70,6 +73,9 @@ export class upload_chuck_merge extends AppController {
 
     // 参数
     let { fileName, fileMD5, totalChunks, path_static } = body //请求参数
+
+
+    
     const fileNameOriginal = fileName //原始文件名
     const path1 = isok_path.path1
     const path2 = isok_path.path2

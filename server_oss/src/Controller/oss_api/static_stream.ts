@@ -137,6 +137,7 @@ export class static_stream {
 
 // 验证token
 async function tool_token_check(token: string) {
+  token = token ? token :""
   const payload = await my_jwt_service.verifyAsync(token, { secret: process.env.VITE_jwt_secret })
   console.log(`获取静态文件---payload:`, payload)
   const user_id = payload.id

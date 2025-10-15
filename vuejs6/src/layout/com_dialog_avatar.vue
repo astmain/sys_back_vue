@@ -1,138 +1,127 @@
 <template>
   <div>
-    <el-dialog v-model="show" title="编辑头像" width="780" draggable :close-on-click-modal="false" @closed="on_closed">
-      <div class="flex gap-6">
-        <!-- 左侧：裁剪区 -->
-        <div class="border p-2">
-          <img ref="img_ref" :src="url_img" alt="source" class="max-w-[480px] max-h-[480px]" style="display: block" />
-        </div>
-
-        <!-- 右侧：预览与信息 -->
-        <div class="flex flex-col gap-4 items-center">
-          <div ref="preview_ref" class="border rounded-full bg-white" :style="`width:${preview_size}px;height:${preview_size}px;overflow:hidden`"></div>
-          <div class="text-sm text-gray-500">
-            <div>图像大小：{{ preview_size }} × {{ preview_size }} 像素</div>
-            <div>文件大小：{{ file_size_text }}</div>
+    <el-dialog v-model="show" title="编辑头像" width="650" draggable :close-on-click-modal="false">
+      <div>图片编辑裁剪大小尺寸 {{ url_img }}</div>
+      <el-button class="btn" @click="on_rotate_left">左旋转</el-button>
+      <el-button class="btn" @click="on_rotate_right">右旋转</el-button>
+      <div class="flex justify-between">
+        <nav style="width: 200px; height: 200px">
+          <vue-cropper
+            ref="cropper_ref"
+            :img="option.img"
+            :output-size="option.size"
+            :output-type="option.output_type"
+            :info="true"
+            :full="option.full"
+            :fixed="fixed"
+            :fixed-number="fixed_number"
+            :can-move="option.can_move"
+            :can-move-box="option.can_move_box"
+            :fixed-box="option.fixed_box"
+            :original="option.original"
+            :auto-crop="option.auto_crop"
+            :auto-crop-width="option.auto_crop_width"
+            :auto-crop-height="option.auto_crop_height"
+            :center-box="option.center_box"
+            :high="option.high"
+            :max-img-size="option.max_img_size"
+            mode="contain"
+            @real-time="on_real_time"
+            @img-load="on_img_load"
+          />
+        </nav>
+        <nav>
+          <div>图片编辑后的预览图</div>
+          <div :style="{ width: previews.w + 'px', height: previews.h + 'px', overflow: 'hidden', margin: '5px' }">
+            <div :style="previews.div">
+              <img :src="previews.url" :style="previews.img" />
+            </div>
           </div>
-        </div>
+        </nav>
       </div>
 
       <template #footer>
-        <el-button type="primary" @click="on_submit">确定</el-button>
-        <el-button @click="show = false">取消</el-button>
+        <el-button type="primary" @click="() => (show = false)">取消</el-button>
+        <el-button type="primary" @click="submit">确定</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="tsx">
-import { ref, watch, nextTick } from "vue"
-import Cropper from "cropperjs"
-import "cropperjs/dist/cropper.css"
+import { ref, reactive } from "vue"
 import { BUS } from "@/BUS"
+import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 
-type T_emit = {
-  (e: "done", payload: { blob: Blob; base64: string; url: string }): void
+let show = ref(false)
+let url_img = ref("111")
+
+// 预览
+const cropper_ref = ref<any>(null)
+const previews = ref<any>({}) //预览视图
+const fixed = ref<boolean>(false) //固定
+const fixed_number = ref<[number, number]>([1, 1]) //正方形比例
+const option = reactive({
+  img: "https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png",
+  auto_crop_width: 200,
+  auto_crop_height: 200,
+  size: 1,
+  full: false,
+  output_type: "png",
+  can_move: true,
+  fixed_box: false,
+  original: false,
+  can_move_box: true,
+  auto_crop: true,
+  center_box: true,
+  high: true,
+  max_img_size: 99999,
+})
+
+function on_real_time(data: any) {
+  previews.value = data
 }
 
-const emit = defineEmits<T_emit>()
-
-// 对外暴露
-const show = ref(false)
-const url_img = ref<string>("")
-const preview_size = ref<number>(160)
-const img_ref = ref<HTMLImageElement | null>(null)
-const preview_ref = ref<HTMLDivElement | null>(null)
-let cropper: InstanceType<typeof Cropper> | null = null
-
-const file_size_text = ref<string>("—")
-let object_url_to_revoke: string | null = null
-
+function on_img_load(msg: any) {
+  console.log("img load", msg)
+}
+function on_rotate_left() {
+  cropper_ref.value?.rotateLeft()
+}
+function on_rotate_right() {
+  cropper_ref.value?.rotateRight()
+}
 function open() {
   show.value = true
 }
 
-function set_file(file: File) {
-  if (object_url_to_revoke) URL.revokeObjectURL(object_url_to_revoke)
-  const url = URL.createObjectURL(file)
-  object_url_to_revoke = url
-  url_img.value = url
-  file_size_text.value = format_size(file.size)
+async function submit() {
   show.value = true
-}
 
-function init_cropper() {
-  if (!img_ref.value) return
-  cropper?.destroy()
-  cropper = new Cropper(img_ref.value, {
-    viewMode: 1,
-    aspectRatio: 1,
-    dragMode: "move",
-    autoCropArea: 1,
-    background: false,
-    guides: false,
-    movable: true,
-    zoomable: true,
-    rotatable: false,
-    scalable: false,
-    preview: preview_ref.value || undefined,
-  })
-}
+  //
+  console.log(`111---previews:`, previews)
+  console.log(`111---previews:`, previews.value.url) //blob:http://127.0.0.1:8080/e14fd2d2-0215-4488-a2c2-d4a4d0b86351"
+  // 如何将 previews.value.url 转成 类似input 上传文件 event.target.files 中的file
+  const file = await url_to_file(previews.value.url)
+  console.log(`111---file:`, file)
 
-function on_submit() {
-  if (!cropper) return
-  const size = preview_size.value
-  const canvas = cropper.getCroppedCanvas({
-    width: size,
-    height: size,
-    imageSmoothingEnabled: true,
-    imageSmoothingQuality: "high",
-  })
-  canvas.toBlob(
-    async (blob) => {
-      if (!blob) return
-      const base64 = canvas.toDataURL("image/png", 0.92)
-      const url = URL.createObjectURL(blob)
-
-      // 默认直接更新本地头像（也可以交给父组件处理上传）
-      BUS.user.avatar = base64
-
-      emit("done", { blob, base64, url })
-      show.value = false
+  util_sdk_oss_upload({
+    file,
+    path_static: "/public/0/我的头像",
+    callback: (res: any) => {
+      console.log(res)
     },
-    "image/png",
-    0.92
-  )
-}
+  })
 
-function on_closed() {
-  cropper?.destroy()
-  cropper = null
-  if (object_url_to_revoke) {
-    URL.revokeObjectURL(object_url_to_revoke)
-    object_url_to_revoke = null
+  async function url_to_file(url: string, name = "avatar.png") {
+    const res = await fetch(url)
+    const blob = await res.blob()
+    return new File([blob], name, { type: blob.type || "image/png" })
   }
 }
 
-watch(
-  () => show.value,
-  async (v) => {
-    if (v) {
-      await nextTick()
-      init_cropper()
-    }
-  }
-)
-
-function format_size(n: number) {
-  if (n < 1024) return `${n} B`
-  if (n < 1024 * 1024) return `${(n / 1024).toFixed(2)} KB`
-  return `${(n / 1024 / 1024).toFixed(2)} MB`
-}
-
-defineExpose({ open, set_file, show, url_img })
+// 暴露方法给父组件调用
+defineExpose({ show, open, submit, url_img })
 </script>
 
-<style scoped>
-/* 保持简洁，无阴影与动画 */
-</style>
+<style></style>

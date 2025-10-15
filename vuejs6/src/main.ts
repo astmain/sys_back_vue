@@ -4,12 +4,19 @@ import { plugin_ElementPlusCss } from "./plugins/plugin_ElementPlusCss.ts"
 import { plugin_pinia } from "./plugins/plugin_pinia.ts"
 import { plugin_UnoCss } from "./plugins/plugin_UnoCss.ts"
 import router from "./router"
+
+// 1111
+import VueCropper from "vue-cropper"
+import 'vue-cropper/dist/index.css'
+// import "vue-cropper/dist/index.css"
+
 async function main() {
   // await plugin_ElementPlus({ app });
-  await plugin_ElementPlusCss({ app });
+  await plugin_ElementPlusCss({ app })
   await plugin_pinia({ app })
   await plugin_UnoCss({ app })
   app.use(router)
+  app.use(VueCropper)
   app.mount("#app")
 }
 main()
