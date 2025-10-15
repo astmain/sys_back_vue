@@ -60,13 +60,12 @@ function input_click(event: any) {
 async function input_change(event: any) {
   console.log("111", event.target.files)
   let file = event.target.files[0]
-
-  // await new Promise((resolve) => setTimeout(resolve, 1000))
-
-  // let ctx = document.getElementById("com_dialog_avatar").__vueParentComponent?.ctx
   //@ts-ignore
   let ctx_exposed = document.getElementById("com_dialog_avatar").__vnode.ctx.exposed
-  console.log(`111---ctx:`, ctx_exposed.open())
+  console.log(`111---ctx:`, ctx_exposed)
+  ctx_exposed.url_img.value = URL.createObjectURL(file)
+  ctx_exposed.open()
+  event.target.value = "" // 清空input的值
 }
 </script>
 
