@@ -17,8 +17,9 @@
     <nav class="nav-menu">
       <div class="flex gap-4">
         <img :src="BUS.user.avatar" alt="头像" class="w-20 h-20" />
-        <input type="file" id="input_change" @change="input_change" hidden />
-        <el-button type="primary" link @click="input_click">修改头像</el-button>
+        <input type="file" id="file_change" @change="file_change" hidden />
+        <!-- @vue-ignore -->
+        <el-button type="primary" link @click="() => document.getElementById('file_change')?.click()">修改头像</el-button>
       </div>
 
       <div class="flex">
@@ -31,8 +32,6 @@
         <el-input v-model="BUS.user.phone" style="width: 200px" placeholder="请输入手机号" />
       </div>
     </nav>
-    1111
-    <com_dialog_avatar id="com_dialog_avatar" />
   </div>
 </template>
 
@@ -42,8 +41,6 @@ import { BUS } from "@/BUS"
 import { ref, reactive } from "vue"
 import { ElMessage } from "element-plus"
 import { useRouter, useRoute } from "vue-router"
-import /*组件*/ com_dialog_avatar from "./com_dialog_avatar.vue"
-
 // 路由
 const router = useRouter()
 const route = useRoute()
@@ -53,20 +50,9 @@ let active = ref("个人信息")
 function nav_active(name: string) {
   active.value = name
 }
-function input_click(event: any) {
-  document.getElementById("input_change")?.click()
-}
 
-async function input_change(event: any) {
+function file_change(event: any) {
   console.log("111", event.target.files)
-  let file = event.target.files[0]
-
-  // await new Promise((resolve) => setTimeout(resolve, 1000))
-
-  // let ctx = document.getElementById("com_dialog_avatar").__vueParentComponent?.ctx
-  //@ts-ignore
-  let ctx_exposed = document.getElementById("com_dialog_avatar").__vnode.ctx.exposed
-  console.log(`111---ctx:`, ctx_exposed.open())
 }
 </script>
 
