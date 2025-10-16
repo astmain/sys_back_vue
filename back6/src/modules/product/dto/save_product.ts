@@ -40,8 +40,11 @@ export class arg_product_model {
   @Min(0, { message: 'price_extend-必须大于等于 0' })
   price_extend: number
 
-  @ApiProperty({ description: '(图片列表)', example: [{ url: 'https://www.baidu.com/img/flexible/logo/pc/result.png', name: 'result.png', size: 1048576, size_format: '1MB' }] })
-  list_main_img: any[]
+  @ApiProperty({ description: '(图片列表)' })
+  @ValidateIf((o) => Array.isArray(o.list_file) && o.list_file.length > 0)
+  @ValidateNested({ each: true })
+  @IsArray()
+  list_main_img: info_file[]
 }
 
 export class save_product {
@@ -95,5 +98,5 @@ export class save_product {
   })
   @ValidateNested()
   @Type(() => arg_product_model)
-  arg_product_model:  arg_product_model
+  arg_product_model: arg_product_model
 }

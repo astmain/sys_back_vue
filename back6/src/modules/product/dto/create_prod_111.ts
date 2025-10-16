@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, ValidateNested } from 'class-validator'
+import { IsArray, IsString, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 
 export class info_file {
@@ -10,10 +10,14 @@ export class info_file {
 
 export class arg_product_model {
   @ApiProperty({ description: '(图片列表)', example: [{ name: 'result.png' }] })
-  list_main_img: any[]
+  @IsArray()
+  @Type (()=>info_file)
+  list_main_img: info_file[]
 }
 
 export class create_prod_111 {
-  @ApiProperty({ description: '参数商品模型', example: '' })
+  @ApiProperty({ description: '参数商品模型' })
+  @IsArray()
+  @Type (()=>arg_product_model)
   arg_product_model: arg_product_model
 }
