@@ -21,13 +21,16 @@ export class product {
   @Api_Post('查询-商品-列表')
   async find_list_product(@Body() body: find_list_product, @Req() req: any) {
     const where: any = { title: { contains: body.title || '' } }
-    const list = await db.tb_product.findMany({ where })
+    const list = await db.tb_product.findMany({ where, include: { arg_product_model: true } })
     return { code: 200, msg: '成功', result: list }
   }
 
   @Api_Post('保存-商品')
   async save_product(@Body() body: save_product, @Req() req: any) {
     if (body.product_id) {
+      let { arg_product_model, ...data } = body
+      await db.tb_product.update({ where: { product_id: body.product_id }, data: data })
+      await db.arg_product_model.update({ where: { product_id: body.product_id }, data: body.arg_product_model })
       return { code: 200, msg: '成功-更新', result: {} }
     } else {
       let { arg_product_model, ...data } = body
@@ -41,6 +44,7 @@ export class product {
 
   @Api_Post('删除-商品')
   async remove_product_ids(@Body() body: remove_product_ids, @Req() req: any) {
+    await db.tb_product.deleteMany({ where: { product_id: { in: body.ids } } })
     return { code: 200, msg: '成功', result: {} }
   }
 }

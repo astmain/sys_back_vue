@@ -115,7 +115,7 @@ import { api, type info_file } from "@/api"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 
-let form = $ref({
+let form = ref({
   // product_id: "string",
   user_id: "user_1",
   title: "",
@@ -140,7 +140,7 @@ let form = $ref({
 
 async function save_product() {
   console.log("save_product---form", form)
-  const res: any = await api.product.save_product(form)
+  const res: any = await api.product.save_product(form.value)
   console.log("save_product---res", res)
   if (res.code !== 200) ElMessage.error("参数错误标题不能未空")
 }
@@ -148,7 +148,7 @@ async function input_list_main_img(event: any) {
   console.log("111", event.target.files)
   let file = event.target.files[0]
   const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
-  form.arg_product_model.list_main_img.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  form.value.arg_product_model.list_main_img.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
   event.target.value = "" // 清空input的值
 }
 
@@ -156,7 +156,7 @@ async function input_list_wireframe(event: any) {
   console.log("111", event.target.files)
   let file = event.target.files[0]
   const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
-  form.arg_product_model.list_wireframe.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  form.value.arg_product_model.list_wireframe.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
   event.target.value = "" // 清空input的值
 }
 
@@ -164,7 +164,7 @@ async function input_list_video(event: any) {
   console.log("111", event.target.files)
   let file = event.target.files[0]
   const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
-  form.arg_product_model.list_video.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  form.value.arg_product_model.list_video.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
   event.target.value = "" // 清空input的值
 }
 
@@ -172,9 +172,16 @@ async function input_list_extend(event: any) {
   console.log("111", event.target.files)
   let file = event.target.files[0]
   const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
-  form.arg_product_model.list_extend.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  form.value.arg_product_model.list_extend.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
   event.target.value = "" // 清空input的值
 }
+
+async function init_form(title: string) {
+  form.value.title = title
+}
+
+// 暴露方法给父组件调用
+defineExpose({ form ,init_form})
 </script>
 
 <style scoped></style>
