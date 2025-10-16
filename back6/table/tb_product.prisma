@@ -34,7 +34,7 @@ model arg_product_model {
     price_extend   Int @default(0) // 企业扩展价格
 
     // 列表
-    list_img          Json    @default("[]") // 图片
+    list_main_img     Json    @default("[]") // 图片
     list_wireframe    Json    @default("[]") // 线框图
     list_file         Json    @default("[]") // 文件
     list_video        Json    @default("[]") // 视频

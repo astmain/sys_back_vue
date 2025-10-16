@@ -1,5 +1,11 @@
 import { axios_api } from "./plugins/axios_api"
 
+// 类型_文件详情
+interface info_file {
+  url: string
+  file_name: string
+}
+
 export let api = {
   auth: {
     login: ({ phone, password }: { phone: string; password: string }) => axios_api.post("/auth/login", { phone, password }),
@@ -34,18 +40,16 @@ export let api = {
       product_id,
       user_id,
       title,
-      main_img,
       remark,
       price_type,
       type_product,
       type_check,
       type_check_remark,
-      arg_product_model: { price_free, price_personal, price_company, price_extend },
+      arg_product_model: { price_free, price_personal, price_company, price_extend, list_main_img },
     }: {
       product_id?: string
       user_id: string
       title: string
-      main_img: string
       remark: string
       price_type: string
       type_product: string
@@ -56,19 +60,19 @@ export let api = {
         price_personal: number
         price_company: number
         price_extend: number
+        list_main_img: info_file[]
       }
     }) =>
       axios_api.post("/product/save_product", {
         product_id,
         user_id,
         title,
-        main_img,
         remark,
         price_type,
         type_product,
         type_check,
         type_check_remark,
-        arg_product_model: { price_free, price_personal, price_company, price_extend },
+        arg_product_model: { price_free, price_personal, price_company, price_extend, list_main_img },
       }),
   },
 }

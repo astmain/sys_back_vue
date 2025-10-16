@@ -30,15 +30,9 @@ export class product {
     } else {
       let { arg_product_model, ...data } = body
       data['price_num'] = arg_product_model[data.price_type]
+      data['main_img'] = arg_product_model.list_main_img[0].url
       const one = await db.tb_product.create({ data: data })
-
-      // const arg = await db.arg_product_model.create({ data: { product_id: one.product_id } })
-      const arg = await db.arg_product_model.create({
-        data: {
-          ...arg_product_model,
-          product_id: one.product_id,
-        },
-      })
+      const arg = await db.arg_product_model.create({ data: { ...arg_product_model, product_id: one.product_id } })
       return { code: 200, msg: '成功-上传', result: { one, arg } }
     }
   }

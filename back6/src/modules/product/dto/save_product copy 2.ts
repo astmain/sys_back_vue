@@ -40,20 +40,11 @@ export class arg_product_model {
   @Min(0, { message: 'price_extend-必须大于等于 0' })
   price_extend: number
 
-  @ApiProperty({
-    description: '主图列表',
-    type: [info_file],
-    example: [
-      {
-        url: 'https://www.baidu.com/img/flexible/logo/pc/result.png',
-        file_name: 'result.png',
-      },
-    ],
-  })
-  @IsArray()
+  @ApiProperty({ description: '主图列表', example: 300 })
+  @ValidateIf((o) => Array.isArray(o.list_file) && o.list_file.length > 0)
   @ValidateNested({ each: true })
-  @Type(() => info_file)
-  list_main_img: info_file[]
+  @IsArray()
+  list_main_img: info_file
 }
 
 export class save_product {
