@@ -5,7 +5,7 @@ import { Matches, IsNumber, IsString, IsNotEmpty, IsOptional, IsBoolean, IsArray
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
-class info_file {
+export class info_file {
   @ApiProperty({ description: 'url', example: 'https://www.baidu.com/img/flexible/logo/pc/result.png' })
   @IsString()
   @Matches(/^https?:\/\//, { message: 'url-必须以http或https开头' })
@@ -40,20 +40,8 @@ export class arg_product_model {
   @Min(0, { message: 'price_extend-必须大于等于 0' })
   price_extend: number
 
-  @ApiProperty({
-    description: '主图列表',
-    type: [info_file],
-    example: [
-      {
-        url: 'https://www.baidu.com/img/flexible/logo/pc/result.png',
-        file_name: 'result.png',
-      },
-    ],
-  })
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => info_file)
-  list_main_img: info_file[]
+  @ApiProperty({ description: '(图片列表)', example: [{ url: 'https://www.baidu.com/img/flexible/logo/pc/result.png', name: 'result.png', size: 1048576, size_format: '1MB' }] })
+  list_main_img: any[]
 }
 
 export class save_product {
@@ -72,11 +60,6 @@ export class save_product {
   @IsString({ message: '标题-必须是字符串' })
   @IsNotEmpty({ message: '标题-必须不能为空' })
   title: string
-
-  // @ApiProperty({ description: '主图', example: 'https://www.baidu.com/img/flexible/logo/pc/result.png' })
-  // @IsString()
-  // @Matches(/^https?:\/\//, { message: '主图-必须以http或https开头' })
-  // main_img: string
 
   @ApiProperty({ description: '备注', example: 'cuid_string' })
   @IsString({ message: '备注-必须是字符串' })
@@ -100,8 +83,17 @@ export class save_product {
   @IsString()
   type_check_remark: string
 
-  @ApiProperty({ description: '参数商品模型', example: '' })
+  @ApiProperty({
+    description: '参数商品模型',
+    example: {
+      price_free: 0,
+      price_personal: 111100,
+      price_company: 200,
+      price_extend: 300,
+      list_main_img: [{ url: 'https://www.baidu.com/img/flexible/logo/pc/result.png', name: 'result.png', size: 1048576, size_format: '1MB' }],
+    },
+  })
   @ValidateNested()
   @Type(() => arg_product_model)
-  arg_product_model: arg_product_model
+  arg_product_model:  arg_product_model
 }
