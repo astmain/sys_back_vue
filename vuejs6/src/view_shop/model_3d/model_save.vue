@@ -37,6 +37,12 @@
     </nav>
 
     <nav class="flex gap-20">
+      <span class="w-30">是否有插件</span>
+      <el-switch v-model="form.arg_product_model.is_plug_in" />
+      <el-input v-model="form.arg_product_model.is_plug_in_remark" style="width: 200px" placeholder="插件备注" />
+    </nav>
+
+    <nav class="flex gap-20">
       <span class="w-30">备注</span>
       <el-input v-model="form.remark" style="width: 200px" />
     </nav>
@@ -56,12 +62,45 @@
     <span class="w-30 text-lg font-bold">商品其他参数</span>
   </nav>
 
-  <nav class="flex gap-20">
-    <span class="w-30">轮播图</span>
+  <nav class="flex gap-20 pt-2">
+    <span class="w-30">主图轮播图</span>
     <div class="flex">
-      <div v-for="item in form.arg_product_model.list_main_img"><img v-if="item.url" :src="item.url" class="w-30 h-30" /></div>
-      <label class="ml-2 flex items-center justify-center w-30 h-30 border-2 border-dashed border-gray-400 p-4" for="input_img_list_change">
-        <input type="file" id="input_img_list_change" @change="input_img_list_change" hidden />
+      <div v-for="item in form.arg_product_model.list_main_img"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+      <label for="input_list_main_img" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+        <input id="input_list_main_img" type="file" @change="input_list_main_img" hidden />
+        <div>+</div>
+      </label>
+    </div>
+  </nav>
+
+  <nav class="flex gap-20 pt-2">
+    <span class="w-30">线框图</span>
+    <div class="flex">
+      <div v-for="item in form.arg_product_model.list_wireframe"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+      <label for="input_list_wireframe" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+        <input id="input_list_wireframe" type="file" @change="input_list_wireframe" hidden />
+        <div>+</div>
+      </label>
+    </div>
+  </nav>
+
+  <nav class="flex gap-20 pt-2">
+    <span class="w-30">视频</span>
+    <div class="flex">
+      <div v-for="item in form.arg_product_model.list_video"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+      <label for="input_list_video" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+        <input id="input_list_video" type="file" @change="input_list_video" hidden />
+        <div>+</div>
+      </label>
+    </div>
+  </nav>
+
+  <nav class="flex gap-20 pt-2">
+    <span class="w-30">附件</span>
+    <div class="flex">
+      <div v-for="item in form.arg_product_model.list_extend"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+      <label for="input_list_extend" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+        <input id="input_list_extend" type="file" @change="input_list_extend" hidden />
         <div>+</div>
       </label>
     </div>
@@ -94,7 +133,6 @@ let form = $ref({
     is_plug_in_remark: "",
     list_main_img: [] as info_file[],
     list_wireframe: [] as info_file[],
-    list_file: [] as info_file[],
     list_video: [] as info_file[],
     list_extend: [] as info_file[],
   },
@@ -106,11 +144,35 @@ async function save_product() {
   console.log("save_product---res", res)
   if (res.code !== 200) ElMessage.error("参数错误标题不能未空")
 }
-async function input_img_list_change(event: any) {
+async function input_list_main_img(event: any) {
   console.log("111", event.target.files)
   let file = event.target.files[0]
   const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
   form.arg_product_model.list_main_img.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  event.target.value = "" // 清空input的值
+}
+
+async function input_list_wireframe(event: any) {
+  console.log("111", event.target.files)
+  let file = event.target.files[0]
+  const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
+  form.arg_product_model.list_wireframe.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  event.target.value = "" // 清空input的值
+}
+
+async function input_list_video(event: any) {
+  console.log("111", event.target.files)
+  let file = event.target.files[0]
+  const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
+  form.arg_product_model.list_video.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
+  event.target.value = "" // 清空input的值
+}
+
+async function input_list_extend(event: any) {
+  console.log("111", event.target.files)
+  let file = event.target.files[0]
+  const res = await util_sdk_oss_upload({ file, path_static: "/public/0/product" })
+  form.arg_product_model.list_extend.push({ url: res.result.url, file_name: res.result.fileNameOriginal })
   event.target.value = "" // 清空input的值
 }
 </script>

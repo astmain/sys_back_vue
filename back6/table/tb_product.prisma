@@ -39,7 +39,6 @@ model arg_product_model {
     // 列表
     list_main_img  Json @default("[]") // 主图轮播图
     list_wireframe Json @default("[]") // 线框图
-    list_file      Json @default("[]") // 文件
     list_video     Json @default("[]") // 视频
     list_extend    Json @default("[]") // 附件
 }

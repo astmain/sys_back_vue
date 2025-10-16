@@ -53,12 +53,6 @@ export class arg_product_model {
   @Type(() => info_file)
   list_wireframe: info_file[]
 
-  @ApiProperty({ description: '(列表-文件)', type: [info_file] })
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => info_file)
-  list_file: info_file[]
-
   @ApiProperty({ description: '(列表-视频)', type: [info_file] })
   @IsArray()
   @ValidateNested({ each: true })

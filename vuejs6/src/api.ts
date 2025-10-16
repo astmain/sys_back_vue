@@ -54,7 +54,6 @@ export let api = {
         is_plug_in_remark: string
         list_main_img: info_file[]
         list_wireframe: info_file[]
-        list_file: info_file[]
         list_video: info_file[]
         list_extend: info_file[]
       }
