@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer'
 
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger'
-import { Matches, IsNumber, IsString, IsNotEmpty, IsOptional, IsBoolean, IsArray, ValidateIf, ValidateNested, IsIn, isNumber, IsPositive, Min } from 'class-validator'
+import { Matches, IsNumber, IsString, IsNotEmpty, ArrayMinSize, IsOptional, IsBoolean, IsArray, ValidateIf, ValidateNested, IsIn, isNumber, IsPositive, Min } from 'class-validator'
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
@@ -40,11 +40,44 @@ export class arg_product_model {
   @Min(0, { message: 'price_extend-必须大于等于 0' })
   price_extend: number
 
-  @ApiProperty({ description: '(图片列表)' })
-  @ValidateIf((o) => Array.isArray(o.list_file) && o.list_file.length > 0)
+  @ApiProperty({ description: '(列表-主图轮播图)', type: [info_file] })
+  @ArrayMinSize(1, { message: '列表-主图轮播图-至少需要一个元素' })
   @ValidateNested({ each: true })
+  @Type(() => info_file)
   @IsArray()
   list_main_img: info_file[]
+
+  @ApiProperty({ description: '(列表-线框图)', type: [info_file] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => info_file)
+  list_wireframe: info_file[]
+
+  @ApiProperty({ description: '(列表-文件)', type: [info_file] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => info_file)
+  list_file: info_file[]
+
+  @ApiProperty({ description: '(列表-视频)', type: [info_file] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => info_file)
+  list_video: info_file[]
+
+  @ApiProperty({ description: '(列表-附件)', type: [info_file] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => info_file)
+  list_extend: info_file[]
+
+  @ApiProperty({ description: '是否有插件', example: false })
+  @IsBoolean()
+  is_plug_in: boolean
+
+  @ApiProperty({ description: '插件备注', example: '' })
+  @IsString()
+  is_plug_in_remark: string
 }
 
 export class save_product {
@@ -68,7 +101,7 @@ export class save_product {
   @IsString({ message: '备注-必须是字符串' })
   remark: string
 
-  @ApiProperty({ description: '(价格类型)', example: 'price_free' })
+  @ApiProperty({ description: '价格类型', example: 'price_free' })
   @IsString()
   @IsIn(['price_free', 'price_personal', 'price_company', 'price_extend'], { message: "价格类型-必须是['price_free', 'price_personal', 'price_company', 'price_extend']" })
   price_type: string
@@ -86,16 +119,7 @@ export class save_product {
   @IsString()
   type_check_remark: string
 
-  @ApiProperty({
-    description: '参数商品模型',
-    example: {
-      price_free: 0,
-      price_personal: 111100,
-      price_company: 200,
-      price_extend: 300,
-      list_main_img: [{ url: 'https://www.baidu.com/img/flexible/logo/pc/result.png', name: 'result.png', size: 1048576, size_format: '1MB' }],
-    },
-  })
+  @ApiProperty({ description: '(参数-商品模型)' })
   @ValidateNested()
   @Type(() => arg_product_model)
   arg_product_model: arg_product_model

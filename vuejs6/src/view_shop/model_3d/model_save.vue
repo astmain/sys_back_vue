@@ -72,7 +72,7 @@
 
 <script setup lang="tsx">
 import { ref } from "vue"
-import { api } from "@/api"
+import { api, type info_file } from "@/api"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 
@@ -90,7 +90,13 @@ let form = $ref({
     price_personal: 1,
     price_company: 1,
     price_extend: 1,
-    list_main_img: [{ url: "", file_name: "" }],
+    is_plug_in: false,
+    is_plug_in_remark: "",
+    list_main_img: [] as info_file[],
+    list_wireframe: [] as info_file[],
+    list_file: [] as info_file[],
+    list_video: [] as info_file[],
+    list_extend: [] as info_file[],
   },
 })
 
