@@ -22,13 +22,24 @@ export class product {
     const list = await db.tb_product.findMany({ where })
     return { code: 200, msg: '成功', result: list }
   }
+
   @Api_Post('保存-商品')
   async save_product(@Body() body: save_product, @Req() req: any) {
     if (body.product_id) {
       return { code: 200, msg: '成功-更新', result: {} }
     } else {
-      await db.tb_product.create({ data: body })
-      return { code: 200, msg: '成功-上传', result: {} }
+      let { arg_product_model, ...data } = body
+      data['price_num'] = arg_product_model[data.price_type]
+      const one = await db.tb_product.create({ data: data })
+
+      // const arg = await db.arg_product_model.create({ data: { product_id: one.product_id } })
+      const arg = await db.arg_product_model.create({
+        data: {
+          ...arg_product_model,
+          product_id: one.product_id,
+        },
+      })
+      return { code: 200, msg: '成功-上传', result: { one, arg } }
     }
   }
 

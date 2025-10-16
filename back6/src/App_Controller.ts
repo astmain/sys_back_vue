@@ -140,6 +140,17 @@ export class App_controller {
     return new Base_Response_Dto(200, 'payload2:目前固定写数据', { VITE_jwt_secret: process.env.VITE_jwt_secret, token, payload2 })
   }
 
+  @ApiOperation({ summary: 'token解析' })
+  @Get('token_parse')
+  token_parse() {
+    const my_jwt_service = new JwtService()
+
+    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtrLTNEMiIsInBob25lIjoiMTM1OTk1NDE3MzAiLCJpZCI6Mywicm9sZUlkcyI6WzEsMTJdLCJpYXQiOjE3NjA1NzczNjksImV4cCI6MTc2MDY2Mzc2OX0.NF7mFlMRH0pPXp_sx3_az2ydsa4kMzpC2-BQefYnr-4'
+    const payload = my_jwt_service.verify(token, { secret: process.env.VITE_jwt_secret })
+    console.log(`解析---payload:`, payload)
+    return new Base_Response_Dto(200, 'payload2:目前固定写数据', { VITE_jwt_secret: process.env.VITE_jwt_secret, token, payload })
+  }
+
   @Get('pages')
   @ApiOperation({ summary: '用户分页功能' })
   @ApiOkResponse({ description: '用户分页功能', type: User_Pages_Response_Dto })

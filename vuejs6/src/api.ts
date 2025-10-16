@@ -37,13 +37,10 @@ export let api = {
       main_img,
       remark,
       price_type,
-      price_free,
-      price_personal,
-      price_company,
-      price_extend,
       type_product,
       type_check,
       type_check_remark,
+      arg_product_model: { price_free, price_personal, price_company, price_extend },
     }: {
       product_id?: string
       user_id: string
@@ -51,13 +48,27 @@ export let api = {
       main_img: string
       remark: string
       price_type: string
-      price_free: number
-      price_personal: number
-      price_company: number
-      price_extend: number
       type_product: string
       type_check: string
       type_check_remark: string
-    }) => axios_api.post("/product/save_product", { product_id, user_id, title, main_img, remark, price_type, price_free, price_personal, price_company, price_extend, type_product, type_check, type_check_remark }),
+      arg_product_model: {
+        price_free: number
+        price_personal: number
+        price_company: number
+        price_extend: number
+      }
+    }) =>
+      axios_api.post("/product/save_product", {
+        product_id,
+        user_id,
+        title,
+        main_img,
+        remark,
+        price_type,
+        type_product,
+        type_check,
+        type_check_remark,
+        arg_product_model: { price_free, price_personal, price_company, price_extend },
+      }),
   },
 }
