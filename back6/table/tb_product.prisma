@@ -25,7 +25,10 @@ model arg_product_model {
     arg_product_model_id String     @id @default(cuid())
     // 一对一关联（外键在本表）
     product_id           String     @unique //references指向tb_product的product_id   | fields指向arg_product_model的product_id
-    tb_product           tb_product @relation(references: [product_id], fields: [product_id])
+    tb_product           tb_product @relation(references: [product_id], fields: [product_id], onDelete: Cascade, onUpdate: Cascade)
+    // 判断
+    is_plug_in           Boolean    @default(false) // 是否有插件
+    is_plug_in_remark    String     @default("") // 插件备注
 
     // 多种价格
     price_free     Int @default(0) // 免费价格
@@ -34,12 +37,8 @@ model arg_product_model {
     price_extend   Int @default(0) // 企业扩展价格
 
     // 列表
-    list_main_img     Json    @default("[]") // 图片
-    list_wireframe    Json    @default("[]") // 线框图
-    list_file         Json    @default("[]") // 文件
-    list_video        Json    @default("[]") // 视频
-    list_extend       Json    @default("[]") // 附件
-    // 判断
-    is_plug_in        Boolean @default(false) // 是否有插件
-    is_plug_in_remark String  @default("") // 插件备注
+    list_main_img  Json @default("[]") // 主图轮播图
+    list_wireframe Json @default("[]") // 线框图
+    list_video     Json @default("[]") // 视频
+    list_extend    Json @default("[]") // 附件
 }

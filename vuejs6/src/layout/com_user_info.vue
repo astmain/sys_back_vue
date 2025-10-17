@@ -10,7 +10,8 @@
         <el-dropdown-menu>
           <el-dropdown-item command="user_center"> 个人中心</el-dropdown-item>
           <el-dropdown-item command="logout"> 退出</el-dropdown-item>
-          <el-dropdown-item command="model_save"> 上传模型</el-dropdown-item>
+          <el-dropdown-item command="model_save"> 模型上传</el-dropdown-item>
+          <el-dropdown-item command="model_manage"> 模型管理</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -47,6 +48,8 @@ function handle_dropdown(command: any) {
     router.push("/user_center")
   } else if (command === "model_save") {
     router.push("/model_save")
+  } else if (command === "model_manage") {
+    router.push("/model_manage")
   }
 }
 </script>

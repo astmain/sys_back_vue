@@ -1,7 +1,7 @@
 import { axios_api } from "./plugins/axios_api"
 
 // 类型_文件详情
-interface info_file {
+export interface info_file {
   url: string
   file_name: string
 }
@@ -36,17 +36,7 @@ export let api = {
   product: {
     find_list_product: ({ title }: { title: string }) => axios_api.post("/product/find_list_product", { title }),
     remove_product_ids: ({ ids }: { ids: string[] }) => axios_api.post("/product/remove_product_ids", { ids }),
-    save_product: ({
-      product_id,
-      user_id,
-      title,
-      remark,
-      price_type,
-      type_product,
-      type_check,
-      type_check_remark,
-      arg_product_model: { price_free, price_personal, price_company, price_extend, list_main_img },
-    }: {
+    save_product: (form: {
       product_id?: string
       user_id: string
       title: string
@@ -60,19 +50,13 @@ export let api = {
         price_personal: number
         price_company: number
         price_extend: number
+        is_plug_in: boolean
+        is_plug_in_remark: string
         list_main_img: info_file[]
+        list_wireframe: info_file[]
+        list_video: info_file[]
+        list_extend: info_file[]
       }
-    }) =>
-      axios_api.post("/product/save_product", {
-        product_id,
-        user_id,
-        title,
-        remark,
-        price_type,
-        type_product,
-        type_check,
-        type_check_remark,
-        arg_product_model: { price_free, price_personal, price_company, price_extend, list_main_img },
-      }),
+    }) => axios_api.post("/product/save_product", form),
   },
 }

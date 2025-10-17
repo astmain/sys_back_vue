@@ -25,26 +25,7 @@ import { ref } from "vue"
 import { api } from "@/api"
 
 // 响应式数据
-let products = $ref([
-  {
-    title: "3D模型设计A",
-    remark: "专业3D模型设计服务，定制化解决方案",
-    price_free: "599",
-    main_img: "http://gips3.baidu.com/it/u=2489404253,92500118&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280",
-  },
-  {
-    title: "3D模型设计B",
-    remark: "创意3D模型设计，独特艺术风格",
-    price_free: "799",
-    main_img: "http://gips0.baidu.com/it/u=1370402140,2009956566&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280",
-  },
-  {
-    title: "3D模型设计C",
-    remark: "工业级3D模型设计，精确工程标准",
-    price_free: "999",
-    main_img: "http://gips2.baidu.com/it/u=2687682002,935161719&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024",
-  },
-])
+let products = $ref<any[]>([])
 
 async function find_list_product() {
   const form = { title: "" }

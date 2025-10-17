@@ -227,46 +227,9 @@ export class App_controller {
     return new Base_Response_Dto(200, '保存用户', { one })
   }
 
-  @Get('save_test1')
-  @ApiOperation({ summary: '保存test1' })
-  @ApiOkResponse({ description: '保存test1', type: Base_Response_Dto })
-  async save_test1() {
-    await db.test1.deleteMany()
-    const one = await db.test1.createMany({
-      data: [
-        { phone: '1-1', password: '123456' },
-        { phone: '1-2', password: '123456' },
-        { phone: '1-3', password: '123456' },
-        { phone: '1-4', password: '123456' },
-        { phone: '1-5', password: '123456' },
-        { phone: '1-6', password: '123456' },
-        { phone: '1-7', password: '123456' },
-        { phone: '1-8', password: '123456' },
-        { phone: '1-9', password: '123456' },
-        { phone: '1-10', password: '123456' },
-        { phone: '2-1', password: '123456' },
-        { phone: '2-2', password: '123456' },
-        { phone: '2-3', password: '123456' },
-        { phone: '2-4', password: '123456' },
-        { phone: '2-5', password: '123456' },
-        { phone: '2-6', password: '123456' },
-        { phone: '2-7', password: '123456' },
-        { phone: '2-8', password: '123456' },
-        { phone: '2-9', password: '123456' },
-        { phone: '2-10', password: '123456' },
-        { phone: '3-1', password: '123456' },
-        { phone: '3-2', password: '123456' },
-        { phone: '3-3', password: '123456' },
-        { phone: '3-4', password: '123456' },
-        { phone: '3-5', password: '123456' },
-        { phone: '3-6', password: '123456' },
-        { phone: '3-7', password: '123456' },
-        { phone: '3-8', password: '123456' },
-        { phone: '3-9', password: '123456' },
-        { phone: '3-10', password: '123456' },
-      ],
-    })
-
-    return { code: 200, msg: '保存test1', result: one }
+  @Get('my_dto')
+  @ApiOperation({ summary: '我的dto' })
+  async my_dto() {
+    return { code: 200, msg: '成功', result: {} }
   }
 }
