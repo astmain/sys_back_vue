@@ -8,16 +8,16 @@ export interface info_file {
 
 export let api = {
   auth: {
-    login: ({ phone, password }: { phone: string; password: string }) => axios_api.post("/auth/login", { phone, password }),
+    login: (form: { phone: string; password: string }) => axios_api.post("/auth/login", form),
   },
 
   depart: {
-    find_depart_menu: ({ role_id }: { role_id: string }) => axios_api.post("/depart/find_depart_menu", { role_id }),
-    update_depart_role_menu: ({ role_id, nodes_id }: { role_id: string; nodes_id: string[] }) => axios_api.post("/depart/update_depart_role_menu", { role_id, nodes_id }),
-    create_depart_menu: ({ depart_parent_id, depart_name, role_name, menu_button_ids }: { depart_parent_id: string; depart_name: string; role_name: string; menu_button_ids: string[] }) => axios_api.post("/depart/create_depart_menu", { depart_parent_id, depart_name, role_name, menu_button_ids }),
-    create_list_depart_role_menu: ({ depart_parent_id, depart_name, role_list }: { depart_parent_id: string; depart_name: string; role_list: any[] }) => axios_api.post("/depart/create_list_depart_role_menu", { depart_parent_id, depart_name, role_list }),
-    delete_depart_role_ids: ({ ids }: { ids: string[] }) => axios_api.post("/depart/delete_depart_role_ids", { ids }),
-    update_list_depart_role_menu: ({ depart_id, depart_name, role_list }: { depart_id: string; depart_name: string; role_list: any[] }) => axios_api.post("/depart/update_list_depart_role_menu", { depart_id, depart_name, role_list }),
+    find_depart_menu: (form: { role_id: string }) => axios_api.post("/depart/find_depart_menu", form),
+    update_depart_role_menu: (form: { role_id: string; nodes_id: string[] }) => axios_api.post("/depart/update_depart_role_menu", form),
+    create_depart_menu: (form: { depart_parent_id: string; depart_name: string; role_name: string; menu_button_ids: string[] }) => axios_api.post("/depart/create_depart_menu", form),
+    create_list_depart_role_menu: (form: { depart_parent_id: string; depart_name: string; role_list: any[] }) => axios_api.post("/depart/create_list_depart_role_menu", form),
+    delete_depart_role_ids: (form: { ids: string[] }) => axios_api.post("/depart/delete_depart_role_ids", form),
+    update_list_depart_role_menu: (form: { depart_id: string; depart_name: string; role_list: any[] }) => axios_api.post("/depart/update_list_depart_role_menu", form),
   },
 
   menu: {
@@ -25,17 +25,18 @@ export let api = {
   },
 
   user: {
-    find_one_user: ({ id }: { id: string }) => axios_api.post("/user/find_one_user", { id }),
+    find_one_user: (form: { id: string }) => axios_api.post("/user/find_one_user", form),
     find_tree_depart: () => axios_api.post("/user/find_tree_depart"),
-    find_list_user: ({ depart_id }: { depart_id: string }) => axios_api.post("/user/find_list_user", { depart_id }),
-    save_user: ({ id, name, phone, gender, remark, user_depart_role_ids }: { id: string; name: string; phone: string; gender: string; remark: string; user_depart_role_ids: string[] }) => axios_api.post("/user/save_user", { id, name, phone, gender, remark, user_depart_role_ids }),
-    remove_ids_user: ({ ids }: { ids: string[] }) => axios_api.post("/user/remove_ids_user", { ids }),
-    update_user_info: ({ id, name, gender, avatar }: { id: string; name: string; gender: string; avatar: string }) => axios_api.post("/user/update_user_info", { id, name, gender, avatar }),
+    find_list_user: (form: { depart_id: string }) => axios_api.post("/user/find_list_user", form),
+    save_user: (form: { id: string; name: string; phone: string; gender: string; remark: string; user_depart_role_ids: string[] }) => axios_api.post("/user/save_user", form),
+    remove_ids_user: (form: { ids: string[] }) => axios_api.post("/user/remove_ids_user", form),
+    update_user_info: (form: { id: string; name: string; gender: string; avatar: string }) => axios_api.post("/user/update_user_info", form),
   },
 
   product: {
-    find_list_product: ({ title }: { title: string }) => axios_api.post("/product/find_list_product", { title }),
-    remove_product_ids: ({ ids }: { ids: string[] }) => axios_api.post("/product/remove_product_ids", { ids }),
+    find_list_product: (form: { title: string }) => axios_api.post("/product/find_list_product", form),
+    find_one_product: (form: { product_id: string }) => axios_api.post("/product/find_one_product", form),
+    remove_product_ids: (form: { ids: string[] }) => axios_api.post("/product/remove_product_ids", form),
     save_product: (form: {
       product_id?: string
       user_id: string

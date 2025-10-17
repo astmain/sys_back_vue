@@ -12,9 +12,8 @@ import _ from 'lodash'
 import { remove_product_ids } from './dto/remove_product_ids'
 import { save_product } from './dto/save_product'
 import { find_list_product } from './dto/find_list_product'
-import { info_file } from './dto/save_product'
+import { find_one_product } from './dto/find_one_product'
 
-import { ApiProperty, OmitType, ApiExtraModels } from '@nestjs/swagger'
 @Api_public()
 @Api_Controller('商品')
 export class product {
@@ -28,6 +27,13 @@ export class product {
       list[i]['user'] = { name: user?.name, avatar: user?.avatar }
     }
     return { code: 200, msg: '成功', result: list }
+  }
+  @Api_Post('查询-商品-详情')
+  async find_one_product(@Body() body: find_one_product, @Req() req: any) {
+    const product = await db.tb_product.findUnique({ where: { product_id: body.product_id }, include: { arg_product_model: true } })
+    let user = await db.sys_user.findUnique({ where: { id: product.user_id } })
+    product['user'] = { name: user?.name, avatar: user?.avatar }
+    return { code: 200, msg: '成功', result: product }
   }
 
   @Api_Post('保存-商品')
