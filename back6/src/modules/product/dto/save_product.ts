@@ -67,11 +67,11 @@ export class arg_product_model {
 
   @ApiProperty({ description: '是否有插件', example: false })
   @IsBoolean()
-  is_plug_in: boolean
+  is_plugin: boolean
 
   @ApiProperty({ description: '插件备注', example: '' })
   @IsString()
-  is_plug_in_remark: string
+  is_plugin_remark: string
 }
 
 export class save_product {

@@ -27,8 +27,8 @@ model arg_product_model {
     product_id           String     @unique //references指向tb_product的product_id   | fields指向arg_product_model的product_id
     tb_product           tb_product @relation(references: [product_id], fields: [product_id], onDelete: Cascade, onUpdate: Cascade)
     // 判断
-    is_plug_in           Boolean    @default(false) // 是否有插件
-    is_plug_in_remark    String     @default("") // 插件备注
+    is_plugin            Boolean    @default(false) // 是否有插件
+    is_plugin_remark     String     @default("") // 插件备注
 
     // 多种价格
     price_free     Int @default(0) // 免费价格

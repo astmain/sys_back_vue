@@ -9,7 +9,7 @@
 
         <el-menu style="flex: 1" v-show="BUS.web_type === 'shop'" mode="horizontal" :default-active="active_menu" router class="header_menu" color background-color="#304156" text-color="#bfcbd9" active-text-color="#409eff">
           <el-menu-item index="/print_3d">3D打印</el-menu-item>
-          <el-menu-item index="/model_3d">3D模型</el-menu-item>
+          <el-menu-item index="/model_shop">3D模型</el-menu-item>
         </el-menu>
 
         <div style="display: flex; align-items: center; gap: 10px; justify-content: center">

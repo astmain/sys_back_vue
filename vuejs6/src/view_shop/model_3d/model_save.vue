@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col gap-2">
     <!-- 商品基本参数 -->
-    <nav class="flex gap-20">
+    <nav class="flex gap-2">
       <span class="w-30 text-lg font-bold">商品基本参数</span>
     </nav>
-    <nav class="flex gap-20">
+    <nav class="flex gap-2">
       <span class="w-30">标题</span>
       <el-input v-model="form.title" style="width: 600px" />
     </nav>
@@ -17,7 +17,7 @@
       </el-select>
 
       <div v-if="form.price_type === 'price_free'">
-        <Cinput1 :prefix="{ name: '免费价格' }" v-model:value="form.arg_product_model.price_free" />
+        <Cinput1 :prefix="{ name: '免费价格' }" value="0" disabled />
       </div>
       <div v-else class="flex gap-2">
         <Cinput1 :prefix="{ name: '个人价格' }" v-model:value="form.arg_product_model.price_personal" />
@@ -26,88 +26,65 @@
       </div>
     </nav>
 
-    <nav class="flex gap-20">
-      <span class="w-30">是否有插件</span>
-      <el-switch v-model="form.arg_product_model.is_plug_in" />
-      <el-input v-model="form.arg_product_model.is_plug_in_remark" style="width: 200px" placeholder="插件备注" />
+    <!-- 商品其他参数 -->
+    <nav class="flex gap-2">
+      <span class="w-30 text-lg font-bold">商品其他参数</span>
     </nav>
 
-    <nav class="flex gap-20">
+    <nav class="flex gap-2">
+      <span class="w-30">主图轮播图</span>
+      <div class="flex">
+        <div v-for="item in form.arg_product_model.list_main_img"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+        <label for="input_list_main_img" class="flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+          <input id="input_list_main_img" type="file" @change="input_list_main_img" hidden />
+          <div>+</div>
+        </label>
+      </div>
+    </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">线框图</span>
+      <div class="flex">
+        <div v-for="item in form.arg_product_model.list_wireframe"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+        <label for="input_list_wireframe" class="flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400">
+          <input id="input_list_wireframe" type="file" @change="input_list_wireframe" hidden />
+          <div>+</div>
+        </label>
+      </div>
+    </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">视频</span>
+      <div class="flex">
+        <div v-for="item in form.arg_product_model.list_video"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+        <label for="input_list_video" class="flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+          <input id="input_list_video" type="file" @change="input_list_video" hidden />
+          <div>+</div>
+        </label>
+      </div>
+    </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">附件</span>
+      <div class="flex">
+        <div v-for="item in form.arg_product_model.list_extend"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
+        <label for="input_list_extend" class="flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
+          <input id="input_list_extend" type="file" @change="input_list_extend" hidden />
+          <div>+</div>
+        </label>
+      </div>
+    </nav>
+
+    <nav class="flex gap-2">
+      <el-switch class="w-30" v-model="form.arg_product_model.is_plugin" inline-prompt active-text="有插件" inactive-text="无插件" />
+      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_plugin_remark" style="width: 200px" placeholder="插件备注" />
+    </nav>
+
+    <nav class="flex gap-2">
       <span class="w-30">备注</span>
       <el-input v-model="form.remark" style="width: 200px" />
     </nav>
-
-    <!-- <nav class="flex gap-20">
-      <span class="w-30">审核类型</span>
-      <el-input v-model="form.type_check" style="width: 200px" />
-    </nav>
-    <nav class="flex gap-20">
-      <span class="w-30">审核类型备注</span>
-      <el-input v-model="form.type_check_remark" style="width: 200px" />
-    </nav> -->
   </div>
-
-  <!-- 商品其他参数 -->
-  <nav class="flex gap-20">
-    <span class="w-30 text-lg font-bold">商品其他参数</span>
-  </nav>
-
-  <nav class="flex gap-20 pt-2">
-    <span class="w-30">主图轮播图</span>
-    <div class="flex">
-      <div v-for="item in form.arg_product_model.list_main_img"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
-      <label for="input_list_main_img" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
-        <input id="input_list_main_img" type="file" @change="input_list_main_img" hidden />
-        <div>+</div>
-      </label>
-    </div>
-  </nav>
-
-  <nav class="flex gap-20 pt-2">
-    <span class="w-30">线框图</span>
-    <div class="flex">
-      <div v-for="item in form.arg_product_model.list_wireframe"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
-      <label for="input_list_wireframe" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
-        <input id="input_list_wireframe" type="file" @change="input_list_wireframe" hidden />
-        <div>+</div>
-      </label>
-    </div>
-  </nav>
-
-  <nav class="flex gap-20 pt-2">
-    <span class="w-30">视频</span>
-    <div class="flex">
-      <div v-for="item in form.arg_product_model.list_video"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
-      <label for="input_list_video" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
-        <input id="input_list_video" type="file" @change="input_list_video" hidden />
-        <div>+</div>
-      </label>
-    </div>
-  </nav>
-
-  <nav class="flex gap-20 pt-2">
-    <span class="w-30">附件</span>
-    <div class="flex">
-      <div v-for="item in form.arg_product_model.list_extend"><img v-if="item.url" :src="item.url" class="w-20 h-20" /></div>
-      <label for="input_list_extend" class="ml-2 flex items-center justify-center w-20 h-20 border-2 border-dashed border-gray-400 p-4">
-        <input id="input_list_extend" type="file" @change="input_list_extend" hidden />
-        <div>+</div>
-      </label>
-    </div>
-  </nav>
-
-  <Cinput1
-    v-model:value="form.user_id"
-    placeholder="请输入内容"
-    :css="{ width: clazz_width }"
-    :prefix="{
-      name: '用户ID',
-      click: () => 测试clazz(),
-    }"
-  />
-  <div>parent:{{ form.user_id }}</div>
-  <div>clazz_width:{{ clazz_width }}</div>
-  <el-button type="primary" @click="测试clazz()">测试clazz</el-button>
   <el-button type="primary" @click="save_product">保存商品</el-button>
 </template>
 
@@ -132,8 +109,8 @@ let form = ref({
     price_personal: 1,
     price_company: 1,
     price_extend: 1,
-    is_plug_in: false,
-    is_plug_in_remark: "",
+    is_plugin: false,
+    is_plugin_remark: "",
     list_main_img: [] as info_file[],
     list_wireframe: [] as info_file[],
     list_video: [] as info_file[],

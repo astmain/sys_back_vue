@@ -21,7 +21,12 @@ export class product {
   @Api_Post('查询-商品-列表')
   async find_list_product(@Body() body: find_list_product, @Req() req: any) {
     const where: any = { title: { contains: body.title || '' } }
-    const list = await db.tb_product.findMany({ where, include: { arg_product_model: true } })
+    let list = await db.tb_product.findMany({ where, include: { arg_product_model: true } })
+    for (let i = 0; i < list.length; i++) {
+      let item = list[i]
+      let user = await db.sys_user.findUnique({ where: { id: item.user_id } })
+      list[i]['user'] = { name: user?.name, avatar: user?.avatar }
+    }
     return { code: 200, msg: '成功', result: list }
   }
 

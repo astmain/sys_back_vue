@@ -19,9 +19,10 @@ export const view_admin = [
 // ==================== 商城界面 ====================
 export const view_shop = [
   { name: "3D打印", path: "/print_3d", component: () => import("@/view_shop/print_3d/print_3d.vue") },
-  { name: "3D模型", path: "/model_3d", component: () => import("@/view_shop/model_3d/model_3d.vue") },
+  { name: "3D模型", path: "/model_shop", component: () => import("@/view_shop/model_3d/model_shop.vue") },
   { name: "模型上传", path: "/model_save", component: () => import("@/view_shop/model_3d/model_save.vue") },
   { name: "模型管理", path: "/model_manage", component: () => import("@/view_shop/model_3d/model_manage.vue") },
+  { name: "模型商品", path: "/model_product", component: () => import("@/view_shop/model_3d/model_product.vue") },
 ]
 
 // ==================== 路由配置 ====================

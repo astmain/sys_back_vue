@@ -50,8 +50,8 @@ export let api = {
         price_personal: number
         price_company: number
         price_extend: number
-        is_plug_in: boolean
-        is_plug_in_remark: string
+        is_plugin: boolean
+        is_plugin_remark: string
         list_main_img: info_file[]
         list_wireframe: info_file[]
         list_video: info_file[]
