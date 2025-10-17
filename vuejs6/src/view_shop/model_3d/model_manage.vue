@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <el-dialog v-model="dialog_visible" title="编辑模型" width="1000px" draggable :close-on-click-modal="false">
+  <el-dialog v-model="dialog_visible" title="编辑模型" width="1200px" draggable :close-on-click-modal="false">
     <model_save ref="model_save_ref" />
   </el-dialog>
 </template>

@@ -9,9 +9,9 @@
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="user_center"> 个人中心</el-dropdown-item>
-          <el-dropdown-item command="logout"> 退出</el-dropdown-item>
           <el-dropdown-item command="model_save"> 模型上传</el-dropdown-item>
           <el-dropdown-item command="model_manage"> 模型管理</el-dropdown-item>
+          <el-dropdown-item command="logout"> 退出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

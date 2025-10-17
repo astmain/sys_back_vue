@@ -9,28 +9,28 @@
       <el-input v-model="form.title" style="width: 600px" />
     </nav>
 
-    <nav class="flex gap-20">
+    <nav class="flex gap-2">
       <span class="w-30">价格类型</span>
-      <el-select v-model="form.price_type" placeholder="Select" style="width: 200px">
+      <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
         <el-option label="免费分享" value="price_free" />
         <el-option label="素材出售" value="price_personal" />
       </el-select>
 
       <div v-if="form.price_type === 'price_free'">
-        <el-input v-model="form.arg_product_model.price_free" style="width: 200px">
+        <el-input v-model="form.arg_product_model.price_free" style="width: 180px">
           <template #prepend>免费价格</template>
         </el-input>
       </div>
-      <div v-else class="flex gap-5">
-        <el-input v-model="form.arg_product_model.price_personal" style="width: 200px">
+      <div v-else class="flex gap-2">
+        <el-input v-model="form.arg_product_model.price_personal" style="width: 180px">
           <template #prepend>个人价格</template>
         </el-input>
 
-        <el-input v-model="form.arg_product_model.price_company" style="width: 200px">
+        <el-input v-model="form.arg_product_model.price_company" style="width: 180px">
           <template #prepend>企业价格</template>
         </el-input>
 
-        <el-input v-model="form.arg_product_model.price_extend" style="width: 200px">
+        <el-input v-model="form.arg_product_model.price_extend" style="width: 180px">
           <template #prepend>企业扩展价格</template>
         </el-input>
       </div>
@@ -181,7 +181,7 @@ async function init_form(title: string) {
 }
 
 // 暴露方法给父组件调用
-defineExpose({ form ,init_form})
+defineExpose({ form, init_form })
 </script>
 
 <style scoped></style>
