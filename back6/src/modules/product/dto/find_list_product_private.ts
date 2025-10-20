@@ -5,7 +5,7 @@ import { IsNumber, IsString, IsNotEmpty, IsOptional, IsBoolean, IsArray, Validat
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
-export class find_list_product {
+export class find_list_product_private {
   @ApiProperty({ description: '标题', example: 'cuid_string' })
   @IsString({ message: '标题-必须是字符串' })
   title: string

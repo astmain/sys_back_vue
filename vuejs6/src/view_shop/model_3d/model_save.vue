@@ -125,17 +125,6 @@
       <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_copyright_remark" style="width: 200px" placeholder="请填写版权备注" />
     </nav>
 
-    <!--
-    is_business: false,
-    is_skeleton: false,
-    is_animation: false,
-    is_print: false,
-    is_no_collapse: false,
-    is_chartlet: false, //贴图
-    is_texture: false, //材质
-    is_copyright: false, //版权
-     -->
-
     <nav class="flex gap-2">
       <span class="w-30">备注</span>
       <el-input v-model="form.remark" style="width: 200px" />
@@ -146,6 +135,7 @@
 
 <script setup lang="tsx">
 import { ref, onMounted } from "vue"
+import { BUS } from "@/BUS"
 import { api, type info_file } from "@/api"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
@@ -160,7 +150,8 @@ let dict_info = ref<any>({
 
 let form = ref({
   // product_id: "string",
-  user_id: "user_1",
+  // user_id: "user_1",
+  user_id:BUS.user.id,
   title: "",
   remark: "",
   price_type: "price_free",

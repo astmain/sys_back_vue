@@ -2,7 +2,7 @@
   <div>
     <h2 style="margin-bottom: 30px">商城3D模型</h2>
 
-    <el-button type="primary" @click="find_list_product">搜索</el-button>
+    <el-button type="primary" @click="find_list_product_public">搜索</el-button>
 
     <div class="css_grid">
       <div class="css_card" v-for="(product, index) in products" :key="index" @click="go_model_product(product.product_id)">
@@ -28,9 +28,9 @@ import { useRouter } from "vue-router"
 // 响应式数据
 let products = $ref<any[]>([])
 const router = useRouter()
-async function find_list_product() {
+async function find_list_product_public() {
   const form = { title: "" }
-  const res: any = await api.product.find_list_product(form)
+  const res: any = await api.product.find_list_product_public(form)
   console.log("find_list_product---res", res)
   if (res.code !== 200) return alert("错了")
   products = res.result
@@ -41,7 +41,7 @@ async function go_model_product(product_id: string) {
 }
 
 onMounted(() => {
-  find_list_product()
+  find_list_product_public()
 })
 </script>
 

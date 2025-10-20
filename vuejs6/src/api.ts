@@ -17,7 +17,6 @@ export let api = {
     save_dict: (form: { parent_id?: string; id?: string; name: string; code: string; remark: string; status: boolean; sort: number }) => axios_api.post("/dict/save_dict", form),
     remove_dict_ids: (form: { ids: string[] }) => axios_api.post("/dict/remove_dict_ids", form),
     find_list_dict: (form: { parent_id?: string }) => axios_api.post("/dict/find_list_dict", form),
-    
   },
 
   depart: {
@@ -43,7 +42,8 @@ export let api = {
   },
 
   product: {
-    find_list_product: (form: { title: string }) => axios_api.post("/product/find_list_product", form),
+    find_list_product_public: (form: { title: string }) => axios_api.post("/product/find_list_product_public", form),
+    find_list_product_private: (form: { title: string }) => axios_api.post("/product/find_list_product_private", form),
     find_one_product: (form: { product_id: string }) => axios_api.post("/product/find_one_product", form),
     remove_product_ids: (form: { ids: string[] }) => axios_api.post("/product/remove_product_ids", form),
     save_product: (form: {

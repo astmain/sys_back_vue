@@ -2,7 +2,7 @@
   <div>
     <h1>模型管理</h1>
 
-    <el-button type="primary" @click="find_list_product">查询</el-button>
+    <el-button type="primary" @click="find_list_product_private">查询</el-button>
 
     <div>
       <div v-for="(item, index) in list_product" :key="index">
@@ -38,8 +38,8 @@ let model_save_ref = $ref<any>(null)
 let list_product = $ref<any[]>([])
 let form = $ref<any>({ title: "" })
 let dialog_visible = $ref(false)
-async function find_list_product() {
-  const res: any = await api.product.find_list_product(form)
+async function find_list_product_private() {  
+  const res: any = await api.product.find_list_product_private(form)
   console.log("find_list_product---res", res)
   if (res.code !== 200) return alert("错了")
   list_product = res.result
@@ -57,11 +57,11 @@ async function remove_product_ids(ids: string[]) {
   const res: any = await api.product.remove_product_ids({ ids })
   console.log("remove_product_ids---res", res)
   if (res.code !== 200) return alert("错了")
-  find_list_product()
+  find_list_product_private()
 }
 
 onMounted(() => {
-  find_list_product()
+  find_list_product_private()
 })
 </script>
 
