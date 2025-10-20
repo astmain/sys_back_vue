@@ -9,11 +9,6 @@
       <el-input v-model="form.title" style="width: 600px" />
     </nav>
 
-    <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
-      <el-option label=".stl" value=".stl" />
-      <el-option label=".stl" value=".stl" />
-    </el-select>
-
     <nav class="flex gap-2">
       <span class="w-30">价格类型</span>
       <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
@@ -81,17 +76,65 @@
     </nav>
 
     <nav class="flex gap-2">
-      <el-switch class="w-30" v-model="form.arg_product_model.is_plugin" inline-prompt active-text="有插件" inactive-text="无插件" />
-      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_plugin_remark" style="width: 200px" placeholder="插件备注" />
+      <span class="w-30">文件格式</span>
+      <el-select v-model="form.arg_product_model.type_format" placeholder="Select" style="width: 120px">
+        <el-option v-for="(item, index) in dict_info.type_format.children" :key="index" :label="item.name" :value="item.code" />
+      </el-select>
     </nav>
 
     <nav class="flex gap-2">
-      <span class="w-30">附件</span>
-      <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
-        <el-option label=".stl" value=".stl" />
-        <el-option label=".stl" value=".stl" />
+      <span class="w-30">面片数</span>
+      <el-select v-model="form.arg_product_model.type_area" placeholder="Select" style="width: 120px">
+        <el-option v-for="(item, index) in dict_info.type_area.children" :key="index" :label="item.name" :value="item.code" />
       </el-select>
     </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">布线数</span>
+      <el-select v-model="form.arg_product_model.type_wiring" placeholder="Select" style="width: 120px">
+        <el-option v-for="(item, index) in dict_info.type_wiring.children" :key="index" :label="item.name" :value="item.code" />
+      </el-select>
+    </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">uv数</span>
+      <el-select v-model="form.arg_product_model.type_uv" placeholder="Select" style="width: 120px">
+        <el-option v-for="(item, index) in dict_info.type_uv.children" :key="index" :label="item.name" :value="item.code" />
+      </el-select>
+    </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">商品属性</span>
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_business" active-text="可以商用" inactive-text="不可商用" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_business" active-text="有骨架" inactive-text="无骨架" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_animation" active-text="有动画" inactive-text="无动画" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_print" active-text="可打印" inactive-text="不可打印" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_no_collapse" active-text="无塌陷" inactive-text="有塌陷" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_chartlet" active-text="有贴图" inactive-text="无贴图" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_texture" active-text="有材质" inactive-text="无材质" />
+    </nav>
+
+    <nav class="flex gap-2">
+      <span class="w-30">插件介绍</span>
+      <el-switch class="w-30" v-model="form.arg_product_model.is_plugin" inline-prompt active-text="有插件" inactive-text="无插件" />
+      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_plugin_remark" style="width: 200px" placeholder="请填写插件备注" />
+    </nav>
+    <nav class="flex gap-2">
+      <span class="w-30">版权介绍</span>
+      <el-switch class="w-30" v-model="form.arg_product_model.is_copyright" inline-prompt active-text="有版权" inactive-text="无版权" />
+      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_copyright_remark" style="width: 200px" placeholder="请填写版权备注" />
+    </nav>
+
+    <!--
+    is_business: false,
+    is_skeleton: false,
+    is_animation: false,
+    is_print: false,
+    is_no_collapse: false,
+    is_chartlet: false, //贴图
+    is_texture: false, //材质
+    is_copyright: false, //版权
+     -->
 
     <nav class="flex gap-2">
       <span class="w-30">备注</span>
@@ -108,7 +151,12 @@ import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 import { Cinput1 } from "@/components/Cinput1"
 
-let dict_info = [] as any[]
+let dict_info = ref<any>({
+  type_format: { children: [] },
+  type_area: { children: [] },
+  type_wiring: { children: [] },
+  type_uv: { children: [] },
+})
 
 let form = ref({
   // product_id: "string",
@@ -120,7 +168,23 @@ let form = ref({
   type_check: "check_pending",
   type_check_remark: "",
   arg_product_model: {
-    type_format: "",
+    type_format: "format1",
+    type_area: "area1",
+    type_wiring: "wiring1",
+    type_uv: "uv1",
+
+    //
+    is_business: false,
+    is_skeleton: false,
+    is_animation: false,
+    is_print: false,
+    is_no_collapse: false,
+    is_chartlet: false, //贴图
+    is_texture: false, //材质
+    is_copyright: false, //版权
+    is_copyright_remark: "", //版权
+
+    //
 
     price_free: 0,
     price_personal: 1,
@@ -187,12 +251,9 @@ async function save_product() {
 
 onMounted(async () => {
   const res: any = await api.dict.find_list_dict({})
+  console.log("find_list_dict---res", JSON.parse(JSON.stringify(res)))
   if (res.code != 200) return ElMessage.error(res.message)
-  dict_info = res.result
-  console.log("dict_info---dict_info", JSON.parse(JSON.stringify(dict_info)))
-
-  let type_format = dict_info.find((item) => item.code === "type_format").children
-  console.log("type_format---type_format", type_format)
+  dict_info.value = res.result.dict_obj
 })
 
 // 暴露方法给父组件调用

@@ -17,7 +17,7 @@ export let api = {
     save_dict: (form: { parent_id?: string; id?: string; name: string; code: string; remark: string; status: boolean; sort: number }) => axios_api.post("/dict/save_dict", form),
     remove_dict_ids: (form: { ids: string[] }) => axios_api.post("/dict/remove_dict_ids", form),
     find_list_dict: (form: { parent_id?: string }) => axios_api.post("/dict/find_list_dict", form),
-
+    
   },
 
   depart: {

@@ -84,9 +84,9 @@ export class arg_product_model {
   @IsIn(['wiring1', 'wiring2', 'wiring3', 'wiring4', 'wiring5'], { message: "布线-必须是['wiring1', 'wiring2', 'wiring3', 'wiring4', 'wiring5']" })
   type_wiring: string
 
-  @ApiProperty({ description: '(字典)审核类型', example: 'check_publish' })
-  @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "审核类型-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
-  type_check: string
+  // @ApiProperty({ description: '(字典)审核类型', example: 'check_publish' })
+  // @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "审核类型-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
+  // type_check: string
 
   @ApiProperty({ description: '是否商用', example: false })
   @IsBoolean()
