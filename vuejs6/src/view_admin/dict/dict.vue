@@ -90,8 +90,6 @@ async function save_dict(title: string) {
   ctx.form_reset()
 
   if (title === "新增字典父级") {
-    ctx.form.value.id = ""
-    ctx.form.value.parent_id = ""
     ctx.callback.value = async () => {
       let form = ctx.form.value
       let res: any = await api.dict.save_dict(form)
@@ -101,7 +99,6 @@ async function save_dict(title: string) {
     }
   }
   if (title === "新增字典子级") {
-    ctx.form.value.id = ""
     ctx.form.value.parent_id = curr_parent.id
   }
 
@@ -110,8 +107,6 @@ async function save_dict(title: string) {
   }
 
   if (title === "编辑字典子级") {
-    // ctx.form.value.id = curr_child.id
-    // ctx.form.value.parent_id = curr_child.parent_id
     ctx.form.value = curr_child
   }
 

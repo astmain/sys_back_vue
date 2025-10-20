@@ -72,20 +72,20 @@ export class arg_product_model {
   @IsString()
   type_format: string
 
-  @ApiProperty({ description: '面片数', example: 'area1' })
+  @ApiProperty({ description: '(字典)面片数', example: 'area1' })
   @IsIn(['area1', 'area2', 'area3', 'area4', 'area5'], { message: "面片数-必须是['area1', 'area2', 'area3', 'area4', 'area5']" })
   type_area: string
 
-  @ApiProperty({ description: '(uv)', example: 'uv1' })
+  @ApiProperty({ description: '(字典)uv', example: 'uv1' })
   @IsIn(['uv1', 'uv2', 'uv3', 'uv4'], { message: "uv-必须是['uv1', 'uv2', 'uv3', 'uv4']" })
   type_uv: string
 
-  @ApiProperty({ description: '(布线)', example: '三角形' })
+  @ApiProperty({ description: '(字典)布线', example: '三角形' })
   @IsIn(['wiring1', 'wiring2', 'wiring3', 'wiring4', 'wiring5'], { message: "布线-必须是['wiring1', 'wiring2', 'wiring3', 'wiring4', 'wiring5']" })
   type_wiring: string
 
-  @ApiProperty({ description: '(模型商品审核类型)字典', example: 'check_publish' })
-  @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "布线-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
+  @ApiProperty({ description: '(字典)审核类型', example: 'check_publish' })
+  @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "审核类型-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
   type_check: string
 
   @ApiProperty({ description: '是否商用', example: false })

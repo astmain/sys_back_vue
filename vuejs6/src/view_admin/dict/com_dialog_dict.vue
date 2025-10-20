@@ -47,7 +47,7 @@ import { id } from "zod/v4/locales"
 const show = ref(false)
 const title = ref("")
 let callback = ref(async () => {}) //回调函数
-const form = ref({ id: "", parent_id: "", name: "", code: "", status: true, remark: "", sort: 0 })
+const form = ref({ id: "", parent_id: null as any, name: "", code: "", status: true, remark: "", sort: 0 })
 
 async function submit() {
   callback.value()
@@ -55,7 +55,7 @@ async function submit() {
 }
 
 function form_reset() {
-  form.value = { id: "", parent_id: "", name: "", code: "", status: true, remark: "", sort: 0 }
+  form.value = { id: "", parent_id: null, name: "", code: "", status: true, remark: "", sort: 0 }
 }
 
 defineExpose({ show, title, open, submit, form, form_reset, callback })
