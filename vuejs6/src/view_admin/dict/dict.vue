@@ -10,7 +10,7 @@
       <nav class="flex flex-col gap-2 mr-5">
         <div v-for="(item, index) in list_dict_parent" :key="item.id">
           <el-dropdown trigger="contextmenu" @visible-change="(visible) => handle_node_click(item.id)">
-            <div @click="handle_node_click(item.id)" class="w-200px cursor-pointer hover:bg-gray-100 p-2">
+            <div @click="handle_node_click(item.id)" :class="{ 'bg-blue-100': active === item.id }" class="w-200px cursor-pointer p2">
               {{ item.name }}
             </div>
             <template #dropdown>
@@ -67,8 +67,9 @@ import { ref, onMounted } from "vue"
 import { api } from "@/api"
 import { ElMessage } from "element-plus"
 
-import com_dialog_dict from "./com_dialog_dict.vue"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
+import com_dialog_dict from "./com_dialog_dict.vue"
+let active = ref(null as any)
 
 let list_dict_parent = $ref([] as any[])
 let curr_parent = $ref({ name: "", code: "", remark: "", status: true, sort: 0, children: [] as any } as any)
@@ -86,6 +87,8 @@ async function save_dict(title: string) {
   // debugger
   ctx.title.value = title
   ctx.show.value = true
+  ctx.form_reset()
+
   if (title === "新增字典父级") {
     ctx.form.value.id = ""
     ctx.form.value.parent_id = ""
@@ -130,8 +133,7 @@ async function handle_child_click(id: string) {
 
 async function handle_node_click(id: string) {
   console.log(`111---handle_node_click---id:`, id)
-  console.log(`222---handle_node_click---list_dict_parent:`, list_dict_parent)
-
+  active.value = id
   curr_parent = list_dict_parent.find((item: any) => item.id === id)
 }
 
