@@ -40,6 +40,8 @@ export class product {
   async save_product(@Body() body: save_product, @Req() req: any) {
     if (body.product_id) {
       let { arg_product_model, ...data } = body
+      data['type_check'] = 'check_pending'//更新商品审核状态为待审核
+      data['type_check_remark'] = ''
       await db.tb_product.update({ where: { product_id: body.product_id }, data: data })
       await db.arg_product_model.update({ where: { product_id: body.product_id }, data: body.arg_product_model })
       return { code: 200, msg: '成功-更新', result: {} }
@@ -47,6 +49,8 @@ export class product {
       let { arg_product_model, ...data } = body
       data['price_num'] = arg_product_model[data.price_type]
       data['main_img'] = arg_product_model.list_main_img[0].url
+      data['type_check'] = 'check_pending'//新增商品审核状态为待审核
+      data['type_check_remark'] = ''
       const one = await db.tb_product.create({ data: data })
       const arg = await db.arg_product_model.create({ data: { ...arg_product_model, product_id: one.product_id } })
       return { code: 200, msg: '成功-上传', result: { one, arg } }

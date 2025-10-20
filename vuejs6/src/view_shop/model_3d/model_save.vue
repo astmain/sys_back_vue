@@ -9,6 +9,11 @@
       <el-input v-model="form.title" style="width: 600px" />
     </nav>
 
+    <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
+      <el-option label=".stl" value=".stl" />
+      <el-option label=".stl" value=".stl" />
+    </el-select>
+
     <nav class="flex gap-2">
       <span class="w-30">价格类型</span>
       <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
@@ -105,9 +110,12 @@ let form = ref({
   type_check: "check_pending",
   type_check_remark: "",
   arg_product_model: {
+    type_format: "",
+
     price_free: 0,
     price_personal: 1,
     price_company: 1,
+
     price_extend: 1,
     is_plugin: false,
     is_plugin_remark: "",

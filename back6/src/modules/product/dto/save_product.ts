@@ -5,6 +5,8 @@ import { Matches, IsNumber, IsString, IsNotEmpty, ArrayMinSize, IsOptional, IsBo
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
+import { i_format, IsFormatsArray } from './IsFormatsArray'
+
 export class info_file {
   @ApiProperty({ description: 'url', example: 'https://www.baidu.com/img/flexible/logo/pc/result.png' })
   @IsString()
@@ -65,6 +67,55 @@ export class arg_product_model {
   @Type(() => info_file)
   list_extend: info_file[]
 
+  @ApiProperty({ description: '文件名称', example: 'format1' })
+  @IsFormatsArray({ message: '格式,必须是-' + i_format.join(',') }, i_format)
+  @IsString()
+  type_format: string
+
+  @ApiProperty({ description: '面片数', example: 'area1' })
+  @IsIn(['area1', 'area2', 'area3', 'area4', 'area5'], { message: "面片数-必须是['area1', 'area2', 'area3', 'area4', 'area5']" })
+  type_area: string
+
+  @ApiProperty({ description: '(uv)', example: 'uv1' })
+  @IsIn(['uv1', 'uv2', 'uv3', 'uv4'], { message: "uv-必须是['uv1', 'uv2', 'uv3', 'uv4']" })
+  type_uv: string
+
+  @ApiProperty({ description: '(布线)', example: '三角形' })
+  @IsIn(['wiring1', 'wiring2', 'wiring3', 'wiring4', 'wiring5'], { message: "布线-必须是['wiring1', 'wiring2', 'wiring3', 'wiring4', 'wiring5']" })
+  type_wiring: string
+
+  @ApiProperty({ description: '(模型商品审核类型)字典', example: 'check_publish' })
+  @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "布线-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
+  type_check: string
+
+  @ApiProperty({ description: '是否商用', example: false })
+  @IsBoolean()
+  is_business: boolean
+
+  @ApiProperty({ description: '是否有骨骼', example: false })
+  @IsBoolean()
+  is_skeleton: boolean
+
+  @ApiProperty({ description: '是否有动画', example: false })
+  @IsBoolean()
+  is_animation: boolean
+
+  @ApiProperty({ description: '是否可打印', example: false })
+  @IsBoolean()
+  is_print: boolean
+
+  @ApiProperty({ description: '未塌陷', example: true })
+  @IsBoolean()
+  is_no_collapse: boolean
+
+  @ApiProperty({ description: '是否有贴图', example: false })
+  @IsBoolean()
+  is_chartlet: boolean
+
+  @ApiProperty({ description: '是否有材质', example: false })
+  @IsBoolean()
+  is_texture: boolean
+
   @ApiProperty({ description: '是否有插件', example: false })
   @IsBoolean()
   is_plugin: boolean
@@ -72,6 +123,14 @@ export class arg_product_model {
   @ApiProperty({ description: '插件备注', example: '' })
   @IsString()
   is_plugin_remark: string
+
+  @ApiProperty({ description: '是否有版权', example: false })
+  @IsBoolean()
+  is_copyright: boolean
+
+  @ApiProperty({ description: '版权备注', example: '' })
+  @IsString()
+  is_copyright_remark: string
 }
 
 export class save_product {
@@ -105,9 +164,9 @@ export class save_product {
   @IsString()
   type_product: string
 
-  @ApiProperty({ description: '审核类型', example: 'check_publish' })
-  @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "审核类型-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
-  type_check: string
+  // @ApiProperty({ description: '审核类型', example: 'check_publish' })
+  // @IsIn(['check_pending', 'check_refuse', 'check_success', 'check_publish'], { message: "审核类型-必须是['check_pending','check_refuse',   'check_success','check_publish']" })
+  // type_check: string
 
   @ApiProperty({ description: '审核类型备注', example: '' })
   @IsString()
