@@ -10,44 +10,45 @@ import _ from 'lodash'
 
 // ==================== dto ====================
 import { save_dict } from './dto/save_dict'
-
+import { remove_dict_ids } from './dto/remove_dict_ids'
+import { find_list_dict } from './dto/find_list_dict'
 
 @Api_public()
-@Api_Controller('商品')
-export class product {
-
-
-
-  @Api_Post('保存-商品')
-  async save_product(@Body() body: save_dict, @Req() req: any) {
-    // if (body.product_id) {
-    //   let { arg_product_model, ...data } = body
-    //   data['type_check'] = 'check_pending'//更新商品审核状态为待审核
-    //   data['type_check_remark'] = ''
-    //   await db.tb_product.update({ where: { product_id: body.product_id }, data: data })
-    //   await db.arg_product_model.update({ where: { product_id: body.product_id }, data: body.arg_product_model })
-    //   return { code: 200, msg: '成功-更新', result: {} }
-    // } else {
-    //   let { arg_product_model, ...data } = body
-    //   data['price_num'] = arg_product_model[data.price_type]
-    //   data['main_img'] = arg_product_model.list_main_img[0].url
-    //   data['type_check'] = 'check_pending'//新增商品审核状态为待审核
-    //   data['type_check_remark'] = ''
-    //   const one = await db.tb_product.create({ data: data })
-    //   const arg = await db.arg_product_model.create({ data: { ...arg_product_model, product_id: one.product_id } })
-    //   return { code: 200, msg: '成功-上传', result: { one, arg } }
+@Api_Controller('字典')
+export class dict {
+  @Api_Post('保存-字典')
+  async save_dict(@Body() body: save_dict, @Req() req: any) {
+    let { id, ...data } = body
+    if (id) {
+      await db.dict.update({ where: { id: body.id }, data: data })
+      return { code: 200, msg: '成功-更新', result: {} }
+    } else {
+      const one = await db.dict.create({ data: data })
+      return { code: 200, msg: '成功-新增', result: {} }
     }
+  }
 
+  @Api_Post('删除-商品')
+  async remove_product_ids(@Body() body: remove_dict_ids, @Req() req: any) {
+    await db.dict.deleteMany({ where: { id: { in: body.ids } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
 
-  // @Api_Post('删除-商品')
-  // async remove_product_ids(@Body() body: remove_product_ids, @Req() req: any) {
-  //   await db.tb_product.deleteMany({ where: { product_id: { in: body.ids } } })
-  //   return { code: 200, msg: '成功', result: {} }
-  // }
+  @Api_Post('查询-字典-列表')
+  async find_list_dict(@Body() body: find_list_dict, @Req() req: any) {
+    let { id, ...data } = body
+    let list = []
+    if (id) {
+      list = await db.dict.findMany({ where: { parent_id: id } })
+    } else {
+      list = await db.dict.findMany({ where: { parent_id: null } })
+    }
+    return { code: 200, msg: '成功', result: { list } }
+  }
 }
 
 @Module({
-  controllers: [product],
+  controllers: [dict],
   providers: [],
 })
-export class product_Module {}
+export class dict_Module {}

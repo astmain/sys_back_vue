@@ -9,11 +9,13 @@ import { depart_Module } from '@src/modules/depart/depart'
 import { menu_Module } from '@src/modules/menu/menu'
 import { product_Module } from '@src/modules/product/product'
 import { test1_my_dto_Module } from '@src/modules/test/test1_my_dto'
+import { dict_Module } from '@src/modules/dict/dict'
 
 @Module({
   imports: [
     test1_my_dto_Module, //测试模块
     App_auth_Module, //身份验证(基础)
+    dict_Module, //字典模块
     App_prisma_Module, //数据库(基础)
     auth_Module, //业务模块(基础)
     user_Module, //用户模块

@@ -67,12 +67,14 @@ export class auth {
           { id: 'menu_2', name: '商城管理', path: '/shop' },
           { id: 'menu_3', name: '用户管理', path: '/system/user' },
           { id: 'menu_4', name: '菜单管理', path: '/system/menu' },
+          { id: 'menu_5', name: '字典管理', path: '/system/dict' },
           // 商城管理-子菜单
           { id: 'sub_2001', name: '订单管理', path: '/shop/order', parent_id: 'menu_2' },
           { id: 'sub_2002', name: '商品管理', path: '/shop/product', parent_id: 'menu_2' },
           { id: 'sub_2003', name: '财务管理', path: '/shop/finance', parent_id: 'menu_2' },
         ],
       })
+
       // 按钮权限(首页)
       let 首页_查看 = { parent_id: 'menu_1', path: '/home:查看', id: '/home:查看', remark: '首页_查看', name: '查看', type: 'button' }
       let 首页_删除 = { parent_id: 'menu_1', path: '/home:删除', id: '/home:删除', remark: '首页_删除', name: '删除', type: 'button' }
@@ -86,6 +88,13 @@ export class auth {
       let 用户管理_新增 = { parent_id: 'menu_3', path: '/system/user:新增', id: '/system/user:新增', remark: '用户管理_新增', name: '新增', type: 'button' }
       let 用户管理_修改 = { parent_id: 'menu_3', path: '/system/user:修改', id: '/system/user:修改', remark: '用户管理_修改', name: '修改', type: 'button' }
       await db.sys_menu.createMany({ data: [用户管理_查看, 用户管理_删除, 用户管理_新增, 用户管理_修改] })
+
+      // 按钮权限(用户管理)
+      let 字典_查看 = { parent_id: 'menu_5', path: '/system/dict:查看', id: '/system/dict:查看', remark: '字典_查看', name: '查看', type: 'button' }
+      let 字典_删除 = { parent_id: 'menu_5', path: '/system/dict:删除', id: '/system/dict:删除', remark: '字典_删除', name: '删除', type: 'button' }
+      let 字典_新增 = { parent_id: 'menu_5', path: '/system/dict:新增', id: '/system/dict:新增', remark: '字典_新增', name: '新增', type: 'button' }
+      let 字典_修改 = { parent_id: 'menu_5', path: '/system/dict:修改', id: '/system/dict:修改', remark: '字典_修改', name: '修改', type: 'button' }
+      await db.sys_menu.createMany({ data: [字典_查看, 字典_删除, 字典_新增, 字典_修改] })
 
       // 按钮权限(订单管理)
       let 订单管理_查看 = { parent_id: 'sub_2001', path: '/order:查看', id: '/order:查看', remark: '订单管理_查看', name: '查看', type: 'button' }
@@ -139,6 +148,10 @@ export class auth {
         首页_删除,
         首页_新增,
         首页_修改,
+        字典_查看, //字典
+        字典_删除,
+        字典_新增,
+        字典_修改,
         用户管理_查看, //用户管理
         用户管理_删除,
         用户管理_新增,

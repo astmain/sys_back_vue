@@ -1,0 +1,15 @@
+// 模型商品表
+model dict {
+    id String @id @default(cuid())
+    name String @unique // 名称
+    code String @unique // 编码
+    remark String @default("") // 备注
+    status Boolean @default(true) // 状态 true:正常 false:禁用
+    sort Int @default(0) // 排序
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+    parent_id String? // 父级id
+    parent dict? @relation("self_dict" ,fields: [parent_id], references: [id])
+    children dict[] @relation("self_dict")
+
+}
