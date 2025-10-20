@@ -79,7 +79,7 @@ async function find_list_dict() {
   const res: any = await api.dict.find_list_dict({ parent_id: undefined })
   console.log(`find_list_dict---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
-  list_dict_parent = res.result
+  list_dict_parent = res.result.dict_list
 }
 
 async function save_dict(title: string) {

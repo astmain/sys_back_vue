@@ -48,8 +48,8 @@ export class dict {
     // }
     // list = util_build_tree(list)
 
-    const list = await db.dict.findMany({ where: { parent_id: null }, include: { children: true }, orderBy: { sort: 'asc' } })
-    return { code: 200, msg: '成功', result: list }
+    const dict_list = await db.dict.findMany({ where: { parent_id: null }, include: { children: true }, orderBy: { sort: 'asc' } })
+    return { code: 200, msg: '成功', result: {dict_list} }
   }
 }
 

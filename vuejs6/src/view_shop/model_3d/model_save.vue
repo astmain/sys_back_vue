@@ -86,6 +86,14 @@
     </nav>
 
     <nav class="flex gap-2">
+      <span class="w-30">附件</span>
+      <el-select v-model="form.price_type" placeholder="Select" style="width: 120px">
+        <el-option label=".stl" value=".stl" />
+        <el-option label=".stl" value=".stl" />
+      </el-select>
+    </nav>
+
+    <nav class="flex gap-2">
       <span class="w-30">备注</span>
       <el-input v-model="form.remark" style="width: 200px" />
     </nav>
@@ -94,11 +102,13 @@
 </template>
 
 <script setup lang="tsx">
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import { api, type info_file } from "@/api"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 import { Cinput1 } from "@/components/Cinput1"
+
+let dict_info = [] as any[]
 
 let form = ref({
   // product_id: "string",
@@ -174,6 +184,16 @@ async function save_product() {
   console.log("save_product---res", res)
   if (res.code !== 200) ElMessage.error("参数错误标题不能未空")
 }
+
+onMounted(async () => {
+  const res: any = await api.dict.find_list_dict({})
+  if (res.code != 200) return ElMessage.error(res.message)
+  dict_info = res.result
+  console.log("dict_info---dict_info", JSON.parse(JSON.stringify(dict_info)))
+
+  let type_format = dict_info.find((item) => item.code === "type_format").children
+  console.log("type_format---type_format", type_format)
+})
 
 // 暴露方法给父组件调用
 defineExpose({ form })

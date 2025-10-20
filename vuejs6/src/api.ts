@@ -6,15 +6,18 @@ export interface info_file {
   file_name: string
 }
 
+export const dict_info = []
+
 export let api = {
   auth: {
     login: (form: { phone: string; password: string }) => axios_api.post("/auth/login", form),
   },
 
   dict: {
-    save_dict: (form: { parent_id?: string; id?: string; name: string; code: string; remark: string ,status: boolean,sort: number }) => axios_api.post("/dict/save_dict", form),
+    save_dict: (form: { parent_id?: string; id?: string; name: string; code: string; remark: string; status: boolean; sort: number }) => axios_api.post("/dict/save_dict", form),
     remove_dict_ids: (form: { ids: string[] }) => axios_api.post("/dict/remove_dict_ids", form),
     find_list_dict: (form: { parent_id?: string }) => axios_api.post("/dict/find_list_dict", form),
+
   },
 
   depart: {
