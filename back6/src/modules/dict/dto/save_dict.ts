@@ -7,14 +7,14 @@ import { registerDecorator, ValidationArguments, ValidationOptions } from 'class
 
 export class save_dict {
   @ApiProperty({ description: '字典id', example: 'cuid_string' })
+  @ValidateIf((o) => o.id !== null)
   @IsString({ message: '字典id-必须是字符串' })
-  id: string
+  id: string | null
 
   @ApiProperty({ description: '父级id', example: 'cuid_string', nullable: true })
   @ValidateIf((o) => o.parent_id !== null)
   @IsString({ message: '父级id-必须是字符串' })
-  parent_id?: string | null
-
+  parent_id: string | null
 
   @ApiProperty({ description: '名称', example: '名称' })
   @IsString({ message: '名称-必须是字符串' })

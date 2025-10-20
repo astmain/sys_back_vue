@@ -19,7 +19,6 @@ export class dict {
   @Api_Post('保存-字典')
   async save_dict(@Body() body: save_dict, @Req() req: any) {
     let { id, ...data } = body
-    data.parent_id = data.parent_id || null
     if (id) {
       console.log(`111---更新---id:`, id)
       await db.dict.update({ where: { id: body.id }, data: data })
