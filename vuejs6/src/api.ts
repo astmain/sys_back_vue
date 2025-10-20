@@ -11,6 +11,12 @@ export let api = {
     login: (form: { phone: string; password: string }) => axios_api.post("/auth/login", form),
   },
 
+  dict: {
+    save_dict: (form: { parent_id?: string; id?: string; name: string; code: string; remark: string ,status: boolean,sort: number }) => axios_api.post("/dict/save_dict", form),
+    remove_dict_ids: (form: { ids: string[] }) => axios_api.post("/dict/remove_dict_ids", form),
+    find_list_dict: (form: { parent_id?: string }) => axios_api.post("/dict/find_list_dict", form),
+  },
+
   depart: {
     find_depart_menu: (form: { role_id: string }) => axios_api.post("/depart/find_depart_menu", form),
     update_depart_role_menu: (form: { role_id: string; nodes_id: string[] }) => axios_api.post("/depart/update_depart_role_menu", form),

@@ -5,9 +5,9 @@ import { Matches, IsNumber, IsString, IsNotEmpty, ArrayMinSize, IsOptional, IsBo
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 export class find_list_dict {
-  @ApiProperty({ description: '字典id', example: 'cuid_string' })
-  @IsString({ message: '字典id-必须是字符串' })
-  @IsNotEmpty({ message: '字典id-必须不能为空' })
+  @ApiProperty({ description: '父级id', example: 'cuid_string' })
+  @IsString({ message: '父级id-必须是字符串' })
+  @IsNotEmpty({ message: '父级id-必须不能为空' })
   @IsOptional()
-  id?: string
+  parent_id?: string
 }
