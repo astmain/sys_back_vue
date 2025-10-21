@@ -1,7 +1,7 @@
 <template>
   <div v-if="product" class="flex gap-10">
     <div class="主图部分">
-      <img :src="product.user.avatar" style="width: 500px; height: 500px" />
+      <img class="w-400px h-400px" :src="product.main_img" />
     </div>
 
     <div>
