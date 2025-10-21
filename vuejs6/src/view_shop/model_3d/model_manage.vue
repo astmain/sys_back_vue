@@ -34,7 +34,7 @@
           </nav>
 
           <nav class="w-200px flex gap-4">
-            <div class="">{{ BUS.dict_obj.type_check[item.type_check].name }}</div>
+            <div :class="BUS.dict_obj.type_check[item.type_check].css">{{ BUS.dict_obj.type_check[item.type_check].name }}</div>
           </nav>
 
           <nav class="w-200px flex flex-col gap-2">
@@ -43,7 +43,7 @@
               <span>¥{{ item.arg_product_model.price_free }}</span>
             </div>
 
-            <div v-else class="flex flex-col gap-2">
+            <div v-else class="flex flex-col gap-2 text-sm">
               <span>付费价格</span>
               <span>个人价格¥{{ item.arg_product_model.price_personal }}</span>
               <span>企业价格¥{{ item.arg_product_model.price_company }}</span>
@@ -55,7 +55,7 @@
             <el-button style="margin: 0; padding: 0" link @click="edit_product(item)" type="primary">重新编辑</el-button>
             <el-button style="margin: 0; padding: 0" v-if="item.is_publish" @click="publish_product(item)" link type="info">下载商品</el-button>
             <el-button style="margin: 0; padding: 0" v-else @click="publish_product(item)" link type="primary">上架上品</el-button>
-            <el-button style="margin: 0; padding: 0" link @click="remove_product_ids([item.product_id])">删除商品</el-button>
+            <el-button style="margin: 0; padding: 0" @click="remove_product_ids([item.product_id])" link type="info">删除商品</el-button>
           </nav>
         </div>
       </div>
@@ -76,7 +76,8 @@ import { ElMessage } from "element-plus"
 import model_save from "./model_save.vue"
 let model_save_ref = $ref<any>(null)
 let list_product = $ref<any[]>([])
-let form = $ref<any>({ title: "", type_check: "check_success" })
+let form = $ref<any>({ title: "", type_check: "check_pending" })
+// let form = $ref<any>({ title: "", type_check: "check_success" })
 let dialog_visible = $ref(false)
 async function find_list_product_private() {
   const res: any = await api.product.find_list_product_private(form)

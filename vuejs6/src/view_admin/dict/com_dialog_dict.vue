@@ -28,6 +28,7 @@
 
         <el-form-item label="样式">
           <el-input v-model="form.css"></el-input>
+          <div :class="form.css">样式预览</div>
         </el-form-item>
 
         <el-form-item label="备注">

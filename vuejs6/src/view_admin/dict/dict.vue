@@ -130,6 +130,8 @@ async function save_dict(title: string) {
 
   ctx.callback.value = async () => {
     let form = ctx.form.value
+    console.log(`111---save_dict---callback---form:`, form)
+    // debugger
     let res: any = await api.dict.save_dict(form)
     if (res.code !== 200) return ElMessage.error(res.msg)
     ElMessage.success(res.msg)
