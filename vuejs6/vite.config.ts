@@ -44,8 +44,9 @@ export default defineConfig({
           ([, name]) => {
             return {
               display: "inline-block",
-              width: "1em",
-              height: "1em",
+              "vertical-align": "middle",
+              width: "1.25rem",
+              height: "1.25rem",
               "mask-size": "contain",
               "mask-repeat": "no-repeat",
               "mask-position": "center",

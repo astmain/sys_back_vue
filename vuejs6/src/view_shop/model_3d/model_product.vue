@@ -13,8 +13,8 @@
       </nav>
       <nav class="flex gap-2 items-center text-sm text-gray-400">
         <div>下载量:1</div>
-        <div class="cursor-pointer text-blue-500"><span class="icon-love" style="background: green !important; font-size: 24px"></span>收藏</div>
-        <div class="cursor-pointer text-blue-500"><span class="icon-aaa" style="background: green !important; font-size: 24px"></span>aaa</div>
+        <div class="cursor-pointer text-blue-500"><span class="icon-love !bg-red-500"></span>收藏</div>
+        <div class="cursor-pointer text-blue-500"><span class="icon-aaa" style="background: red; font-size: 20px"></span>aaa</div>
         <div>关注</div>
         <div>进入店铺</div>
       </nav>
