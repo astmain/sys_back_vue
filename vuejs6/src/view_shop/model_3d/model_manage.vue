@@ -38,7 +38,7 @@
           </nav>
 
           <nav class="w-200px flex flex-col gap-2">
-            <div  v-if="item.price_type === 'price_free'">
+            <div v-if="item.price_type === 'price_free'">
               <div>免费价格</div>
               <div>¥{{ item.arg_product_model.price_free }}</div>
             </div>
@@ -74,6 +74,7 @@ import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
 import model_save from "./model_save.vue"
+import { util_data_to_form } from "@/plugins/util_data_to_form"
 let model_save_ref = $ref<any>(null)
 let list_product = $ref<any[]>([])
 let form = $ref<any>({ title: "", type_check: "check_pending" })
@@ -90,7 +91,7 @@ async function edit_product(item: any) {
   dialog_visible = true
   await nextTick(() => {
     const ele = JSON.parse(JSON.stringify(item))
-    model_save_ref.form = ele
+    model_save_ref.form = util_data_to_form(model_save_ref.form, ele)
   })
 }
 

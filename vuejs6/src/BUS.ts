@@ -69,7 +69,9 @@ export const BUS = use_BUS()
 window.BUS = BUS
 
 // 字段
-find_list_dict()
+setTimeout(() => {
+  find_list_dict()
+}, 0)
 async function find_list_dict() {
   const res: any = await api.dict.find_list_dict({})
   console.log("find_list_dict---res", JSON.parse(JSON.stringify(res)))

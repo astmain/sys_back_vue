@@ -29,13 +29,14 @@ model arg_product_model {
     tb_product           tb_product @relation(references: [product_id], fields: [product_id], onDelete: Cascade, onUpdate: Cascade)
     // 判断
 
+    is_animation   Boolean @default(false) // 是否有动画 1
+    is_skeleton    Boolean @default(false) // 是否有骨骼 1
+    is_print       Boolean @default(true) // 是否可打印 1
+    is_no_collapse Boolean @default(true) // 未塌陷     1
+    is_chartlet    Boolean @default(false) // 是否有贴图 1
+    is_texture     Boolean @default(false) // 是否有材质 1
+
     is_business         Boolean @default(false) // 是否商用
-    is_skeleton         Boolean @default(false) // 是否有骨骼
-    is_animation        Boolean @default(false) // 是否有动画
-    is_print            Boolean @default(true) // 是否可打印
-    is_no_collapse      Boolean @default(true) // 未塌陷
-    is_chartlet         Boolean @default(false) // 是否有贴图
-    is_texture          Boolean @default(false) // 是否有材质
     is_plugin           Boolean @default(false) // 是否有插件
     is_plugin_remark    String  @default("") // 插件备注
     is_copyright        Boolean @default(false) // 是否有版权

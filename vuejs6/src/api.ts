@@ -55,8 +55,6 @@ export let api = {
       is_publish: boolean
       price_type: string
       type_product: string
-      type_check: string
-      type_check_remark: string
       arg_product_model: {
         price_free: number
         price_personal: number

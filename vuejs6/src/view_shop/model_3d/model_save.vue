@@ -156,16 +156,13 @@ let dict_info = ref<any>({
 })
 
 let form = ref({
-  // product_id: "string",
-  // user_id: "user_1",
+  product_id: "",
   user_id: BUS.user.id,
   title: "",
   remark: "",
   is_publish: true,
   price_type: "price_free",
   type_product: "model",
-  type_check: "check_pending",
-  type_check_remark: "",
   arg_product_model: {
     type_format: "format1",
     type_area: "area1",
@@ -231,24 +228,18 @@ async function input_list_extend(event: any) {
   event.target.value = "" // 清空input的值
 }
 
-let clazz_width = ref("550px")
-async function 测试clazz() {
-  console.log("测试clazz")
-  for (let i = 0; i < 10; i++) {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    clazz_width.value = `${500 + i * 50}px`
-    console.log("111---clazz_width", clazz_width.value)
-  }
-}
-
 async function save_product() {
-  console.log("save_product---form", form)
+  console.log("save_product---form", JSON.parse(JSON.stringify(form.value)))
+  // debugger
   const res: any = await api.product.save_product(form.value)
   console.log("save_product---res", res)
-  if (res.code !== 200) ElMessage.error("参数错误标题不能未空")
-  ElMessage.success("成功:保存商品")
-  await router.push("/model_manage")
-  location.reload()
+  if (res.code === 200) {
+    ElMessage.success("成功:保存商品")
+    await router.push("/model_manage")
+    location.reload()
+  } else {
+    ElMessage.error("参数错误标题不能未空")
+  }
 }
 
 onMounted(async () => {

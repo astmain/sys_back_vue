@@ -24,6 +24,7 @@ export const view_shop = [
   { name: "模型上传", path: "/model_save", component: () => import("@/view_shop/model_3d/model_save.vue") },
   { name: "模型管理", path: "/model_manage", component: () => import("@/view_shop/model_3d/model_manage.vue") },
   { name: "模型商品", path: "/model_product", component: () => import("@/view_shop/model_3d/model_product.vue") },
+  { name: "购物车", path: "/cart", component: () => import("@/view_shop/cart/cart.vue") },
 ]
 
 // ==================== 路由配置 ====================
