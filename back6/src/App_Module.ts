@@ -10,6 +10,7 @@ import { menu_Module } from '@src/modules/menu/menu'
 import { product_Module } from '@src/modules/product/product'
 import { test1_my_dto_Module } from '@src/modules/test/test1_my_dto'
 import { dict_Module } from '@src/modules/dict/dict'
+import { shop_cart_Module } from '@src/modules/shop_cart/shop_cart'
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { dict_Module } from '@src/modules/dict/dict'
     depart_Module, //部门模块
     menu_Module, //菜单模块
     product_Module, //菜单模块
+    shop_cart_Module, //购物车模块
   ],
   controllers: [App_controller],
   providers: [],

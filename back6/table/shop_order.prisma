@@ -1,0 +1,10 @@
+// 模型商品表
+model shop_order {
+    product_id String @id @default(cuid())
+    user_id    String // 用户id
+    title      String @default("") // 标题
+    remark     String @default("") // 备注
+
+    // 价格
+    price_type String @default("price_free") // 价格类型
+}
