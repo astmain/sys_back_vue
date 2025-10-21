@@ -20,3 +20,7 @@ async function main() {
   app.mount("#app")
 }
 main()
+
+
+
+// 我想使用components/icon/love.svg     使用方式 <div class="icon-love"></div>

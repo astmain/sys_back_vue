@@ -38,16 +38,16 @@
           </nav>
 
           <nav class="w-200px flex flex-col gap-2">
-            <div v-if="item.price_type === 'price_free'">
-              <span>免费价格</span>
-              <span>¥{{ item.arg_product_model.price_free }}</span>
+            <div  v-if="item.price_type === 'price_free'">
+              <div>免费价格</div>
+              <div>¥{{ item.arg_product_model.price_free }}</div>
             </div>
 
-            <div v-else class="flex flex-col gap-2 text-sm">
-              <span>付费价格</span>
-              <span>个人价格¥{{ item.arg_product_model.price_personal }}</span>
-              <span>企业价格¥{{ item.arg_product_model.price_company }}</span>
-              <span>企业扩展价格¥{{ item.arg_product_model.price_extend }}</span>
+            <div v-else class="flex flex-col gap-2">
+              <div>付费价格</div>
+              <div>个人价格¥{{ item.arg_product_model.price_personal }}</div>
+              <div>企业价格¥{{ item.arg_product_model.price_company }}</div>
+              <div>企业扩展价格¥{{ item.arg_product_model.price_extend }}</div>
             </div>
           </nav>
 

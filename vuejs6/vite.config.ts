@@ -13,8 +13,6 @@ import UnoCss from "unocss/vite" // unocss                                      
 import presetUno from "@unocss/preset-uno" // unocss                                                  安装方式    pnpm install @unocss/preset-uno -D
 import presetAttributify from "@unocss/preset-attributify" // unocss                                  安装方式    pnpm install @unocss/preset-attributify -D
 
-
-
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -39,6 +37,24 @@ export default defineConfig({
         ["btn-primary", { "background-color": "#1c3d5a" }],
         ["uno_card", { border: "1px solid #e4e7ed", "border-radius": "12px", padding: "12px 12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 12px rgba(0,0,0,0.12)" }],
         ["uno_card0", { border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 12px rgba(0,0,0,0.12)" }],
+
+        // 添加图标规则
+        [
+          /^icon-(.+)$/,
+          ([, name]) => {
+            return {
+              display: "inline-block",
+              width: "1em",
+              height: "1em",
+              "mask-size": "contain",
+              "mask-repeat": "no-repeat",
+              "mask-position": "center",
+              "background-color": "black",
+              "mask-image": `url("@/components/icon/${name}.svg")`,
+              // "background-image": `url('/src/components/icon/${name}.svg')`,
+            }
+          },
+        ],
       ],
     }),
   ],
