@@ -1,10 +1,8 @@
 <template>
   <div>购物车</div>
   <div class="uno_card1 mb-4" v-for="item in list_group_card" :key="item.author_id">
-    <div class="flex gap-2 bg-gray-200 p-2">
-      <img class="w-10 h-10" :src="item.avatar" />
-      <div>{{ item.name }}</div>
-      <div>{{ item.cart.length }}</div>
+    <div class="flex gap-2 bg-gray-200 p-2 items-center">
+      <div class="text-orange-400 font-bold">商家:{{ item.name }} ></div>
     </div>
 
     <div class="flex flex-col">
@@ -24,6 +22,7 @@
   </div>
 
   <el-button @click="find_list_shop_cart()" type="primary">查询</el-button>
+  <el-button @click="find_list_shop_cart()" type="primary">删除</el-button>
 </template>
 
 <script setup lang="tsx">
@@ -51,7 +50,6 @@ async function remove_shop_cart_ids(card_id: string) {
   if (res.code !== 200) return alert("错了")
   find_list_shop_cart()
 }
-
 
 onMounted(() => {
   find_list_shop_cart()
