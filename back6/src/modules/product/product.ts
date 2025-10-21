@@ -62,6 +62,7 @@ export class product {
       await db.arg_product_model.update({ where: { product_id: body.product_id }, data: body.arg_product_model })
       return { code: 200, msg: '成功-更新', result: {} }
     } else {
+      delete data.product_id
       data['price_num'] = arg_product_model[data.price_type]
       data['main_img'] = arg_product_model.list_main_img[0].url
       data['type_check'] = 'check_pending' //新增商品审核状态为待审核

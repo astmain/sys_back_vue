@@ -132,9 +132,7 @@ export class arg_product_model {
 export class save_product {
   @ApiProperty({ description: '商品id', example: 'cuid_string' })
   @IsString({ message: '商品id-必须是字符串' })
-  @IsNotEmpty({ message: '商品id-必须不能为空' })
-  @IsOptional()
-  product_id?: string
+  product_id: string
 
   @ApiProperty({ description: '用户id', example: 'cuid_string' })
   @IsString({ message: '用户id-必须是字符串' })

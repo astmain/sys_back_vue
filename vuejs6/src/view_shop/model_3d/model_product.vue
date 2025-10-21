@@ -50,7 +50,7 @@
         <h3 class="text-xl font-bold">价格:{{ product.arg_product_model[product.price_type] }}</h3>
         <h3 class="text-sm font-bold text-red-400">注:虚拟商品-经购买，不支持退款</h3>
         <nav class="flex gap-2">
-          <el-button type="danger" plain @click="">加入购物车</el-button>
+          <el-button type="danger" plain @click="save_shop_cart">加入购物车</el-button>
           <el-button type="primary" @click="">立即购买</el-button>
         </nav>
       </div>
@@ -93,6 +93,7 @@
 <script setup lang="tsx">
 import { ref, onMounted, nextTick } from "vue"
 import { api, type info_file } from "@/api"
+import { BUS } from "@/BUS"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 import { useRoute } from "vue-router"
@@ -101,11 +102,29 @@ const product_id = route.query.product_id as string
 let product = $ref<any>(null)
 console.log("product_id", product_id)
 
+// 🟩 查询商品详情
 async function find_one_product() {
   const res: any = await api.product.find_one_product({ product_id })
   console.log("find_one_product---res", res)
   if (res.code !== 200) return alert("错了")
   product = res.result
+}
+
+// 🟩 加入购物车
+async function save_shop_cart() {
+  let form = {
+    user_id: BUS.user.id,
+    price_type: product.price_type,
+    count: 1,
+    product_id: product.product_id,
+  }
+  const res: any = await api.shop_cart.save_shop_cart(form)
+  console.log("save_shop_cart---res", res)
+  if (res.code === 200) {
+    ElMessage.success(res.msg)
+  } else {
+    ElMessage.error(res.msg)
+  }
 }
 
 onMounted(() => {
