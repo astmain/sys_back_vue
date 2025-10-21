@@ -106,7 +106,7 @@
     <nav class="flex gap-2">
       <span class="w-30">商品属性</span>
       <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_business" active-text="可以商用" inactive-text="不可商用" />
-      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_business" active-text="有骨架" inactive-text="无骨架" />
+      <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_skeleton" active-text="有骨架" inactive-text="无骨架" />
       <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_animation" active-text="有动画" inactive-text="无动画" />
       <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_print" active-text="可打印" inactive-text="不可打印" />
       <el-switch class="w-30" inline-prompt v-model="form.arg_product_model.is_no_collapse" active-text="无塌陷" inactive-text="有塌陷" />
@@ -117,12 +117,12 @@
     <nav class="flex gap-2">
       <span class="w-30">插件介绍</span>
       <el-switch class="w-30" v-model="form.arg_product_model.is_plugin" inline-prompt active-text="有插件" inactive-text="无插件" />
-      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_plugin_remark" style="width: 200px" placeholder="请填写插件备注" />
+      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_plugin_remark" type="textarea" placeholder="请填写插件备注" />
     </nav>
     <nav class="flex gap-2">
       <span class="w-30">版权介绍</span>
       <el-switch class="w-30" v-model="form.arg_product_model.is_copyright" inline-prompt active-text="有版权" inactive-text="无版权" />
-      <el-input v-if="form.arg_product_model.is_plugin" v-model="form.arg_product_model.is_copyright_remark" style="width: 200px" placeholder="请填写版权备注" />
+      <el-input v-if="form.arg_product_model.is_copyright" v-model="form.arg_product_model.is_copyright_remark" type="textarea" placeholder="请填写版权备注" />
     </nav>
 
     <nav class="flex gap-2">
@@ -130,16 +130,23 @@
       <el-input v-model="form.remark" style="width: 200px" />
     </nav>
   </div>
-  <el-button type="primary" @click="save_product">保存商品</el-button>
+
+  <nav class="flex flex-col gap-2">
+    <el-checkbox v-model="form.is_publish" label="立即发布" size="large" />
+    <el-button type="primary" @click="save_product">保存商品</el-button>
+  </nav>
 </template>
 
 <script setup lang="tsx">
-import { ref, onMounted } from "vue"
+import { ref, onMounted, nextTick } from "vue"
 import { BUS } from "@/BUS"
 import { api, type info_file } from "@/api"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 import { Cinput1 } from "@/components/Cinput1"
+import { useRouter } from "vue-router"
+
+let router = useRouter()
 
 let dict_info = ref<any>({
   type_format: { children: [] },
@@ -151,9 +158,10 @@ let dict_info = ref<any>({
 let form = ref({
   // product_id: "string",
   // user_id: "user_1",
-  user_id:BUS.user.id,
+  user_id: BUS.user.id,
   title: "",
   remark: "",
+  is_publish: true,
   price_type: "price_free",
   type_product: "model",
   type_check: "check_pending",
@@ -238,6 +246,9 @@ async function save_product() {
   const res: any = await api.product.save_product(form.value)
   console.log("save_product---res", res)
   if (res.code !== 200) ElMessage.error("参数错误标题不能未空")
+  ElMessage.success("成功:保存商品")
+  await router.push("/model_manage")
+  location.reload()
 }
 
 onMounted(async () => {

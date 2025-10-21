@@ -13,6 +13,7 @@
             <el-input v-model="form.code" style="width: 280px"></el-input>
           </el-form-item>
         </nav>
+
         <nav class="flex">
           <el-form-item label="排序" width="300">
             <el-input v-model="form.sort" style="width: 280px" type="number"></el-input>
@@ -24,6 +25,11 @@
             </el-select>
           </el-form-item>
         </nav>
+
+        <el-form-item label="样式">
+          <el-input v-model="form.css"></el-input>
+        </el-form-item>
+
         <el-form-item label="备注">
           <el-input v-model="form.remark" type="textarea" :rows="6"></el-input>
         </el-form-item>
@@ -47,7 +53,7 @@ import { id } from "zod/v4/locales"
 const show = ref(false)
 const title = ref("")
 let callback = ref(async () => {}) //回调函数
-const form = ref({ id: "", parent_id: null as any, name: "", code: "", status: true, remark: "", sort: 0 })
+const form = ref({ id: "", parent_id: null as any, name: "", code: "", status: true, remark: "", css: "", sort: 0 })
 
 async function submit() {
   callback.value()
@@ -55,7 +61,7 @@ async function submit() {
 }
 
 function form_reset() {
-  form.value = { id: "", parent_id: null, name: "", code: "", status: true, remark: "", sort: 0 }
+  form.value = { id: "", parent_id: null, name: "", code: "", status: true, remark: "", css: "", sort: 0 }
 }
 
 defineExpose({ show, title, open, submit, form, form_reset, callback })

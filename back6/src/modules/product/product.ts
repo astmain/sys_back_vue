@@ -14,6 +14,7 @@ import { save_product } from './dto/save_product'
 import { find_list_product_public } from './dto/find_list_product_public'
 import { find_list_product_private } from './dto/find_list_product_private'
 import { find_one_product } from './dto/find_one_product'
+import { publish_product } from './dto/publish_product'
 
 @Api_Controller('商品')
 export class product {
@@ -30,7 +31,8 @@ export class product {
   }
   @Api_Post('查询-商品-列表-私有')
   async find_list_product_private(@Body() body: find_list_product_private, @Req() req: any) {
-    const where: any = { title: { contains: body.title || '' }, user_id: req.user_id }
+    console.log('find_list_product_private---body', body)
+    const where: any = { title: { contains: body.title || '' }, user_id: req.user_id, type_check: body.type_check }
     let list = await db.tb_product.findMany({ where, include: { arg_product_model: true } })
     for (let i = 0; i < list.length; i++) {
       let item = list[i]
@@ -69,6 +71,12 @@ export class product {
       const arg = await db.arg_product_model.create({ data: { ...arg_product_model, product_id: one.product_id } })
       return { code: 200, msg: '成功-上传', result: { one, arg } }
     }
+  }
+
+  @Api_Post('发布-商品')
+  async publish_product(@Body() body: publish_product, @Req() req: any) {
+    await db.tb_product.update({ where: { product_id: body.product_id }, data: { is_publish: body.is_publish } })
+    return { code: 200, msg: '成功', result: {} }
   }
 
   @Api_Post('删除-商品')

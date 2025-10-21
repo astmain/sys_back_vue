@@ -103,11 +103,29 @@ async function save_dict(title: string) {
   }
 
   if (title === "编辑字典父级") {
-    ctx.form.value = curr_parent
+    ctx.form.value = {
+      parent_id: null, //
+      id: curr_parent.id, //
+      name: curr_parent.name,
+      code: curr_parent.code,
+      status: curr_parent.status,
+      remark: curr_parent.remark,
+      css: curr_parent.css,
+      sort: curr_parent.sort,
+    }
   }
 
   if (title === "编辑字典子级") {
-    ctx.form.value = curr_child
+    ctx.form.value = {
+      parent_id: curr_parent.id, //
+      id: curr_child.id, //
+      name: curr_child.name,
+      code: curr_child.code,
+      status: curr_child.status,
+      remark: curr_child.remark,
+      css: curr_child.css,
+      sort: curr_child.sort,
+    }
   }
 
   ctx.callback.value = async () => {
@@ -119,30 +137,10 @@ async function save_dict(title: string) {
   }
 }
 
-async function handle_child_click(id: string) {
-  console.log(`111---handle_node_click---id:`, id)
-  console.log(`222---handle_node_click---list_dict_parent:`, list_dict_parent)
-
-  curr_parent = list_dict_parent.find((item: any) => item.id === id)
-}
-
 async function handle_node_click(id: string) {
   console.log(`111---handle_node_click---id:`, id)
   active.value = id
   curr_parent = list_dict_parent.find((item: any) => item.id === id)
-}
-
-async function handle_context_menu(command: string, item: any) {
-  // if (command === "edit") {
-  //   // 先设置当前选中项
-  //   curr_parent = item
-  //   curr_child = item
-  //   save_dict("编辑字典父级")
-  // } else if (command === "delete") {
-  //   await remove_dict_ids([item.id])
-  // }
-  console.log(`111---handle_context_menu---item:`, item)
-  curr_parent = item
 }
 
 async function remove_dict_ids(ids: string[]) {

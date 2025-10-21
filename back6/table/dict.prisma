@@ -6,6 +6,7 @@ model dict {
     remark String @default("") // 备注
     status Boolean @default(true) // 状态 true:正常 false:禁用
     sort Int @default(0) // 排序
+    css_class String @default("") // css样式类
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
     parent_id String? // 父级id

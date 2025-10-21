@@ -154,6 +154,10 @@ export class save_product {
   @IsString({ message: '备注-必须是字符串' })
   remark: string
 
+  @ApiProperty({ description: '是否上架', example: true })
+  @IsBoolean()
+  is_publish: boolean
+
   @ApiProperty({ description: '价格类型', example: 'price_free' })
   @IsString()
   @IsIn(['price_free', 'price_personal', 'price_company', 'price_extend'], { message: "价格类型-必须是['price_free', 'price_personal', 'price_company', 'price_extend']" })

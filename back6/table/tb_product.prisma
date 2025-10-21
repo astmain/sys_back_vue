@@ -10,10 +10,11 @@ model tb_product {
     price_num  Int    @default(0) // 价格
 
     // 
-    main_img          String @default("") // 主图
-    type_product      String @default("model") // 商品类型
-    type_check        String @default("check_publish") // 审核
-    type_check_remark String @default("")
+    main_img          String  @default("") // 主图
+    type_product      String  @default("model") // 商品类型
+    type_check        String  @default("check_publish") // 审核
+    is_publish        Boolean @default(true) // 是否上架
+    type_check_remark String  @default("")
 
     created_at        DateTime           @default(now())
     updated_at        DateTime           @updatedAt

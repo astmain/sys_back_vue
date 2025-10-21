@@ -21,6 +21,10 @@ export class save_dict {
   @IsNotEmpty({ message: '名称-必须不能为空' })
   name: string
 
+  @ApiProperty({ description: 'css样式类', example: '' })
+  @IsString({ message: 'css样式类-必须是字符串' })
+  css: string
+
   @ApiProperty({ description: '编码', example: 'code' })
   @IsString({ message: '编码-必须是字符串' })
   @IsNotEmpty({ message: '编码-必须不能为空' })
@@ -29,4 +33,12 @@ export class save_dict {
   @ApiProperty({ description: '备注', example: '备注' })
   @IsString({ message: '备注-必须是字符串' })
   remark: string
+
+  @ApiProperty({ description: '状态', example: true })
+  @IsBoolean({ message: '状态-必须是布尔值' })
+  status: boolean
+
+  @ApiProperty({ description: '排序', example: 0 })
+  @IsNumber()
+  sort: number
 }

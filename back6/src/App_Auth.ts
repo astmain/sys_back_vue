@@ -45,17 +45,17 @@ export class AppAuthorized implements CanActivate {
     // console.log(`App_Auth---111---token:`, token)
     // 判断token是否存在
     if (!token) {
-      console.log(`验证失败:App_Auth---222---token---空:`, token)
+      // console.log(`验证失败:App_Auth---222---token---空:`, token)
       throw new UnauthorizedException('验证失败:token空')
     } else {
-      // console.log(`AppAuthorized---333---token---存在:`, token)
+      // console.log(`App_Auth---333---token---存在:`, token)
     }
 
     // 解析token得到user信息
     try {
       // console.log(`111---process.env.VITE_jwt_secret:`, process.env.VITE_jwt_secret)
       let payload = await this.jwt_service.verifyAsync(token, { secret: process.env.VITE_jwt_secret })
-      console.log(`App_Auth---444---payload:`, payload)
+      // console.log(`App_Auth---444---payload:`, payload)
       // 请求全局参数   @Req() request   调用   request["user"]
       request['user'] = payload
       request['user_id'] = payload.id

@@ -39,11 +39,17 @@ export class dict {
 
   @Api_Post('查询-字典-列表')
   async find_list_dict(@Body() body: find_list_dict, @Req() req: any) {
+    // 查询字典列表
     const dict_list = await db.dict.findMany({ where: { parent_id: null }, include: { children: true }, orderBy: { sort: 'asc' } })
-
+    // 构建字典对象
     let dict_obj: any = {}
     for (const item of dict_list) {
       dict_obj[item.code] = { children: item.children, info: item }
+      // 构建子级字典key
+      for (const child of item.children) {
+        let key = child.code
+        dict_obj[item.code][key] = child
+      }
     }
     return { code: 200, msg: '成功', result: { dict_list, dict_obj } }
   }
