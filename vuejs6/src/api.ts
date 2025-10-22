@@ -74,5 +74,6 @@ export let api = {
     save_shop_cart: (form: { card_id?: string; user_id: string; price_type: string; count: number; product_id: string }) => axios_api.post("/shop_cart/save_shop_cart", form),
     find_list_shop_cart: (form: { user_id: string }) => axios_api.post("/shop_cart/find_list_shop_cart", form),
     remove_shop_cart_ids: (form: { ids: string[] }) => axios_api.post("/shop_cart/remove_shop_cart_ids", form),
+    compute_price_shop_cart: (form: { checked_items: { card_id: string; count: number }[] }) => axios_api.post("/shop_cart/compute_price_shop_cart", form),
   },
 }

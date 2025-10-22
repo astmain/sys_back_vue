@@ -17,7 +17,6 @@ const virtual_field_extension = Prisma.defineExtension({
           }else{
             return o.name
           }
-
         },
       },
     },
