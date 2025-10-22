@@ -1,7 +1,7 @@
 // 商品表
 model tb_product {
     product_id String @id @default(cuid())
-    user_id    String // 用户id
+    user_id    String // 用户id    //以后要改成 author_id
     title      String @default("") // 标题
     remark     String @default("") // 备注
 

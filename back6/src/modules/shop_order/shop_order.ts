@@ -46,6 +46,8 @@ export class shop_order {
           order_item_id, //子订单id
           user_id: data.user_id,
           author_id: card.author_id, //商家id
+          product_id: card.product_id, //商品id
+          product_history: JSON.stringify(product), //商品历史记录
           price_one: arg_product_model[card.price_type], //单价
           price_type: card.price_type, //价格类型
           count: card.count, //数量
@@ -62,14 +64,40 @@ export class shop_order {
 
   @Api_Post('删除-订单')
   async remove_shop_order_ids(@Body() body: remove_shop_order_ids, @Req() req: any) {
-    // await db.shop_order.deleteMany({ where: { order_id: { in: body.ids } } })
+    await db.shop_order.deleteMany({ where: { order_id: { in: body.ids } } })
     return { code: 200, msg: '成功', result: {} }
   }
 
   @Api_Post('查询-订单-列表')
   async find_list_shop_order(@Body() body: find_list_shop_order, @Req() req: any) {
     const list = await db.shop_order.findMany({ where: { user_id: body.user_id, status: { contains: body.status } }, include: { shop_order_item: true } })
-    return { code: 200, msg: '成功', result: { list } }
+
+    let list_group = []
+
+    for (let i = 0; i < list.length; i++) {
+      let ele = list[i]
+
+      let author_group = []
+      // for (let j = 0; j < ele.shop_order_item.length; j++) {
+      //   let item = ele.shop_order_item[j]
+      //   console.log('find_list_shop_order---item', item)
+      // }
+      let author_obj = _.groupBy(ele.shop_order_item, 'author_id')
+      // console.log('find_list_shop_order---aaa', aaa)
+      for (let author_id in author_obj) {
+        console.log('find_list_shop_order---author_id', author_id)
+        let cart_list = author_obj[author_id]
+        cart_list = cart_list.map((item: any) => ({ ...item, product_history: JSON.parse(item.product_history) }))
+        let author_one = await db.sys_user.findUnique({ where: { id: author_id }, select: { name: true, avatar: true } })
+        let author = { author_id, ...author_one, cart_list }
+        author_group.push(author)
+      }
+      list_group.push({ ...ele, author_group })
+    }
+
+    // let list_group = _.groupBy(list, 'order_id')
+
+    return { code: 200, msg: '成功', result: { list, list_group } }
   }
 }
 

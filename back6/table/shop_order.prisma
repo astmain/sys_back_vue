@@ -11,9 +11,11 @@ model shop_order {
 
 // 订单子表
 model shop_order_item {
-    order_item_id String @id @default(cuid())
-    user_id       String // 用户id
-    author_id     String // 商家id
+    order_item_id   String @id @default(cuid())
+    user_id         String // 用户id
+    author_id       String // 商家id
+    product_id      String // 商品id
+    product_history String // 商品历史记录
 
     price_one  Int    @default(0) // 单价
     price_type String @default("price_free") // 价格类型

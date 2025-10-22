@@ -115,6 +115,12 @@ export class App_controller {
     return res.redirect(process.env.VITE_url_app_run + '/doc.html')
   }
 
+  @ApiOperation({ summary: '测试微信支付回调' })
+  @Get('test_weixin_pay_callback')
+  test_weixin_pay_callback() {
+    return { code: 200, msg: '成功:测试微信支付回调', result: {} }
+  }
+
   @ApiOperation({ summary: 'token生成' })
   @Get('token_make')
   token_make() {
@@ -144,7 +150,6 @@ export class App_controller {
   @Get('token_parse')
   token_parse() {
     const my_jwt_service = new JwtService()
-
     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtrLTNEMiIsInBob25lIjoiMTM1OTk1NDE3MzAiLCJpZCI6Mywicm9sZUlkcyI6WzEsMTJdLCJpYXQiOjE3NjA1NzczNjksImV4cCI6MTc2MDY2Mzc2OX0.NF7mFlMRH0pPXp_sx3_az2ydsa4kMzpC2-BQefYnr-4'
     const payload = my_jwt_service.verify(token, { secret: process.env.VITE_jwt_secret })
     console.log(`解析---payload:`, payload)
