@@ -58,7 +58,7 @@ export class shop_order {
       })
     }
 
-    return { code: 200, msg: '成功', result: {} }
+    return { code: 200, msg: '成功', result: {order_id} }
   }
 
   @Api_Post('删除-订单')

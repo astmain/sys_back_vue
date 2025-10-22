@@ -36,6 +36,7 @@
     <div>总价:{{ cart_compute_result.total_price }}</div>
     <el-button @click="create_shop_order" type="primary">立即购买</el-button>
   </div>
+  <com_dialog_pay ref="ref_com_dialog_pay" />
 </template>
 
 <script setup lang="tsx">
@@ -46,6 +47,10 @@ import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
 import { util_data_to_form } from "@/plugins/util_data_to_form"
 import { Ccard1 } from "@/components/Ccard1"
+import com_dialog_pay from "../my_order/com_dialog_pay.vue"
+// let ref_com_dialog_pay = $ref<InstanceType<typeof com_dialog_pay>>()
+// let ref_com_dialog_pay = ref<InstanceType<typeof com_dialog_pay>>()
+let ref_com_dialog_pay = ref()
 
 let list_group_card = $ref<any[]>([])
 let cart_compute_result: any = $ref({ total_price: "0.00", card_ids: [] as string[], value_total_price: 0 })
@@ -109,6 +114,13 @@ async function create_shop_order() {
   const res: any = await api.shop_order.create_shop_order({ user_id: BUS.user.id, card_ids: cart_compute_result.card_ids })
   console.log("create_shop_order---res", res)
   if (res.code === 200) {
+    let order_id = res.result.order_id
+    // ref_com_dialog_pay.value.open(order_id)
+    console.log("ref_com_dialog_pay", ref_com_dialog_pay)
+
+    // ref_com_dialog_pay.open({ order_id, price_total: cart_compute_result.total_price })
+    ref_com_dialog_pay.value.open({ order_id, price_total: cart_compute_result.total_price })
+
     ElMessage.success(res.msg)
   } else {
     ElMessage.error(res.msg)
