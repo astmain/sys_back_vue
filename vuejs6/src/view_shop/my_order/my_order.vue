@@ -25,7 +25,7 @@
             <div class="w-100px">{{ BUS.dict_obj?.model_order[ele.status].name }}</div>
             <div class="w-300px text-center">
               <el-button type="info" link @click="remove_shop_order_ids(ele.order_id)">取消订单</el-button>
-              <div type="primary" link @click="handle_paying(ele)">立即支付</div>
+              <el-button type="primary" link @click="handle_paying(ele)">立即支付</el-button>
             </div>
           </h1>
           <nav class="p-2">

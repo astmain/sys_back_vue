@@ -54,15 +54,28 @@ async function open(arg: { order_id: string; price_total: string }) {
 
 // 调用api生成支付二维码url
 async function pay_method_make_url_qr() {
-  const res: any = await api.pay.pay_method_make_url_qr({ order_id: order_id.value, pay_method: pay_method.value })
-  console.log("com_dialog_pay---open---res", res)
+  const res: any = await api.pay.pay_method_make_url_qr({ order_id: order_id.value, pay_method: pay_method.value, price_total: Number(price_total.value) })
+  console.log("com_dialog_pay---pay_method_make_url_qr---res", res)
   if (res.code != 200) ElMessage.error("失败:生产支付二维码")
   //   qr_base64.value = await util_url_to_qr_base64({ url: res.result.url_qr, text: "测试微信支付" }) // 支付二维码url 转码 base64
   qr_base64.value = await util_url_to_qr_base64({ url: res.result.url_qr, text: pay_method.value }) // 支付二维码url 转码 base64
+  await find_one_shop_order()
 }
 
-async function find_one_shop_order() {}
-
+// 查询订单详情
+async function find_one_shop_order() {
+  for (let i = 0; i < 99999; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    const res: any = await api.pay.find_one_shop_order({ order_id: order_id.value })
+    console.log("com_dialog_pay---find_one_shop_order---res", res)
+    if (res.code != 200) ElMessage.error("失败:查询订单详情")
+    if (res.result.status == "success_take") {
+      show.value = false
+      ElMessage.success("订单已完成")
+      break
+    }
+  }
+}
 defineExpose({ show, open, order_id, price_total })
 </script>
 

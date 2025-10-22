@@ -11,34 +11,47 @@ import _ from 'lodash'
 
 // ==================== dto ====================
 import { pay_method_make_url_qr } from './dto/pay_method_make_url_qr'
+import { pay_callback } from './dto/pay_callback'
+import { find_one_shop_order } from './dto/find_one_shop_order'
 @Api_Controller('支付')
 export class pay {
   @Api_Get('支付方式-生成-url二维码')
   @Api_Get('支付方式-生成-url二维码')
   async pay_method_make_url_qr(@Query() body: pay_method_make_url_qr, @Req() req: any) {
-    // console.log('pay_method_make_url_qr---body', body)
-    const { order_id, pay_method } = body
-
+    console.log('pay_method_make_url_qr---body', body)
+    const { pay_method, order_id, price_total } = body
+    // 前置判断-是否有订单
     const order = await db.shop_order.findUnique({ where: { order_id } })
     if (!order) return { code: 400, msg: '订单不存在', result: {} }
-
     // 微信
     if (pay_method === 'weixin') {
-      const url_qr = `http://192.168.0.106:3002/pay/weixin_pay_callback?order_id=${order_id}`
+      const url_qr = `http://192.168.0.106:3002/pay/pay_callback?pay_method=${pay_method}&price_total=${price_total}&order_id=${order_id}`
       return { code: 200, msg: '成功', result: { url_qr } }
     }
     // 支付宝
     if (pay_method === 'zhifubao') {
-      const url_qr = `http://192.168.0.106:3002/pay/alipay_pay_callback?order_id=${order_id}`
+      const url_qr = `http://192.168.0.106:3002/pay/pay_callback?pay_method=${pay_method}&price_total=${price_total}&order_id=${order_id}`
       return { code: 200, msg: '成功', result: { url_qr } }
     }
   }
 
   @Api_public()
-  @Api_Get('微信支付-回调')
-  async weixin_pay_callback(@Query('order_id') order_id: string, @Req() req: any) {
-    console.log('weixin_pay_callback---order_id', order_id)
-    return { code: 200, msg: '成功:支付(微信)', result: {} }
+  @Api_Get('支付-回调-接口')
+  async pay_callback(@Query() body: pay_callback, @Req() req: any) {
+    console.log('pay_callback---body', body)
+    const { pay_method, order_id, price_total } = body
+    // 修改-总订单状态-子订单状态
+    await db.shop_order.update({ where: { order_id }, data: { status: 'success_take' } })
+    await db.shop_order_item.updateMany({ where: { order_id }, data: { status: 'success_take' } })
+    return { code: 200, msg: '成功:支付完成', result: {} }
+  }
+
+  @Api_Post('查询-订单-详情')
+  async find_one_shop_order(@Body() body: find_one_shop_order, @Req() req: any) {
+    const { order_id } = body
+    const order = await db.shop_order.findUnique({ where: { order_id }, include: { shop_order_item: true } })
+    if (!order) return { code: 400, msg: '订单不存在', result: {} }
+    return { code: 200, msg: '成功:查询订单详情', result: order }
   }
 }
 
