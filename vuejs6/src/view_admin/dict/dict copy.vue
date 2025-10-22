@@ -6,24 +6,26 @@
         <el-button type="primary" @click="find_list_dict"> 查询 </el-button>
         <el-button type="primary" @click="save_dict('新增字典父级')"> 新增 </el-button>
       </nav>
-      <!-- 父级字典列表 -->
-      <el-radio-group v-model="active">
-        <el-dropdown v-for="item in list_dict_parent" placement="bottom-start" trigger="contextmenu" @visible-change="(visible) => handle_node_click(item.id)">
-          <el-radio :value="item.id" @click="handle_node_click(item.id)">
-            {{ item.name }}
-          </el-radio>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <div class="flex gap-4 p-2">
-                <el-button plain type="primary" @click="save_dict('编辑字典父级')">编辑</el-button>
-                <el-button plain type="" @click="() => remove_dict_ids([item.id])">删除</el-button>
-              </div>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </el-radio-group>
+
+      <nav class="flex flex-col gap-2 mr-5">
+        <div v-for="(item, index) in list_dict_parent" :key="item.id">
+          <el-dropdown trigger="contextmenu" @visible-change="(visible) => handle_node_click(item.id)">
+            <div @click="handle_node_click(item.id)" :class="{ 'bg-blue-100': active === item.id }" class="w-200px cursor-pointer p2">
+              {{ item.name }}
+            </div>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <div class="flex gap-4 p-2">
+                  <el-button plain type="primary" @click="save_dict('编辑字典父级')">编辑</el-button>
+                  <el-button plain type="" @click="() => remove_dict_ids([item.id])">删除</el-button>
+                </div>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
+      </nav>
     </el-card>
-    <!-- 子级字典列表 -->
+    <!-- 右侧表单 -->
     <el-card>
       <nav class="flex flex-col gap-2">
         <div class="flex gap-2">

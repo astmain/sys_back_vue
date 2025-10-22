@@ -64,17 +64,17 @@ async function pay_method_make_url_qr() {
 
 // 查询订单详情
 async function find_one_shop_order() {
-  for (let i = 0; i < 99999; i++) {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    const res: any = await api.pay.find_one_shop_order({ order_id: order_id.value })
-    console.log("com_dialog_pay---find_one_shop_order---res", res)
-    if (res.code != 200) ElMessage.error("失败:查询订单详情")
-    if (res.result.status == "success_take") {
-      show.value = false
-      ElMessage.success("订单已完成")
-      break
-    }
+  // for (let i = 0; i < 99999; i++) {
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  const res: any = await api.pay.find_one_shop_order({ order_id: order_id.value })
+  console.log("com_dialog_pay---find_one_shop_order---res", res)
+  if (res.code != 200) ElMessage.error("失败:查询订单详情")
+  if (res.result.status == "success_take") {
+    // show.value = false
+    ElMessage.success("订单已完成")
+    // break
   }
+  // }
 }
 defineExpose({ show, open, order_id, price_total })
 </script>

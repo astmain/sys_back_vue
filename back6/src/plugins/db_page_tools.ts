@@ -6,7 +6,7 @@ export class dto_page {
   @ApiProperty({ description: '当前页码', example: 1 })
   @IsNumber()
   currentPage: number // 从 1 开始
-  
+
   @ApiProperty({ description: '每页条数', example: 10 })
   @IsNumber()
   pageSize: number // 每页条数
@@ -48,16 +48,16 @@ type FindManyArgs = {
 
 /** 优化的分页函数 - 自动从 where 中提取分页参数 */
 export async function db_page_find_many<T, A extends FindManyArgs>(
-  model: { 
+  model: {
     findMany(args: A): Promise<T[]>
-    count(args?: { where?: any }): Promise<number> 
-  }, 
-  baseArgs: A
+    count(args?: { where?: any }): Promise<number>
+  },
+  baseArgs: A,
 ): Promise<PaginatedResult<T>> {
   // 从 where 中提取分页参数
   let currentPage = 1
   let pageSize = 10
-  
+
   if (baseArgs.where) {
     // 提取分页参数
     if (baseArgs.where.currentPage) {
@@ -69,9 +69,9 @@ export async function db_page_find_many<T, A extends FindManyArgs>(
       delete baseArgs.where.pageSize
     }
   }
-  
+
   const page = currentPage
-  
+
   const [data, total] = await Promise.all([
     model.findMany({
       ...baseArgs,
@@ -83,15 +83,15 @@ export async function db_page_find_many<T, A extends FindManyArgs>(
 
   const totalPages = Math.ceil(total / pageSize)
 
-  return { 
-    list: data, 
-    pagination: { 
-      page, 
-      pageSize, 
-      total, 
-      pageTotal: totalPages, 
-      hasPrev: page > 1, 
-      hasNext: page < totalPages 
-    } 
+  return {
+    list: data,
+    pagination: {
+      page,
+      pageSize,
+      total,
+      pageTotal: totalPages,
+      hasPrev: page > 1,
+      hasNext: page < totalPages,
+    },
   }
 }

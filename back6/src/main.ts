@@ -19,6 +19,19 @@ async function bootstrap() {
   await app.listen(Number(process.env.VITE_port))
   console.log(`env_curr.VITE_port---`, env_curr.VITE_port)
   console.log(`env_curr.VITE_url_app_run---`, env_curr.VITE_url_app_run)
+
+  // let path_project1 = __dirname.replace('dist', '').replace(/\\/g, '/') //C:/AAA/sys_back_vue/back6
+  // console.log(`path_project1---`, path_project1)
+  // let path_project2 = path.join(path_project1, 'dict_obj.json')
+  // //读取dict_obj.json文件
+  // const dict_obj: any = JSON.parse(fs.readFileSync(path_project2, 'utf-8'))
+  // console.log(`dict_obj---`, dict_obj)
+
+  // console.log(`path_project2---`, path_project2)
+
+  let path_project1 = __dirname.replace('\\dist', '').replace(/\\/g, '/') //C:/AAA/sys_back_vue/back6
+  console.log(`path_project1---`, path_project1)
+  process['path_project'] = path_project1
 }
 
 bootstrap()

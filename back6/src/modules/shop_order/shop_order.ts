@@ -69,7 +69,7 @@ export class shop_order {
 
   @Api_Post('查询-订单-列表')
   async find_list_shop_order(@Body() body: find_list_shop_order, @Req() req: any) {
-    const list = await db.shop_order.findMany({ where: { user_id: body.user_id, status: { contains: body.status } }, include: { shop_order_item: true } })
+    const list = await db.shop_order.findMany({ where: { user_id: body.user_id, status: { contains: body.status } }, orderBy: { created_at: 'asc' }, include: { shop_order_item: true } })
     let list_group = []
     for (let i = 0; i < list.length; i++) {
       let ele = list[i]

@@ -3,11 +3,13 @@ import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 
-import { db } from '@src/App_Prisma'
-import _ from 'lodash'
-
 // ==================== util ====================
 import { util_build_tree } from '@src/plugins/util_build_tree'
+import path from 'path'
+import { db } from '@src/App_Prisma'
+import _ from 'lodash'
+const fs = require('fs')
+
 // ==================== dto ====================
 import { save_dict } from './dto/save_dict'
 import { remove_dict_ids } from './dto/remove_dict_ids'
@@ -51,7 +53,20 @@ export class dict {
         dict_obj[item.code][key] = child
       }
     }
-    return { code: 200, msg: '成功', result: { dict_list, dict_obj } }
+    // 我想使用fs 写入 将dict_obj写入到文件中
+    let path_project1 = process['path_project']
+    console.log(`path_project1---`, path_project1)
+    let path_project2 = path.join(path_project1, 'dict_obj.ts')
+    console.log(`path_project2---`, path_project2)
+    fs.writeFileSync(path_project2, 'export const dict_obj =' + JSON.stringify(dict_obj, null, 2))
+    // import path from 'path'
+    // import fs from 'fs'
+    // // 我想引入dict_obj.json文件
+    // import { dict_obj } from '../dict_obj'
+    // let dict_obj_data = require('../dict_obj')
+    // console.log(`dict_obj---`, dict_obj_data)
+    console.log(`dict_obj---`, 1)
+    return { code: 200, msg: '成功:获取字典', result: { aaa: 1, dict_list, dict_obj } }
   }
 }
 

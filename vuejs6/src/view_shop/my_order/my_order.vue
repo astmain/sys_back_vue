@@ -10,8 +10,8 @@
 
     <div class="flex gap-4">
       <div class="w-300px text-center">商品详情</div>
-      <div class="w-100px">金额数量</div>
-      <div class="w-100px">订单状态</div>
+      <div class="w-200px">金额数量</div>
+      <div class="w-200px">订单状态</div>
       <div class="w-300px text-center">订单操作</div>
     </div>
 
@@ -20,7 +20,7 @@
         <div class="uno_card1">
           <h1 class="flex gap-4 bg-gray-300 p-2">
             <div class="w-300px">总订单号:{{ ele.order_id }}</div>
-            <div class="w-100px"></div>
+            <div class="w-200px" style="font-size: 12px">{{ ele.created_at }}</div>
             <!-- <div class="w-100px">{{ ele.status }}</div> -->
             <div class="w-100px">{{ BUS.dict_obj?.model_order[ele.status].name }}</div>
             <div class="w-300px text-center">

@@ -1,0 +1,11 @@
+{
+  "name": "Tools",
+  "version": "1.0.0",
+  "description": "基础工具",
+  "author": "许鹏",
+  "private": true,
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
