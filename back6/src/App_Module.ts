@@ -12,6 +12,7 @@ import { test1_my_dto_Module } from '@src/modules/test/test1_my_dto'
 import { dict_Module } from '@src/modules/dict/dict'
 import { shop_cart_Module } from '@src/modules/shop_cart/shop_cart'
 import { shop_order_Module } from '@src/modules/shop_order/shop_order'
+import { pay_Module } from '@src/modules/pay/pay'
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { shop_order_Module } from '@src/modules/shop_order/shop_order'
     product_Module, //菜单模块
     shop_cart_Module, //购物车模块
     shop_order_Module, //订单模块
+    pay_Module, //支付模块
   ],
   controllers: [App_controller],
   providers: [],

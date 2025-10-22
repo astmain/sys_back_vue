@@ -1,6 +1,7 @@
-import { Body, Module, Req } from '@nestjs/common'
+import { Body, Module, Req, Query } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
+import { Api_Get } from '@src/plugins/Api_Get'
 import { Api_public } from '@src/App_Auth'
 import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadRequestResponse } from '@nestjs/swagger'
 
@@ -57,8 +58,6 @@ export class shop_order {
       })
     }
 
-    // await db.shop_order.create({ data: { ...data, author_id: card.author_id } })
-
     return { code: 200, msg: '成功', result: {} }
   }
 
@@ -71,17 +70,10 @@ export class shop_order {
   @Api_Post('查询-订单-列表')
   async find_list_shop_order(@Body() body: find_list_shop_order, @Req() req: any) {
     const list = await db.shop_order.findMany({ where: { user_id: body.user_id, status: { contains: body.status } }, include: { shop_order_item: true } })
-
     let list_group = []
-
     for (let i = 0; i < list.length; i++) {
       let ele = list[i]
-
       let author_group = []
-      // for (let j = 0; j < ele.shop_order_item.length; j++) {
-      //   let item = ele.shop_order_item[j]
-      //   console.log('find_list_shop_order---item', item)
-      // }
       let author_obj = _.groupBy(ele.shop_order_item, 'author_id')
       // console.log('find_list_shop_order---aaa', aaa)
       for (let author_id in author_obj) {
@@ -94,9 +86,6 @@ export class shop_order {
       }
       list_group.push({ ...ele, author_group })
     }
-
-    // let list_group = _.groupBy(list, 'order_id')
-
     return { code: 200, msg: '成功', result: { list, list_group } }
   }
 }
