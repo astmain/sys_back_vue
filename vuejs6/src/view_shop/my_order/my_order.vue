@@ -18,7 +18,7 @@
     <div>
       <div v-for="ele in shop_order_list">
         <div class="uno_card1">
-          <h1 class="flex gap-4 bg-gray-300 p-2">
+          <h1 class="flex gap-4 bg-gray-200 p-2">
             <div class="w-300px">总订单号:{{ ele.order_id }}</div>
             <div class="w-200px" style="font-size: 12px">{{ ele.created_at }}</div>
             <!-- <div class="w-100px">{{ ele.status }}</div> -->

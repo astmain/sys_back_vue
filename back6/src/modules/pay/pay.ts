@@ -7,6 +7,8 @@ import { Api_public } from '@src/App_Auth'
 // ==================== 工具 ====================
 import { db } from '@src/App_Prisma'
 import _ from 'lodash'
+// import dict from 'tools_dict'
+import { dict_obj as dict } from '@src/dict_obj'
 
 // let dict_obj = require('@src/dict_obj.ts')
 
@@ -44,9 +46,8 @@ export class pay {
     console.log('pay_callback---body', body, /*当前时间*/ new Date().toLocaleString())
     const { pay_method, order_id, price_total } = body
     // 修改-总订单状态-子订单状态
-    // @ts-ignore
-    const { dict_obj: dict } = await import('@src/dict_obj.ts')
-    // console.log(`dict_obj---`, dict_obj)
+    console.log(`dict---`, dict)
+
     await db.shop_order.update({ where: { order_id }, data: { status: dict.model_order.success_take.code } })
     await db.shop_order_item.updateMany({ where: { order_id }, data: { status: dict.model_order.success_take.code } })
     return { code: 200, msg: '成功:支付完成', result: {} }

@@ -1,10 +1,11 @@
 {
-  "name": "Tools",
+  "name": "tools_dict",
   "version": "1.0.0",
   "description": "基础工具",
   "author": "许鹏",
   "private": true,
   "license": "MIT",
+  "main": "index.js",
   "scripts": {},
   "dependencies": {},
   "devDependencies": {}
