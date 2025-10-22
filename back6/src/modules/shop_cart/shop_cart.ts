@@ -4,8 +4,9 @@ import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadRequestResponse } from '@nestjs/swagger'
 
-import { db } from '@src/App_Prisma'
+// ==================== 工具 ====================
 import _ from 'lodash'
+import { db } from '@src/App_Prisma'
 
 // ==================== dto ====================
 import { save_shop_cart } from './dto/save_shop_cart'
@@ -13,10 +14,13 @@ import { remove_shop_cart_ids } from './dto/remove_shop_cart_ids'
 import { find_list_shop_cart } from './dto/find_list_shop_cart'
 import { compute_price_shop_cart } from './dto/compute_price_shop_cart'
 
+// ==================== 服务 ====================
+import { i_service_shop_cart } from './i_service_shop_cart'
+
 // ==================== controller ====================
-@Api_public()
 @Api_Controller('购物车')
 export class shop_cart {
+  constructor(private readonly service_shop_cart: i_service_shop_cart) {}
   @Api_Post('保存-购物车')
   async save_shop_cart(@Body() body: save_shop_cart) {
     console.log(`save_shop_cart---body---`, body)
@@ -24,14 +28,12 @@ export class shop_cart {
     const product = await db.tb_product.findUnique({ where: { product_id: body.product_id } })
     if (!product) return { code: 400, msg: '商品不存在', result: {} }
     data['author_id'] = product.user_id
-
     if (card_id) {
       const one = await db.shop_cart.update({ where: { card_id: body.card_id }, data })
       return { code: 200, msg: '成功', result: one }
     } else {
       const one = await db.shop_cart.create({ data })
     }
-
     return { code: 200, msg: '成功', result: {} }
   }
 
@@ -68,28 +70,16 @@ export class shop_cart {
 
   @Api_Post('计算-购物车-总价')
   async compute_price_shop_cart(@Body() body: compute_price_shop_cart) {
-    let total_price = 0
-    for (let i = 0; i < body.checked_items.length; i++) {
-      let item = body.checked_items[i]
-      await db.shop_cart.update({ where: { card_id: item.card_id }, data: { count: item.count } })
-      let cart = await db.shop_cart.findUnique({ where: { card_id: item.card_id } })
-      if (!cart) return { code: 400, msg: '购物车不存在', result: {} }
-      let product = await db.tb_product.findUnique({ where: { product_id: cart.product_id }, include: { arg_product_model: true } })
-      if (!product) return { code: 400, msg: '商品不存在', result: {} }
-      // let price = item.count * product[cart.price_type]
-      let arg_product_model = product.arg_product_model
-      // console.log('product', JSON.parse(JSON.stringify(product)))
-      // console.log('arg_product_model', JSON.parse(JSON.stringify(arg_product_model)))
-      let price = item.count * arg_product_model[cart.price_type]
-      console.log('price', price, '=', 'count', item.count, 'price_type', arg_product_model[cart.price_type])
-      total_price += price
-    }
-    return { code: 200, msg: '成功', result: { total_price: total_price.toFixed(2) } }
+    console.log('111--compute_price_shop_cart---body', body)
+    await this.service_shop_cart.update_cart_count(body)
+    const card_ids = body.checked_items.map((item) => item.card_id)
+    let result = await this.service_shop_cart.compute_price_shop_cart(card_ids)
+    return { code: 200, msg: '成功', result }
   }
 }
 
 @Module({
   controllers: [shop_cart],
-  providers: [],
+  providers: [i_service_shop_cart],
 })
 export class shop_cart_Module {}

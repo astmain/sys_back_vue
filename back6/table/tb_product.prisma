@@ -1,4 +1,4 @@
-// 模型商品表
+// 商品表
 model tb_product {
     product_id String @id @default(cuid())
     user_id    String // 用户id
@@ -18,10 +18,10 @@ model tb_product {
 
     created_at        DateTime           @default(now())
     updated_at        DateTime           @updatedAt
-    // 一对一关联
-    arg_product_model arg_product_model?
+    arg_product_model arg_product_model? // 一对一关系
 }
 
+// 商品模型参数表
 model arg_product_model {
     arg_product_model_id String     @id @default(cuid())
     // 一对一关联（外键在本表）

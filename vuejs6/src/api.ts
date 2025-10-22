@@ -76,4 +76,10 @@ export let api = {
     remove_shop_cart_ids: (form: { ids: string[] }) => axios_api.post("/shop_cart/remove_shop_cart_ids", form),
     compute_price_shop_cart: (form: { checked_items: { card_id: string; count: number }[] }) => axios_api.post("/shop_cart/compute_price_shop_cart", form),
   },
+
+  shop_order: {
+    create_shop_order: (form: { user_id: string; card_ids: string[] }) => axios_api.post("/shop_order/create_shop_order", form),
+    remove_shop_order_ids: (form: { ids: string[] }) => axios_api.post("/shop_order/remove_shop_order_ids", form),
+    find_list_shop_order: (form: { user_id: string; status: string }) => axios_api.post("/shop_order/find_list_shop_order", form),
+  },
 }

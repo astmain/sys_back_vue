@@ -25,6 +25,7 @@ export const view_shop = [
   { name: "模型管理", path: "/model_manage", component: () => import("@/view_shop/model_3d/model_manage.vue") },
   { name: "模型商品", path: "/model_product", component: () => import("@/view_shop/model_3d/model_product.vue") },
   { name: "购物车", path: "/cart", component: () => import("@/view_shop/cart/cart.vue") },
+  { name: "我的订单", path: "/my_order", component: () => import("@/view_shop/my_order/my_order.vue") },
   // { name: "购物车", path: "/cart", component: () => import("@/view_shop/cart/cart.tsx") },
 ]
 

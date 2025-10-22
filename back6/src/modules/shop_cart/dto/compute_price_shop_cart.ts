@@ -18,6 +18,4 @@ export class compute_price_shop_cart {
   @IsArray({ message: '购物车id和数量-必须是数组' })
   @IsNotEmpty({ message: '购物车id和数量-必须不能为空' })
   checked_items: checked_items[]
-
-  //[ { card_id: cart.card_id, count: cart.count }]
 }

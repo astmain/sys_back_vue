@@ -37,6 +37,7 @@ export default defineConfig({
         ["btn-primary", { "background-color": "#1c3d5a" }],
         ["uno_card0", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
         ["uno_card1", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
+        ["uno_card2", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
 
         // 添加图标规则 <span class="icon-love !bg-red-500"></span>
         // https://www.iconfont.cn/search/index?searchType=icon&q=爱心

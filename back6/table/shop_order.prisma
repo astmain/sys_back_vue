@@ -1,10 +1,30 @@
-// 模型商品表
+// 订单总表
 model shop_order {
-    order_id String @id @default(cuid())
-    user_id    String // 用户id
-    author_id  String // 商家id
-    total_price Decimal @default(0) // 总价
-    status     String @default("pending") // 状态
+    order_id        String            @id @default(cuid())
+    user_id         String // 用户id
+    price_total     Int               @default(0) // 总价
+    status          String            @default("xxxxxxxx") // 状态
+    created_at      DateTime          @default(now()) // 创建时间
+    updated_at      DateTime          @default(now()) // 更新时间
+    shop_order_item shop_order_item[] //一对多关系
+}
+
+// 订单子表
+model shop_order_item {
+    order_item_id String @id @default(cuid())
+    user_id       String // 用户id
+    author_id     String // 商家id
+
+    price_one  Int    @default(0) // 单价
+    price_type String @default("price_free") // 价格类型
+
+    count      Int      @default(1) // 数量
+    status     String   @default("xxxxxxxx") // 状态
     created_at DateTime @default(now()) // 创建时间
     updated_at DateTime @default(now()) // 更新时间
+
+    order_id        String // 外键字段，引用订单
+    shop_order_list shop_order @relation(fields: [order_id], references: [order_id], onDelete: Cascade, onUpdate: Cascade)
 }
+
+// 订单总表 一对多关系  订单子表

@@ -6,4 +6,8 @@ export class find_list_shop_order {
   @IsString({ message: '用户id-必须是字符串' })
   @IsNotEmpty({ message: '用户id-必须不能为空' })
   user_id: string
+
+  @ApiProperty({ description: '订单状态', example: 'order_pending_pay' })
+  @IsString({ message: '订单状态-必须是字符串' })
+  status: string
 }
