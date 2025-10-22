@@ -10,17 +10,28 @@ import _ from 'lodash'
 // ==================== util ====================
 
 // ==================== dto ====================
-
+import { pay_method_make_url_qr } from './dto/pay_method_make_url_qr'
 @Api_Controller('支付')
 export class pay {
-  @Api_Get('微信支付-生成-url二维码')
-  async weixin_pay_make_url_qr(@Query('order_id') order_id: string, @Req() req: any) {
-    // console.log('make_pay_weixin_url_qr---order_id', order_id)
-    if (!order_id) return { code: 400, msg: '订单号不能为空', result: {} }
+  @Api_Get('支付方式-生成-url二维码')
+  @Api_Get('支付方式-生成-url二维码')
+  async pay_method_make_url_qr(@Query() body: pay_method_make_url_qr, @Req() req: any) {
+    // console.log('pay_method_make_url_qr---body', body)
+    const { order_id, pay_method } = body
+
     const order = await db.shop_order.findUnique({ where: { order_id } })
     if (!order) return { code: 400, msg: '订单不存在', result: {} }
-    const url_qr = `http://192.168.0.106:3002/pay/weixin_pay_callback?order_id=${order_id}`
-    return { code: 200, msg: '成功', result: { url_qr } }
+
+    // 微信
+    if (pay_method === 'weixin') {
+      const url_qr = `http://192.168.0.106:3002/pay/weixin_pay_callback?order_id=${order_id}`
+      return { code: 200, msg: '成功', result: { url_qr } }
+    }
+    // 支付宝
+    if (pay_method === 'zhifubao') {
+      const url_qr = `http://192.168.0.106:3002/pay/alipay_pay_callback?order_id=${order_id}`
+      return { code: 200, msg: '成功', result: { url_qr } }
+    }
   }
 
   @Api_public()

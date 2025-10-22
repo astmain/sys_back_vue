@@ -85,8 +85,8 @@ async function find_list_dict() {
 async function save_dict(title: string) {
   let ctx = (document.getElementById("ref_com_dialog_dict") as any)?.__vnode.ctx.exposed
   // debugger
-  ctx.title.value = title
   ctx.show.value = true
+  ctx.title.value = title
   ctx.form_reset()
 
   if (title === "新增字典父级") {

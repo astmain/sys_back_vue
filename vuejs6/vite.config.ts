@@ -35,9 +35,9 @@ export default defineConfig({
       rules: [
         ["uno_btn", { padding: "0.5rem 1rem", "border-radius": "0.25rem", "background-color": "#3490dc", color: "#fff" }],
         ["btn-primary", { "background-color": "#1c3d5a" }],
-        ["uno_card0", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
-        ["uno_card1", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
-        ["uno_card2", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", height: "auto", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
+        ["uno_card0", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
+        ["uno_card1", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
+        ["uno_card2", { overflow: "hidden", border: "1px solid #e4e7ed", "border-radius": "12px", "box-sizing": "border-box", "box-shadow": "0px 0px 8px rgba(0,0,0,0.12)" }],
 
         // 添加图标规则 <span class="icon-love !bg-red-500"></span>
         // https://www.iconfont.cn/search/index?searchType=icon&q=爱心
@@ -47,12 +47,13 @@ export default defineConfig({
             return {
               display: "inline-block",
               "vertical-align": "middle",
-              width: "1.25rem",
-              height: "1.25rem",
+              // width: "1.25rem",
+              // height: "1.25rem",
               "mask-size": "contain",
               "mask-repeat": "no-repeat",
               "mask-position": "center",
               "background-color": "black",
+              // "background-color": "transparent",
               "mask-image": `url("@/components/icon/${name}.svg")`,
               // "background-image": `url('/src/components/icon/${name}.svg')`,
             }

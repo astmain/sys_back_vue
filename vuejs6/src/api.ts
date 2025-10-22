@@ -82,4 +82,8 @@ export let api = {
     remove_shop_order_ids: (form: { ids: string[] }) => axios_api.post("/shop_order/remove_shop_order_ids", form),
     find_list_shop_order: (form: { user_id: string; status: string }) => axios_api.post("/shop_order/find_list_shop_order", form),
   },
+  pay: {
+    pay_method_make_url_qr: (form: { order_id: string; pay_method: string }) => axios_api.get("/pay/pay_method_make_url_qr", { params: form }),
+    weixin_pay_callback: (form: { order_id: string }) => axios_api.get("/pay/weixin_pay_callback", { params: form }),
+  },
 }
