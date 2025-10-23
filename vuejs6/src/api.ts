@@ -88,4 +88,9 @@ export let api = {
     pay_callback: (form: { order_id: string; pay_method: string; price_total: number }) => axios_api.get("/pay/pay_callback", { params: form }),
     find_one_shop_order: (form: { order_id: string }) => axios_api.post("/pay/find_one_shop_order", form),
   },
+  user_address_take: {
+    find_one_user_address_take: (form: { user_id: string }) => axios_api.post("/user_address_take/find_one_user_address_take", form),
+    save_user_address_take: (form: { id: string; user_id: string; name: string; phone: string; region: any; street: string; is_default: boolean; type_tag: string }) => axios_api.post("/user_address_take/save_user_address_take", form),
+    remove_ids_user_address_take: (form: { ids: string[] }) => axios_api.post("/user_address_take/remove_ids_user_address_take", form),
+  },
 }

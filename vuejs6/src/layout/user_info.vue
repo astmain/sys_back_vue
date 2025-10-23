@@ -51,6 +51,7 @@ const ref_input_file = ref()
 // 参数
 const user_info = ref({ id: "", phone: "", name: "", gender: "", avatar: "" })
 
+// 🟩 更新个人信息
 async function update_user_info() {
   const { phone, ...form } = user_info.value
   debugger
@@ -62,7 +63,7 @@ async function update_user_info() {
   useRouter().push("/login")
 }
 
-// input文件获取数据时.打开弹窗
+// 🟩 input文件获取数据时.打开弹窗
 async function get_input_file(event: any) {
   const file = event.target.files[0]
   const img = URL.createObjectURL(file)

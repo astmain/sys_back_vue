@@ -1,25 +1,11 @@
 <template>
-  <div class="flex">
-    <!-- 导航菜单 -->
-    <nav>
-      <div class="nav_item" :class="active === '个人信息' ? 'active' : ''" @click="nav_active('个人信息')">
-        <span>个人信息</span>
-      </div>
-      <div class="nav_item" :class="active === '我的订单' ? 'active' : ''" @click="nav_active('我的订单')">
-        <span>我的订单</span>
-      </div>
-      <div class="nav_item" :class="active === '收货地址' ? 'active' : ''" @click="nav_active('收货地址')">
-        <span>收货地址</span>
-      </div>
-    </nav>
+  <div class="flex gap-4">
+    <el-radio-group v-model="active" class="flex-col uno_card1 w-120px h-500px">
+      <el-radio value="个人信息" class="!m-0">个人信息</el-radio>
+      <el-radio value="收货地址" class="!m-0">收货地址</el-radio>
+    </el-radio-group>
 
-
-    <div>
-      <user_info/>
-    </div>
-
-   
-
+    <component :is="map_component[active]" />
   </div>
 </template>
 
@@ -32,20 +18,15 @@ import { useRouter, useRoute } from "vue-router"
 
 // 组件
 import user_info from "./user_info.vue"
-
-// 路由
-const router = useRouter()
-const route = useRoute()
+import user_address_take from "./user_address_take.vue"
 
 let active = ref("个人信息")
 
-function nav_active(name: string) {
-  active.value = name
+// 组件映射对象
+const map_component: { [key: string]: any } = {
+  个人信息: user_info,
+  收货地址: user_address_take,
 }
-
-
-
-
 </script>
 
 <style scoped>

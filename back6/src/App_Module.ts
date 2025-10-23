@@ -13,6 +13,7 @@ import { dict_Module } from '@src/modules/dict/dict'
 import { shop_cart_Module } from '@src/modules/shop_cart/shop_cart'
 import { shop_order_Module } from '@src/modules/shop_order/shop_order'
 import { pay_Module } from '@src/modules/pay/pay'
+import { user_address_take_Module } from '@src/modules/user_address_take/user_address_take'
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { pay_Module } from '@src/modules/pay/pay'
     shop_cart_Module, //购物车模块
     shop_order_Module, //订单模块
     pay_Module, //支付模块
+    user_address_take_Module, //用户收货地址模块
   ],
   controllers: [App_controller],
   providers: [],
