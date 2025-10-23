@@ -28,19 +28,19 @@
   <!-- 弹窗-编辑收货地址 -->
   <el-dialog v-model="show" title="编辑收货地址" width="500px" destroy-on-close draggable>
     <el-form :model="form" label-width="120px">
-      <el-form-item label="收货人姓名">
+      <el-form-item label="姓名">
         <el-input v-model="form.name" />
       </el-form-item>
-      <el-form-item label="收货人电话">
+      <el-form-item label="电话">
         <el-input v-model="form.phone" />
       </el-form-item>
       <el-form-item label="省市区">
         <el-cascader v-model="form.region" :options="constant_region" />
       </el-form-item>
-      <el-form-item label="收货人街道">
+      <el-form-item label="街道">
         <el-input v-model="form.street" />
       </el-form-item>
-      <el-form-item label="是否默认地址">
+      <el-form-item label="默认地址">
         <el-switch v-model="form.is_default" />
       </el-form-item>
       <el-form-item label="标记">
