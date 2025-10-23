@@ -12,15 +12,19 @@ import _ from 'lodash'
 import { remove_product_ids } from './dto/remove_product_ids'
 import { save_product } from './dto/save_product'
 import { find_list_product_public } from './dto/find_list_product_public'
-import { find_list_product_private } from './dto/find_list_product_private'
+import { find_list_product_admin } from './dto/find_list_product_admin'
 import { find_one_product } from './dto/find_one_product'
 import { publish_product } from './dto/publish_product'
 
+// ==================== service ====================
+import { i_service_auth } from '../auth/i_service_auth'
+
 @Api_Controller('商品')
 export class product {
+  constructor(private readonly service_auth: i_service_auth) {}
   @Api_Post('查询-商品-列表-公开')
   async find_list_product_public(@Body() body: find_list_product_public, @Req() req: any) {
-    const where: any = { title: { contains: body.title || '' } }
+    const where: any = { title: { contains: body.title || '' }, is_publish: true, type_product: 'model', type_check: 'check_success' }
     let list = await db.tb_product.findMany({ where, include: { arg_product_model: true } })
     for (let i = 0; i < list.length; i++) {
       let item = list[i]
@@ -29,10 +33,17 @@ export class product {
     }
     return { code: 200, msg: '成功', result: list }
   }
-  @Api_Post('查询-商品-列表-私有')
-  async find_list_product_private(@Body() body: find_list_product_private, @Req() req: any) {
-    console.log('find_list_product_private---body', body)
-    const where: any = { title: { contains: body.title || '' }, user_id: req.user_id, type_check: body.type_check }
+  @Api_Post('查询-商品-列表-租户')
+  async find_list_product_admin(@Body() body: find_list_product_admin, @Req() req: any) {
+    console.log('find_list_product_admin---body', body)
+    // 用户界面id(查询条件)
+    let where = { title: { contains: body.title }, type_check: body.type_check, user_id: req.user_id }
+    // 管理界面(查询条件)
+    if (body.is_admin) {
+      await this.service_auth.is_auth_url({ user_id: req.user_id, url: '/product:查看' })
+      where = { title: { contains: body.title }, type_check: body.type_check, user_id: undefined }
+    }
+
     let list = await db.tb_product.findMany({ where, include: { arg_product_model: true } })
     for (let i = 0; i < list.length; i++) {
       let item = list[i]
@@ -89,6 +100,6 @@ export class product {
 
 @Module({
   controllers: [product],
-  providers: [],
+  providers: [i_service_auth],
 })
 export class product_Module {}

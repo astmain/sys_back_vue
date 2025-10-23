@@ -83,11 +83,6 @@ export class user {
 
   @Api_Post('查询-用户-列表')
   async find_list_user(@Body() body: find_list_user, @Req() req: any) {
-    // async find_list_user(@Body() body: createZodDto(find_list_user_schema), @Req() req: any) {
-    // async find_list_user(@Body() body: find_list_user_dto, @Req() req: any) {
-    // async find_list_user(@Body() body: find_list_user_dto, @Req() req: any) {
-    // async find_list_user(@Body(new ZodValidationPipe(find_list_user_schema)) body: i_find_list_user, @Req() req: any) {
-    // console.log(`body---`, body)
     // 通过depart_id找到所有的父子级id和parent_id
     const depart_list_id_AND_parent_id = await db_find_ids_self_and_children({ db, table_name: 'sys_depart', id: body.depart_id })
     // console.log(`depart_list_id_AND_parent_id---`, depart_list_id_AND_parent_id)

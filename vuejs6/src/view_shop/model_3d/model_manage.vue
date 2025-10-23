@@ -3,12 +3,12 @@
     <h1>模型管理</h1>
 
     <div class="flex items-center gap-4">
-      <el-button type="primary" @click="find_list_product_private">查询</el-button>
-      <div class="text-center text-lg" :class="{ active: form.type_check === 'check_pending' }" @click="() => ((form.type_check = 'check_pending'), find_list_product_private())">待审核</div>
+      <el-button type="primary" @click="find_list_product_admin()">查询</el-button>
+      <div class="text-center text-lg" :class="{ active: form.type_check === 'check_pending' }" @click="() => ((form.type_check = 'check_pending'), find_list_product_admin())">待审核</div>
       <el-divider direction="vertical" />
-      <div class="text-center text-lg" :class="{ active: form.type_check === 'check_refuse' }" @click="() => ((form.type_check = 'check_refuse'), find_list_product_private())">未通过</div>
+      <div class="text-center text-lg" :class="{ active: form.type_check === 'check_refuse' }" @click="() => ((form.type_check = 'check_refuse'), find_list_product_admin())">未通过</div>
       <el-divider direction="vertical" />
-      <div class="text-center text-lg" :class="{ active: form.type_check === 'check_success' }" @click="() => ((form.type_check = 'check_success'), find_list_product_private())">已通过</div>
+      <div class="text-center text-lg" :class="{ active: form.type_check === 'check_success' }" @click="() => ((form.type_check = 'check_success'), find_list_product_admin())">已通过</div>
     </div>
 
     <div>
@@ -52,10 +52,11 @@
           </nav>
 
           <nav class="w-200px flex flex-col gap-2">
-            <el-button style="margin: 0; padding: 0" link @click="edit_product(item)" type="primary">重新编辑</el-button>
-            <el-button style="margin: 0; padding: 0" v-if="item.is_publish" @click="publish_product(item)" link type="info">下载商品</el-button>
-            <el-button style="margin: 0; padding: 0" v-else @click="publish_product(item)" link type="primary">上架上品</el-button>
-            <el-button style="margin: 0; padding: 0" @click="remove_product_ids([item.product_id])" link type="info">删除商品</el-button>
+            <el-button style="margin: 0; padding: 0" link type="primary" v-if="is_admin" @click="check_product(item)">审核商品</el-button>
+            <el-button style="margin: 0; padding: 0" link type="primary" @click="edit_product(item)">重新编辑</el-button>
+            <el-button style="margin: 0; padding: 0" link type="info" v-if="item.is_publish" @click="publish_product(item)">下架商品</el-button>
+            <el-button style="margin: 0; padding: 0" link type="primary" v-else @click="publish_product(item)">上架上品</el-button>
+            <el-button style="margin: 0; padding: 0" link type="info" @click="remove_product_ids([item.product_id])">删除商品</el-button>
           </nav>
         </div>
       </div>
@@ -63,56 +64,91 @@
   </div>
 
   <el-dialog v-model="dialog_visible" title="编辑模型" width="1200px" draggable :close-on-click-modal="false">
-    <model_save ref="model_save_ref" />
+    <model_save ref="ref_model_save" />
   </el-dialog>
+  <com_dialog_model_manage_check_product ref="ref_com_dialog_model_manage_check_product" />
 </template>
 
 <script setup lang="tsx">
-import { ref, onMounted, nextTick } from "vue"
+import { ref, onMounted, nextTick, computed } from "vue"
 import { api, type info_file } from "@/api"
 import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
-import model_save from "./model_save.vue"
 import { util_data_to_form } from "@/plugins/util_data_to_form"
-let model_save_ref = $ref<any>(null)
-let list_product = $ref<any[]>([])
-let form = $ref<any>({ title: "", type_check: "check_pending" })
-// let form = $ref<any>({ title: "", type_check: "check_success" })
+
+// 组件
+import model_product from "./model_product.vue"
+import com_dialog_model_manage_check_product from "./com_dialog_model_manage_check_product.vue"
+const ref_com_dialog_model_manage_check_product = ref()
+
+// 当前路由是否是管理界面
+let is_admin = location.pathname === "/model_manage" ? false : true
+
+/*组件*/
+import model_save from "./model_save.vue"
+let ref_model_save = $ref<any>(null)
 let dialog_visible = $ref(false)
-async function find_list_product_private() {
-  const res: any = await api.product.find_list_product_private(form)
-  console.log("find_list_product---res", res)
-  if (res.code !== 200) return alert("错了")
+let list_product = $ref<any[]>([])
+let form = $ref({ title: "", type_check: "check_pending", is_admin }) //根据当前路由判断是否是管理界面
+
+// 🟩 查询商品列表(租户)
+async function find_list_product_admin() {
+  const res: any = await api.product.find_list_product_admin(form)
+  console.log("find_list_product_admin---res", res)
+  if (res.code !== 200) return ElMessage.error("管理查询商品列表失败")
   list_product = res.result
 }
 
+// 🟩 重新编辑商品
 async function edit_product(item: any) {
   dialog_visible = true
   await nextTick(() => {
     const ele = JSON.parse(JSON.stringify(item))
-    model_save_ref.form = util_data_to_form(model_save_ref.form, ele)
+    ref_model_save.form = util_data_to_form(ref_model_save.form, ele)
   })
 }
 
+// 🟩 删除商品
 async function remove_product_ids(ids: string[]) {
   if (!(await plugin_confirm())) return
   const res: any = await api.product.remove_product_ids({ ids })
   console.log("remove_product_ids---res", res)
   if (res.code !== 200) return ElMessage.error("删除商品失败")
-  find_list_product_private()
+  find_list_product_admin()
 }
 
+// 🟩 上架商品
 async function publish_product(item: any) {
   const res: any = await api.product.publish_product({ product_id: item.product_id, is_publish: !item.is_publish })
   console.log("publish_product---res", res)
   if (res.code !== 200) return ElMessage.error("商品上架状态失败")
   ElMessage.success(res.msg)
-  find_list_product_private()
+  find_list_product_admin()
 }
 
+// 🟩 审核商品
+async function check_product(item: any) {
+  console.log("check_product---item", item)
+  const form = { product_id: item.product_id, type_check: item.type_check, type_check_remark: item.type_check_remark }
+  console.log("check_product---form", form)
+  let render = model_product
+
+  ref_com_dialog_model_manage_check_product.value.open(form, render)
+
+  // function render() {
+  //   return (
+  //     <div>
+  //       <div>审核状态</div>
+  //       <div>审核备注</div>
+  //     </div>
+  //   )
+  // }
+}
+
+// 🟩 初始化
 onMounted(() => {
-  find_list_product_private()
+  find_list_product_admin()
 })
 </script>
 

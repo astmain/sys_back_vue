@@ -98,7 +98,7 @@ import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"
 import { useRoute } from "vue-router"
 const route = useRoute()
-const product_id = route.query.product_id as string
+let product_id = (route.query?.product_id as string) || (localStorage.getItem("product_id") as string)
 let product = $ref<any>(null)
 console.log("product_id", product_id)
 

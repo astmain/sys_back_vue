@@ -9,6 +9,7 @@ import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadReque
 import _ from 'lodash'
 import { db } from '@src/App_Prisma'
 import { util_uuid9 } from '@src/plugins/util_uuid9'
+import { util_id } from '@src/plugins/util_id'
 
 // ==================== dto ====================
 import { create_shop_order } from './dto/create_shop_order'
@@ -28,7 +29,7 @@ export class shop_order {
     let price_total = await this.service_shop_cart.compute_price_shop_cart(card_ids)
 
     // 新增总订单
-    let order_id = `order_total_${util_uuid9()}`
+    let order_id = util_id({ type: 'order_id' })
     let order_total = await db.shop_order.create({ data: { order_id, user_id: data.user_id, price_total: Number(price_total.total_price), status: 'order_pending_pay' } })
 
     for (let i = 0; i < card_ids.length; i++) {
@@ -41,7 +42,7 @@ export class shop_order {
       if (!product) return { code: 400, msg: '商品不存在', result: {} }
       let arg_product_model = product.arg_product_model
       // 新增订单子订单
-      let order_item_id = `order_item_${util_uuid9()}`
+      let order_item_id = util_id({ type: 'order_item_id' })
       await db.shop_order_item.create({
         data: {
           order_item_id, //子订单id
