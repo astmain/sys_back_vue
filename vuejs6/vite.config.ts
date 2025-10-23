@@ -47,8 +47,8 @@ export default defineConfig({
             return {
               display: "inline-block",
               "vertical-align": "middle",
-              // width: "1.25rem",
-              // height: "1.25rem",
+              "min-width": "1.25rem",
+              "min-height": "1.25rem",
               "mask-size": "contain",
               "mask-repeat": "no-repeat",
               "mask-position": "center",

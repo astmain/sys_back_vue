@@ -17,19 +17,17 @@
 
     <div>
       <div v-for="ele in shop_order_list">
-        <div class="uno_card1">
+        <div class="uno_card1 mb-6">
           <h1 class="flex gap-4 bg-gray-200 p-2">
             <div class="w-300px">总订单号:{{ ele.order_id }}</div>
             <div class="w-200px" style="font-size: 12px">{{ ele.created_at }}</div>
-            <!-- <div class="w-100px">{{ ele.status }}</div> -->
-            <div class="w-100px">{{ BUS.dict_obj?.model_order[ele.status].name }}</div>
+            <div class="w-100px" :class="BUS.dict_obj?.model_order[ele.status].css">{{ BUS.dict_obj?.model_order[ele.status].name }}</div>
             <div class="w-300px text-center">
-              <el-button type="info" link @click="remove_shop_order_ids(ele.order_id)">取消订单</el-button>
-              <el-button type="primary" link @click="handle_paying(ele)">立即支付</el-button>
+              <el-button type="info" link @click="remove_shop_order_ids(ele.order_id)">删除订单</el-button>
+              <el-button v-if="ele.status === 'order_pending_pay'" type="primary" link @click="handle_paying(ele)">立即支付</el-button>
             </div>
           </h1>
           <nav class="p-2">
-            <!-- {{ ele.author_group }} -->
             <div v-for="author in ele.author_group" class="mb-6">
               <h1 class="uno_card1 p-2 mb-1 bg-gray-100">商家:{{ author.name }}</h1>
               <div v-for="cart in author.cart_list">
@@ -79,6 +77,7 @@ import { BUS } from "@/BUS"
 import { api, type info_file } from "@/api"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { util_url_to_qr_base64 } from "@/plugins/util_url_to_qr_base64"
+import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"
 import { Cinput1 } from "@/components/Cinput1"
 import { useRouter } from "vue-router"
@@ -113,6 +112,7 @@ async function find_list_shop_order() {
 }
 
 async function remove_shop_order_ids(order_id: string) {
+  if (!(await plugin_confirm())) return
   const res: any = await api.shop_order.remove_shop_order_ids({ ids: [order_id] })
   console.log("remove_shop_order_ids---res", res)
   if (res.code === 200) ElMessage.success("删除订单成功"), await find_list_shop_order()

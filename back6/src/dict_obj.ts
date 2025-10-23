@@ -44,9 +44,9 @@ export const dict_obj ={
         "remark": "",
         "status": true,
         "sort": 0,
-        "css": "",
+        "css": "bg-red-500",
         "created_at": "2025-10-20T16:00:54.086Z",
-        "updated_at": "2025-10-20T16:00:54.086Z",
+        "updated_at": "2025-10-23T03:14:56.256Z",
         "parent_id": "cmgyh93u70000t7asz65uesyc"
       }
     ],
@@ -105,9 +105,9 @@ export const dict_obj ={
           "remark": "",
           "status": true,
           "sort": 0,
-          "css": "",
+          "css": "bg-red-500",
           "created_at": "2025-10-20T16:00:54.086Z",
-          "updated_at": "2025-10-20T16:00:54.086Z",
+          "updated_at": "2025-10-23T03:14:56.256Z",
           "parent_id": "cmgyh93u70000t7asz65uesyc"
         }
       ]
@@ -155,9 +155,9 @@ export const dict_obj ={
       "remark": "",
       "status": true,
       "sort": 0,
-      "css": "",
+      "css": "bg-red-500",
       "created_at": "2025-10-20T16:00:54.086Z",
-      "updated_at": "2025-10-20T16:00:54.086Z",
+      "updated_at": "2025-10-23T03:14:56.256Z",
       "parent_id": "cmgyh93u70000t7asz65uesyc"
     }
   },
@@ -1088,9 +1088,9 @@ export const dict_obj ={
         "remark": "",
         "status": true,
         "sort": 0,
-        "css": "",
+        "css": "text-green-500",
         "created_at": "2025-10-22T04:09:29.549Z",
-        "updated_at": "2025-10-22T04:12:49.159Z",
+        "updated_at": "2025-10-23T01:41:20.356Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       },
       {
@@ -1100,9 +1100,9 @@ export const dict_obj ={
         "remark": "",
         "status": true,
         "sort": 0,
-        "css": "",
+        "css": "text-gray-500  ",
         "created_at": "2025-10-22T04:09:35.031Z",
-        "updated_at": "2025-10-22T04:12:23.174Z",
+        "updated_at": "2025-10-23T03:16:22.795Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       }
     ],
@@ -1115,7 +1115,7 @@ export const dict_obj ={
       "sort": 0,
       "css": "",
       "created_at": "2025-10-22T04:08:43.993Z",
-      "updated_at": "2025-10-22T04:08:43.993Z",
+      "updated_at": "2025-10-23T02:57:48.497Z",
       "parent_id": null,
       "children": [
         {
@@ -1161,9 +1161,9 @@ export const dict_obj ={
           "remark": "",
           "status": true,
           "sort": 0,
-          "css": "",
+          "css": "text-green-500",
           "created_at": "2025-10-22T04:09:29.549Z",
-          "updated_at": "2025-10-22T04:12:49.159Z",
+          "updated_at": "2025-10-23T01:41:20.356Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         },
         {
@@ -1173,9 +1173,9 @@ export const dict_obj ={
           "remark": "",
           "status": true,
           "sort": 0,
-          "css": "",
+          "css": "text-gray-500  ",
           "created_at": "2025-10-22T04:09:35.031Z",
-          "updated_at": "2025-10-22T04:12:23.174Z",
+          "updated_at": "2025-10-23T03:16:22.795Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         }
       ]
@@ -1223,9 +1223,9 @@ export const dict_obj ={
       "remark": "",
       "status": true,
       "sort": 0,
-      "css": "",
+      "css": "text-green-500",
       "created_at": "2025-10-22T04:09:29.549Z",
-      "updated_at": "2025-10-22T04:12:49.159Z",
+      "updated_at": "2025-10-23T01:41:20.356Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     },
     "cancel_order": {
@@ -1235,9 +1235,9 @@ export const dict_obj ={
       "remark": "",
       "status": true,
       "sort": 0,
-      "css": "",
+      "css": "text-gray-500  ",
       "created_at": "2025-10-22T04:09:35.031Z",
-      "updated_at": "2025-10-22T04:12:23.174Z",
+      "updated_at": "2025-10-23T03:16:22.795Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     }
   }

@@ -1,5 +1,11 @@
-// 删除数据时确定
 import { ElMessageBox } from "element-plus"
+/** 
+ * 删除数据时确定
+ * 示例: if (!(await plugin_confirm())) return
+ * @returns 
+ */
+
+
 export async function plugin_confirm() {
   return new Promise(async (resolve) => {
     try {
@@ -11,3 +17,7 @@ export async function plugin_confirm() {
     }
   })
 }
+
+
+
+

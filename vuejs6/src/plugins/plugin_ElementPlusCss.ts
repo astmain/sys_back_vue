@@ -10,6 +10,14 @@ export async function plugin_ElementPlusCss({ app }: { app: any }) {
       --el-switch-on-color: #409eff !important;
       --el-switch-off-color: #9ca3af !important;
     }
+
+
+    
+    .el-radio__inner {
+      display: none !important; /* 使圆点消失 */
+    }
+
+
   `
   document.head.appendChild(style)
 }

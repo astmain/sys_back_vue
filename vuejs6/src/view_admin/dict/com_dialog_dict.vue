@@ -1,10 +1,16 @@
 <template>
   <div>
     <el-dialog v-model="show" :title="title" width="800px" draggable :close-on-click-modal="false">
-      <div>id: {{ form.id }}</div>
-      <div>parent_id: {{ form.parent_id }}</div>
-
       <el-form label-width="100px">
+        <nav class="flex">
+          <el-form-item label="id">
+            <el-input v-model="form.id" style="width: 280px" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="parent_id">
+            <el-input v-model="form.parent_id" style="width: 280px" disabled></el-input>
+          </el-form-item>
+        </nav>
+
         <nav class="flex">
           <el-form-item label="字典名称">
             <el-input v-model="form.name" style="width: 280px"></el-input>
@@ -28,7 +34,7 @@
 
         <el-form-item label="样式">
           <el-input v-model="form.css"></el-input>
-          <div :class="form.css">样式预览</div>
+          <div class="ml-3" :class="form.css">{{ form.css }}</div>
         </el-form-item>
 
         <el-form-item label="备注">
@@ -38,7 +44,8 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submit"> Confirm </el-button>
+          <el-button type="" @click="close"> 取消 </el-button>
+          <el-button type="primary" @click="submit"> 保存 </el-button>
         </div>
       </template>
     </el-dialog>
@@ -65,5 +72,14 @@ function form_reset() {
   form.value = { id: "", parent_id: null, name: "", code: "", status: true, remark: "", css: "", sort: 0 }
 }
 
-defineExpose({ show, title, open, submit, form, form_reset, callback })
+function open(arg: { title: string }) {
+  show.value = true
+  title.value = arg.title
+  form_reset()
+}
+function close() {
+  show.value = false
+}
+
+defineExpose({ show, title, open, close, submit, form, form_reset, callback })
 </script>
