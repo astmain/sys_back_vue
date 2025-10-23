@@ -91,12 +91,8 @@ function on_rotate_left() {
 function on_rotate_right() {
   cropper_ref.value?.rotateRight()
 }
-function open(arg: { img: string }) {
-  cropper_opt.img = arg.img
+function open() {
   show.value = true
-}
-function close() {
-  show.value = false
 }
 
 async function submit() {
@@ -114,7 +110,7 @@ async function submit() {
       console.log(res)
       if (res.code !== 200) alert("上传头像异常")
       img_upload_url.value = res.result.url
-      callback.value(img_upload_url.value)
+      callback.value(img_upload_url)
       console.log("")
       show.value = false
     },

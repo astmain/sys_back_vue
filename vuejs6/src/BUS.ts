@@ -79,6 +79,10 @@ async function find_list_dict() {
   window.BUS.dict_obj = res.result.dict_obj
 }
 
+
+
+
+
 // const res: any = await api.dict.find_list_dict({})
 // console.log("find_list_dict---res", JSON.parse(JSON.stringify(res)))
 // if (res.code != 200) return ElMessage.error(res.message)

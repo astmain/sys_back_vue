@@ -16,7 +16,7 @@
         <div style="display: flex; align-items: center; gap: 10px; justify-content: center">
           <el-button :type="BUS.web_type === 'shop' ? 'primary' : ''" @click="handle_switch_shop"> shop</el-button>
           <el-button :type="BUS.web_type === 'admin' ? 'primary' : ''" @click="handle_switch_admin"> admin</el-button>
-          <com_user_button/>
+          <com_user_info></com_user_info>
         </div>
       </div>
     </el-header>
@@ -67,7 +67,7 @@ import { ElMessage } from "element-plus"
 import { BUS } from "@/BUS"
 
 import /*组件*/ env_control from "./env_control.vue"
-import /*组件*/ com_user_button from "./com_user_button.vue"
+import /*组件*/ com_user_info from "./com_user_info.vue"
 
 // 路由
 const router = useRouter()
