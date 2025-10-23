@@ -1,11 +1,13 @@
 <template>
   <div class="flex-col gap-6 w-full" id="com_user_address_take">
-    <div class="uno_card1 p-4 flex justify-between gap-4">
+    <!-- 查询新增 -->
+    <nav class="uno_card1 p-4 flex justify-between gap-4">
       <el-button type="primary" @click="find_one_user_address_take">查询</el-button>
       <el-button type="primary" @click=";(show = true), (form = form_temp)">新增</el-button>
-    </div>
+    </nav>
 
-    <div class="uno_card1 p-4">
+    <!-- 表格-收货地址 -->
+    <nav class="uno_card1 p-4">
       <el-table :data="list_address_take" tooltip-effect="dark" stripe border>
         <el-table-column prop="is_default" label="默认" width="80" />
         <el-table-column prop="name" label="收货人姓名" width="100" />
@@ -20,9 +22,10 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>
+    </nav>
   </div>
 
+  <!-- 弹窗-编辑收货地址 -->
   <el-dialog v-model="show" title="编辑收货地址" width="500px" destroy-on-close draggable>
     <el-form :model="form" label-width="120px">
       <el-form-item label="收货人姓名">
