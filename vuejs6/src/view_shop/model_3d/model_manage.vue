@@ -133,17 +133,16 @@ async function check_product(item: any) {
   const form = { product_id: item.product_id, type_check: item.type_check, type_check_remark: item.type_check_remark }
   console.log("check_product---form", form)
   let render = model_product
-
   ref_com_dialog_model_manage_check_product.value.open(form, render)
+  ref_com_dialog_model_manage_check_product.value.callback = async () => {
+    const res: any = await api.product.check_product(form)
+    console.log("check_product---res", res)
+    if (res.code !== 200) return ElMessage.error("审核商品失败")
+    ElMessage.success(res.msg)
+    find_list_product_admin()
+    ref_com_dialog_model_manage_check_product.value.colse()
+  }
 
-  // function render() {
-  //   return (
-  //     <div>
-  //       <div>审核状态</div>
-  //       <div>审核备注</div>
-  //     </div>
-  //   )
-  // }
 }
 
 // 🟩 初始化

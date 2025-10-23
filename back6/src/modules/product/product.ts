@@ -15,6 +15,7 @@ import { find_list_product_public } from './dto/find_list_product_public'
 import { find_list_product_admin } from './dto/find_list_product_admin'
 import { find_one_product } from './dto/find_one_product'
 import { publish_product } from './dto/publish_product'
+import { check_product } from './dto/check_product'
 
 // ==================== service ====================
 import { i_service_auth } from '../auth/i_service_auth'
@@ -94,6 +95,12 @@ export class product {
   @Api_Post('删除-商品')
   async remove_product_ids(@Body() body: remove_product_ids, @Req() req: any) {
     await db.tb_product.deleteMany({ where: { product_id: { in: body.ids } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
+
+  @Api_Post('审核-商品')
+  async check_product(@Body() body: check_product, @Req() req: any) {
+    await db.tb_product.update({ where: { product_id: body.product_id }, data: { type_check: body.type_check, type_check_remark: body.type_check_remark } })
     return { code: 200, msg: '成功', result: {} }
   }
 }

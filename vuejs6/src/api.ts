@@ -43,10 +43,11 @@ export let api = {
 
   product: {
     find_list_product_public: (form: { title: string }) => axios_api.post("/product/find_list_product_public", form),
-    find_list_product_admin: (form: { title: string; is_admin: boolean, type_check: string }) => axios_api.post("/product/find_list_product_admin", form),
+    find_list_product_admin: (form: { title: string; is_admin: boolean; type_check: string }) => axios_api.post("/product/find_list_product_admin", form),
     find_one_product: (form: { product_id: string }) => axios_api.post("/product/find_one_product", form),
     remove_product_ids: (form: { ids: string[] }) => axios_api.post("/product/remove_product_ids", form),
     publish_product: (form: { product_id: string; is_publish: boolean }) => axios_api.post("/product/publish_product", form),
+    check_product: (form: { product_id: string; type_check: string; type_check_remark: string }) => axios_api.post("/product/check_product", form),
     save_product: (form: {
       product_id?: string
       user_id: string
