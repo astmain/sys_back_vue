@@ -12,6 +12,7 @@
           <el-dropdown-item command="my_order"> 我的订单</el-dropdown-item>
           <el-dropdown-item command="model_save"> 模型上传</el-dropdown-item>
           <el-dropdown-item command="model_manage"> 模型管理</el-dropdown-item>
+          <el-dropdown-item command="markdown"> markdown</el-dropdown-item>
           <el-dropdown-item command="logout"> 退出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -53,6 +54,9 @@ function handle_dropdown(command: any) {
     router.push("/model_manage")
   } else if (command === "my_order") {
     router.push("/my_order")
+  } else if (command === "markdown") {
+    // router.push("/markdown")
+    window.open("/markdown", "_blank")
   }
 }
 </script>
