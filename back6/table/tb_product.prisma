@@ -60,3 +60,42 @@ model arg_product_model {
     list_video     Json @default("[]") // 视频
     list_extend    Json @default("[]") // 附件
 }
+
+// 商品表
+model tb_product_print_upload {
+    product_print_id String @id @default(cuid())
+    user_id          String // 用户id    //以后要改成 author_id
+    // ==================== 文件信息 ====================
+    fileNameOriginal String @default("") // 文件原始名
+    size             Int    @default(0) // 文件大小
+    size_format      String @default("") // 文件大小格式
+    url              String @default("") // 文件url
+    url_screenshot   String @default("") // 截图url
+    // ==================== 解析参数 ====================
+    length               Int @default(0) // 长度
+    width                Int @default(0) // 宽度
+    height               Int @default(0) // 高度
+    surface_area         Int @default(0) // 表面积
+    volume               Int @default(0) // 体积
+    complexity           Int @default(0) // 复杂度
+    structural_strength  Int @default(0) // 结构强度
+    num_faces            Int @default(0) // 面数
+    points               Int @default(0) // 点数
+    min_thickness        Int @default(0) // 最小厚度
+    thickness_proportion Int @default(0) // 厚度比例
+}
+
+//   "size": 1,
+//   "length": 57.08331298828125,
+//   "width": 87.88800048828125,
+//   "height": 99.99980163574219,
+//   "surface_area": 29252.025390625,
+//   "volume": 214244.765625,
+//   "complexity": 0.4999850438216027,
+//   "structural_strength": 66864,
+//   "num_faces": 66864,
+//   "points": 66864,
+//   "min_thickness": 3.1415,
+//   "thickness_proportion": 0.4696987825670785,
+//   "path_screenshot_absolute": "/app/filestore_oss/public/1/111_2025-10_24_08_22_29_139666_new.png",
+//   "path_screenshot_relative": "https://server.oss.yun3d.com/oss_api/static_stream?path_static=/public/1/111_2025-10_24_08_22_29_139666_new.png",

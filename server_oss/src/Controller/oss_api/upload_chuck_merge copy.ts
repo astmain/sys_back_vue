@@ -9,7 +9,7 @@ import { static_dir } from './app/static_dir'
 import { tool_isok_path } from './tool_isok_path'
 
 // dto 类====================================
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, IsIn, Matches } from 'class-validator'
+import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString,IsIn, Matches } from 'class-validator'
 import { tool_file_exit_static } from '@src/Controller/oss_api/tool_file_exit_static'
 import { Optional } from '@nestjs/common'
 
@@ -34,9 +34,13 @@ class Api_upload_chuck_merge_dto {
   @IsInt()
   totalChunks: number
 
-  @ApiProperty({ description: '是否3d解析(可选参数)', example: true })
-  @IsIn(["oss", "oss_parse", "oss_parse_back"], { message: '["oss(oss上传)","oss_parse(oss上传并且3d解析)","oss_parse_back(oss上传并且3d解析并且发送到后端)"]' })
-  oss_type: string
+
+    @ApiProperty({ description: '是否3d解析(可选参数)', example: true })
+  @IsOptional()
+  @IsBoolean()
+  is_3d_parse: boolean = false
+
+
 
   // @ApiProperty({ description: '部门id', example: 1 })
   // @IsInt()
@@ -129,15 +133,8 @@ export class upload_chuck_merge extends AppController {
       let path_file = '/filestore_oss' + path_db //文件的路径
       console.log(`upload_chuck_merge---path_file:`, path_file)
 
-      //1️⃣ 情况1 oss上传==============================================================
-      if (body.oss_type === 'oss') {
-        const res = { code: 200, msg: '成功:合并分片', result: { url: url, size, fileName, fileNameOriginal, path_file, size_format: tool_format_size(size) } }
-        console.log(`upload_chuck_merge---res:`, res)
-        return res
-      }
-
-      //2️⃣ 情况2 oss上传并且3d解析==============================================================
-      else if (body.oss_type === 'oss_parse') {
+      // 是否3d解析
+      if (body.is_3d_parse) {
         let res_parse = await callback_oss_to_parse({ path_file }) //回调解析服务
         // 构建数据基础文件信息
         res_parse.result['base_file_info'] = {
@@ -148,27 +145,6 @@ export class upload_chuck_merge extends AppController {
           filepath: url + '&download=true', //可以下载
           screenshot: 'https://server.oss.yun3d.com/oss_api/static_stream?path_static=' + res_parse.result.path_screenshot_relative, //截图
         }
-
-        const url_screenshot = 'https://server.oss.yun3d.com/oss_api/static_stream?path_static=' + res_parse.result.path_screenshot_relative //截图url
-        console.log(`upload_chuck_merge---token:`, req.headers.token)
-        const res = { code: 200, msg: '成功:合并分片', result: { res_parse, url, url_screenshot, size, fileName, fileNameOriginal, path_file, size_format: tool_format_size(size) } }
-        console.log(`upload_chuck_merge---res:`, res)
-        return res
-      }
-
-      //3️⃣ 情况3 oss上传并且3d解析并且发送到后端==============================================================
-      else if (body.oss_type === 'oss_parse_back') {
-        let res_parse = await callback_oss_to_parse({ path_file }) //回调解析服务
-        // 构建数据基础文件信息
-        res_parse.result['base_file_info'] = {
-          sha256: 'sha256',
-          file_type: suffix,
-          file_size: size,
-          filename: fileNameOriginal,
-          filepath: url + '&download=true', //可以下载
-          screenshot: 'https://server.oss.yun3d.com/oss_api/static_stream?path_static=' + res_parse.result.path_screenshot_relative, //截图
-        }
-
         console.log(`upload_chuck_merge---token:`, req.headers.token)
         let res_back = await callback_oss_to_back({ parse_result: res_parse.result, token: req.headers.token }) //回调后端服务
         const res = { code: 200, msg: '成功:合并分片', result: { res_parse, res_back, url: url, size, fileName, fileNameOriginal, path_file, size_format: tool_format_size(size) } }
@@ -179,7 +155,8 @@ export class upload_chuck_merge extends AppController {
         console.log(`upload_chuck_merge---res:`, res)
         return res
       }
-    } else {
+    }
+    else {
       const res = { code: 400, msg: '失败:合并分片', result: res_merge }
       console.log(`upload_chuck_merge---res:`, res)
       return res
@@ -302,6 +279,10 @@ async function callback_oss_to_parse({ path_file }) {
   // } catch (error) {
   //   return { code: 400, msg: '失败2:回调模块解析模块的结果失败', result: { error } }
   // }
+
+
+
+
   return {
     "code": 200,
     "msg": "成功:解析",

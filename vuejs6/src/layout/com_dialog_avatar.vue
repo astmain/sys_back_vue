@@ -40,7 +40,7 @@
       </div>
 
       <template #footer>
-        <el-button type="primary" @click="() => (show = false)">取消</el-button>
+        <el-button type="" plain @click="() => (show = false)">取消</el-button>
         <el-button type="primary" @click="submit">确定</el-button>
       </template>
     </el-dialog>
