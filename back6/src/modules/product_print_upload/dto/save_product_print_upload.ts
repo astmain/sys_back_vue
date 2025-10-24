@@ -7,14 +7,15 @@ import { registerDecorator, ValidationArguments, ValidationOptions } from 'class
 
 export class save_product_print_upload {
   @ApiProperty({ description: '商品打印上传历史id', example: 'cuid_string' })
-  @IsString({ message: '商品打印上传历史id-必须是字符串' })
-  product_print_id: string
+  @ValidateIf((o) => o.product_print_id !== null) // 为 null 或空，不验证（让数据库自动生成）
+  @IsString()
+  product_print_id: string | null
 
   @ApiProperty({ description: '用户id', example: 'cuid_string' })
   @IsString({ message: '用户id-必须是字符串' })
   @IsNotEmpty()
   user_id: string
-// ==================== 文件信息 ====================
+  // ==================== 文件信息 ====================
   @ApiProperty({ description: '文件原始名', example: 'cuid_string' })
   @IsString({ message: '文件原始名-必须是字符串' })
   @IsNotEmpty()
@@ -38,7 +39,7 @@ export class save_product_print_upload {
   @IsString({ message: '截图url-必须是字符串' })
   @IsNotEmpty()
   url_screenshot: string
-// ==================== 解析参数 ====================
+  // ==================== 解析参数 ====================
   @ApiProperty({ description: '长度', example: 0 })
   @IsNumber()
   length: number
@@ -82,7 +83,6 @@ export class save_product_print_upload {
   @ApiProperty({ description: '厚度比例', example: 0 })
   @IsNumber()
   thickness_proportion: number
-
 }
 
 // product_print_id String @id @default(cuid())

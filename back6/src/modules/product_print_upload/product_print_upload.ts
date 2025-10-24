@@ -18,8 +18,8 @@ export class product_print_upload {
   @Api_Post('查询-商品打印上传历史-列表')
   async find_list_product_print_upload(@Body() body: find_list_product_print_upload, @Req() req: any) {
     console.log('find_list_product_print_upload---body', body)
-    let list = await db.tb_product_print_upload.findMany({ where: { user_id: req.user_id } })
-    return { code: 200, msg: '成功', result: { list } }
+    let list_product_print_upload = await db.tb_product_print_upload.findMany({ where: { user_id: req.user_id } })
+    return { code: 200, msg: '成功', result: { list_product_print_upload } }
   }
 
   @Api_Post('查询-商品打印上传历史-详情')
@@ -31,11 +31,15 @@ export class product_print_upload {
   async save_product_print_upload(@Body() body: save_product_print_upload, @Req() req: any) {
     console.log('save_product_print_upload---body', body)
     console.log('save_product_print_upload---req.user_id', req.user_id)
-    if (body.product_print_id) {
-      await db.tb_product_print_upload.update({ where: { product_print_id: body.product_print_id }, data: body })
+
+    const { product_print_id, ...data } = body
+    if (product_print_id) {
+      console.log('更新---body.product_print_id', body.product_print_id)
+      await db.tb_product_print_upload.update({ where: { product_print_id }, data })
       return { code: 200, msg: '成功-更新', result: {} }
     } else {
-      await db.tb_product_print_upload.create({ data: body })
+      console.log('新建---body.product_print_id', body.product_print_id)
+      await db.tb_product_print_upload.create({ data })
       return { code: 200, msg: '成功-新建', result: {} }
     }
   }

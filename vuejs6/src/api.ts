@@ -70,6 +70,31 @@ export let api = {
       }
     }) => axios_api.post("/product/save_product", form),
   },
+  product_print_upload: {
+    find_list_product_print_upload: (form: { user_id: string }) => axios_api.post("/product_print_upload/find_list_product_print_upload", form),
+    find_one_product_print_upload: (form: { product_print_id: string }) => axios_api.post("/product_print_upload/find_one_product_print_upload", form),
+    save_product_print_upload: (form: {
+      product_print_id: string
+      user_id: string
+      fileNameOriginal: string
+      size_format: string
+      size: number
+      url: string
+      url_screenshot: string
+      length: number
+      width: number
+      height: number
+      surface_area: number
+      volume: number
+      complexity: number
+      structural_strength: number
+      num_faces: number
+      points: number
+      min_thickness: number
+      thickness_proportion: number
+    }) => axios_api.post("/product_print_upload/save_product_print_upload", form),
+    remove_ids_product_print_upload: (form: { ids: string[] }) => axios_api.post("/product_print_upload/remove_ids_product_print_upload", form),
+  },
 
   shop_cart: {
     save_shop_cart: (form: { card_id?: string; user_id: string; price_type: string; count: number; product_id: string }) => axios_api.post("/shop_cart/save_shop_cart", form),
