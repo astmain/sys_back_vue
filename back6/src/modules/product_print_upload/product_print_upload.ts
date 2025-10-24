@@ -19,12 +19,12 @@ export class product_print_upload {
   async find_list_product_print_upload(@Body() body: find_list_product_print_upload, @Req() req: any) {
     console.log('find_list_product_print_upload---body', body)
     let list_product_print_upload = await db.tb_product_print_upload.findMany({ where: { user_id: req.user_id } })
-    return { code: 200, msg: '成功', result: { list_product_print_upload } }
+    return { code: 200, msg: '成功:查询列表', result: { list_product_print_upload } }
   }
 
   @Api_Post('查询-商品打印上传历史-详情')
   async find_one_product_print_upload(@Body() body: find_one_product_print_upload, @Req() req: any) {
-    return { code: 200, msg: '成功', result: {} }
+    return { code: 200, msg: '成功:查询详情', result: {} }
   }
 
   @Api_Post('保存-商品打印上传历史')
