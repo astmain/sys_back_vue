@@ -29,6 +29,7 @@
     "install": "^0.13.0",
     "jszip": "^3.10.1",
     "lodash": "4.17.21",
+    "marked": "^16.4.1",
     "nestjs-zod": "^5.0.1",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.4.1",

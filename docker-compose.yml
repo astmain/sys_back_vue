@@ -15,4 +15,3 @@ services:
     command: sh -c "npm i pnpm -g && pnpm i -f &&  pnpm docker:generate && pnpm docker:push && pnpm docker"
 
 
-# 

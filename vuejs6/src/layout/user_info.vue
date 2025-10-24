@@ -54,13 +54,12 @@ const user_info = ref({ id: "", phone: "", name: "", gender: "", avatar: "" })
 // 🟩 更新个人信息
 async function update_user_info() {
   const { phone, ...form } = user_info.value
-  debugger
   const res: any = await api.user.update_user_info({ ...form })
   if (res.code !== 200) ElMessage.error("失败:更新个人信息-接口异常")
   ElMessage.success("成功:更新个人信息")
   // 退出登录
   BUS.token = ""
-  useRouter().push("/login")
+  location.replace("/login")
 }
 
 // 🟩 input文件获取数据时.打开弹窗
