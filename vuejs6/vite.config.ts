@@ -31,6 +31,21 @@ export default defineConfig({
         ["flex-end", "flex items-center justify-end"],
         ["flex-col", "flex flex-col"],
         ["red", "text-red-500"],
+        ["uno_prefix1", "font-bold flex items-center before:content-[''] before:inline-block before:w-6px before:h-16px before:bg-[#1366F0] before:rounded-full before:mr-1 "],
+
+        // base
+        ["uno-btn0-base", "box-border |   rounded-md px-4px py-2px   |   text-center cursor-pointer   |   border-0   "],
+        // 按钮 2实体 1边框线  3文字
+        // 蓝色
+        ["uno-btn1-blue", "text-13px bg-blue-600 text-gray-100  | uno-btn0-base"],
+        ["uno-btn2-blue", "text-13px bg-gray-100 text-blue-600  | uno-btn0-base  | border-solid border-1 border-blue-600  "],
+        ["uno-btn3-blue", "text-13px bg-gray-100 text-blue-600  | uno-btn0-base"],
+
+        // 灰色
+        ["uno-btn1-gray", "text-14px bg-gray-100 text-gray-600  | uno-btn0-base  | border-solid border-1 border-gray-600  "],
+        ["uno-btn2-gray", "text-14px bg-gray-600 text-white-100 | uno-btn0-base"],
+        ["uno-btn3-gray", "text-14px bg-gray-100 text-gray-700  | uno-btn0-base"],
+        ["uno-btn4-gray", "text-14px bg-gray-100 text-gray-400  | uno-btn0-base"],
       ],
       rules: [
         ["uno_btn", { padding: "0.5rem 1rem", "border-radius": "0.25rem", "background-color": "#3490dc", color: "#fff" }],

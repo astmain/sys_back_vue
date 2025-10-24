@@ -1,13 +1,11 @@
 <template>
+  <!-- 保存函数遵循原则: 1(新增)没有参数row时将form_temp赋值给form,2(更新)有参数row时将row赋值给form,3(更新指定字段)有参数key-value时将key-value赋值给form -->
   <div class="flex-col gap-6 w-full" id="com_user_address_take">
     <!-- 工具栏 -->
     <nav class="uno_card1 p-4 flex justify-between gap-4">
-      <div className="flex items-center gap-1">
-        <span class="w-6px h-16px bg-[#1366F0] rounded-3px"></span>
-        <span class="font-bold">收货地址</span>
-      </div>
+      <span class="uno_prefix1">收货地址</span>
       <el-button type="primary" @click="find_one_user_address_take">查询</el-button>
-      <el-button link type="primary" @click=";(show = true), (form = form_temp)">+新增收货地址</el-button>
+      <el-button link type="primary" @click=";(form = form_temp), (show = true)">+新增收货地址</el-button>
     </nav>
 
     <!-- 表格-收货地址 -->
@@ -20,10 +18,10 @@
         <el-table-column label="操作" fixed="right" width="300">
           <template #default="scope">
             <div class="flex items-center gap-2">
-              <label v-if="scope.row.is_default" class="w-70px text-center">默认</label>
-              <label v-else class="w-70px text-12px text-center cursor-pointer bg-blue-600 text-gray-200 rounded-md p-1px" @click="save_user_address_take(scope.row)">设为默认</label>
-              <el-button link type="" @click=";(show = true), (form = JSON.parse(JSON.stringify(scope.row)))">修改</el-button>
-              <el-button link type="info" @click="remove_ids_user_address_take([scope.row.id])">删除</el-button>
+              <label v-if="scope.row.is_default" class="uno-btn4-gray w-70px">默认</label>
+              <button v-else class="uno-btn1-blue w-70px" @click=";(form = util_data_to_form(form_temp, scope.row)), (form.is_default = true), save_user_address_take()">设为默认</button>
+              <button class="uno-btn3-gray" link type="" @click=";(form = util_data_to_form(form_temp, scope.row)), (show = true)">修改</button>
+              <button class="uno-btn4-gray" link type="info" @click="remove_ids_user_address_take([scope.row.id])">删除</button>
             </div>
           </template>
         </el-table-column>
@@ -31,7 +29,7 @@
     </nav>
   </div>
 
-  <!-- 弹窗-编辑收货地址 -->
+  <!-- 弹窗-表单 -->
   <el-dialog v-model="show" title="编辑收货地址" width="500px" destroy-on-close draggable>
     <el-form :model="form" label-width="120px">
       <el-form-item label="姓名">
@@ -65,9 +63,9 @@ import { api } from "@/api"
 import { BUS } from "@/BUS"
 import { ref, reactive, onMounted } from "vue"
 import { ElMessage } from "element-plus"
-import { useRouter, useRoute } from "vue-router"
 import { constant_region } from "@/components/constant_region"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
+import { util_data_to_form } from "@/plugins/util_data_to_form"
 // 参数变量
 const form = ref({ id: "", user_id: BUS.user.id, name: "", phone: "", region: ["福建省", "泉州市", "丰泽区"], street: "", is_default: false, type_tag: "家" })
 const form_temp = JSON.parse(JSON.stringify(form.value))
@@ -83,9 +81,8 @@ async function find_one_user_address_take() {
 }
 
 // 🟩 保存-用户收货地址
-async function save_user_address_take(row?: any) {
-  if (row) (form.value = row), (form.value.is_default = true) // 如果传入了行数据,则将行数据赋值给表单
-  const { created_at, updated_at, ext_address, ...form_data } = JSON.parse(JSON.stringify(form.value)) //解构复制
+async function save_user_address_take() {
+  const { created_at, updated_at, ext_address, ...form_data } = form.value
   console.log("save_user_address_take---form", JSON.parse(JSON.stringify(form_data)))
   const res: any = await api.user_address_take.save_user_address_take(form_data)
   console.log(res)
@@ -108,6 +105,7 @@ async function remove_ids_user_address_take(ids: string[]) {
 
 onMounted(async () => {
   await find_one_user_address_take()
-
 })
 </script>
+
+<style scoped></style>

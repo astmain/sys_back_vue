@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, IsObject, IsBoolean, IsArray, IsNotEmpty } from 'class-validator'
+import { IsString, IsObject, IsBoolean, IsArray, IsNotEmpty, IsMobilePhone } from 'class-validator'
 
 export class save_user_address_take {
   @ApiProperty({ description: '收货地址id', example: 'uuid_1' })
@@ -17,6 +17,7 @@ export class save_user_address_take {
   name: string
 
   @ApiProperty({ description: '收货人电话', example: '15160315110' })
+  @IsMobilePhone('zh-CN', {}, { message: '手机号格式不正确' })
   @IsString()
   @IsNotEmpty()
   phone: string
