@@ -20,8 +20,8 @@
             <div class="flex items-center gap-2">
               <label v-if="scope.row.is_default" class="uno-btn4-gray w-70px">默认</label>
               <button v-else class="uno-btn1-blue w-70px" @click=";(form = util_data_to_form(form_temp, scope.row)), (form.is_default = true), save_user_address_take()">设为默认</button>
-              <button class="uno-btn3-gray" link type="" @click=";(form = util_data_to_form(form_temp, scope.row)), (show = true)">修改</button>
-              <button class="uno-btn4-gray" link type="info" @click="remove_ids_user_address_take([scope.row.id])">删除</button>
+              <button class="uno-btn3-gray" @click=";(form = util_data_to_form(form_temp, scope.row)), (show = true)">修改</button>
+              <button class="uno-btn4-gray" @click="remove_ids_user_address_take([scope.row.id])">删除</button>
             </div>
           </template>
         </el-table-column>
@@ -82,7 +82,7 @@ async function find_one_user_address_take() {
 
 // 🟩 保存-用户收货地址
 async function save_user_address_take() {
-  const { created_at, updated_at, ext_address, ...form_data } = form.value
+  const { created_at, updated_at, ext_address, ...form_data } = JSON.parse(JSON.stringify(form.value))
   console.log("save_user_address_take---form", JSON.parse(JSON.stringify(form_data)))
   const res: any = await api.user_address_take.save_user_address_take(form_data)
   console.log(res)
