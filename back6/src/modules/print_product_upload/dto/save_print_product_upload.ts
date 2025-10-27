@@ -7,9 +7,9 @@ import { registerDecorator, ValidationArguments, ValidationOptions } from 'class
 
 export class save_print_product_upload {
   @ApiProperty({ description: '商品打印上传历史id', example: 'cuid_string' })
-  @ValidateIf((o) => o.product_print_id !== null) // 为 null 或空，不验证（让数据库自动生成）
+  @ValidateIf((o) => o.product_id !== null) // 为 null 或空，不验证（让数据库自动生成）
   @IsString()
-  product_print_id: string | null
+  product_id: string | null
 
   @ApiProperty({ description: '用户id', example: 'cuid_string' })
   @IsString({ message: '用户id-必须是字符串' })
@@ -85,7 +85,7 @@ export class save_print_product_upload {
   thickness_proportion: number
 }
 
-// product_print_id String @id @default(cuid())
+// product_id String @id @default(cuid())
 // user_id          String // 用户id    //以后要改成 author_id
 
 // // 解析参数

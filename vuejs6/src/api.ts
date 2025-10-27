@@ -72,9 +72,9 @@ export let api = {
   },
   print_product_upload: {
     find_list_print_product_upload: (form: { user_id: string }) => axios_api.post("/print_product_upload/find_list_print_product_upload", form),
-    find_one_print_product_upload: (form: { product_print_id: string }) => axios_api.post("/print_product_upload/find_one_print_product_upload", form),
+    find_one_print_product_upload: (form: { product_id: string }) => axios_api.post("/print_product_upload/find_one_print_product_upload", form),
     save_print_product_upload: (form: {
-      product_print_id: string
+      product_id: string
       user_id: string
       fileNameOriginal: string
       size_format: string

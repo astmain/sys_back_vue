@@ -1,6 +1,6 @@
 // 商品表
 model tb_print_product_upload {
-    product_print_id     String @id @default(cuid())
+    product_id     String @id @default(cuid())
     user_id              String // 用户id    //以后要改成 author_id
     // ==================== 文件信息 ====================
     fileNameOriginal     String @default("") // 文件原始名

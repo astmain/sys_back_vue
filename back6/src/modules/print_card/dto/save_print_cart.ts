@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString } from 'class-validator'
+import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString, IsBoolean } from 'class-validator'
 
 export class save_print_cart {
   // ==================== 基本数据 ====================
@@ -21,6 +21,12 @@ export class save_print_cart {
   @IsString()
   @IsNotEmpty()
   product_id: string
+
+  @ApiProperty({ description: '是否选中', example: true })
+  @IsBoolean()
+  @IsNotEmpty()
+  checked: boolean
+
   // ==================== 3d解析数据 ====================
   @ApiProperty({ description: '长度', example: 100 })
   @IsNumber()

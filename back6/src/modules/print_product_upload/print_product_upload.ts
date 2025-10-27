@@ -32,13 +32,13 @@ export class print_product_upload {
     console.log('save_print_product_upload---body', body)
     console.log('save_print_product_upload---req.user_id', req.user_id)
 
-    const { product_print_id, ...data } = body
-    if (product_print_id) {
-      console.log('更新---body.product_print_id', body.product_print_id)
-      await db.tb_print_product_upload.update({ where: { product_print_id }, data })
+    const { product_id, ...data } = body
+    if (product_id) {
+      console.log('更新---body.product_id', body.product_id)
+      await db.tb_print_product_upload.update({ where: { product_id }, data })
       return { code: 200, msg: '成功-更新', result: {} }
     } else {
-      console.log('新建---body.product_print_id', body.product_print_id)
+      console.log('新建---body.product_id', body.product_id)
       await db.tb_print_product_upload.create({ data })
       return { code: 200, msg: '成功-新建', result: {} }
     }
@@ -46,7 +46,7 @@ export class print_product_upload {
 
   @Api_Post('删除-商品打印上传历史')
   async remove_ids_print_product_upload(@Body() body: remove_ids_print_product_upload, @Req() req: any) {
-    await db.tb_print_product_upload.deleteMany({ where: { product_print_id: { in: body.ids } } })
+    await db.tb_print_product_upload.deleteMany({ where: { product_id: { in: body.ids } } })
     return { code: 200, msg: '成功:删除', result: {} }
   }
 }

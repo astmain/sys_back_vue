@@ -23,7 +23,7 @@
           <template #default="scope">
             <div class="flex items-center gap-2">
               <el-button link type="info" @click="save_print_cart(scope.row)">加入购物车</el-button>
-              <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_print_id)">删除</el-button>
+              <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_id)">删除</el-button>
             </div>
           </template>
         </el-table-column>
@@ -48,7 +48,7 @@
         <div class="uno_card1 m-2">
           <h1 class="flex items-center gap-2">
             <span class="w-80px flex items-center gap-2">
-              <el-checkbox v-model="item.checked" size="large"></el-checkbox>
+              <el-checkbox v-model="item.checked" size="large" @change="save_print_cart(item)"></el-checkbox>
               <span class="text-gray-900">{{ index + 1 }}</span>
             </span>
 
@@ -98,6 +98,7 @@ const form_save_print_cart = ref({
   user_id: "",
   count: 0,
   product_id: "",
+  checked: false,
   // ==================== 3d解析数据 ====================
   length: 0,
   width: 0,
@@ -147,8 +148,9 @@ async function get_input_file(event: any) {
 
     const res_parse = res.result.res_parse.result
     const form = {
-      product_print_id: "",
+      product_id: "",
       user_id: BUS.user.id,
+      checked: true,
       // 文件信息
       fileNameOriginal: res.result.fileNameOriginal,
       size_format: res.result.size_format,
@@ -196,8 +198,8 @@ async function find_list_print_product_upload() {
 }
 
 // 🟩 删除历史记录
-async function remove_ids_print_product_upload(product_print_id: string) {
-  const res: any = await api.print_product_upload.remove_ids_print_product_upload({ ids: [product_print_id] })
+async function remove_ids_print_product_upload(product_id: string) {
+  const res: any = await api.print_product_upload.remove_ids_print_product_upload({ ids: [product_id] })
   console.log(`remove_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_product_upload()
@@ -205,13 +207,13 @@ async function remove_ids_print_product_upload(product_print_id: string) {
 
 // 🟩 保存购物车
 async function save_print_cart(item: any) {
-  // const form = { card_id: "", user_id: BUS.user.id, count: 1, product_id: product_print_id }
-
+  console.log(`save_print_cart---item:`, item)
   form_save_print_cart.value = {
     card_id: item?.card_id || "",
+    checked: item?.checked || false,
     user_id: BUS.user.id,
     count: 1,
-    product_id: item.product_print_id,
+    product_id: item.product_id,
     length: item.length,
     width: item.width,
     height: item.height,

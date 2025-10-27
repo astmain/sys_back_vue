@@ -29,9 +29,10 @@ export class print_card {
     }
     // 新增
     else {
-      const product = await db.tb_print_product_upload.findFirst({ where: { product_print_id: body.product_id } })
+      const product = await db.tb_print_product_upload.findFirst({ where: { product_id: body.product_id } })
       if (!product) return { code: 400, msg: '商品不存在' }
       await db.tb_print_cart.create({ data: data })
+      return { code: 200, msg: '成功:新增', result: {} }
     }
   }
 
