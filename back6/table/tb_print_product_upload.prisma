@@ -1,0 +1,79 @@
+// 商品表
+model tb_print_product_upload {
+    product_print_id     String @id @default(cuid())
+    user_id              String // 用户id    //以后要改成 author_id
+    // ==================== 文件信息 ====================
+    fileNameOriginal     String @default("") // 文件原始名
+    size                 Int    @default(0) // 文件大小
+    size_format          String @default("") // 文件大小格式
+    url                  String @default("") // 文件url
+    url_screenshot       String @default("") // 截图url
+    // ==================== 解析参数 ====================
+    length               Int    @default(0) // 长度
+    width                Int    @default(0) // 宽度
+    height               Int    @default(0) // 高度
+    surface_area         Int    @default(0) // 表面积
+    volume               Int    @default(0) // 体积
+    complexity           Int    @default(0) // 复杂度
+    structural_strength  Int    @default(0) // 结构强度
+    num_faces            Int    @default(0) // 面数
+    points               Int    @default(0) // 点数
+    min_thickness        Int    @default(0) // 最小厚度
+    thickness_proportion Int    @default(0) // 厚度比例
+
+    // ==================== 时间 ====================
+    at_created DateTime @default(now()) // 创建时间
+    at_updated DateTime @updatedAt // 更新时间
+}
+
+model tb_print_cart {
+    product_print_id     String @id @default(cuid())
+    user_id              String // 用户id    //以后要改成 author_id
+    // ==================== 文件信息 ====================
+    fileNameOriginal     String @default("") // 文件原始名
+    size                 Int    @default(0) // 文件大小
+    size_format          String @default("") // 文件大小格式
+    url                  String @default("") // 文件url
+    url_screenshot       String @default("") // 截图url
+    // ==================== 解析参数 ====================
+    length               Int    @default(0) // 长度
+    width                Int    @default(0) // 宽度
+    height               Int    @default(0) // 高度
+    surface_area         Int    @default(0) // 表面积
+    volume               Int    @default(0) // 体积
+    complexity           Int    @default(0) // 复杂度
+    structural_strength  Int    @default(0) // 结构强度
+    num_faces            Int    @default(0) // 面数
+    points               Int    @default(0) // 点数
+    min_thickness        Int    @default(0) // 最小厚度
+    thickness_proportion Int    @default(0) // 厚度比例
+
+    // ==================== 时间 ====================
+    at_created DateTime @default(now()) // 创建时间
+    at_updated DateTime @updatedAt // 更新时间
+
+    // ==================== 材料 ====================
+    arg_material   String @default("") // 材料
+    arg_polish     String @default("") // 打磨
+    arg_nut        String @default("") // 螺母
+    arg_color      String @default("") //参数
+    arg_list_slot  Json   @default("[]") //附件打孔
+    arg_list_other Json   @default("[]") //附件其他
+}
+
+model arg_print_material {
+    id             String @id @default(cuid())
+    kind1          String @default("") //材料分类
+    kind2          String @default("") //材料分类
+    code           String @default("") //型号编码
+    name           String @default("") //材料名称
+    price          Int    @default(0) //价格
+    color          String @default("") //颜色
+    remark         String @default("") //备注说明
+    url_img        String @default("") //展示图片颜色
+    diameter_inner Int    @default(0) //内直径
+    diameter_out   Int    @default(0) //外直径
+    length         Int    @default(0) //长
+    with           Int    @default(0) //宽
+    height         Int    @default(0) //高
+}

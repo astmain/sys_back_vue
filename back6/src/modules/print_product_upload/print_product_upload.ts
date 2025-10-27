@@ -14,7 +14,7 @@ import { save_print_product_upload } from './dto/save_print_product_upload'
 import { remove_ids_print_product_upload } from './dto/remove_ids_print_product_upload'
 
 @Api_Controller('商品打印上传历史')
-export class print_product_upload {
+export class product_print_upload {
   @Api_Post('查询-商品打印上传历史-列表')
   async find_list_print_product_upload(@Body() body: find_list_print_product_upload, @Req() req: any) {
     console.log('find_list_print_product_upload---body', body)
@@ -52,7 +52,7 @@ export class print_product_upload {
 }
 
 @Module({
-  controllers: [print_product_upload],
+  controllers: [product_print_upload],
   providers: [],
 })
-export class print_product_upload_Module {}
+export class product_print_upload_Module {}
