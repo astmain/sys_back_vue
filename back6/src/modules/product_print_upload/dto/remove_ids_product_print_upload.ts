@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsString, IsNotEmpty } from 'class-validator'
 import { Transform } from 'class-transformer'
 
-export class remove_ids_product_print_upload {
+export class remove_ids_print_product_upload {
   @ApiProperty({ description: '(商品ids)', example: ['111', '222'] })
   @Transform(({ value }) => (Array.isArray(value) ? [...new Set(value)].map(String) : value))
   @IsArray({ message: '商品ids-必须是数组' })

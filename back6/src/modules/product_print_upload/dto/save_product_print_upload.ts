@@ -5,7 +5,7 @@ import { Matches, IsNumber, IsString, IsNotEmpty, ArrayMinSize, IsOptional, IsBo
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
-export class save_product_print_upload {
+export class save_print_product_upload {
   @ApiProperty({ description: '商品打印上传历史id', example: 'cuid_string' })
   @ValidateIf((o) => o.product_print_id !== null) // 为 null 或空，不验证（让数据库自动生成）
   @IsString()

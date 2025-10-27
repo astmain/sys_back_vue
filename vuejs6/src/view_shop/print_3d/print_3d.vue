@@ -8,9 +8,9 @@
 
     <!-- 历史记录 -->
     <div>
-      <button class="uno-btn1-blue h-30px w-100px" @click="find_list_product_print_upload">查询历史记录</button>
+      <button class="uno-btn1-blue h-30px w-100px" @click="find_list_print_product_upload">查询历史记录</button>
       <h2>历史记录</h2>
-      <el-table :data="list_product_print_upload" style="width: 100%">
+      <el-table :data="list_print_product_upload" style="width: 100%">
         <el-table-column label="操作" fixed="right" width="300">
           <template #default="scope">
             <img :src="scope.row.url_screenshot" alt="screenshot" style="width: 100px; height: 100px" />
@@ -22,8 +22,8 @@
         <el-table-column label="操作" fixed="right" width="300">
           <template #default="scope">
             <div class="flex items-center gap-2">
-              <el-button link type="info" @click="remove_ids_product_print_upload(scope.row.product_print_id)">加入购物车</el-button>
-              <el-button link type="info" @click="remove_ids_product_print_upload(scope.row.product_print_id)">删除</el-button>
+              <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_print_id)">加入购物车</el-button>
+              <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_print_id)">删除</el-button>
             </div>
           </template>
         </el-table-column>
@@ -56,7 +56,7 @@ import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload.ts"
 const ref_file_input = ref<HTMLInputElement | null>(null)
 // 参数
 const tableData = ref<any[]>([])
-const list_product_print_upload = ref<any[]>([])
+const list_print_product_upload = ref<any[]>([])
 
 // 🟩 获取input文件
 async function get_input_file(event: any) {
@@ -144,7 +144,7 @@ async function get_input_file(event: any) {
     }
 
     console.log(`get_input_file---form:`, form)
-    await save_product_print_upload(form)
+    await save_print_product_upload(form)
   } catch (error) {
     ElMessage.error((error as Error).message)
   } finally {
@@ -153,32 +153,32 @@ async function get_input_file(event: any) {
 }
 
 // 🟩 保存历史记录
-async function save_product_print_upload(form: any) {
-  const res: any = await api.product_print_upload.save_product_print_upload(form)
-  console.log(`save_product_print_upload---res:`, res)
+async function save_print_product_upload(form: any) {
+  const res: any = await api.print_product_upload.save_print_product_upload(form)
+  console.log(`save_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
-  list_product_print_upload.value = res.result.list_product_print_upload
-  await find_list_product_print_upload()
+  list_print_product_upload.value = res.result.list_print_product_upload
+  await find_list_print_product_upload()
 }
 
 // 🟩 查询历史记录
-async function find_list_product_print_upload() {
-  const res: any = await api.product_print_upload.find_list_product_print_upload({ user_id: BUS.user.id })
-  console.log(`find_list_product_print_upload---res:`, res)
+async function find_list_print_product_upload() {
+  const res: any = await api.print_product_upload.find_list_print_product_upload({ user_id: BUS.user.id })
+  console.log(`find_list_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
-  list_product_print_upload.value = res.result.list_product_print_upload
+  list_print_product_upload.value = res.result.list_print_product_upload
 }
 
 // 🟩 删除历史记录
-async function remove_ids_product_print_upload(product_print_id: string) {
-  const res: any = await api.product_print_upload.remove_ids_product_print_upload({ ids: [product_print_id] })
-  console.log(`remove_product_print_upload---res:`, res)
+async function remove_ids_print_product_upload(product_print_id: string) {
+  const res: any = await api.print_product_upload.remove_ids_print_product_upload({ ids: [product_print_id] })
+  console.log(`remove_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
-  find_list_product_print_upload()
+  find_list_print_product_upload()
 }
 
 onMounted(() => {
-  find_list_product_print_upload()
+  find_list_print_product_upload()
 })
 </script>
 

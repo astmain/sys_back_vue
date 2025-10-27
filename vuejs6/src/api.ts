@@ -70,10 +70,10 @@ export let api = {
       }
     }) => axios_api.post("/product/save_product", form),
   },
-  product_print_upload: {
-    find_list_product_print_upload: (form: { user_id: string }) => axios_api.post("/product_print_upload/find_list_product_print_upload", form),
-    find_one_product_print_upload: (form: { product_print_id: string }) => axios_api.post("/product_print_upload/find_one_product_print_upload", form),
-    save_product_print_upload: (form: {
+  print_product_upload: {
+    find_list_print_product_upload: (form: { user_id: string }) => axios_api.post("/print_product_upload/find_list_print_product_upload", form),
+    find_one_print_product_upload: (form: { product_print_id: string }) => axios_api.post("/print_product_upload/find_one_print_product_upload", form),
+    save_print_product_upload: (form: {
       product_print_id: string
       user_id: string
       fileNameOriginal: string
@@ -92,8 +92,8 @@ export let api = {
       points: number
       min_thickness: number
       thickness_proportion: number
-    }) => axios_api.post("/product_print_upload/save_product_print_upload", form),
-    remove_ids_product_print_upload: (form: { ids: string[] }) => axios_api.post("/product_print_upload/remove_ids_product_print_upload", form),
+    }) => axios_api.post("/print_product_upload/save_print_product_upload", form),
+    remove_ids_print_product_upload: (form: { ids: string[] }) => axios_api.post("/print_product_upload/remove_ids_print_product_upload", form),
   },
 
   shop_cart: {

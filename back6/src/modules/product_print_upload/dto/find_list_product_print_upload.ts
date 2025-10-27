@@ -5,7 +5,7 @@ import { IsNumber, IsString, IsNotEmpty, IsOptional, IsBoolean, IsArray, Validat
 import { Type } from 'class-transformer'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
-export class find_list_product_print_upload {
+export class find_list_print_product_upload {
   @ApiProperty({ description: '用户id', example: 'user_1' })
   @IsString()
   @IsNotEmpty()
