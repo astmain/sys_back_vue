@@ -96,6 +96,11 @@ export let api = {
     remove_ids_print_product_upload: (form: { ids: string[] }) => axios_api.post("/print_product_upload/remove_ids_print_product_upload", form),
   },
 
+  print_card: {
+    save_print_cart: (form: { card_id: string; user_id: string; count: number; product_id: string }) => axios_api.post("/print_card/save_print_cart", form),
+    find_list_print_cart: (form: { user_id: string }) => axios_api.post("/print_card/find_list_print_cart", form),
+  },
+
   shop_cart: {
     save_shop_cart: (form: { card_id?: string; user_id: string; price_type: string; count: number; product_id: string }) => axios_api.post("/shop_cart/save_shop_cart", form),
     find_list_shop_cart: (form: { user_id: string }) => axios_api.post("/shop_cart/find_list_shop_cart", form),

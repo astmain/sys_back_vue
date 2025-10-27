@@ -27,8 +27,10 @@ model tb_print_product_upload {
 }
 
 model tb_print_cart {
-    product_print_id     String @id @default(cuid())
+    card_id              String @id @default(cuid()) // 购物车id
+    product_id           String @default("") // 商品id
     user_id              String // 用户id    //以后要改成 author_id
+    count                Int    @default(0) // 数量
     // ==================== 文件信息 ====================
     fileNameOriginal     String @default("") // 文件原始名
     size                 Int    @default(0) // 文件大小

@@ -22,7 +22,7 @@
         <el-table-column label="操作" fixed="right" width="300">
           <template #default="scope">
             <div class="flex items-center gap-2">
-              <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_print_id)">加入购物车</el-button>
+              <el-button link type="info" @click="save_print_cart(scope.row.product_print_id)">加入购物车</el-button>
               <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_print_id)">删除</el-button>
             </div>
           </template>
@@ -33,12 +33,12 @@
     <!-- 购物车 -->
     <div>
       <h2>购物车</h2>
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="Date" width="180" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" />
-        <el-table-column prop="address" label="Address" />
-      </el-table>
+      <button class="uno-btn1-blue h-30px w-100px" @click="find_list_print_cart">查询购物车</button>
+      <div>
+        
+      </div>
+
+
     </div>
   </div>
 </template>
@@ -57,6 +57,7 @@ const ref_file_input = ref<HTMLInputElement | null>(null)
 // 参数
 const tableData = ref<any[]>([])
 const list_print_product_upload = ref<any[]>([])
+const list_print_cart = ref<any[]>([])
 
 // 🟩 获取input文件
 async function get_input_file(event: any) {
@@ -175,6 +176,24 @@ async function remove_ids_print_product_upload(product_print_id: string) {
   console.log(`remove_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_product_upload()
+}
+
+// 🟩 保存购物车
+async function save_print_cart(product_print_id: string) {
+  const form = { card_id: "", user_id: BUS.user.id, count: 1, product_id: product_print_id }
+  console.log(`save_cart_print---form:`, form)
+  const res: any = await api.print_card.save_print_cart(form)
+  console.log(`save_cart_print---res:`, res)
+  if (res.code !== 200) return ElMessage.error(res.msg)
+  find_list_print_product_upload()
+}
+
+// 🟩 查询购物车
+async function find_list_print_cart() {
+  const res: any = await api.print_card.find_list_print_cart({ user_id: BUS.user.id })
+  console.log(`save_cart_print---res:`, res)
+  if (res.code !== 200) return ElMessage.error(res.msg)
+  list_print_cart.value = res.result.list
 }
 
 onMounted(() => {
