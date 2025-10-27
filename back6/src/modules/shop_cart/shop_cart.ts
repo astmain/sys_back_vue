@@ -58,7 +58,6 @@ export class shop_cart {
       let ele = { ...author, id: author_id, author_id, checked: false, cart }
       list_group_card.push(ele)
     }
-
     return { code: 200, msg: '成功', result: { list, list_group_author, list_group_card } }
   }
 
