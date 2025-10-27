@@ -1,3 +1,4 @@
+
 export const dict_obj ={
   "type_format": {
     "children": [
@@ -9,8 +10,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "111111",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T10:09:19.906Z",
+        "updated_at": "2025-10-21T04:04:11.766Z",
         "parent_id": "cmgyh93u70000t7asz65uesyc"
       },
       {
@@ -21,8 +22,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T15:52:41.449Z",
+        "updated_at": "2025-10-20T15:52:41.449Z",
         "parent_id": "cmgyh93u70000t7asz65uesyc"
       },
       {
@@ -33,8 +34,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:00:33.302Z",
+        "updated_at": "2025-10-20T16:00:33.302Z",
         "parent_id": "cmgyh93u70000t7asz65uesyc"
       },
       {
@@ -45,8 +46,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "bg-red-500",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:00:54.086Z",
+        "updated_at": "2025-10-23T03:14:56.256Z",
         "parent_id": "cmgyh93u70000t7asz65uesyc"
       }
     ],
@@ -58,8 +59,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T01:49:15.823Z",
+      "updated_at": "2025-10-20T16:02:39.540Z",
       "parent_id": null,
       "children": [
         {
@@ -70,8 +71,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "111111",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T10:09:19.906Z",
+          "updated_at": "2025-10-21T04:04:11.766Z",
           "parent_id": "cmgyh93u70000t7asz65uesyc"
         },
         {
@@ -82,8 +83,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T15:52:41.449Z",
+          "updated_at": "2025-10-20T15:52:41.449Z",
           "parent_id": "cmgyh93u70000t7asz65uesyc"
         },
         {
@@ -94,8 +95,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:00:33.302Z",
+          "updated_at": "2025-10-20T16:00:33.302Z",
           "parent_id": "cmgyh93u70000t7asz65uesyc"
         },
         {
@@ -106,8 +107,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "bg-red-500",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:00:54.086Z",
+          "updated_at": "2025-10-23T03:14:56.256Z",
           "parent_id": "cmgyh93u70000t7asz65uesyc"
         }
       ]
@@ -120,8 +121,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "111111",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T10:09:19.906Z",
+      "updated_at": "2025-10-21T04:04:11.766Z",
       "parent_id": "cmgyh93u70000t7asz65uesyc"
     },
     "format2": {
@@ -132,8 +133,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T15:52:41.449Z",
+      "updated_at": "2025-10-20T15:52:41.449Z",
       "parent_id": "cmgyh93u70000t7asz65uesyc"
     },
     "format3": {
@@ -144,8 +145,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:00:33.302Z",
+      "updated_at": "2025-10-20T16:00:33.302Z",
       "parent_id": "cmgyh93u70000t7asz65uesyc"
     },
     "format4": {
@@ -156,8 +157,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "bg-red-500",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:00:54.086Z",
+      "updated_at": "2025-10-23T03:14:56.256Z",
       "parent_id": "cmgyh93u70000t7asz65uesyc"
     }
   },
@@ -171,8 +172,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T10:09:32.814Z",
+        "updated_at": "2025-10-20T16:05:23.303Z",
         "parent_id": "cmgylb13n0000t76cz0kzcqfh"
       },
       {
@@ -183,8 +184,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:05:12.077Z",
+        "updated_at": "2025-10-20T16:05:12.077Z",
         "parent_id": "cmgylb13n0000t76cz0kzcqfh"
       },
       {
@@ -195,8 +196,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:06:08.952Z",
+        "updated_at": "2025-10-20T16:06:16.588Z",
         "parent_id": "cmgylb13n0000t76cz0kzcqfh"
       },
       {
@@ -207,8 +208,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:06:26.696Z",
+        "updated_at": "2025-10-20T16:06:49.013Z",
         "parent_id": "cmgylb13n0000t76cz0kzcqfh"
       },
       {
@@ -219,8 +220,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:06:37.829Z",
+        "updated_at": "2025-10-20T16:06:57.500Z",
         "parent_id": "cmgylb13n0000t76cz0kzcqfh"
       }
     ],
@@ -232,8 +233,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T03:42:44.051Z",
+      "updated_at": "2025-10-20T16:02:24.486Z",
       "parent_id": null,
       "children": [
         {
@@ -244,8 +245,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T10:09:32.814Z",
+          "updated_at": "2025-10-20T16:05:23.303Z",
           "parent_id": "cmgylb13n0000t76cz0kzcqfh"
         },
         {
@@ -256,8 +257,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:05:12.077Z",
+          "updated_at": "2025-10-20T16:05:12.077Z",
           "parent_id": "cmgylb13n0000t76cz0kzcqfh"
         },
         {
@@ -268,8 +269,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:06:08.952Z",
+          "updated_at": "2025-10-20T16:06:16.588Z",
           "parent_id": "cmgylb13n0000t76cz0kzcqfh"
         },
         {
@@ -280,8 +281,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:06:26.696Z",
+          "updated_at": "2025-10-20T16:06:49.013Z",
           "parent_id": "cmgylb13n0000t76cz0kzcqfh"
         },
         {
@@ -292,8 +293,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:06:37.829Z",
+          "updated_at": "2025-10-20T16:06:57.500Z",
           "parent_id": "cmgylb13n0000t76cz0kzcqfh"
         }
       ]
@@ -306,8 +307,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T10:09:32.814Z",
+      "updated_at": "2025-10-20T16:05:23.303Z",
       "parent_id": "cmgylb13n0000t76cz0kzcqfh"
     },
     "area2": {
@@ -318,8 +319,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:05:12.077Z",
+      "updated_at": "2025-10-20T16:05:12.077Z",
       "parent_id": "cmgylb13n0000t76cz0kzcqfh"
     },
     "area3": {
@@ -330,8 +331,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:06:08.952Z",
+      "updated_at": "2025-10-20T16:06:16.588Z",
       "parent_id": "cmgylb13n0000t76cz0kzcqfh"
     },
     "area4": {
@@ -342,8 +343,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:06:26.696Z",
+      "updated_at": "2025-10-20T16:06:49.013Z",
       "parent_id": "cmgylb13n0000t76cz0kzcqfh"
     },
     "area5": {
@@ -354,8 +355,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:06:37.829Z",
+      "updated_at": "2025-10-20T16:06:57.500Z",
       "parent_id": "cmgylb13n0000t76cz0kzcqfh"
     }
   },
@@ -369,8 +370,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T10:08:21.733Z",
+        "updated_at": "2025-10-20T16:07:22.088Z",
         "parent_id": "cmgyxkv1l0001t72wwpvfstom"
       },
       {
@@ -381,8 +382,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:07:38.523Z",
+        "updated_at": "2025-10-20T16:08:20.108Z",
         "parent_id": "cmgyxkv1l0001t72wwpvfstom"
       },
       {
@@ -393,8 +394,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:07:51.372Z",
+        "updated_at": "2025-10-20T16:08:28.124Z",
         "parent_id": "cmgyxkv1l0001t72wwpvfstom"
       },
       {
@@ -405,8 +406,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:07:59.161Z",
+        "updated_at": "2025-10-20T16:08:34.964Z",
         "parent_id": "cmgyxkv1l0001t72wwpvfstom"
       },
       {
@@ -417,8 +418,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:08:06.797Z",
+        "updated_at": "2025-10-20T16:08:40.974Z",
         "parent_id": "cmgyxkv1l0001t72wwpvfstom"
       }
     ],
@@ -430,8 +431,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T09:26:18.153Z",
+      "updated_at": "2025-10-20T17:05:58.985Z",
       "parent_id": null,
       "children": [
         {
@@ -442,8 +443,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T10:08:21.733Z",
+          "updated_at": "2025-10-20T16:07:22.088Z",
           "parent_id": "cmgyxkv1l0001t72wwpvfstom"
         },
         {
@@ -454,8 +455,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:07:38.523Z",
+          "updated_at": "2025-10-20T16:08:20.108Z",
           "parent_id": "cmgyxkv1l0001t72wwpvfstom"
         },
         {
@@ -466,8 +467,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:07:51.372Z",
+          "updated_at": "2025-10-20T16:08:28.124Z",
           "parent_id": "cmgyxkv1l0001t72wwpvfstom"
         },
         {
@@ -478,8 +479,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:07:59.161Z",
+          "updated_at": "2025-10-20T16:08:34.964Z",
           "parent_id": "cmgyxkv1l0001t72wwpvfstom"
         },
         {
@@ -490,8 +491,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:08:06.797Z",
+          "updated_at": "2025-10-20T16:08:40.974Z",
           "parent_id": "cmgyxkv1l0001t72wwpvfstom"
         }
       ]
@@ -504,8 +505,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T10:08:21.733Z",
+      "updated_at": "2025-10-20T16:07:22.088Z",
       "parent_id": "cmgyxkv1l0001t72wwpvfstom"
     },
     "wiring2": {
@@ -516,8 +517,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:07:38.523Z",
+      "updated_at": "2025-10-20T16:08:20.108Z",
       "parent_id": "cmgyxkv1l0001t72wwpvfstom"
     },
     "wiring3": {
@@ -528,8 +529,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:07:51.372Z",
+      "updated_at": "2025-10-20T16:08:28.124Z",
       "parent_id": "cmgyxkv1l0001t72wwpvfstom"
     },
     "wiring4": {
@@ -540,8 +541,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:07:59.161Z",
+      "updated_at": "2025-10-20T16:08:34.964Z",
       "parent_id": "cmgyxkv1l0001t72wwpvfstom"
     },
     "wiring5": {
@@ -552,8 +553,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:08:06.797Z",
+      "updated_at": "2025-10-20T16:08:40.974Z",
       "parent_id": "cmgyxkv1l0001t72wwpvfstom"
     }
   },
@@ -567,8 +568,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:12:57.222Z",
+        "updated_at": "2025-10-21T04:04:28.745Z",
         "parent_id": "cmgzc380z000vv17o3t0l7eo6"
       },
       {
@@ -579,8 +580,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:13:03.546Z",
+        "updated_at": "2025-10-20T16:13:03.546Z",
         "parent_id": "cmgzc380z000vv17o3t0l7eo6"
       },
       {
@@ -591,8 +592,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:13:09.867Z",
+        "updated_at": "2025-10-20T16:13:09.867Z",
         "parent_id": "cmgzc380z000vv17o3t0l7eo6"
       },
       {
@@ -603,8 +604,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:13:16.874Z",
+        "updated_at": "2025-10-20T16:13:16.874Z",
         "parent_id": "cmgzc380z000vv17o3t0l7eo6"
       }
     ],
@@ -616,8 +617,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:12:29.411Z",
+      "updated_at": "2025-10-20T16:12:46.248Z",
       "parent_id": null,
       "children": [
         {
@@ -628,8 +629,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:12:57.222Z",
+          "updated_at": "2025-10-21T04:04:28.745Z",
           "parent_id": "cmgzc380z000vv17o3t0l7eo6"
         },
         {
@@ -640,8 +641,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:13:03.546Z",
+          "updated_at": "2025-10-20T16:13:03.546Z",
           "parent_id": "cmgzc380z000vv17o3t0l7eo6"
         },
         {
@@ -652,8 +653,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:13:09.867Z",
+          "updated_at": "2025-10-20T16:13:09.867Z",
           "parent_id": "cmgzc380z000vv17o3t0l7eo6"
         },
         {
@@ -664,8 +665,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:13:16.874Z",
+          "updated_at": "2025-10-20T16:13:16.874Z",
           "parent_id": "cmgzc380z000vv17o3t0l7eo6"
         }
       ]
@@ -678,8 +679,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:12:57.222Z",
+      "updated_at": "2025-10-21T04:04:28.745Z",
       "parent_id": "cmgzc380z000vv17o3t0l7eo6"
     },
     "uv2": {
@@ -690,8 +691,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:13:03.546Z",
+      "updated_at": "2025-10-20T16:13:03.546Z",
       "parent_id": "cmgzc380z000vv17o3t0l7eo6"
     },
     "uv3": {
@@ -702,8 +703,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:13:09.867Z",
+      "updated_at": "2025-10-20T16:13:09.867Z",
       "parent_id": "cmgzc380z000vv17o3t0l7eo6"
     },
     "uv4": {
@@ -714,8 +715,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:13:16.874Z",
+      "updated_at": "2025-10-20T16:13:16.874Z",
       "parent_id": "cmgzc380z000vv17o3t0l7eo6"
     }
   },
@@ -729,8 +730,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "text-red-500 text-sm",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:15:36.199Z",
+        "updated_at": "2025-10-21T04:15:12.562Z",
         "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
       },
       {
@@ -741,8 +742,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:15:41.067Z",
+        "updated_at": "2025-10-20T16:16:24.872Z",
         "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
       },
       {
@@ -753,8 +754,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-20T16:15:45.835Z",
+        "updated_at": "2025-10-20T16:16:33.771Z",
         "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
       }
     ],
@@ -766,8 +767,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:14:59.977Z",
+      "updated_at": "2025-10-20T16:14:59.977Z",
       "parent_id": null,
       "children": [
         {
@@ -778,8 +779,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "text-red-500 text-sm",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:15:36.199Z",
+          "updated_at": "2025-10-21T04:15:12.562Z",
           "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
         },
         {
@@ -790,8 +791,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:15:41.067Z",
+          "updated_at": "2025-10-20T16:16:24.872Z",
           "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
         },
         {
@@ -802,8 +803,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-20T16:15:45.835Z",
+          "updated_at": "2025-10-20T16:16:33.771Z",
           "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
         }
       ]
@@ -816,8 +817,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "text-red-500 text-sm",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:15:36.199Z",
+      "updated_at": "2025-10-21T04:15:12.562Z",
       "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
     },
     "check_refuse": {
@@ -828,8 +829,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:15:41.067Z",
+      "updated_at": "2025-10-20T16:16:24.872Z",
       "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
     },
     "check_success": {
@@ -840,8 +841,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-20T16:15:45.835Z",
+      "updated_at": "2025-10-20T16:16:33.771Z",
       "parent_id": "cmgzc6g7f0001v1uoaoy8epiw"
     }
   },
@@ -855,8 +856,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-21T16:40:52.633Z",
+        "updated_at": "2025-10-21T16:40:52.633Z",
         "parent_id": "cmh0sincn0001v1xwwlo7auj5"
       },
       {
@@ -867,8 +868,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-21T16:41:12.832Z",
+        "updated_at": "2025-10-21T16:41:12.832Z",
         "parent_id": "cmh0sincn0001v1xwwlo7auj5"
       },
       {
@@ -879,8 +880,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-21T16:41:21.381Z",
+        "updated_at": "2025-10-21T16:41:21.381Z",
         "parent_id": "cmh0sincn0001v1xwwlo7auj5"
       },
       {
@@ -891,8 +892,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-21T16:41:29.708Z",
+        "updated_at": "2025-10-21T16:42:20.730Z",
         "parent_id": "cmh0sincn0001v1xwwlo7auj5"
       }
     ],
@@ -904,8 +905,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-21T16:40:09.143Z",
+      "updated_at": "2025-10-21T16:40:09.143Z",
       "parent_id": null,
       "children": [
         {
@@ -916,8 +917,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-21T16:40:52.633Z",
+          "updated_at": "2025-10-21T16:40:52.633Z",
           "parent_id": "cmh0sincn0001v1xwwlo7auj5"
         },
         {
@@ -928,8 +929,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-21T16:41:12.832Z",
+          "updated_at": "2025-10-21T16:41:12.832Z",
           "parent_id": "cmh0sincn0001v1xwwlo7auj5"
         },
         {
@@ -940,8 +941,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-21T16:41:21.381Z",
+          "updated_at": "2025-10-21T16:41:21.381Z",
           "parent_id": "cmh0sincn0001v1xwwlo7auj5"
         },
         {
@@ -952,8 +953,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-21T16:41:29.708Z",
+          "updated_at": "2025-10-21T16:42:20.730Z",
           "parent_id": "cmh0sincn0001v1xwwlo7auj5"
         }
       ]
@@ -966,8 +967,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-21T16:40:52.633Z",
+      "updated_at": "2025-10-21T16:40:52.633Z",
       "parent_id": "cmh0sincn0001v1xwwlo7auj5"
     },
     "price_personal": {
@@ -978,8 +979,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-21T16:41:12.832Z",
+      "updated_at": "2025-10-21T16:41:12.832Z",
       "parent_id": "cmh0sincn0001v1xwwlo7auj5"
     },
     "price_company": {
@@ -990,8 +991,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-21T16:41:21.381Z",
+      "updated_at": "2025-10-21T16:41:21.381Z",
       "parent_id": "cmh0sincn0001v1xwwlo7auj5"
     },
     "price_extend": {
@@ -1002,8 +1003,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-21T16:41:29.708Z",
+      "updated_at": "2025-10-21T16:42:20.730Z",
       "parent_id": "cmh0sincn0001v1xwwlo7auj5"
     }
   },
@@ -1017,8 +1018,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-22T04:09:06.401Z",
+        "updated_at": "2025-10-22T04:24:08.236Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       },
       {
@@ -1029,8 +1030,8 @@ export const dict_obj ={
         "status": false,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-22T04:09:16.914Z",
+        "updated_at": "2025-10-22T04:13:38.796Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       },
       {
@@ -1041,8 +1042,8 @@ export const dict_obj ={
         "status": false,
         "sort": 0,
         "css": "",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-22T04:09:23.814Z",
+        "updated_at": "2025-10-22T04:13:57.117Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       },
       {
@@ -1053,8 +1054,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "text-green-500",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-22T04:09:29.549Z",
+        "updated_at": "2025-10-23T01:41:20.356Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       },
       {
@@ -1065,8 +1066,8 @@ export const dict_obj ={
         "status": true,
         "sort": 0,
         "css": "text-gray-500  ",
-        "created_at": "2025-10-27T10:32:01.753Z",
-        "updated_at": "2025-10-27T10:32:01.753Z",
+        "created_at": "2025-10-22T04:09:35.031Z",
+        "updated_at": "2025-10-23T03:16:22.795Z",
         "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
       }
     ],
@@ -1078,8 +1079,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-22T04:08:43.993Z",
+      "updated_at": "2025-10-23T02:57:48.497Z",
       "parent_id": null,
       "children": [
         {
@@ -1090,8 +1091,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-22T04:09:06.401Z",
+          "updated_at": "2025-10-22T04:24:08.236Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         },
         {
@@ -1102,8 +1103,8 @@ export const dict_obj ={
           "status": false,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-22T04:09:16.914Z",
+          "updated_at": "2025-10-22T04:13:38.796Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         },
         {
@@ -1114,8 +1115,8 @@ export const dict_obj ={
           "status": false,
           "sort": 0,
           "css": "",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-22T04:09:23.814Z",
+          "updated_at": "2025-10-22T04:13:57.117Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         },
         {
@@ -1126,8 +1127,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "text-green-500",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-22T04:09:29.549Z",
+          "updated_at": "2025-10-23T01:41:20.356Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         },
         {
@@ -1138,8 +1139,8 @@ export const dict_obj ={
           "status": true,
           "sort": 0,
           "css": "text-gray-500  ",
-          "created_at": "2025-10-27T10:32:01.753Z",
-          "updated_at": "2025-10-27T10:32:01.753Z",
+          "created_at": "2025-10-22T04:09:35.031Z",
+          "updated_at": "2025-10-23T03:16:22.795Z",
           "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
         }
       ]
@@ -1152,8 +1153,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-22T04:09:06.401Z",
+      "updated_at": "2025-10-22T04:24:08.236Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     },
     "pading_deliver": {
@@ -1164,8 +1165,8 @@ export const dict_obj ={
       "status": false,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-22T04:09:16.914Z",
+      "updated_at": "2025-10-22T04:13:38.796Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     },
     "pading_take": {
@@ -1176,8 +1177,8 @@ export const dict_obj ={
       "status": false,
       "sort": 0,
       "css": "",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-22T04:09:23.814Z",
+      "updated_at": "2025-10-22T04:13:57.117Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     },
     "success_take": {
@@ -1188,8 +1189,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "text-green-500",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-22T04:09:29.549Z",
+      "updated_at": "2025-10-23T01:41:20.356Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     },
     "cancel_order": {
@@ -1200,8 +1201,8 @@ export const dict_obj ={
       "status": true,
       "sort": 0,
       "css": "text-gray-500  ",
-      "created_at": "2025-10-27T10:32:01.753Z",
-      "updated_at": "2025-10-27T10:32:01.753Z",
+      "created_at": "2025-10-22T04:09:35.031Z",
+      "updated_at": "2025-10-23T03:16:22.795Z",
       "parent_id": "cmh1h463e0001t7hs5eqfvdvp"
     }
   }

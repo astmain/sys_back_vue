@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString, IsBoolean } from 'class-validator'
+import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString, IsBoolean, IsObject  } from 'class-validator'
 
 export class save_print_cart {
   // ==================== 基本数据 ====================
@@ -110,19 +110,19 @@ export class save_print_cart {
   size_format: string
   // ==================== 材料属性 ====================
   @ApiProperty({ description: '材料id', example: '100KB' })
-  @IsString()
+  @IsObject()
   @IsNotEmpty()
-  arg_material: string
+  arg_material: any
 
   @ApiProperty({ description: '打磨id', example: 1 })
-  @IsString()
+  @IsObject()
   @IsNotEmpty()
-  arg_polish: string
+  arg_polish: any
 
   @ApiProperty({ description: '螺丝id', example: 1 })
-  @IsString()
+  @IsObject()
   @IsNotEmpty()
-  arg_nut: string
+  arg_nut: any
 }
 
 // length               Int     @default(0) // 长度

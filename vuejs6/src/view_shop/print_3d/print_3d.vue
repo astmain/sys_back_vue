@@ -210,9 +210,13 @@ async function save_print_cart(item: any) {
     size: item.size,
     size_format: item.size_format,
     // 材料
-    arg_material: group_arg_print_material.value.材料.光敏树脂[0].id,
-    arg_polish: group_arg_print_material.value.打磨[0].id,
-    arg_nut: group_arg_print_material.value.螺母[0].id,
+    // arg_material: group_arg_print_material.value.材料.光敏树脂[0].id,
+    // arg_polish: group_arg_print_material.value.打磨[0].id,
+    // arg_nut: group_arg_print_material.value.螺母[0].id,
+
+    arg_material: group_arg_print_material.value.材料.光敏树脂[0],
+    arg_polish: group_arg_print_material.value.打磨[0],
+    arg_nut: group_arg_print_material.value.螺母[0],
   }
   console.log(`save_cart_print---form_save_print_cart.value:`, form_save_print_cart.value)
   const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)

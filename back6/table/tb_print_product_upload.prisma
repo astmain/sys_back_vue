@@ -1,26 +1,26 @@
 // 商品表
 model tb_print_product_upload {
-    product_id     String @id @default(cuid())
+    product_id           String  @id @default(cuid())
     user_id              String // 用户id    //以后要改成 author_id
     checked              Boolean @default(false) // 是否选中
     // ==================== 文件信息 ====================
-    fileNameOriginal     String @default("") // 文件原始名
-    size                 Int    @default(0) // 文件大小
-    size_format          String @default("") // 文件大小格式
-    url                  String @default("") // 文件url
-    url_screenshot       String @default("") // 截图url
+    fileNameOriginal     String  @default("") // 文件原始名
+    size                 Int     @default(0) // 文件大小
+    size_format          String  @default("") // 文件大小格式
+    url                  String  @default("") // 文件url
+    url_screenshot       String  @default("") // 截图url
     // ==================== 解析参数 ====================
-    length               Int    @default(0) // 长度
-    width                Int    @default(0) // 宽度
-    height               Int    @default(0) // 高度
-    surface_area         Int    @default(0) // 表面积
-    volume               Int    @default(0) // 体积
-    complexity           Int    @default(0) // 复杂度
-    structural_strength  Int    @default(0) // 结构强度
-    num_faces            Int    @default(0) // 面数
-    points               Int    @default(0) // 点数
-    min_thickness        Int    @default(0) // 最小厚度
-    thickness_proportion Int    @default(0) // 厚度比例
+    length               Int     @default(0) // 长度
+    width                Int     @default(0) // 宽度
+    height               Int     @default(0) // 高度
+    surface_area         Int     @default(0) // 表面积
+    volume               Int     @default(0) // 体积
+    complexity           Int     @default(0) // 复杂度
+    structural_strength  Int     @default(0) // 结构强度
+    num_faces            Int     @default(0) // 面数
+    points               Int     @default(0) // 点数
+    min_thickness        Int     @default(0) // 最小厚度
+    thickness_proportion Int     @default(0) // 厚度比例
 
     // ==================== 时间 ====================
     at_created DateTime @default(now()) // 创建时间
@@ -57,12 +57,12 @@ model tb_print_cart {
     at_updated DateTime @updatedAt // 更新时间
 
     // ==================== 材料 ====================
-    arg_material   String @default("") // 材料
-    arg_polish     String @default("") // 打磨
-    arg_nut        String @default("") // 螺母
-    arg_color      String @default("") //参数
-    arg_list_slot  Json   @default("[]") //附件打孔
-    arg_list_other Json   @default("[]") //附件其他
+    arg_material   Json @default("{}") // 材料
+    arg_polish     Json @default("{}") // 打磨
+    arg_nut        Json @default("{}") // 螺母
+    arg_color      Json @default("{}") //参数
+    arg_list_slot  Json @default("[]") //附件打孔
+    arg_list_other Json @default("[]") //附件其他
 }
 
 model arg_print_material {

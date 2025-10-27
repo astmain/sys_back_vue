@@ -43,6 +43,7 @@ export class dict {
   async find_list_dict(@Body() body: find_list_dict, @Req() req: any) {
     // 查询字典列表
     const dict_list = await db.dict.findMany({ where: { parent_id: null }, include: { children: true }, orderBy: { sort: 'asc' } })
+    const dict_raw_list = await db.dict.findMany()
     // 构建字典对象
     let dict_obj: any = {}
     for (const item of dict_list) {
@@ -66,7 +67,7 @@ export class dict {
     // let dict_obj_data = require('../dict_obj')
     // console.log(`dict_obj---`, dict_obj_data)
     console.log(`dict_obj---`, 1)
-    return { code: 200, msg: '成功:获取字典', result: { aaa: 1, dict_list, dict_obj } }
+    return { code: 200, msg: '成功:获取字典', result: { aaa: 1, dict_list, dict_obj ,dict_raw_list} }
   }
 }
 
