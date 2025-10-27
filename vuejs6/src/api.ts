@@ -6,6 +6,34 @@ export interface info_file {
   file_name: string
 }
 
+// 类型_材料
+export interface info_print_card {
+  card_id: string
+  user_id: string
+  checked: boolean
+  count: number
+  product_id: string
+  length: number
+  width: number
+  height: number //
+  surface_area: number
+  volume: number
+  complexity: number
+  structural_strength: number
+  num_faces: number
+  points: number
+  min_thickness: number
+  thickness_proportion: number
+  url: string
+  url_screenshot: string
+  fileNameOriginal: string
+  size: number
+  size_format: string
+  // 材料
+  arg_material: string
+  arg_polish: string
+  arg_nut: string
+}
 export const dict_info = []
 
 export let api = {
@@ -122,27 +150,10 @@ export let api = {
   print_card: {
     find_list_print_cart: (form: { user_id: string }) => axios_api.post("/print_card/find_list_print_cart", form),
     remove_card_print_ids: (form: { ids: string[] }) => axios_api.post("/print_card/remove_card_print_ids", form),
-    save_print_cart: (form: {
-      card_id: string
-      user_id: string
-      count: number
-      product_id: string
-      length: number
-      width: number
-      height: number //
-      surface_area: number
-      volume: number
-      complexity: number
-      structural_strength: number
-      num_faces: number
-      min_thickness: number
-      thickness_proportion: number
-      url: string
-      url_screenshot: string
-      fileNameOriginal: string
-      size: number
-      size_format: string
-    }) => axios_api.post("/print_card/save_print_cart", form),
+    save_print_cart: (form: info_print_card) => axios_api.post("/print_card/save_print_cart", form),
+  },
+  arg_print_material: {
+    find_list_arg_print_material: () => axios_api.post("/arg_print_material/find_list_arg_print_material"),
   },
 }
 

@@ -108,6 +108,21 @@ export class save_print_cart {
   @IsString()
   @IsNotEmpty()
   size_format: string
+  // ==================== 材料属性 ====================
+  @ApiProperty({ description: '材料id', example: '100KB' })
+  @IsString()
+  @IsNotEmpty()
+  arg_material: string
+
+  @ApiProperty({ description: '打磨id', example: 1 })
+  @IsString()
+  @IsNotEmpty()
+  arg_polish: string
+
+  @ApiProperty({ description: '螺丝id', example: 1 })
+  @IsString()
+  @IsNotEmpty()
+  arg_nut: string
 }
 
 // length               Int     @default(0) // 长度

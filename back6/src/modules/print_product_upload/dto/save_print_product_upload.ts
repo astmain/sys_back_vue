@@ -15,6 +15,11 @@ export class save_print_product_upload {
   @IsString({ message: '用户id-必须是字符串' })
   @IsNotEmpty()
   user_id: string
+
+  @ApiProperty({ description: '是否选中', example: false })
+  @IsBoolean()
+  @IsNotEmpty()
+  checked: boolean
   // ==================== 文件信息 ====================
   @ApiProperty({ description: '文件原始名', example: 'cuid_string' })
   @IsString({ message: '文件原始名-必须是字符串' })

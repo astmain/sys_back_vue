@@ -2,6 +2,7 @@
 model tb_print_product_upload {
     product_id     String @id @default(cuid())
     user_id              String // 用户id    //以后要改成 author_id
+    checked              Boolean @default(false) // 是否选中
     // ==================== 文件信息 ====================
     fileNameOriginal     String @default("") // 文件原始名
     size                 Int    @default(0) // 文件大小

@@ -82,7 +82,7 @@
 import { canvas_three_parse } from "./canvas_three_parse.js"
 import { onMounted, ref, computed } from "vue"
 import { BUS } from "@/BUS"
-import { api } from "@/api"
+import { api, type info_print_card } from "@/api"
 
 import { ElMessage } from "element-plus"
 import { ElNotification } from "element-plus"
@@ -92,32 +92,8 @@ const ref_file_input = ref<HTMLInputElement | null>(null)
 const tableData = ref<any[]>([])
 const list_print_product_upload = ref<any[]>([])
 const list_print_cart = ref<any[]>([])
-const form_save_print_cart = ref({
-  // ==================== 基本数据 ====================
-  card_id: "",
-  user_id: "",
-  count: 0,
-  product_id: "",
-  checked: false,
-  // ==================== 3d解析数据 ====================
-  length: 0,
-  width: 0,
-  height: 0,
-  surface_area: 0,
-  volume: 0,
-  complexity: 0,
-  structural_strength: 0,
-  num_faces: 0,
-  points: 0,
-  min_thickness: 0,
-  thickness_proportion: 0,
-  // ==================== 文件数据 ====================
-  url: "",
-  url_screenshot: "",
-  fileNameOriginal: "",
-  size: 0,
-  size_format: "",
-})
+const group_arg_print_material = ref<any>({})
+const form_save_print_cart = ref<info_print_card>({} as info_print_card)
 
 // 🟩 全选状态 - 计算属性
 const checked_all = computed({
@@ -207,6 +183,9 @@ async function remove_ids_print_product_upload(product_id: string) {
 
 // 🟩 保存购物车
 async function save_print_cart(item: any) {
+  console.log(`save_print_cart---group_arg_print_material.value:`, group_arg_print_material.value)
+  console.log(`save_print_cart---group_arg_print_material.value:`, group_arg_print_material.value.材料.光敏树脂[0].id)
+
   console.log(`save_print_cart---item:`, item)
   form_save_print_cart.value = {
     card_id: item?.card_id || "",
@@ -230,6 +209,10 @@ async function save_print_cart(item: any) {
     fileNameOriginal: item.fileNameOriginal,
     size: item.size,
     size_format: item.size_format,
+    // 材料
+    arg_material: group_arg_print_material.value.材料.光敏树脂[0].id,
+    arg_polish: group_arg_print_material.value.打磨[0].id,
+    arg_nut: group_arg_print_material.value.螺母[0].id,
   }
   console.log(`save_cart_print---form_save_print_cart.value:`, form_save_print_cart.value)
   const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
@@ -257,8 +240,17 @@ async function remove_card_print_ids() {
   find_list_print_cart()
 }
 
+// 🟩 查询材料
+async function find_list_arg_print_material() {
+  const res: any = await api.arg_print_material.find_list_arg_print_material()
+  console.log(`find_list_arg_print_material---res:`, res)
+  if (res.code !== 200) return ElMessage.error(res.msg)
+  group_arg_print_material.value = res.result.group_arg_print_material
+}
+
 onMounted(() => {
   find_list_print_product_upload()
+  find_list_arg_print_material()
 })
 </script>
 
