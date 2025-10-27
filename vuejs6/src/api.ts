@@ -96,11 +96,6 @@ export let api = {
     remove_ids_print_product_upload: (form: { ids: string[] }) => axios_api.post("/print_product_upload/remove_ids_print_product_upload", form),
   },
 
-  print_card: {
-    save_print_cart: (form: { card_id: string; user_id: string; count: number; product_id: string }) => axios_api.post("/print_card/save_print_cart", form),
-    find_list_print_cart: (form: { user_id: string }) => axios_api.post("/print_card/find_list_print_cart", form),
-  },
-
   shop_cart: {
     save_shop_cart: (form: { card_id?: string; user_id: string; price_type: string; count: number; product_id: string }) => axios_api.post("/shop_cart/save_shop_cart", form),
     find_list_shop_cart: (form: { user_id: string }) => axios_api.post("/shop_cart/find_list_shop_cart", form),
@@ -123,4 +118,128 @@ export let api = {
     save_user_address_take: (form: { id: string; user_id: string; name: string; phone: string; region: any; street: string; is_default: boolean; type_tag: string }) => axios_api.post("/user_address_take/save_user_address_take", form),
     remove_ids_user_address_take: (form: { ids: string[] }) => axios_api.post("/user_address_take/remove_ids_user_address_take", form),
   },
+
+  print_card: {
+    find_list_print_cart: (form: { user_id: string }) => axios_api.post("/print_card/find_list_print_cart", form),
+    remove_card_print_ids: (form: { ids: string[] }) => axios_api.post("/print_card/remove_card_print_ids", form),
+    save_print_cart: (form: {
+      card_id: string
+      user_id: string
+      count: number
+      product_id: string
+      length: number
+      width: number
+      height: number //
+      surface_area: number
+      volume: number
+      complexity: number
+      structural_strength: number
+      num_faces: number
+      min_thickness: number
+      thickness_proportion: number
+      url: string
+      url_screenshot: string
+      fileNameOriginal: string
+      size: number
+      size_format: string
+    }) => axios_api.post("/print_card/save_print_cart", form),
+  },
 }
+
+// export class save_print_cart {
+//   // ==================== 基本数据 ====================
+//   @ApiProperty({ description: '购物车id', example: 'cuid_string' })
+//   @IsString()
+//   card_id: string
+
+//   @ApiProperty({ description: '用户id', example: 'user_1' })
+//   @IsString()
+//   @IsNotEmpty()
+//   user_id: string
+
+//   @ApiProperty({ description: '商品数量', example: 1 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   count: number
+
+//   @ApiProperty({ description: '商品id', example: 'cuid_string' })
+//   @IsString()
+//   @IsNotEmpty()
+//   product_id: string
+//   // ==================== 3d解析数据 ====================
+//   @ApiProperty({ description: '长度', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   length: number
+
+//   @ApiProperty({ description: '宽度', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   width: number
+
+//   @ApiProperty({ description: '高度', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   height: number
+
+//   @ApiProperty({ description: '表面积', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   surface_area: number
+
+//   @ApiProperty({ description: '体积', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   volume: number
+
+//   @ApiProperty({ description: '复杂度', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   complexity: number
+
+//   @ApiProperty({ description: '结构强度', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   structural_strength: number
+
+//   @ApiProperty({ description: '面数', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   num_faces: number
+
+//   @ApiProperty({ description: '点数', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   min_thickness: number
+
+//   @ApiProperty({ description: '厚度比例', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   thickness_proportion: number
+//   // ==================== 文件数据 ====================
+//   @ApiProperty({ description: 'url', example: 'https://www.baidu.com' })
+//   @IsString()
+//   @IsNotEmpty()
+//   url: string
+
+//   @ApiProperty({ description: 'url_screenshot', example: 'https://www.baidu.com' })
+//   @IsString()
+//   @IsNotEmpty()
+//   url_screenshot: string
+
+//   @ApiProperty({ description: '文件名', example: 'test.stl' })
+//   @IsString()
+//   @IsNotEmpty()
+//   fileNameOriginal: string
+
+//   @ApiProperty({ description: '文件大小', example: 100 })
+//   @IsNumber()
+//   @IsNotEmpty()
+//   size: number
+
+//   @ApiProperty({ description: '文件大小格式', example: '100KB' })
+//   @IsString()
+//   @IsNotEmpty()
+//   size_format: string
+
+// }

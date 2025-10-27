@@ -153,7 +153,7 @@ export class upload_chuck_merge extends AppController {
         // http://103.119.2.223:3000/oss_api/static_stream?path_static=/public/0/我的头像/avatar_2025-10_20_17_27_19_666371_new.png
 
         // const url_screenshot = 'https://server.oss.yun3d.com/oss_api/static_stream?path_static=' + res_parse.result.path_screenshot_relative //截图url
-        const url_screenshot = 'http://103.119.2.223:3000/oss_api/static_stream?path_static=/public/0/我的头像/avatar_2025-10_20_17_27_19_666371_new.png' //截图url
+        const url_screenshot = 'https://server.oss.yun3d.com/oss_api/static_stream?path_static=/public/1/太空版labubu111.png' //截图url
         console.log(`upload_chuck_merge---token:`, req.headers.token)
         const res = { code: 200, msg: '成功:合并分片', result: { res_parse, url, url_screenshot, size, fileName, fileNameOriginal, path_file, size_format: tool_format_size(size) } }
         console.log(`upload_chuck_merge---res:`, res)

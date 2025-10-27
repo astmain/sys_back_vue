@@ -27,28 +27,29 @@ model tb_print_product_upload {
 }
 
 model tb_print_cart {
-    card_id              String @id @default(cuid()) // 购物车id
-    product_id           String @default("") // 商品id
+    card_id              String  @id @default(cuid()) // 购物车id
+    product_id           String  @default("") // 商品id
     user_id              String // 用户id    //以后要改成 author_id
-    count                Int    @default(0) // 数量
+    count                Int     @default(0) // 数量
+    checked              Boolean @default(true) // 是否选中
     // ==================== 文件信息 ====================
-    fileNameOriginal     String @default("") // 文件原始名
-    size                 Int    @default(0) // 文件大小
-    size_format          String @default("") // 文件大小格式
-    url                  String @default("") // 文件url
-    url_screenshot       String @default("") // 截图url
+    fileNameOriginal     String  @default("") // 文件原始名
+    size                 Int     @default(0) // 文件大小
+    size_format          String  @default("") // 文件大小格式
+    url                  String  @default("") // 文件url
+    url_screenshot       String  @default("") // 截图url
     // ==================== 解析参数 ====================
-    length               Int    @default(0) // 长度
-    width                Int    @default(0) // 宽度
-    height               Int    @default(0) // 高度
-    surface_area         Int    @default(0) // 表面积
-    volume               Int    @default(0) // 体积
-    complexity           Int    @default(0) // 复杂度
-    structural_strength  Int    @default(0) // 结构强度
-    num_faces            Int    @default(0) // 面数
-    points               Int    @default(0) // 点数
-    min_thickness        Int    @default(0) // 最小厚度
-    thickness_proportion Int    @default(0) // 厚度比例
+    length               Int     @default(0) // 长度
+    width                Int     @default(0) // 宽度
+    height               Int     @default(0) // 高度
+    surface_area         Int     @default(0) // 表面积
+    volume               Int     @default(0) // 体积
+    complexity           Int     @default(0) // 复杂度
+    structural_strength  Int     @default(0) // 结构强度
+    num_faces            Int     @default(0) // 面数
+    points               Int     @default(0) // 点数
+    min_thickness        Int     @default(0) // 最小厚度
+    thickness_proportion Int     @default(0) // 厚度比例
 
     // ==================== 时间 ====================
     at_created DateTime @default(now()) // 创建时间

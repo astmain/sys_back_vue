@@ -22,20 +22,17 @@ export class print_card {
   async save_print_cart(@Body() body: save_print_cart) {
     console.log(`save_cart_print---body:`, body)
     const { card_id, ...data } = body
-
-    const product = await db.tb_print_product_upload.findFirst({ where: { product_print_id: body.product_id } })
-    if (!product) return { code: 400, msg: '商品不存在' }
-
+    // 更新
     if (card_id) {
-    } else {
-      const { length, width, height, surface_area, volume, complexity, structural_strength, num_faces, points, min_thickness, thickness_proportion, ...data_print_cart } = product
-      const data2 = { length, width, height, surface_area, volume, complexity, structural_strength, num_faces, points, min_thickness, thickness_proportion, ...data }
-      console.log(`data2:`, data2)
-      const one_print_cart = await db.tb_print_cart.create({ data: data2 })
+      await db.tb_print_cart.update({ where: { card_id: card_id }, data: data })
+      return { code: 200, msg: '成功:更新', result: {} }
     }
-
-    // console.log(`save_cart_print---one:`, one)
-    return { code: 200, msg: '成功', result: {} }
+    // 新增
+    else {
+      const product = await db.tb_print_product_upload.findFirst({ where: { product_print_id: body.product_id } })
+      if (!product) return { code: 400, msg: '商品不存在' }
+      await db.tb_print_cart.create({ data: data })
+    }
   }
 
   @Api_Post('查询-打印-购物车-列表')
@@ -44,9 +41,9 @@ export class print_card {
     return { code: 200, msg: '成功', result: { list } }
   }
 
-  @Api_Post('删除-购物车')
+  @Api_Post('删除-打印-购物车')
   async remove_card_print_ids(@Body() body: remove_card_print_ids, @Req() req: any) {
-    await db.shop_cart.deleteMany({ where: { card_id: { in: body.ids } } })
+    await db.tb_print_cart.deleteMany({ where: { card_id: { in: body.ids } } })
     return { code: 200, msg: '成功', result: {} }
   }
 }

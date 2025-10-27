@@ -22,7 +22,7 @@
         <el-table-column label="操作" fixed="right" width="300">
           <template #default="scope">
             <div class="flex items-center gap-2">
-              <el-button link type="info" @click="save_print_cart(scope.row.product_print_id)">加入购物车</el-button>
+              <el-button link type="info" @click="save_print_cart(scope.row)">加入购物车</el-button>
               <el-button link type="info" @click="remove_ids_print_product_upload(scope.row.product_print_id)">删除</el-button>
             </div>
           </template>
@@ -33,13 +33,46 @@
     <!-- 购物车 -->
     <div>
       <h2>购物车</h2>
-      <button class="uno-btn1-blue h-30px w-100px" @click="find_list_print_cart">查询购物车</button>
-      <div>
 
-        <!-- 帮我使用图片 -->
+      <button class="uno-btn1-blue h-30px w-100px" @click="find_list_print_cart">查询购物车</button>
+
+      <div class="flex items-center justify-between gap-2">
+        <nav class="flex items-center gap-2">
+          <el-checkbox v-model="checked_all" size="large" />
+          <span>全选</span>
+        </nav>
+        <button class="uno-btn1-blue h-30px w-100px" @click="remove_card_print_ids">批量删除</button>
       </div>
 
+      <div v-for="(item, index) in list_print_cart">
+        <div class="uno_card1 m-2">
+          <h1 class="flex items-center gap-2">
+            <span class="w-80px flex items-center gap-2">
+              <el-checkbox v-model="item.checked" size="large"></el-checkbox>
+              <span class="text-gray-900">{{ index + 1 }}</span>
+            </span>
 
+            <span class="w-200px">文件名: {{ item.fileNameOriginal }}</span>
+            <span class="w-100px">数量: {{ item.count }}</span>
+            <span class="w-100px">单价: {{ item.price }}</span>
+            <span class="w-100px">金额: {{ item.total_price }}</span>
+          </h1>
+          <div class="flex items-center gap-2">
+            <el-image class="w-80px h-80px" :src="item.url_screenshot" />
+            <nav class="w-200px flex flex-col gap-2 text-sm">
+              <span>尺寸: {{ item.length }}x{{ item.width }}x{{ item.height }}</span>
+              <span>重量: {{ item.volume }}g</span>
+              <span>层高: {{ item.min_thickness }}mm</span>
+            </nav>
+
+            <nav class="w-200px flex flex-col gap-2 text-sm">
+              <span>材料: {{ item.arg_material }}</span>
+              <span>打磨: {{ item.arg_polish }}</span>
+              <span>喷漆: {{ item.arg_paint }}</span>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -47,7 +80,7 @@
 <script setup lang="tsx">
 // @ts-ignore
 import { canvas_three_parse } from "./canvas_three_parse.js"
-import { onMounted, ref } from "vue"
+import { onMounted, ref, computed } from "vue"
 import { BUS } from "@/BUS"
 import { api } from "@/api"
 
@@ -59,6 +92,43 @@ const ref_file_input = ref<HTMLInputElement | null>(null)
 const tableData = ref<any[]>([])
 const list_print_product_upload = ref<any[]>([])
 const list_print_cart = ref<any[]>([])
+const form_save_print_cart = ref({
+  // ==================== 基本数据 ====================
+  card_id: "",
+  user_id: "",
+  count: 0,
+  product_id: "",
+  // ==================== 3d解析数据 ====================
+  length: 0,
+  width: 0,
+  height: 0,
+  surface_area: 0,
+  volume: 0,
+  complexity: 0,
+  structural_strength: 0,
+  num_faces: 0,
+  points: 0,
+  min_thickness: 0,
+  thickness_proportion: 0,
+  // ==================== 文件数据 ====================
+  url: "",
+  url_screenshot: "",
+  fileNameOriginal: "",
+  size: 0,
+  size_format: "",
+})
+
+// 🟩 全选状态 - 计算属性
+const checked_all = computed({
+  get() {
+    return list_print_cart.value.length > 0 && list_print_cart.value.every((item: any) => item.checked)
+  },
+  set(val: boolean) {
+    list_print_cart.value.forEach((item: any) => {
+      item.checked = val
+    })
+  },
+})
 
 // 🟩 获取input文件
 async function get_input_file(event: any) {
@@ -75,53 +145,7 @@ async function get_input_file(event: any) {
       ElNotification({ title: "上传文件...", message: res_callback.msg, type: "success" })
     }
 
-    // const res = {
-    //   code: 200,
-    //   msg: "成功:合并分片",
-    //   err_msg: "",
-    //   err_info: {},
-    //   result: {
-    //     res_parse: {
-    //       code: 200,
-    //       msg: "成功:解析",
-    //       result: {
-    //         size: 1,
-    //         length: 57.08331298828125,
-    //         width: 87.88800048828125,
-    //         height: 99.99980163574219,
-    //         surface_area: 29252.025390625,
-    //         volume: 214244.765625,
-    //         complexity: 0.4999850438216027,
-    //         structural_strength: 66864,
-    //         num_faces: 66864,
-    //         points: 66864,
-    //         min_thickness: 3.1415,
-    //         thickness_proportion: 0.4696987825670785,
-    //         path_screenshot_absolute: "/app/filestore_oss/public/1/111_2025-10_24_08_22_29_139666_new.png",
-    //         path_screenshot_relative: "https://server.oss.yun3d.com/oss_api/static_stream?path_static=/public/1/111_2025-10_24_08_22_29_139666_new.png",
-    //         base_file_info: {
-    //           sha256: "sha256",
-    //           file_type: ".stl",
-    //           file_size: 6686284,
-    //           filename: "111.stl",
-    //           filepath: "http://103.119.2.223:3000/oss_api/static_stream?path_static=/public/1/111_2025-10_24_10_07_32_16053_new.stl&download=true",
-    //           screenshot: "https://server.oss.yun3d.com/oss_api/static_stream?path_static=https://server.oss.yun3d.com/oss_api/static_stream?path_static=/public/1/111_2025-10_24_08_22_29_139666_new.png",
-    //         },
-    //       },
-    //       err: "",
-    //     },
-    //     url: "http://103.119.2.223:3000/oss_api/static_stream?path_static=/public/1/111_2025-10_24_10_07_32_16053_new.stl",
-    //     url_screenshot: "https://server.oss.yun3d.com/oss_api/static_stream?path_static=https://server.oss.yun3d.com/oss_api/static_stream?path_static=/public/1/111_2025-10_24_08_22_29_139666_new.png",
-    //     size: 6686284,
-    //     fileName: "111_2025-10_24_10_07_32_16053_new.stl",
-    //     fileNameOriginal: "111.stl",
-    //     path_file: "/filestore_oss/public/1/111_2025-10_24_10_07_32_16053_new.stl",
-    //     size_format: "6.38 MB",
-    //   },
-    // }
-
     const res_parse = res.result.res_parse.result
-
     const form = {
       product_print_id: "",
       user_id: BUS.user.id,
@@ -180,13 +204,37 @@ async function remove_ids_print_product_upload(product_print_id: string) {
 }
 
 // 🟩 保存购物车
-async function save_print_cart(product_print_id: string) {
-  const form = { card_id: "", user_id: BUS.user.id, count: 1, product_id: product_print_id }
-  console.log(`save_cart_print---form:`, form)
-  const res: any = await api.print_card.save_print_cart(form)
+async function save_print_cart(item: any) {
+  // const form = { card_id: "", user_id: BUS.user.id, count: 1, product_id: product_print_id }
+
+  form_save_print_cart.value = {
+    card_id: item?.card_id || "",
+    user_id: BUS.user.id,
+    count: 1,
+    product_id: item.product_print_id,
+    length: item.length,
+    width: item.width,
+    height: item.height,
+    surface_area: item.surface_area,
+    volume: item.volume,
+    complexity: item.complexity,
+    structural_strength: item.structural_strength,
+    num_faces: item.num_faces,
+    min_thickness: item.min_thickness,
+    points: item.points,
+    thickness_proportion: item.thickness_proportion,
+    url: item.url,
+    url_screenshot: item.url_screenshot,
+    fileNameOriginal: item.fileNameOriginal,
+    size: item.size,
+    size_format: item.size_format,
+  }
+  console.log(`save_cart_print---form_save_print_cart.value:`, form_save_print_cart.value)
+  const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_product_upload()
+  find_list_print_cart()
 }
 
 // 🟩 查询购物车
@@ -195,6 +243,16 @@ async function find_list_print_cart() {
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   list_print_cart.value = res.result.list
+}
+
+// 🟩 删除购物车
+async function remove_card_print_ids() {
+  const ids = list_print_cart.value.filter((item: any) => item.checked).map((item: any) => item.card_id)
+  console.log(`remove_card_print_ids---ids:`, ids)
+  const res: any = await api.print_card.remove_card_print_ids({ ids })
+  console.log(`remove_card_print_ids---res:`, res)
+  if (res.code !== 200) return ElMessage.error(res.msg)
+  find_list_print_cart()
 }
 
 onMounted(() => {
