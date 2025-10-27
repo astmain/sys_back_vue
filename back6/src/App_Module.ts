@@ -14,7 +14,7 @@ import { shop_cart_Module } from '@src/modules/shop_cart/shop_cart'
 import { shop_order_Module } from '@src/modules/shop_order/shop_order'
 import { pay_Module } from '@src/modules/pay/pay'
 import { user_address_take_Module } from '@src/modules/user_address_take/user_address_take'
-import { print_product_upload } from '@src/modules/print_product_upload/print_product_upload'
+import { print_product_upload_Module  } from '@src/modules/print_product_upload/print_product_upload'
 
 @Module({
   imports: [
@@ -31,7 +31,7 @@ import { print_product_upload } from '@src/modules/print_product_upload/print_pr
     shop_order_Module, //订单模块
     pay_Module, //支付模块
     user_address_take_Module, //用户收货地址模块
-    print_product_upload, //商品打印上传历史模块
+    print_product_upload_Module, //商品打印上传历史模块
   ],
   controllers: [App_controller],
   providers: [],
