@@ -33,9 +33,7 @@
     <!-- 购物车 -->
     <div>
       <h2>购物车</h2>
-
       <button class="uno-btn1-blue h-30px w-100px" @click="find_list_print_cart">查询购物车</button>
-
       <div class="flex items-center justify-between gap-2">
         <nav class="flex items-center gap-2">
           <el-checkbox v-model="checked_all" size="large" />
@@ -66,15 +64,21 @@
             </nav>
 
             <nav class="w-200px flex flex-col gap-2 text-sm">
-              <span>材料: {{ item.arg_material }}</span>
-              <span>打磨: {{ item.arg_polish }}</span>
-              <span>喷漆: {{ item.arg_paint }}</span>
+              <span>材料: {{ item.arg_material.name }}</span>
+              <span>打磨: {{ item.arg_polish.name }}</span>
+              <span>螺母: {{ item.arg_nut.name }}</span>
+            </nav>
+
+            <nav class="w-200px flex flex-col gap-2 text-sm">
+              <button class="uno-btn3-blue h-30px w-100px" @click="ref_com_dialog_print_product.open(item,group_arg_print_material)">修改</button>
             </nav>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <com_dialog_print_product ref="ref_com_dialog_print_product" />
 </template>
 
 <script setup lang="tsx">
@@ -87,7 +91,10 @@ import { api, type info_print_card } from "@/api"
 import { ElMessage } from "element-plus"
 import { ElNotification } from "element-plus"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload.ts"
+// 组件
+import com_dialog_print_product from "./com_dialog_print_product.vue"
 const ref_file_input = ref<HTMLInputElement | null>(null)
+const ref_com_dialog_print_product = ref()
 // 参数
 const tableData = ref<any[]>([])
 const list_print_product_upload = ref<any[]>([])
@@ -255,6 +262,7 @@ async function find_list_arg_print_material() {
 onMounted(() => {
   find_list_print_product_upload()
   find_list_arg_print_material()
+  find_list_print_cart()
 })
 </script>
 
