@@ -70,7 +70,7 @@
             </nav>
 
             <nav class="w-200px flex flex-col gap-2 text-sm">
-              <button class="uno-btn3-blue h-30px w-100px" @click="ref_com_dialog_print_product.open(item,group_arg_print_material)">修改</button>
+              <button class="uno-btn3-blue h-30px w-100px" @click="ref_com_dialog_print_product.open(item,group_arg_print_material,material_list)">修改</button>
             </nav>
           </div>
         </div>
@@ -100,6 +100,7 @@ const tableData = ref<any[]>([])
 const list_print_product_upload = ref<any[]>([])
 const list_print_cart = ref<any[]>([])
 const group_arg_print_material = ref<any>({})
+const material_list = ref<any>({})
 const form_save_print_cart = ref<info_print_card>({} as info_print_card)
 
 // 🟩 全选状态 - 计算属性
@@ -257,6 +258,7 @@ async function find_list_arg_print_material() {
   console.log(`find_list_arg_print_material---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   group_arg_print_material.value = res.result.group_arg_print_material
+  material_list.value = res.result.material_list
 }
 
 onMounted(() => {

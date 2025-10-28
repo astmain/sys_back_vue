@@ -59,8 +59,9 @@ model tb_print_cart {
     // ==================== 材料 ====================
     arg_material   Json @default("{}") // 材料
     arg_polish     Json @default("{}") // 打磨
-    arg_nut        Json @default("{}") // 螺母
-    arg_color      Json @default("{}") //参数
+    arg_nut        Json @default("[]") // 螺母
+    arg_paint1     Json @default("{}") //喷漆1-哑光
+    arg_paint2     Json @default("{}") //参数2-亮光
     arg_list_slot  Json @default("[]") //附件打孔
     arg_list_other Json @default("[]") //附件其他
 }

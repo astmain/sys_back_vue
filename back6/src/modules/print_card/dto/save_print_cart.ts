@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString, IsBoolean, IsObject  } from 'class-validator'
+import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString, IsBoolean, IsObject } from 'class-validator'
 
 export class save_print_cart {
   // ==================== 基本数据 ====================
