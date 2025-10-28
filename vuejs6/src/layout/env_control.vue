@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VueDragResize :isActive="isActive" :x="BUS.control_button.left" :y="BUS.control_button.top" w="auto" h="auto" :sticks="[]" :isResizable="false" @dragging="dragging" @dragstop="dragstop" @activated="clickMessageBoard">
+    <VueDragResize  style="z-index: 99999999;" :isActive="isActive" :x="BUS.control_button.left" :y="BUS.control_button.top" w="auto" h="auto" :sticks="[]" :isResizable="false" @dragging="dragging" @dragstop="dragstop" @activated="clickMessageBoard">
       <el-button type="primary">打开</el-button>
     </VueDragResize>
 
