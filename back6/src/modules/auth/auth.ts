@@ -230,17 +230,17 @@ export class auth {
       { id: 'paint_c03', kind1: '喷漆', kind2: '亮光', name: '873C', code: '873C', color: '873C', remark: '', url_img: '', price: 0 }, //
 
       //螺母
-      { id: 'nut_n01', kind1: '螺母', kind2: '', name: 'M2*2', code: 'M2*2', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'nut_n02', kind1: '螺母', kind2: '', name: 'M2*3', code: 'M2*3', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'nut_n03', kind1: '螺母', kind2: '', name: 'M2*5', code: 'M2*5', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'nut_n04', kind1: '螺母', kind2: '', name: 'M3*3', code: 'M3*3', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'nut_n05', kind1: '螺母', kind2: '', name: 'M3*5', code: 'M3*5', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'nut_n06', kind1: '螺母', kind2: '', name: 'M4*4', code: 'M4*4', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'nut_n07', kind1: '螺母', kind2: '', name: 'M4*8', code: 'M4*8', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n01', kind1: '螺母', kind2: '', name: 'M2*2', code: 'M2*2', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n02', kind1: '螺母', kind2: '', name: 'M2*3', code: 'M2*3', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n03', kind1: '螺母', kind2: '', name: 'M2*5', code: 'M2*5', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n04', kind1: '螺母', kind2: '', name: 'M3*3', code: 'M3*3', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n05', kind1: '螺母', kind2: '', name: 'M3*5', code: 'M3*5', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n06', kind1: '螺母', kind2: '', name: 'M4*4', code: 'M4*4', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'nut_n07', kind1: '螺母', kind2: '', name: 'M4*8', code: 'M4*8', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
 
       //层高
-      { id: 'height_01', kind1: '层高', kind2: '', name: '0.1mm', code: '0.1mm', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
-      { id: 'height_02', kind1: '层高', kind2: '', name: '0.05mm', code: '0.05mm', color: '', remark: '', url_img: '', price: 0, length: 0, with: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'height_01', kind1: '层高', kind2: '', name: '0.1mm', code: '0.1mm', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
+      { id: 'height_02', kind1: '层高', kind2: '', name: '0.05mm', code: '0.05mm', color: '', remark: '', url_img: '', price: 0, length: 0, width: 0, height: 0, diameter_inner: 0, diameter_out: 0 }, //
     ]
     await db.arg_print_material.deleteMany()
     await db.arg_print_material.createMany({ data: all_material })

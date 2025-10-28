@@ -79,6 +79,7 @@ model arg_print_material {
     diameter_inner Int    @default(0) //内直径
     diameter_out   Int    @default(0) //外直径
     length         Int    @default(0) //长
-    with           Int    @default(0) //宽
+    width          Int    @default(0) //宽
     height         Int    @default(0) //高
+    count          Int    @default(0) //数量(方便前端调用)
 }

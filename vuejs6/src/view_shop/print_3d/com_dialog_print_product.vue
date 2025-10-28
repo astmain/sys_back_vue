@@ -10,8 +10,8 @@
         <el-table :data="table_data" style="width: 100%">
           <el-table-column width="55">
             <template #default="scope">
-              <div @click="handle_radio_click(scope.row)" v-if="radio_row == scope.row" class="text-blue-700 text-20px font-bold">√</div>
-              <div @click="handle_radio_click(scope.row)" v-else class="text-gray-400 text-20px">o</div>
+              <div @click="handle_radio_click(scope.row)" v-if="radio_row == scope.row" class="icon-check-ok !bg-blue-500 !bg-blue-700"></div>
+              <div @click="handle_radio_click(scope.row)" v-else class="icon-check-no !bg-gray-200"></div>
             </template>
           </el-table-column>
           <el-table-column prop="name" label="名称" />
@@ -27,22 +27,21 @@
             <Cradio_item v-for="item in group_arg_print_material['打磨']" :value="item"> {{ item.name }}</Cradio_item>
           </Cradio>
         </div>
-        <div>
-          <span>螺母</span>
-          <Cradio v-model="Cradio_value_nut">
-            <Cradio_item value="不需要"> 不需要</Cradio_item>
-            <Cradio_item value="需要"> 需要</Cradio_item>
+        <div class="flex items-center gap-2 h-30px">
+          <span class="w-50px">螺母</span>
+          <Cradio v-model="nut_radio">
+            <Cradio_item class="w-70px" value="不需要"> 不需要</Cradio_item>
+            <Cradio_item class="w-70px" value="需要"> 需要</Cradio_item>
           </Cradio>
-          <el-select v-model="Cradio_value_nut" placeholder="请选择螺母" 
-          @visible-change="(visible) => visible && !show_nut && (show_nut = true)"
-          >
-            <el-option value="不需要" label="不需要"></el-option>
-            <el-option value="需要" label="需要"></el-option>
+          <com_dialog_nut ref="ref_com_dialog_nut" />
+          <el-select v-if="nut_radio == '需要'" v-model="form_data.arg_nut" multiple value-key="value" placeholder="请选择螺母" @visible-change="show_aaaa">
+            <template #label="obj">
+              <span>{{ obj.value.name }} </span>
+            </template>
+            <el-option v-for="item in nut_select_options" :value="item" />
           </el-select>
 
-          <!-- <Cradio v-model="form_data.arg_nut">
-            <Cradio_item v-for="item in group_arg_print_material['螺丝']" :value="item"> {{ item.name }}</Cradio_item>
-          </Cradio> -->
+          <el-button type="primary" @click="test1">打印</el-button>
         </div>
       </div>
 
@@ -52,13 +51,6 @@
       </template>
     </el-dialog>
   </div>
-
-  <el-dialog class="dialog_nut" v-model="show_nut" title="选择螺母" width="800px" height="500px" :close-on-click-modal="false" draggable>
-    <template #footer>
-      <button class="uno-btn3-blue h-30px w-100px mr-10px" @click="show_nut = false">关闭</button>
-      <button class="uno-btn1-blue h-30px w-100px m -10px" @click="">保存</button>
-    </template>
-  </el-dialog>
 </template>
 
 <script setup lang="tsx">
@@ -70,6 +62,10 @@ import { ElMessage } from "element-plus"
 import { ElNotification } from "element-plus"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload.ts"
 
+// 组件
+import com_dialog_nut from "./com_dialog_nut.vue"
+const ref_com_dialog_nut = ref<any>(null)
+// 参数
 const show = ref(false)
 const form = ref<info_print_card>({} as info_print_card)
 const group_arg_print_material = ref({} as any)
@@ -77,17 +73,17 @@ const material_list = ref<any[]>([])
 const radio_material = ref<string>("")
 const radio_row = ref<any>(null)
 
-const Cradio_value_nut = ref("需要")
-const show_nut = ref(false)
-
+const nut_radio = ref("需要")
+const nut_select_options = ref<any[]>([])
+const nut_show = ref(false)
 
 const form_data = ref<any>({
+  arg_material: null as any,
   arg_polish: null as any,
   arg_nut: null as any,
   // arg_paint1: null as any,
   // arg_paint2: null as any,
 })
-
 
 const table_data = computed(() => {
   return group_arg_print_material.value["材料"]?.[radio_material.value] || []
@@ -109,20 +105,39 @@ function close() {
   show.value = false
 }
 function submit() {
-  // console.log("submit---selected_row", selected_row.value)
+  console.log("submit---form_data", form_data.value)
+  show.value = false
 }
 
 function handle_radio_click(row: any) {
+  form_data.value.arg_material = row
   radio_row.value = row
-  console.log("handle_radio_click---radio_row", radio_row.value)
 }
 
-defineExpose({
-  show,
-  open,
-  close,
-  submit,
-})
+function save_nut() {
+  console.log("save_nut---group_arg_print_material", group_arg_print_material.value["螺母"])
+  let list = group_arg_print_material.value["螺母"].filter((item: any) => item.count > 0)
+  console.log("save_nut---list", list)
+  form_data.value.arg_nut = list
+  nut_show.value = false
+}
+
+function show_aaaa(visible: boolean) {
+  if (visible) {
+    ref_com_dialog_nut.value.open({ list_nut: group_arg_print_material.value["螺母"] })
+    ref_com_dialog_nut.value.callback = (res: any) => {
+      console.log("show_aaaa---res", res)
+      form_data.value.arg_nut = res
+      console.log("show_aaaa---form_data.value", JSON.parse(JSON.stringify(form_data.value)))
+    }
+  }
+}
+
+function test1() {
+  console.log("test1---form_data", JSON.parse(JSON.stringify(form_data.value)))
+}
+
+defineExpose({ show, open, close, submit })
 </script>
 
 <style scoped>
