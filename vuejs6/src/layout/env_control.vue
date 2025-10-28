@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref } from "vue"
 import { BUS } from "@/BUS"
 import VueDragResize from "vue-drag-resize/src"
