@@ -18,14 +18,21 @@ export class arg_print_material {
     let list_arg_print_material = await db.arg_print_material.findMany()
 
     // 按 kind1 分组
-    let group = _.groupBy(list_arg_print_material, 'kind1')
+    let group_arg_print_material = _.groupBy(list_arg_print_material, 'kind1')
 
     // 对"材料"组进行二次分组，按 kind2
-    if (group['材料']) {
-      group['材料'] = _.groupBy(group['材料'], 'kind2')
+    if (group_arg_print_material['材料']) {
+      group_arg_print_material['材料'] = _.groupBy(group_arg_print_material['材料'], 'kind2')
     }
 
-    return { code: 200, msg: '成功', result: { list_arg_print_material, group_arg_print_material: group } }
+    let material_list = []
+    for (let o in group_arg_print_material['材料']) {
+      console.log(`111---o:`, o)
+      material_list.push({ name: o, checked: false })
+    }
+    material_list[0].checked = true
+
+    return { code: 200, msg: '成功', result: { list_arg_print_material, group_arg_print_material, material_list } }
   }
 }
 
