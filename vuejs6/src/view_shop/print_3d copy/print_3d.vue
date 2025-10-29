@@ -41,13 +41,12 @@
       </div>
 
       <div v-for="(item, index) in list_print_cart">
-        <div class="uno_card1 m-2">
+        <div class="uno_card1 m-2 p-2">
           <h1 class="flex items-center gap-2">
             <span class="w-80px flex items-center gap-2">
               <el-checkbox v-model="item.checked" size="large" @change="save_print_cart(item)"></el-checkbox>
               <span class="text-gray-900">{{ index + 1 }}</span>
             </span>
-
             <span class="w-200px">文件名: {{ item.fileNameOriginal }}</span>
             <span class="w-100px">数量: {{ item.count }}</span>
             <span class="w-100px">单价: {{ item.price }}</span>
@@ -189,9 +188,6 @@ async function remove_ids_print_product_upload(product_id: string) {
 
 // 🟩 保存购物车
 async function save_print_cart(item: any) {
-  console.log(`save_print_cart---group_arg_print_material.value:`, group_arg_print_material.value)
-  console.log(`save_print_cart---group_arg_print_material.value:`, group_arg_print_material.value.材料.光敏树脂[0].id)
-
   console.log(`save_print_cart---item:`, item)
   form_save_print_cart.value = {
     card_id: item?.card_id || "",
@@ -216,15 +212,11 @@ async function save_print_cart(item: any) {
     size: item.size,
     size_format: item.size_format,
     // 材料
-    // arg_material: group_arg_print_material.value.材料.光敏树脂[0].id,
-    // arg_polish: group_arg_print_material.value.打磨[0].id,
-    // arg_nut: group_arg_print_material.value.螺母[0].id,
-
     arg_material: group_arg_print_material.value.材料.光敏树脂[0],
-    arg_polish: group_arg_print_material.value.打磨[0],
-    arg_nut: group_arg_print_material.value.螺母[0],
+    arg_polish: group_arg_print_material.value.打磨[1],
+    arg_nut: group_arg_print_material.value.螺母.filter((item: any, index: number) => index == 0),
   }
-  console.log(`save_cart_print---form_save_print_cart.value:`, form_save_print_cart.value)
+  // console.log(`save_cart_print---form_save_print_cart:`, JSON.parse(JSON.stringify(form_save_print_cart.value)))
   const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)

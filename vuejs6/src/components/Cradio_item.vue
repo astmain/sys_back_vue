@@ -21,11 +21,10 @@ const radio_value = computed(() => {
 // 关键修改：直接访问 current_value 来建立响应式依赖
 const is_checked = computed(() => {
   if (!radio_context) return false
-  // 直接读取 current_value.value 建立响应式依赖
-  const current_val = radio_context.current_value.value
   const val = radio_value.value
-  // 使用 JSON.stringify 进行简单比较，或者可以用 isEqual
-  return JSON.stringify(current_val) === JSON.stringify(val)
+  // 使用父组件提供的 is_selected 方法，它使用 lodash isEqual 进行深度比较
+  // 比 JSON.stringify 更可靠，能正确处理属性顺序不同的对象
+  return radio_context.is_selected(val)
 })
 
 function handle_click() {

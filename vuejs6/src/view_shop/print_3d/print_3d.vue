@@ -93,7 +93,6 @@ import com_dialog_print_product from "./com_dialog_print_product.vue"
 const ref_file_input = ref<HTMLInputElement | null>(null)
 const ref_com_dialog_print_product = ref()
 // 参数
-const tableData = ref<any[]>([])
 const list_print_product_upload = ref<any[]>([])
 const list_print_cart = ref<any[]>([])
 const group_arg_print_material = ref<any>({})
@@ -213,11 +212,10 @@ async function save_print_cart(item: any) {
     size_format: item.size_format,
     // 材料
     arg_material: group_arg_print_material.value.材料.光敏树脂[0],
-    arg_polish: group_arg_print_material.value.打磨[0],
+    arg_polish: group_arg_print_material.value.打磨[1],
     arg_nut: group_arg_print_material.value.螺母.filter((item: any, index: number) => index == 0),
   }
-  // console.log(`save_cart_print---form_save_print_cart.value:`, JSON.parse(JSON.stringify(form_save_print_cart.value)))
-  // return
+  // console.log(`save_cart_print---form_save_print_cart:`, JSON.parse(JSON.stringify(form_save_print_cart.value)))
   const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)

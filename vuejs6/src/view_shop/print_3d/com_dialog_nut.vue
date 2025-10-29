@@ -1,5 +1,5 @@
 <template>
-  <el-dialog class="dialog_nut" v-model="show" title="选择螺母" width="800px" height="800px" :close-on-click-modal="false" draggable>
+  <el-dialog class="dialog_nut" v-model="show" title="选择螺母" width="800px" height="800px" :close-on-click-modal="false" draggable append-to-body>
     <div class="flex gap-20 m-2">
       <nav class="">
         <div v-for="item in list_nut" class="flex w-200px items-center gap-4 mb-2">

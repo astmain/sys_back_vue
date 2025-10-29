@@ -30,9 +30,9 @@ export interface info_print_card {
   size: number
   size_format: string
   // 材料
-  arg_material: string
-  arg_polish: string
-  arg_nut: string
+  arg_material: any
+  arg_polish: any
+  arg_nut: any
 }
 export const dict_info = []
 
