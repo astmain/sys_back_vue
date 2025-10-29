@@ -2,6 +2,7 @@
   <div id="print_3d">
     <input ref="ref_file_input" class="file_input" type="file" @change="get_input_file" accept=".stl,.obj" style="display: none" />
     <button class="uno-btn1-blue h-30px w-100px" @click="ref_file_input?.click()">点击选择文件</button>
+    <button class="uno-btn1-blue h-30px w-100px" @click="test1">test1</button>
     <!-- 画布three解析 -->
     <canvas id="canvas_three_parse" style="width: 100%; height: 300px; border: 1px solid red; box-sizing: border-box" />
     <!-- 历史记录 -->
@@ -67,7 +68,7 @@
             </nav>
 
             <nav class="w-200px flex flex-col gap-2 text-sm">
-              <button class="uno-btn3-blue h-30px w-100px" @click="ref_com_dialog_print_product.open(item, group_arg_print_material, material_list)">修改</button>
+              <button class="uno-btn3-blue h-30px w-100px" @click="handle_edit(item)">修改</button>
             </nav>
           </div>
         </div>
@@ -90,14 +91,43 @@ import { ElNotification } from "element-plus"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload.ts"
 // 组件
 import com_dialog_print_product from "./com_dialog_print_product.vue"
+import { util_data_to_form } from "@/plugins/util_data_to_form.js"
 const ref_file_input = ref<HTMLInputElement | null>(null)
 const ref_com_dialog_print_product = ref()
+
 // 参数
 const list_print_product_upload = ref<any[]>([])
 const list_print_cart = ref<any[]>([])
 const group_arg_print_material = ref<any>({})
 const material_list = ref<any>({})
-const form_save_print_cart = ref<info_print_card>({} as info_print_card)
+const form_save_print_cart = ref({} as info_print_card)
+const form_save_print_cart_temp = ref<info_print_card>({
+  card_id: "",
+  checked: false,
+  user_id: BUS.user.id,
+  count: 1,
+  product_id: "",
+  length: 0,
+  width: 0,
+  height: 0,
+  surface_area: 0,
+  volume: 0,
+  complexity: 0,
+  structural_strength: 0,
+  num_faces: 0,
+  points: 0,
+  min_thickness: 0,
+  thickness_proportion: 0,
+  url: "",
+  url_screenshot: "",
+  fileNameOriginal: "",
+  size: 0,
+  size_format: "",
+  // 材料
+  arg_material: { id: "", code: "", name: "", color: "", count: 0, kind1: "", kind2: "", price: 0, width: 0, height: 0, length: 0, remark: "", url_img: "", diameter_out: 0, diameter_inner: 0 },
+  arg_polish: { id: "", code: "", name: "", color: "", count: 0, kind1: "", kind2: "", price: 0, width: 0, height: 0, length: 0, remark: "", url_img: "", diameter_out: 0, diameter_inner: 0 },
+  arg_nut: [],
+})
 
 // 🟩 全选状态 - 计算属性
 const checked_all = computed({
@@ -187,40 +217,54 @@ async function remove_ids_print_product_upload(product_id: string) {
 
 // 🟩 保存购物车
 async function save_print_cart(item: any) {
-  console.log(`save_print_cart---item:`, item)
-  form_save_print_cart.value = {
-    card_id: item?.card_id || "",
-    checked: item?.checked || false,
-    user_id: BUS.user.id,
-    count: 1,
-    product_id: item.product_id,
-    length: item.length,
-    width: item.width,
-    height: item.height,
-    surface_area: item.surface_area,
-    volume: item.volume,
-    complexity: item.complexity,
-    structural_strength: item.structural_strength,
-    num_faces: item.num_faces,
-    min_thickness: item.min_thickness,
-    points: item.points,
-    thickness_proportion: item.thickness_proportion,
-    url: item.url,
-    url_screenshot: item.url_screenshot,
-    fileNameOriginal: item.fileNameOriginal,
-    size: item.size,
-    size_format: item.size_format,
-    // 材料
-    arg_material: group_arg_print_material.value.材料.光敏树脂[0],
-    arg_polish: group_arg_print_material.value.打磨[1],
-    arg_nut: group_arg_print_material.value.螺母.filter((item: any, index: number) => index == 0),
+  console.log(`save_print_cart---item:`, JSON.parse(JSON.stringify(item)))
+
+  if (!item?.card_id) {
+    console.log(`save_print_cart---item:`, "新增模式")
+    form_save_print_cart.value = form_save_print_cart_temp.value
+    form_save_print_cart.value.arg_material = group_arg_print_material.value.材料.光敏树脂[0]
+    form_save_print_cart.value.arg_polish = group_arg_print_material.value.打磨[1]
+    form_save_print_cart.value.arg_nut = group_arg_print_material.value.螺母.filter((item: any, index: number) => index == 0)
+    form_save_print_cart.value.product_id = item.product_id
+    form_save_print_cart.value.url = item.url
+    form_save_print_cart.value.url_screenshot = item.url_screenshot
+    form_save_print_cart.value.fileNameOriginal = item.fileNameOriginal
+    form_save_print_cart.value.size_format = item.size_format
+    form_save_print_cart.value.size = item.size
+    // let a1 = JSON.parse(JSON.stringify(form_save_print_cart.value))
+    // debugger
+  } else {
+    console.log(`save_print_cart---item:`, "更新模式")
+    form_save_print_cart.value = util_data_to_form(form_save_print_cart_temp.value, item)
+    // let a1 = util_data_to_form(form_save_print_cart_temp.value, item)
+    // let a2 = JSON.parse(JSON.stringify(item))
+    // let aaa = JSON.parse(JSON.stringify(form_save_print_cart.value))
+    // debugger
   }
-  // console.log(`save_cart_print---form_save_print_cart:`, JSON.parse(JSON.stringify(form_save_print_cart.value)))
   const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_product_upload()
   find_list_print_cart()
+  ref_com_dialog_print_product.value?.close()
+}
+
+// 🟩 编辑
+function handle_edit(item: any) {
+  ref_com_dialog_print_product.value.open(item, group_arg_print_material.value, material_list.value)
+  ref_com_dialog_print_product.value.callback = (res: any) => {
+    console.log("print_3d---handle_edit---res:", res)
+    save_print_cart(res)
+  }
+}
+
+// 🟩 提交订单
+function submit_order(item: any) {
+  ref_com_dialog_print_product.value.open(item, group_arg_print_material.value, material_list.value)
+  ref_com_dialog_print_product.value.callback = (res: any) => {
+    console.log("print_3d---handle_edit---res:", res)
+    save_print_cart(res)
+  }
 }
 
 // 🟩 查询购物车
@@ -250,10 +294,50 @@ async function find_list_arg_print_material() {
   material_list.value = res.result.material_list
 }
 
-onMounted(() => {
-  find_list_print_product_upload()
-  find_list_arg_print_material()
-  find_list_print_cart()
+async function test1() {
+  /**
+   * 深度合并对象的通用工厂函数
+   * @param default_values 默认值对象
+   * @param params 部分参数
+   * @returns 完整对象
+   */
+  function create_obj_deep<T extends Record<string, any>>(default_values: T, params?: Partial<T>): T {
+    if (!params) return { ...default_values }
+
+    const result = { ...default_values }
+
+    for (const key in params) {
+      const param_val = params[key]
+      const default_val = default_values[key]
+
+      // 如果都是对象且不是数组，则递归合并
+      if (param_val && typeof param_val === "object" && !Array.isArray(param_val) && default_val && typeof default_val === "object" && !Array.isArray(default_val)) {
+        result[key] = create_obj_deep(default_val, param_val)
+      } else {
+        result[key] = param_val as any
+      }
+    }
+
+    return result as T
+  }
+
+  function create_obj<T>(defaults: T, overrides?: Partial<T>): T {
+    return { ...defaults, ...overrides } as T
+  }
+
+  let res = create_obj({} as info_print_card, {
+    card_id: "",
+    checked: false,
+    user_id: BUS.user.id,
+    count: 1,
+  })
+  console.log(1111111111111, res)
+}
+
+onMounted(async () => {
+  await find_list_print_product_upload()
+  await find_list_arg_print_material()
+  await find_list_print_cart()
 })
 </script>
 

@@ -24,15 +24,16 @@ export interface info_print_card {
   points: number
   min_thickness: number
   thickness_proportion: number
+  // 文件
   url: string
   url_screenshot: string
   fileNameOriginal: string
   size: number
   size_format: string
   // 材料
-  arg_material: any
-  arg_polish: any
-  arg_nut: any
+  arg_material: { id: string; code: string; name: string; color: string; count: number; kind1: string; kind2: string; price: number; width: number; height: number; length: number; remark: string; url_img: string; diameter_out: number; diameter_inner: number }
+  arg_polish: { id: string; code: string; name: string; color: string; count: number; kind1: string; kind2: string; price: number; width: number; height: number; length: number; remark: string; url_img: string; diameter_out: number; diameter_inner: number }
+  arg_nut: Array<{ id: string; code: string; name: string; color: string; count: number; kind1: string; kind2: string; price: number; width: number; height: number; length: number; remark: string; url_img: string; diameter_out: number; diameter_inner: number }>
 }
 export const dict_info = []
 

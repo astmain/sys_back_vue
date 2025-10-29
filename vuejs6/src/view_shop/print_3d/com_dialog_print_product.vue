@@ -1,5 +1,5 @@
 <template>
-  <div id="print_3d">
+  <div id="com_dialog_print_product">
     <el-dialog v-model="show" title="修改" width="800px" height="500px" :close-on-click-modal="false" draggable>
       <div class="flex-col gap-8">
         <h1 class="uno_prefix1 text-18px">选择材料</h1>
@@ -73,11 +73,12 @@ const group_arg_print_material = ref({} as any)
 const material_list = ref<any[]>([])
 const radio_material = ref<string>("")
 const nut_radio_model = ref("") //螺丝绑定值
+const callback = ref((res: any) => {}) //回调函数
 
 function open(item: any, a_group_arg_print_material: any, a_material_list: any) {
   form.value = JSON.parse(JSON.stringify(item)) //赋值整个表单
-  group_arg_print_material.value = a_group_arg_print_material //材料字段全部的材料分组
-  material_list.value = a_material_list //材料列表
+  group_arg_print_material.value = JSON.parse(JSON.stringify(a_group_arg_print_material)) //材料字段全部的材料分组
+  material_list.value = JSON.parse(JSON.stringify(a_material_list)) //材料列表
   radio_material.value = material_list.value[0].name
   nut_radio_model.value = item.arg_nut.length > 0 ? "需要" : "不需要"
   show.value = true
@@ -87,7 +88,7 @@ function close() {
 }
 function submit() {
   console.log("submit---form", form.value)
-  show.value = false
+  callback.value(form.value)
 }
 
 function open_com_dialog_nut(visible: boolean) {
@@ -105,7 +106,7 @@ function test1() {
   console.log("test1---form", JSON.parse(JSON.stringify(form.value)))
 }
 
-defineExpose({ show, open, close, submit })
+defineExpose({ show, open, close, submit,callback })
 </script>
 
 <style scoped>
