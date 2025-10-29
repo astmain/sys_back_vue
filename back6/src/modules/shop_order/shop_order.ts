@@ -30,6 +30,7 @@ export class shop_order {
 
     // 模型订单
     if (body.type_order === 'model') {
+      console.log('create_shop_order---body.type_order', '模型订单', body.type_order)
       // 计算购物车总价
       let price_total = await this.service_shop_cart.compute_price_shop_cart(card_ids)
 
@@ -67,6 +68,7 @@ export class shop_order {
 
     // 打印订单
     else if (body.type_order === 'print') {
+      console.log('create_shop_order---body.type_order', '打印订单', body.type_order)
     }
 
     return { code: 200, msg: '成功', result: { order_id } }
