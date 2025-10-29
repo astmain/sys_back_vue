@@ -24,7 +24,7 @@ import { marked } from "marked"
 let list_doc = ref([
   { name: "doc1.md", path: "/doc1.md" },
   { name: "前端01_ui风格.md", path: "/前端01_ui风格.md" },
-  { name: "doc3.md", path: "/doc3.md" },
+  { name: "后端02_dto模版.md", path: "/后端02_dto模版.md" },
 ])
 // let active = ref(list_doc.value.at(0)?.path || "")
 let html_str = ref()

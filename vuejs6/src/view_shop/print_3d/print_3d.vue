@@ -2,10 +2,8 @@
   <div id="print_3d">
     <input ref="ref_file_input" class="file_input" type="file" @change="get_input_file" accept=".stl,.obj" style="display: none" />
     <button class="uno-btn1-blue h-30px w-100px" @click="ref_file_input?.click()">点击选择文件</button>
-
     <!-- 画布three解析 -->
     <canvas id="canvas_three_parse" style="width: 100%; height: 300px; border: 1px solid red; box-sizing: border-box" />
-
     <!-- 历史记录 -->
     <div>
       <button class="uno-btn1-blue h-30px w-100px" @click="find_list_print_product_upload">查询历史记录</button>
@@ -43,13 +41,12 @@
       </div>
 
       <div v-for="(item, index) in list_print_cart">
-        <div class="uno_card1 m-2">
+        <div class="uno_card1 m-2 p-2">
           <h1 class="flex items-center gap-2">
             <span class="w-80px flex items-center gap-2">
               <el-checkbox v-model="item.checked" size="large" @change="save_print_cart(item)"></el-checkbox>
               <span class="text-gray-900">{{ index + 1 }}</span>
             </span>
-
             <span class="w-200px">文件名: {{ item.fileNameOriginal }}</span>
             <span class="w-100px">数量: {{ item.count }}</span>
             <span class="w-100px">单价: {{ item.price }}</span>
@@ -70,7 +67,7 @@
             </nav>
 
             <nav class="w-200px flex flex-col gap-2 text-sm">
-              <button class="uno-btn3-blue h-30px w-100px" @click="ref_com_dialog_print_product.open(item,group_arg_print_material,material_list)">修改</button>
+              <button class="uno-btn3-blue h-30px w-100px" @click="ref_com_dialog_print_product.open(item, group_arg_print_material, material_list)">修改</button>
             </nav>
           </div>
         </div>
@@ -191,9 +188,6 @@ async function remove_ids_print_product_upload(product_id: string) {
 
 // 🟩 保存购物车
 async function save_print_cart(item: any) {
-  console.log(`save_print_cart---group_arg_print_material.value:`, group_arg_print_material.value)
-  console.log(`save_print_cart---group_arg_print_material.value:`, group_arg_print_material.value.材料.光敏树脂[0].id)
-
   console.log(`save_print_cart---item:`, item)
   form_save_print_cart.value = {
     card_id: item?.card_id || "",
@@ -218,15 +212,12 @@ async function save_print_cart(item: any) {
     size: item.size,
     size_format: item.size_format,
     // 材料
-    // arg_material: group_arg_print_material.value.材料.光敏树脂[0].id,
-    // arg_polish: group_arg_print_material.value.打磨[0].id,
-    // arg_nut: group_arg_print_material.value.螺母[0].id,
-
     arg_material: group_arg_print_material.value.材料.光敏树脂[0],
     arg_polish: group_arg_print_material.value.打磨[0],
-    arg_nut: group_arg_print_material.value.螺母[0],
+    arg_nut: group_arg_print_material.value.螺母.filter((item: any, index: number) => index == 0),
   }
-  console.log(`save_cart_print---form_save_print_cart.value:`, form_save_print_cart.value)
+  // console.log(`save_cart_print---form_save_print_cart.value:`, JSON.parse(JSON.stringify(form_save_print_cart.value)))
+  // return
   const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
