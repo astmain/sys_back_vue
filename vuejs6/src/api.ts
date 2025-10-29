@@ -133,7 +133,7 @@ export let api = {
   },
 
   shop_order: {
-    create_shop_order: (form: { user_id: string; card_ids: string[] }) => axios_api.post("/shop_order/create_shop_order", form),
+    create_shop_order: (form: { user_id: string; card_ids: string[] ,type_order:string }) => axios_api.post("/shop_order/create_shop_order", form),
     remove_shop_order_ids: (form: { ids: string[] }) => axios_api.post("/shop_order/remove_shop_order_ids", form),
     find_list_shop_order: (form: { user_id: string; status: string }) => axios_api.post("/shop_order/find_list_shop_order", form),
   },

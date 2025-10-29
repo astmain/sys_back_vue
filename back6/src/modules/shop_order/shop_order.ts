@@ -25,41 +25,51 @@ export class shop_order {
   @Api_Post('新增-订单')
   async create_shop_order(@Body() body: create_shop_order) {
     const { card_ids, ...data } = body
-    // 计算购物车总价
-    let price_total = await this.service_shop_cart.compute_price_shop_cart(card_ids)
+    let order_id = ''
+    order_id = util_id({ type: 'order_model_id' })
 
-    // 新增总订单
-    let order_id = util_id({ type: 'order_id' })
-    let order_total = await db.shop_order.create({ data: { order_id, user_id: data.user_id, price_total: Number(price_total.total_price), status: 'order_pending_pay' } })
+    // 模型订单
+    if (body.type_order === 'model') {
+      // 计算购物车总价
+      let price_total = await this.service_shop_cart.compute_price_shop_cart(card_ids)
 
-    for (let i = 0; i < card_ids.length; i++) {
-      let card_id = card_ids[i]
-      // 查询购物车
-      let card = await db.shop_cart.findUnique({ where: { card_id: card_id } })
-      if (!card) return { code: 400, msg: '购物车不存在', result: {} }
-      // 查询商品
-      let product = await db.tb_product.findUnique({ where: { product_id: card.product_id }, include: { arg_product_model: true } })
-      if (!product) return { code: 400, msg: '商品不存在', result: {} }
-      let arg_product_model = product.arg_product_model
-      // 新增订单子订单
-      let order_item_id = util_id({ type: 'order_item_id' })
-      await db.shop_order_item.create({
-        data: {
-          order_item_id, //子订单id
-          user_id: data.user_id,
-          author_id: card.author_id, //商家id
-          product_id: card.product_id, //商品id
-          product_history: JSON.stringify(product), //商品历史记录
-          price_one: arg_product_model[card.price_type], //单价
-          price_type: card.price_type, //价格类型
-          count: card.count, //数量
-          order_id: order_total.order_id, //订单id
-          status: 'order_pending_pay', //订单状态
-        },
-      })
+      // 新增总订单
+
+      let order_total = await db.shop_order.create({ data: { order_id, user_id: data.user_id, price_total: Number(price_total.total_price), status: 'order_pending_pay' } })
+
+      for (let i = 0; i < card_ids.length; i++) {
+        let card_id = card_ids[i]
+        // 查询购物车
+        let card = await db.shop_cart.findUnique({ where: { card_id: card_id } })
+        if (!card) return { code: 400, msg: '购物车不存在', result: {} }
+        // 查询商品
+        let product = await db.tb_product.findUnique({ where: { product_id: card.product_id }, include: { arg_product_model: true } })
+        if (!product) return { code: 400, msg: '商品不存在', result: {} }
+        let arg_product_model = product.arg_product_model
+        // 新增订单子订单
+        let order_item_id = util_id({ type: 'order_model_item_id' })
+        await db.shop_order_item.create({
+          data: {
+            order_item_id, //子订单id
+            user_id: data.user_id,
+            author_id: card.author_id, //商家id
+            product_id: card.product_id, //商品id
+            product_history: JSON.stringify(product), //商品历史记录
+            price_one: arg_product_model[card.price_type], //单价
+            price_type: card.price_type, //价格类型
+            count: card.count, //数量
+            order_id: order_total.order_id, //订单id
+            status: 'order_pending_pay', //订单状态
+          },
+        })
+      }
     }
 
-    return { code: 200, msg: '成功', result: {order_id} }
+    // 打印订单
+    else if (body.type_order === 'print') {
+    }
+
+    return { code: 200, msg: '成功', result: { order_id } }
   }
 
   @Api_Post('删除-订单')

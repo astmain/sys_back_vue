@@ -111,7 +111,7 @@ async function remove_shop_cart_ids(card_id: string) {
 }
 
 async function create_shop_order() {
-  const res: any = await api.shop_order.create_shop_order({ user_id: BUS.user.id, card_ids: cart_compute_result.card_ids })
+  const res: any = await api.shop_order.create_shop_order({ user_id: BUS.user.id, card_ids: cart_compute_result.card_ids, type_order: "model" })
   console.log("create_shop_order---res", res)
   if (res.code === 200) {
     let order_id = res.result.order_id

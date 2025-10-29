@@ -13,4 +13,8 @@ export class create_shop_order {
   @IsNotEmpty({ message: '购物车ids-必须不能为空' })
   @IsString({ each: true, message: '购物车ids-必须每个元素是字符串' })
   card_ids: string[]
+
+  @ApiProperty({ description: '订单类型', example: 'print' })
+  @IsIn(['print', 'model'], { message: '订单类型-必须是print或model' })
+  type_order: 'print' | 'model'
 }

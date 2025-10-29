@@ -17,6 +17,7 @@ import { user_address_take_Module } from '@src/modules/user_address_take/user_ad
 import { print_product_upload_Module } from '@src/modules/print_product_upload/print_product_upload'
 import { print_card_Module } from '@src/modules/print_card/print_card'
 import { arg_print_material_Module } from '@src/modules/arg_print_material/arg_print_material'
+import { print_order_Module } from '@src/modules/print_order/print_order'
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { arg_print_material_Module } from '@src/modules/arg_print_material/arg_p
     print_product_upload_Module, //商品打印上传历史模块
     print_card_Module, //商品打印上传历史模块
     arg_print_material_Module, //材料模块
+    print_order_Module, //打印订单模块
   ],
   controllers: [App_controller],
   providers: [],
