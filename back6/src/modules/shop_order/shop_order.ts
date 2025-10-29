@@ -25,19 +25,17 @@ export class shop_order {
   @Api_Post('新增-订单')
   async create_shop_order(@Body() body: create_shop_order) {
     const { card_ids, ...data } = body
+    console.log('create_shop_order---body', body)
     let order_id = ''
-    order_id = util_id({ type: 'order_model_id' })
 
     // 模型订单
     if (body.type_order === 'model') {
-      console.log('create_shop_order---body.type_order', '模型订单', body.type_order)
+      console.log('create_shop_order---body.type_order', '模型订单')
+      order_id = util_id({ type: 'order_model_id' })
       // 计算购物车总价
-      let price_total = await this.service_shop_cart.compute_price_shop_cart(card_ids)
-
+      let res_price = await this.service_shop_cart.compute_price_shop_cart(card_ids)
       // 新增总订单
-
-      let order_total = await db.shop_order.create({ data: { order_id, user_id: data.user_id, price_total: Number(price_total.total_price), status: 'order_pending_pay' } })
-
+      let order_total = await db.shop_order.create({ data: { order_id, user_id: data.user_id, price_total: Number(res_price.total_price), status: 'order_pending_pay' } })
       for (let i = 0; i < card_ids.length; i++) {
         let card_id = card_ids[i]
         // 查询购物车
@@ -64,14 +62,18 @@ export class shop_order {
           },
         })
       }
+
+      return { code: 200, msg: '成功:新增-模型订单', result: { order_id } }
     }
 
     // 打印订单
     else if (body.type_order === 'print') {
-      console.log('create_shop_order---body.type_order', '打印订单', body.type_order)
+      console.log('create_shop_order---body.type_order', '打印订单')
+      order_id = util_id({ type: 'order_print_id' })
+      let res_price = { card_ids, total_price: (0).toFixed(2), value_total_price: (0).toFixed(2) }
+      let order_total = await db.shop_order.create({ data: { order_id, user_id: data.user_id, price_total: Number(res_price.total_price), status: 'order_pending_pay' } })
+      return { code: 200, msg: '成功:新增-打印订单', result: { order_id } }
     }
-
-    return { code: 200, msg: '成功', result: { order_id } }
   }
 
   @Api_Post('删除-订单')

@@ -74,6 +74,9 @@
         </div>
       </div>
     </div>
+
+    <!-- 支付 -->
+    <button class="uno-btn1-blue h-30px w-100px" @click="create_shop_order">提交订单</button>
   </div>
 
   <com_dialog_print_product ref="ref_com_dialog_print_product" />
@@ -259,12 +262,12 @@ function handle_edit(item: any) {
 }
 
 // 🟩 提交订单
-function submit_order(item: any) {
-  ref_com_dialog_print_product.value.open(item, group_arg_print_material.value, material_list.value)
-  ref_com_dialog_print_product.value.callback = (res: any) => {
-    console.log("print_3d---handle_edit---res:", res)
-    save_print_cart(res)
-  }
+async function create_shop_order(item: any) {
+  let card_ids = list_print_cart.value.filter((item: any) => item.checked).map((item: any) => item.card_id)
+  const res: any = await api.shop_order.create_shop_order({ user_id: BUS.user.id, type_order: "print", card_ids })
+  console.log(`create_shop_order---res:`, res)
+  if (res.code !== 200) return ElMessage.error(res.msg)
+  ElMessage.success(res.msg)
 }
 
 // 🟩 查询购物车
