@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { RouterModule } from '@nestjs/core'
 import { App_auth_Module } from '@src/App_auth'
 import { App_prisma_Module } from '@src/App_prisma'
 import { App_controller } from '@src/App_controller'
@@ -31,7 +32,13 @@ import { print_order_Module } from '@src/modules/print_order/print_order'
     menu_Module, //菜单模块
     product_Module, //菜单模块
     shop_cart_Module, //购物车模块
-    shop_order_Module, //订单模块
+    shop_order_Module, //订单模块    这个接口,我希望可以在这个接口加上前缀 "v2/shop_order" ,直接在App_Module.ts文件修改应该怎么改
+    // RouterModule.register([
+    //   {
+    //     path: 'v2',
+    //     children: [{ path: 'shop_order', module: shop_order_Module }],
+    //   },
+    // ]),
     pay_Module, //支付模块
     user_address_take_Module, //用户收货地址模块
     print_product_upload_Module, //商品打印上传历史模块

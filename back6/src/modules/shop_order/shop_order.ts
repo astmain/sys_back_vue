@@ -137,7 +137,10 @@ export class shop_order {
 }
 
 @Module({
-  controllers: [shop_order],
+  controllers: [
+    
+    shop_order
+  ],
   providers: [i_service_shop_cart],
 })
 export class shop_order_Module {}
