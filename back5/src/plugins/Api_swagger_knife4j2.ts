@@ -10,24 +10,10 @@ export async function Api_swagger_knife4j2(app) {
   // Swagger API文档配置
   const config = new DocumentBuilder()
     .setTitle('api')
-    .setTitle(process.env.VITE_project_name)
-    .setDescription(process.env.VITE_project_remark)
+    .setTitle('111.1') //
+    .setDescription('111.2')
     .setVersion('1.0')
-    .addTag('项目介绍', '介绍')
-    // .addTag('🟪test4_App_test1', '测试模块1 - 使用dto1_module1模型')
-    // .addTag('🟪test4_App_test2', '测试模块2 - 使用dto1_module2模型')
-    .addGlobalParameters({
-      name: 'token',
-      in: 'header',
-      description: 'token',
-      required: true,
-      schema: {
-        type: 'string',
-        default: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1MTYwMzE1MTEwIiwicGhvbmUiOiIxNTE2MDMxNTExMCIsImlkIjoxLCJ1c2VyX2lkIjoxLCJyb2xlSWRzIjpbXSwiZGVwYXJ0bWVudCI6W3siaWQiOjJ9XSwiaWF0IjoxNzU3NDMyNDgxLCJleHAiOjI2MjEzNDYwODEsInJvbGVzIjpbXSwiZXh0cmEiOnsiY2hlY2tlZCI6dHJ1ZX19.dHfLiPbWiLKdu5NYvNPcXTnVWvaSq3XQsIzyj-v6bJ0',
-        // default: '',
-      },
-    })
-
+    .addTag('111.3', '111.4')
     .build()
 
   // 创建Swagger文档
@@ -37,7 +23,7 @@ export async function Api_swagger_knife4j2(app) {
   // Knife4j2 增强文档配置
   await knife4jSetup(app, [
     {
-      name: process.env.VITE_project_name,
+      name: '111.5',
       url: '/api-json',
       swaggerVersion: '3.0',
       location: '/api-json',
