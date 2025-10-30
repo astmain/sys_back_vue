@@ -11,7 +11,7 @@ export function Api_Controller(description?: string) {
     if (!dict_class.has(class_name)) {
       dict_class.add(class_name)
     } else {
-      throw new Error(`类  ${class_name}   已经存在`)
+      // throw new Error(`类  ${class_name}   已经存在`)
     }
 
     // 使用applyDecorators组合多个装饰器

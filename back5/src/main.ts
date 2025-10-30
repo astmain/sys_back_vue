@@ -10,6 +10,8 @@ import { knife4jSetup } from 'nestjs-knife4j2'
 async function bootstrap() {
   console.log(`111---222:`, 1111)
   const app = await NestFactory.create(App_Module)
+  let a1=app
+  let a2=App_Module
   // ==================== 插件配置 ====================
   const { env_curr } = plugins.check_env() //检查环境变量
   // await plugins.Api_swagger_knife4j2(app) //文档配置(swagger_knife4j2)
