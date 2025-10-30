@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" //使用sqlite时无法用JSON{},只能使用JSON[]
+  url      = "file:./sqlite.db"
+}
+
+model tb_permiss {
+  id        Int     @id @default(autoincrement())
+  menu_id   Int     @default(0)
+  depart_id Int     @default(0)
+  uuid      String  @default(uuid())
+  create    Boolean @default(false)
+  delete    Boolean @default(false)
+  update    Boolean @default(false)
+  find      Boolean @default(false)
+  view      Boolean @default(false)
+}
+
+model tb_menu {
+  id        Int    @id @default(autoincrement()) //数据库id
+  name      String //菜单名称[必须是字符,不能未空]
+  path      String //菜单路径[必须是字符,不能未空]
+  parent_id Int    @default(0) //父级菜单id
+}
+
+model tb_user {
+  id             Int              @id @default(autoincrement()) //数据库id
+  name           String //姓名[必须是字符,不能未空]
+  tel            String           @unique //电话[必须是字符,不能未空]
+  password       String           @default("123456") //密码[必须是字符,不能未空]
+  avatar         String           @default("https://gitee.com/astmain/static/raw/master/blank.jpg") //头像[url]
+  createdAt      DateTime         @default(now()) //创建时间
+  address_info   Json             @default("[]") //发货地址
+  contacts       Json             @default("[]") //联系人
+  tb_depart_role tb_depart_role[] //关联-部门表
+  status         String           @default("new") //"状态-[new-新号,active-活跃,disabled-禁用,blocked-封禁]"
+}
+
+model tb_depart_role {
+  id        Int       @id @default(autoincrement()) //数据表id
+  name      String    @default("") //部门名称
+  is_depart Boolean   @default(true) //是否是部门(辅助字段)
+  tb_user   tb_user[] //关联-用户表
+  //父级id(辅助字段) 最上级父级别1
+  remark    String    @default("请填写备注说明!") //备注
+
+  parent_id Int? // 关联自身
+  parent    tb_depart_role?  @relation("tb_depart_role_children", fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: Cascade) //自关联数据
+  children  tb_depart_role[] @relation("tb_depart_role_children") //自关联数据
+}
+
+model tb_mall_car {
+  id      Int    @id @default(autoincrement()) //数据库id
+  name    String //姓名[必须是字符,不能未空]
+  price   Int //价格
+  img_url String @default("https://gitee.com/astmain/static/raw/master/food/1.webp") //图片url链接
+  remark  String @default("请填写备注说明") //备注[必须是字符,不能未空]
+  user_id Int //用户id
+}
+
+model tb_file_manage {
+  id          Int      @id @default(autoincrement()) //数据库id
+  user_id     Int //用户id
+  file_url    String //文件url链接
+  img_url     String   @default("") //图片url链接
+  createdAt   DateTime @default(now()) //创建时间
+  file_path   String //文件url链接
+  file_suffix String //文件后缀
+  file_name   String //文件名
+}

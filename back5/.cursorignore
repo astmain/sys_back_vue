@@ -1,0 +1,18 @@
+# cursor忽略文件
+# 开发工具
+.git/**/*           
+.vscode/**/*
+.idea/**/*
+.cursorignore
+
+
+# 文件
+dist/**/*
+node_modules/**/*
+
+
+
+
+
+
+

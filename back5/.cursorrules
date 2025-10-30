@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {
+      "pattern": ".*",
+      "language": "zh",
+      "comment": "始终使用中文回复用户的问题。"
+    }
+  ]
+}
