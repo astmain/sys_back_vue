@@ -1,0 +1,23 @@
+model payment {
+    payment_id String @id @default(cuid())
+    user_id String // 用户id
+    price_total Int // 总金额
+    status String @default("pending") // 状态
+
+
+
+
+    currency        String          @default("CNY") // 货币类型
+    type_pay String @default("weixin") // 支付类型
+
+
+    shop_order_id String // 订单id
+
+    metadata        String            @default("") // 元数据
+    at_created       DateTime        @default(now())
+    at_updated       DateTime        @updatedAt
+    at_pay_success DateTime? // 支付成功时间
+    at_pay_error DateTime? // 支付失败时间
+    at_pay_cancel DateTime? // 支付取消时间
+
+}
