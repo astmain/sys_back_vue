@@ -7,9 +7,7 @@ generator client {
 //   url      = "file:./sqlite.db"
 // }
 
-
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://root:123456@103.119.2.223:2001/back?schema=public"
+  url      = "postgresql://root:123456@103.119.2.223:2003/back?schema=public"
 }
-

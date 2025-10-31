@@ -1,5 +1,3 @@
-
-
 import { user_module } from '@src/v1/user/user'
 
 export const v1_module = {

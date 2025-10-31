@@ -6,19 +6,14 @@
   "private": true,
   "license": "MIT",
   "prisma": {
-    "schema": "table"
+    "schema": "src/v1/zoom_prisma"
   },
   "scripts": {
     "开发": "==================== 开发 ====================",
-    "make": "     pnpm i  &&  pnpm dev:generate   &&   pnpm dev:push",
+    "make": "     pnpm i  &&  pnpm dev:generate ",
     "dev": "          dotenv -e .env.dev --        nest start --watch",
-    "dev:generate": " dotenv -e .env.dev --        prisma generate      --schema=table",
-    "dev:push": "     dotenv -e .env.dev --        prisma db push       --schema=table",
-    "dev:migrate": "  dotenv -e .env.dev --        prisma migrate dev   --schema=table",
-    "dev:studio": "   dotenv -e .env.dev --        prisma studio        --schema=table",
-    "生成": "==================== 生成 ====================",
-    "prod": "         dotenv -e .env.prod --        nest start --watch",
-    "pnpm": "pnpm i  "
+    "dev:generate": "   dotenv -e .env.dev --        prisma db generate   ",
+    "dev:push": "       dotenv -e .env.dev --        prisma db push       "
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
