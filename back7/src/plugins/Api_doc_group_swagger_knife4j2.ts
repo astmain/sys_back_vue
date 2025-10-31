@@ -7,7 +7,23 @@ export async function Api_doc_group_swagger_knife4j2(app: any, list_module: any[
   const list_docs = []
   for (const item of list_module) {
     // console.log(`111---item:`, item)
-    const doc_config = new DocumentBuilder().setTitle(item.title).setDescription(item.description).setVersion('0.1').build()
+    const doc_config = new DocumentBuilder()
+      .setTitle(item.title)
+      .setDescription(item.description)
+      .setVersion('0.1')
+      .addGlobalParameters({
+        name: 'token',
+        in: 'header',
+        description: 'token',
+        required: true,
+        schema: {
+          type: 'string',
+          default: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1MTYwMzE1MTEwIiwicGhvbmUiOiIxNTE2MDMxNTExMCIsImlkIjoxLCJ1c2VyX2lkIjoxLCJyb2xlSWRzIjpbXSwiZGVwYXJ0bWVudCI6W3siaWQiOjJ9XSwiaWF0IjoxNzU3NDMyNDgxLCJleHAiOjI2MjEzNDYwODEsInJvbGVzIjpbXSwiZXh0cmEiOnsiY2hlY2tlZCI6dHJ1ZX19.dHfLiPbWiLKdu5NYvNPcXTnVWvaSq3XQsIzyj-v6bJ0',
+          // default: '',
+        },
+      })
+
+      .build()
     const document = SwaggerModule.createDocument(app, doc_config, { include: item.imports })
     SwaggerModule.setup(item.title, app, document)
     list_docs.push({

@@ -11,11 +11,12 @@ import { home_module } from '@src/home_module'
 import { Api_doc_group_swagger_knife4j2 } from '@src/plugins/Api_doc_group_swagger_knife4j2'
 import { v1_module } from '@src/v1_module'
 import { v2_module } from '@src/v2_module'
+import { App_auth_Module } from '@src/App_Auth'
 
 const list_module = [{ title: 'common', description: '通用接口', imports: [home_module] }, v1_module, v2_module]
 // console.log(`111---list_module:`, list_module)
 @Module({
-  imports: list_module.flatMap((o) => o.imports),
+  imports: [App_auth_Module, ...list_module.flatMap((o) => o.imports)],
   controllers: [],
 })
 class App_Module {}

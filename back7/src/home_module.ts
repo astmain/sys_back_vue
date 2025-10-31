@@ -5,7 +5,6 @@ import { Module } from '@nestjs/common'
 import { /*环境变量*/ check_env } from '@src/plugins/check_env'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_auth'
-import { db } from './App_prisma'
 
 // 通用响应基础类
 class Base_Response_Dto<T = any> {

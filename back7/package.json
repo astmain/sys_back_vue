@@ -5,15 +5,16 @@
   "author": "许鹏",
   "private": true,
   "license": "MIT",
-  "prisma": {
-    "schema": "src/v1/zoom_prisma"
-  },
   "scripts": {
     "开发": "==================== 开发 ====================",
-    "make": "     pnpm i  &&  pnpm dev:generate ",
+    "make": "     pnpm i  &&  ",
     "dev": "          dotenv -e .env.dev --        nest start --watch",
-    "dev:generate": "   dotenv -e .env.dev --        prisma db generate   ",
-    "dev:push": "       dotenv -e .env.dev --        prisma db push       "
+    "v1": "==================== v1 ============================================================",
+    "v1:generate": "   dotenv -e .env.dev --        prisma generate     --schema=src/v1/zoom_prisma",
+    "v1:push": "       dotenv -e .env.dev --        prisma db push      --schema=src/v1/zoom_prisma",
+    "v2": "==================== v2 ============================================================",
+    "v2:generate": "   dotenv -e .env.dev --        prisma generate     --schema=src/v2/zoom_prisma",
+    "v2:push": "       dotenv -e .env.dev --        prisma db push      --schema=src/v2/zoom_prisma"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
