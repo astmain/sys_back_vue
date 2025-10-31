@@ -1,11 +1,12 @@
-import { /*接口*/ Controller, Get, Res } from '@nestjs/common'
+import { /*接口*/ Controller, Get, Res, Module } from '@nestjs/common'
 import { /*文档*/ ApiTags, ApiOperation, ApiOkResponse, ApiProperty } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
-import { Module } from '@nestjs/common'
 import { /*环境变量*/ check_env } from '@src/plugins/check_env'
 import dayjs from 'dayjs' // const dayjs = require('dayjs')
 import { Api_public } from './App_auth'
 import { db } from './App_prisma'
+// Api_group.ts
+import { Api_group } from '@src/plugins/Api_group'
 
 // 通用响应基础类
 class Base_Response_Dto<T = any> {
@@ -26,8 +27,7 @@ class Base_Response_Dto<T = any> {
 }
 
 @Api_public()
-@ApiTags('首页')
-@Controller()
+@Api_group('', '首页')
 export class home {
   @ApiOperation({ summary: '首页文档', description: '首页文档:' + process.env.VITE_url_app_run })
   @Get()

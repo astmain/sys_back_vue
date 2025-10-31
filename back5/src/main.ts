@@ -1,32 +1,34 @@
-import { DocumentBuilder as doc, SwaggerModule as swagger } from '@nestjs/swagger'
-import { knife4jSetup } from 'nest-knife4j'
 import { NestFactory } from '@nestjs/core'
-import { plugins } from './plugins/index'
 import { Module } from '@nestjs/common'
+import { swaggerKnife4jSetup } from './plugins/Api_group'
+import { check_env } from './plugins/check_env'
+import { filter_cors } from './plugins/filter_cors'
+import { filter_dto } from './plugins/filter_dto'
+import { filter_request } from './plugins/filter_request'
+import { filter_response } from './plugins/filter_response'
 
-import { v1_module } from './v1/v1_module'
-import { v2_module } from './v2/v2_module'
 import { home, home_module } from './home_module'
+import { user_module as user1 } from './v1/user/user'
+import { user_module as user2 } from './v2/user/user'
 
 @Module({
-  imports: [home_module, v1_module, v2_module],
-  controllers: [home],
+  imports: [home_module, user1, user2],
+  controllers: [],
 })
 class App_Module {}
 
 async function main() {
   const app = await NestFactory.create(App_Module)
   // ==================== 插件配置 ====================
-  const { env_curr } = plugins.check_env() //检查环境变量
-  await plugins.filter_cors(app) // CORS配置(跨域请求)
-  await plugins.filter_dto(app) // dto配置(全局验证管道)
-  await plugins.filter_request(app) // 请求拦截器
-  await plugins.filter_response(app) // 响应拦截器
+  const { env_curr } = check_env() //检查环境变量
+  await filter_cors(app) // CORS配置(跨域请求)
+  await filter_dto(app) // dto配置(全局验证管道)
+  await filter_request(app) // 请求拦截器
+  await filter_response(app) // 响应拦截器
 
-  swagger.setup('v1', app, swagger.createDocument(app, new doc().addTag('项目说明').setTitle('v1版本').setDescription('无介绍').build()))
-
-  // 使用knife4jSetup
-  knife4jSetup(app, [{ name: 'v1', url: `/v1-json`, swaggerVersion: '', location: `` }])
+  // ==================== Swagger + Knife4j 文档配置 ====================
+  // 配置分组的 API 文档（模块已在各自文件中自动注册）
+  await swaggerKnife4jSetup(app)
 
   // 监听端口
   await app.listen(Number(process.env.VITE_port))
