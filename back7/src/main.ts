@@ -1,38 +1,34 @@
-import { DocumentBuilder as doc, SwaggerModule as swagger } from '@nestjs/swagger'
-import { knife4jSetup } from 'nest-knife4j'
 import { NestFactory } from '@nestjs/core'
-import { plugins } from './plugins/index'
 import { Module } from '@nestjs/common'
+import { check_env } from '@src/plugins/check_env'
+import { filter_cors } from '@src/plugins/filter_cors'
+import { filter_dto } from '@src/plugins/filter_dto'
+import { filter_request } from '@src/plugins/filter_request'
+import { filter_response } from '@src/plugins/filter_response'
+import { user_module } from '@src/v1/user/user'
+import { user_module as user_module_v2 } from '@src/v2/user/user'
+import { home_module } from '@src/home_module'
+import { Api_doc_group_swagger_knife4j2 } from '@src/plugins/Api_doc_group_swagger_knife4j2'
+import { v1_module } from '@src/v1_module'
+import { v2_module } from '@src/v2_module'
 
-import { v1_module } from './v1/v1_module'
-import { v2_module } from './v2/v2_module'
-import { home, home_module } from './home_module'
-
+const list_module = [{ title: 'common', description: '通用接口', imports: [home_module] }, v1_module, v2_module]
+// console.log(`111---list_module:`, list_module)
 @Module({
-  imports: [v1_module, v2_module],
-  controllers: [home],
+  imports: list_module.flatMap((o) => o.imports),
+  controllers: [],
 })
 class App_Module {}
 
 async function main() {
   const app = await NestFactory.create(App_Module)
   // ==================== 插件配置 ====================
-  const { env_curr } = plugins.check_env() //检查环境变量
-  await plugins.filter_cors(app) // CORS配置(跨域请求)
-  await plugins.filter_dto(app) // dto配置(全局验证管道)
-  await plugins.filter_request(app) // 请求拦截器
-  await plugins.filter_response(app) // 响应拦截器
-
-  // SwaggerModule.setup('all', app, SwaggerModule.createDocument(app, new DocumentBuilder().addTag('项目说明').setTitle('全部api').setDescription('全部相关API').build(), { include: [v1_module, v2_module] }))
-  swagger.setup('v1', app, swagger.createDocument(app, new doc().addTag('项目说明').setTitle('v1版本').setDescription('无介绍').build(), { include: [home_module, v1_module] }))
-  swagger.setup('v2', app, swagger.createDocument(app, new doc().addTag('项目说明').setTitle('v2版本').setDescription('无介绍').build(), { include: [home_module, v2_module] }))
-
-  // 使用knife4jSetup
-  knife4jSetup(app, [
-    { name: 'v1', url: `/v1-json`, swaggerVersion: '', location: `` },
-    { name: 'v2', url: `/v2-json`, swaggerVersion: '', location: `` },
-    // { name: 'all', url: `/all-json`, swaggerVersion: '', location: `` },
-  ])
+  const { env_curr } = check_env() //检查环境变量
+  await filter_cors(app) // CORS配置(跨域请求)
+  await filter_dto(app) // dto配置(全局验证管道)
+  await filter_request(app) // 请求拦截器
+  await filter_response(app) // 响应拦截器
+  await Api_doc_group_swagger_knife4j2(app, list_module)
 
   // 监听端口
   await app.listen(Number(process.env.VITE_port))

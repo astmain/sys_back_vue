@@ -1,6 +1,7 @@
 import { Controller, Module, Get, Post, Body, Req, Inject } from '@nestjs/common'
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger'
 import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger'
+import { Query } from '@nestjs/common'
 
 import { Api_group } from '@src/plugins/Api_group'
 
@@ -18,7 +19,7 @@ class find_list_user {
 @Api_group('v2', '用户管理')
 export class user {
   @Post('find_list_user')
-  async find_list_user(@Body() body: find_list_user, @Req() _req: any) {
+  async find_list_user(@Query() body: find_list_user, @Req() _req: any) {
     return { code: 200, msg: '成功:v2' }
   }
 }
