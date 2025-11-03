@@ -24,7 +24,7 @@
 <script setup lang="tsx">
 import { ref, markRaw } from "vue"
 import { BUS } from "@/BUS"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 
 let show = ref(false) //显示隐藏

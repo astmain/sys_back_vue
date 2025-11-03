@@ -54,7 +54,7 @@
 
 <script setup lang="tsx">
 import { ref, onMounted } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 import { id } from "zod/v4/locales"
 

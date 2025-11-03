@@ -34,6 +34,12 @@ async function main() {
   await app.listen(Number(process.env.VITE_port))
   console.log(`env_curr.VITE_port---`, env_curr.VITE_port)
   console.log(`env_curr.VITE_url_app_run---`, env_curr.VITE_url_app_run)
+
+
+  // 获取项目根目录
+  let path_project1 = __dirname.replace('\\dist', '').replace(/\\/g, '/') //C:/AAA/sys_back_vue/back6
+  console.log(`path_project1---`, path_project1)
+  process['path_project'] = path_project1
 }
 
 main()

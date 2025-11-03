@@ -103,8 +103,8 @@ async function handle_active(item: any) {
 
 // 获取订单列表
 async function find_list_shop_order() {
-  // const res: any = await api.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "model" })
-  const res: any = await api.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "print" })
+  // const res: any = await api_v1.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "model" })
+  const res: any = await api_v1.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "print" })
   console.log("find_list_order---res", res)
   if (res.code === 200) {
     shop_order_list.value = res.result.list_group
@@ -115,7 +115,7 @@ async function find_list_shop_order() {
 
 async function remove_shop_order_ids(order_id: string) {
   if (!(await plugin_confirm())) return
-  const res: any = await api.shop_order.remove_shop_order_ids({ ids: [order_id] })
+  const res: any = await api_v1.shop_order.remove_shop_order_ids({ ids: [order_id] })
   console.log("remove_shop_order_ids---res", res)
   if (res.code === 200) ElMessage.success("删除订单成功"), await find_list_shop_order()
   else ElMessage.error("删除订单失败")

@@ -33,7 +33,7 @@
 <script setup lang="tsx">
 import { ref } from "vue"
 import { BUS } from "@/BUS"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 import { util_uuid9 } from "@/plugins/util_uuid9"
 
@@ -62,7 +62,7 @@ async function open() {
     role_list.push({ id: role.id, name: role.name, kind: "update", menu_button_ids: role.menu_button_ids })
   }
   form = { depart_id: tree_node_curr.value?.id, depart_name: tree_node_curr.value.name, role_list: role_list }
-  let res: any = await api.depart.find_depart_menu({ role_id: tree_node_curr.value.id })
+  let res: any = await api_v1.depart.find_depart_menu({ role_id: tree_node_curr.value.id })
   tree_menu.value = res.result.menu_tree
 }
 
@@ -84,7 +84,7 @@ async function submit() {
   }
   console.log("data---", JSON.parse(JSON.stringify(data)))
 
-  let res: any = await api.depart.update_list_depart_role_menu(data)
+  let res: any = await api_v1.depart.update_list_depart_role_menu(data)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   ElMessage.success(res.msg)
   show.value = false

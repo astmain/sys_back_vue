@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 // ==================== util ====================
 import { db1 as db } from '@src/v1/db_prisma_1'
@@ -13,7 +14,7 @@ import { find_one_print_product_upload } from './dto/find_one_print_product_uplo
 import { save_print_product_upload } from './dto/save_print_product_upload'
 import { remove_ids_print_product_upload } from './dto/remove_ids_print_product_upload'
 
-@Api_Controller('商品打印上传历史')
+@Api_group('v1', '商品打印上传历史')
 export class print_product_upload {
   @Api_Post('查询-商品打印上传历史-列表')
   async find_list_print_product_upload(@Body() body: find_list_print_product_upload, @Req() req: any) {

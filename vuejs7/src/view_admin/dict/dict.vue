@@ -61,7 +61,7 @@
 
 <script setup lang="tsx">
 import { ref, onMounted } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import com_dialog_dict from "./com_dialog_dict.vue"
@@ -75,7 +75,7 @@ let curr_child = $ref({} as any)
 
 // 🟩查询字典列表
 async function find_list_dict() {
-  const res: any = await api.dict.find_list_dict({ parent_id: undefined })
+  const res: any = await api_v1.dict.find_list_dict({ parent_id: undefined })
   console.log(`find_list_dict---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   list_dict_parent = res.result.dict_list
@@ -84,7 +84,7 @@ async function find_list_dict() {
 // 🟩 删除字典
 async function remove_dict_ids(ids: string[]) {
   if (!(await plugin_confirm())) return
-  let res: any = await api.dict.remove_dict_ids({ ids })
+  let res: any = await api_v1.dict.remove_dict_ids({ ids })
   if (res.code !== 200) return ElMessage.error("失败:删除")
   ElMessage.success("成功:删除")
   await find_list_dict()
@@ -133,7 +133,7 @@ async function save_dict(title: string) {
     let form = ctx.form
     console.log(`111---save_dict---callback---form:`, form)
     // debugger
-    let res: any = await api.dict.save_dict(form)
+    let res: any = await api_v1.dict.save_dict(form)
     if (res.code !== 200) return ElMessage.error(res.msg)
     ElMessage.success(res.msg)
     await find_list_dict()

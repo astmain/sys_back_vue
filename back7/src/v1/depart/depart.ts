@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 import { db1 as db } from '@src/v1/db_prisma_1'
 import _ from 'lodash'
@@ -19,7 +20,7 @@ import { delete_depart_role_ids } from './dto/delete_depart_role_ids'
 import { update_list_depart_role_menu } from './dto/update_list_depart_role_menu'
 
 @Api_public()
-@Api_Controller('部门管理')
+@Api_group('v1', '部门管理')
 export class depart {
   @Api_Post('菜单权限-部门树')
   async menu_premiss_tree() {

@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="tsx">
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 import { ref, reactive, onMounted } from "vue"
 import { ElMessage } from "element-plus"
@@ -75,7 +75,7 @@ const show = ref(false)
 // 🟩 查询-用户收货地址
 async function find_one_user_address_take() {
   const form = { user_id: BUS.user.id }
-  const res: any = await api.user_address_take.find_one_user_address_take(form)
+  const res: any = await api_v1.user_address_take.find_one_user_address_take(form)
   console.log("find_one_user_address_take---res", res)
   if (res.code !== 200) return ElMessage.error("失败:查询收货地址")
   list_address_take.value = res.result.list_address_take
@@ -85,7 +85,7 @@ async function find_one_user_address_take() {
 async function save_user_address_take() {
   const { created_at, updated_at, ext_address, ...form_data } = JSON.parse(JSON.stringify(form.value))
   console.log("save_user_address_take---form", JSON.parse(JSON.stringify(form_data)))
-  const res: any = await api.user_address_take.save_user_address_take(form_data)
+  const res: any = await api_v1.user_address_take.save_user_address_take(form_data)
   console.log(res)
   if (res.code !== 200) return ElMessage.error("失败:保存收货地址")
   ElMessage.success("成功:保存收货地址")
@@ -97,7 +97,7 @@ async function save_user_address_take() {
 async function remove_ids_user_address_take(ids: string[]) {
   if (!(await plugin_confirm())) return
   console.log("remove_ids_user_address_take---ids", ids)
-  const res: any = await api.user_address_take.remove_ids_user_address_take({ ids })
+  const res: any = await api_v1.user_address_take.remove_ids_user_address_take({ ids })
   console.log(res)
   if (res.code !== 200) return ElMessage.error("失败:删除收货地址")
   ElMessage.success("成功:删除收货地址")

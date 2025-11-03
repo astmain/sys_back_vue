@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 
 // ==================== 响应式数据 ====================
@@ -60,7 +60,7 @@ const menu_curr_item = ref({} as any) //菜单当前项
 
 // ✅查询菜单树
 async function find_tree_menu() {
-  let res: any = await api.menu.find_tree_menu()
+  let res: any = await api_v1.menu.find_tree_menu()
   menu_tree.value = res.result.menu_tree
 }
 

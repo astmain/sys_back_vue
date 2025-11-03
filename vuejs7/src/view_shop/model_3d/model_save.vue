@@ -231,7 +231,7 @@ async function input_list_extend(event: any) {
 async function save_product() {
   console.log("save_product---form", JSON.parse(JSON.stringify(form.value)))
   // debugger
-  const res: any = await api.product.save_product(form.value)
+  const res: any = await api_v1.product.save_product(form.value)
   console.log("save_product---res", res)
   if (res.code === 200) {
     ElMessage.success("成功:保存商品")
@@ -243,7 +243,7 @@ async function save_product() {
 }
 
 onMounted(async () => {
-  const res: any = await api.dict.find_list_dict({})
+  const res: any = await api_v1.dict.find_list_dict({})
   console.log("find_list_dict---res", JSON.parse(JSON.stringify(res)))
   if (res.code != 200) return ElMessage.error(res.message)
   dict_info.value = res.result.dict_obj

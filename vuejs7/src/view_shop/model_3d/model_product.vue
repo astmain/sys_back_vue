@@ -104,7 +104,7 @@ console.log("product_id", product_id)
 
 // 🟩 查询商品详情
 async function find_one_product() {
-  const res: any = await api.product.find_one_product({ product_id })
+  const res: any = await api_v1.product.find_one_product({ product_id })
   console.log("find_one_product---res", res)
   if (res.code !== 200) return alert("错了")
   product = res.result
@@ -118,7 +118,7 @@ async function save_shop_cart() {
     count: 1,
     product_id: product.product_id,
   }
-  const res: any = await api.shop_cart.save_shop_cart(form)
+  const res: any = await api_v1.shop_cart.save_shop_cart(form)
   console.log("save_shop_cart---res", res)
   if (res.code === 200) {
     ElMessage.success(res.msg)

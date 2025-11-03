@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { api } from "./api"
+import { api_v1 } from "./api_v1"
 
 export const use_BUS = defineStore("localStorage_BUS", {
   state: () => ({
@@ -73,17 +73,13 @@ setTimeout(() => {
   find_list_dict()
 }, 0)
 async function find_list_dict() {
-  const res: any = await api.dict.find_list_dict({})
+  const res: any = await api_v1.dict.find_list_dict({})
   console.log("find_list_dict---res", JSON.parse(JSON.stringify(res)))
   //@ts-ignore
   window.BUS.dict_obj = res.result.dict_obj
 }
 
-
-
-
-
-// const res: any = await api.dict.find_list_dict({})
+// const res: any = await api_v1.dict.find_list_dict({})
 // console.log("find_list_dict---res", JSON.parse(JSON.stringify(res)))
 // if (res.code != 200) return ElMessage.error(res.message)
 // dict_info.value = res.result.dict_obj

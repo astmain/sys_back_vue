@@ -40,7 +40,7 @@
 
 <script setup lang="tsx">
 import { ref, reactive, onMounted } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 import { ElMessage } from "element-plus"
 import { useRouter, useRoute } from "vue-router"
@@ -54,7 +54,7 @@ const user_info = ref({ id: "", phone: "", name: "", gender: "", avatar: "" })
 // 🟩 更新个人信息
 async function update_user_info() {
   const { phone, ...form } = user_info.value
-  const res: any = await api.user.update_user_info({ ...form })
+  const res: any = await api_v1.user.update_user_info({ ...form })
   if (res.code !== 200) ElMessage.error("失败:更新个人信息-接口异常")
   ElMessage.success("成功:更新个人信息")
   // 退出登录

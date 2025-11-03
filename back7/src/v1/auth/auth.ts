@@ -7,6 +7,7 @@ import { Body } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { ApiProperty } from '@nestjs/swagger'
 import { IsString } from 'class-validator'
+import { Api_group } from '@src/plugins/Api_group'
 
 export class login {
   @ApiProperty({ description: '用户名', example: '15160315110' })
@@ -18,7 +19,7 @@ export class login {
 }
 
 @Api_public()
-@Api_Controller('认证')
+@Api_group('v1', '认证')
 export class auth {
   @Api_Post('登陆')
   async login(@Body() body: login) {
@@ -245,7 +246,6 @@ export class auth {
     await db.arg_print_material.deleteMany()
     await db.arg_print_material.createMany({ data: all_material })
 
-
     return { code: 200, msg: '成功:材料初始化完成', result: {} }
   }
 
@@ -260,8 +260,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-20 09:49:15 823',
-        updated_at: '2025-10-21 00:02:39 540',
         parent_id: null,
       },
       {
@@ -272,8 +270,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-20 11:42:44 051',
-        updated_at: '2025-10-21 00:02:24 486',
         parent_id: null,
       },
       {
@@ -284,8 +280,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-20 17:26:18 153',
-        updated_at: '2025-10-21 01:05:58 985',
         parent_id: null,
       },
       {
@@ -296,8 +290,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-20 18:08:21 733',
-        updated_at: '2025-10-21 00:07:22 088',
         parent_id: 'cmgyxkv1l0001t72wwpvfstom',
       },
       {
@@ -308,8 +300,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '111111',
-        created_at: '2025-10-20 18:09:19 906',
-        updated_at: '2025-10-21 12:04:11 766',
         parent_id: 'cmgyh93u70000t7asz65uesyc',
       },
       {
@@ -320,8 +310,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-20 18:09:32 814',
-        updated_at: '2025-10-21 00:05:23 303',
         parent_id: 'cmgylb13n0000t76cz0kzcqfh',
       },
       {
@@ -332,8 +320,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-20 23:52:41 449',
-        updated_at: '2025-10-20 23:52:41 449',
         parent_id: 'cmgyh93u70000t7asz65uesyc',
       },
       {
@@ -344,8 +330,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:00:33 302',
-        updated_at: '2025-10-21 00:00:33 302',
         parent_id: 'cmgyh93u70000t7asz65uesyc',
       },
       {
@@ -368,8 +352,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:05:12 077',
-        updated_at: '2025-10-21 00:05:12 077',
         parent_id: 'cmgylb13n0000t76cz0kzcqfh',
       },
       {
@@ -380,8 +362,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:06:08 952',
-        updated_at: '2025-10-21 00:06:16 588',
         parent_id: 'cmgylb13n0000t76cz0kzcqfh',
       },
       {
@@ -392,8 +372,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:06:26 696',
-        updated_at: '2025-10-21 00:06:49 013',
         parent_id: 'cmgylb13n0000t76cz0kzcqfh',
       },
       {
@@ -404,8 +382,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:06:37 829',
-        updated_at: '2025-10-21 00:06:57 500',
         parent_id: 'cmgylb13n0000t76cz0kzcqfh',
       },
       {
@@ -428,8 +404,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:07:51 372',
-        updated_at: '2025-10-21 00:08:28 124',
         parent_id: 'cmgyxkv1l0001t72wwpvfstom',
       },
       {
@@ -440,8 +414,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:07:59 161',
-        updated_at: '2025-10-21 00:08:34 964',
         parent_id: 'cmgyxkv1l0001t72wwpvfstom',
       },
       {
@@ -452,8 +424,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:08:06 797',
-        updated_at: '2025-10-21 00:08:40 974',
         parent_id: 'cmgyxkv1l0001t72wwpvfstom',
       },
       {
@@ -464,8 +434,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:12:29 411',
-        updated_at: '2025-10-21 00:12:46 248',
         parent_id: null,
       },
       {
@@ -476,8 +444,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:12:57 222',
-        updated_at: '2025-10-21 12:04:28 745',
         parent_id: 'cmgzc380z000vv17o3t0l7eo6',
       },
       {
@@ -488,8 +454,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:13:03 546',
-        updated_at: '2025-10-21 00:13:03 546',
         parent_id: 'cmgzc380z000vv17o3t0l7eo6',
       },
       {
@@ -500,8 +464,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:13:09 867',
-        updated_at: '2025-10-21 00:13:09 867',
         parent_id: 'cmgzc380z000vv17o3t0l7eo6',
       },
       {
@@ -512,8 +474,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:13:16 874',
-        updated_at: '2025-10-21 00:13:16 874',
         parent_id: 'cmgzc380z000vv17o3t0l7eo6',
       },
       {
@@ -524,8 +484,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:14:59 977',
-        updated_at: '2025-10-21 00:14:59 977',
         parent_id: null,
       },
       {
@@ -536,8 +494,6 @@ export class auth {
         status: true,
         sort: 0,
         css: 'text-red-500 text-sm',
-        created_at: '2025-10-21 00:15:36 199',
-        updated_at: '2025-10-21 12:15:12 562',
         parent_id: 'cmgzc6g7f0001v1uoaoy8epiw',
       },
       {
@@ -548,8 +504,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:15:41 067',
-        updated_at: '2025-10-21 00:16:24 872',
         parent_id: 'cmgzc6g7f0001v1uoaoy8epiw',
       },
       {
@@ -560,8 +514,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-21 00:15:45 835',
-        updated_at: '2025-10-21 00:16:33 771',
         parent_id: 'cmgzc6g7f0001v1uoaoy8epiw',
       },
       {
@@ -572,8 +524,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 00:40:09 143',
-        updated_at: '2025-10-22 00:40:09 143',
         parent_id: null,
       },
       {
@@ -584,8 +534,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 00:40:52 633',
-        updated_at: '2025-10-22 00:40:52 633',
         parent_id: 'cmh0sincn0001v1xwwlo7auj5',
       },
       {
@@ -596,8 +544,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 00:41:12 832',
-        updated_at: '2025-10-22 00:41:12 832',
         parent_id: 'cmh0sincn0001v1xwwlo7auj5',
       },
       {
@@ -608,8 +554,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 00:41:21 381',
-        updated_at: '2025-10-22 00:41:21 381',
         parent_id: 'cmh0sincn0001v1xwwlo7auj5',
       },
       {
@@ -620,8 +564,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 00:41:29 708',
-        updated_at: '2025-10-22 00:42:20 730',
         parent_id: 'cmh0sincn0001v1xwwlo7auj5',
       },
       {
@@ -644,8 +586,6 @@ export class auth {
         status: true,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 12:09:06 401',
-        updated_at: '2025-10-22 12:24:08 236',
         parent_id: 'cmh1h463e0001t7hs5eqfvdvp',
       },
       {
@@ -656,8 +596,6 @@ export class auth {
         status: false,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 12:09:16 914',
-        updated_at: '2025-10-22 12:13:38 796',
         parent_id: 'cmh1h463e0001t7hs5eqfvdvp',
       },
       {
@@ -668,8 +606,6 @@ export class auth {
         status: false,
         sort: 0,
         css: '',
-        created_at: '2025-10-22 12:09:23 814',
-        updated_at: '2025-10-22 12:13:57 117',
         parent_id: 'cmh1h463e0001t7hs5eqfvdvp',
       },
       {
@@ -680,8 +616,6 @@ export class auth {
         status: true,
         sort: 0,
         css: 'text-green-500',
-        created_at: '2025-10-22 12:09:29 549',
-        updated_at: '2025-10-23 09:41:20 356',
         parent_id: 'cmh1h463e0001t7hs5eqfvdvp',
       },
       {
@@ -692,8 +626,6 @@ export class auth {
         status: true,
         sort: 0,
         css: 'text-gray-500  ',
-        created_at: '2025-10-22 12:09:35 031',
-        updated_at: '2025-10-23 11:16:22 795',
         parent_id: 'cmh1h463e0001t7hs5eqfvdvp',
       },
     ]
@@ -704,10 +636,7 @@ export class auth {
 
     //删除所有字典
     await db.dict.deleteMany()
-    await db.dict.createMany({
-      data: dict_raw_list2,
-    })
-
+    await db.dict.createMany({ data: dict_raw_list2 })
     return { code: 200, msg: '成功:初始化数据-字典', result: {} }
   }
 }

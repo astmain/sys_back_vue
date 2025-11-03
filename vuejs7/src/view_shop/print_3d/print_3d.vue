@@ -195,7 +195,7 @@ async function get_input_file(event: any) {
 
 // 🟩 保存历史记录
 async function save_print_product_upload(form: any) {
-  const res: any = await api.print_product_upload.save_print_product_upload(form)
+  const res: any = await api_v1.print_product_upload.save_print_product_upload(form)
   console.log(`save_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   list_print_product_upload.value = res.result.list_print_product_upload
@@ -204,7 +204,7 @@ async function save_print_product_upload(form: any) {
 
 // 🟩 查询历史记录
 async function find_list_print_product_upload() {
-  const res: any = await api.print_product_upload.find_list_print_product_upload({ user_id: BUS.user.id })
+  const res: any = await api_v1.print_product_upload.find_list_print_product_upload({ user_id: BUS.user.id })
   console.log(`find_list_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   list_print_product_upload.value = res.result.list_print_product_upload
@@ -212,7 +212,7 @@ async function find_list_print_product_upload() {
 
 // 🟩 删除历史记录
 async function remove_ids_print_product_upload(product_id: string) {
-  const res: any = await api.print_product_upload.remove_ids_print_product_upload({ ids: [product_id] })
+  const res: any = await api_v1.print_product_upload.remove_ids_print_product_upload({ ids: [product_id] })
   console.log(`remove_print_product_upload---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_product_upload()
@@ -244,7 +244,7 @@ async function save_print_cart(item: any) {
     // let aaa = JSON.parse(JSON.stringify(form_save_print_cart.value))
     // debugger
   }
-  const res: any = await api.print_card.save_print_cart(form_save_print_cart.value)
+  const res: any = await api_v1.print_card.save_print_cart(form_save_print_cart.value)
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_product_upload()
@@ -264,7 +264,7 @@ function handle_edit(item: any) {
 // 🟩 提交订单
 async function create_shop_order(item: any) {
   let card_ids = list_print_cart.value.filter((item: any) => item.checked).map((item: any) => item.card_id)
-  const res: any = await api.shop_order.create_shop_order({ user_id: BUS.user.id, type_order: "print", card_ids })
+  const res: any = await api_v1.shop_order.create_shop_order({ user_id: BUS.user.id, type_order: "print", card_ids })
   console.log(`create_shop_order---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   ElMessage.success(res.msg)
@@ -272,7 +272,7 @@ async function create_shop_order(item: any) {
 
 // 🟩 查询购物车
 async function find_list_print_cart() {
-  const res: any = await api.print_card.find_list_print_cart({ user_id: BUS.user.id })
+  const res: any = await api_v1.print_card.find_list_print_cart({ user_id: BUS.user.id })
   console.log(`save_cart_print---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   list_print_cart.value = res.result.list
@@ -282,7 +282,7 @@ async function find_list_print_cart() {
 async function remove_card_print_ids() {
   const ids = list_print_cart.value.filter((item: any) => item.checked).map((item: any) => item.card_id)
   console.log(`remove_card_print_ids---ids:`, ids)
-  const res: any = await api.print_card.remove_card_print_ids({ ids })
+  const res: any = await api_v1.print_card.remove_card_print_ids({ ids })
   console.log(`remove_card_print_ids---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   find_list_print_cart()
@@ -290,7 +290,7 @@ async function remove_card_print_ids() {
 
 // 🟩 查询材料
 async function find_list_arg_print_material() {
-  const res: any = await api.arg_print_material.find_list_arg_print_material()
+  const res: any = await api_v1.arg_print_material.find_list_arg_print_material()
   console.log(`find_list_arg_print_material---res:`, res)
   if (res.code !== 200) return ElMessage.error(res.msg)
   group_arg_print_material.value = res.result.group_arg_print_material

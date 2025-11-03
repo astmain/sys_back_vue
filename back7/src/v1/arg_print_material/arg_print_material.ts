@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 // ==================== util ====================
 import { db1 as db } from '@src/v1/db_prisma_1'
@@ -10,7 +11,7 @@ import { argsArgArrayOrObject } from 'rxjs/internal/util/argsArgArrayOrObject'
 
 // ==================== dto ====================
 
-@Api_Controller('材料')
+@Api_group('v1', '材料')
 export class arg_print_material {
   @Api_Post('查询-材料-列表')
   async find_list_arg_print_material(@Body() body: any, @Req() req: any) {

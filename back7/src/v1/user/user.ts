@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 import { db1 as db } from '@src/v1/db_prisma_1'
 import _ from 'lodash'
@@ -25,7 +26,7 @@ import { i_find_list_user } from './dto/find_list_user'
 class find_list_user_dto extends createZodDto(find_list_user_schema) {}
 
 @Api_public()
-@Api_Controller('用户')
+@Api_group('v1', '用户')
 export class user {
   @Api_Post('查询-用户-详情')
   async find_one_user(@Body() body: find_one_user) {

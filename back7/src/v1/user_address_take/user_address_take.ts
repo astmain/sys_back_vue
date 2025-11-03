@@ -2,6 +2,7 @@ import { Body, Module, Req, HttpException, HttpStatus } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 import { db1 as db } from '@src/v1/db_prisma_1'
 import _ from 'lodash'
@@ -14,7 +15,7 @@ import { find_one_user_address_take } from './dto/find_one_user_address_take'
 import { save_user_address_take } from './dto/save_user_address_take'
 import { remove_ids_user_address_take } from './dto/remove_ids_user_address_take'
 
-@Api_Controller('用户收货地址')
+@Api_group('v1', '用户收货地址')
 export class user_address_take {
   @Api_Post('查询-用户收货地址-详情')
   async find_one_user_address_take(@Body() body: find_one_user_address_take) {

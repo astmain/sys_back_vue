@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadRequestResponse } from '@nestjs/swagger'
 
 // ==================== 工具 ====================
@@ -18,7 +19,7 @@ import { compute_price_shop_cart } from './dto/compute_price_shop_cart'
 import { i_service_shop_cart } from './i_service_shop_cart'
 
 // ==================== controller ====================
-@Api_Controller('购物车')
+@Api_group('v1', '购物车')
 export class shop_cart {
   constructor(private readonly service_shop_cart: i_service_shop_cart) {}
   @Api_Post('保存-购物车')

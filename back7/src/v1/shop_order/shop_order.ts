@@ -3,6 +3,7 @@ import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_Get } from '@src/plugins/Api_Get'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadRequestResponse } from '@nestjs/swagger'
 
 // ==================== 工具 ====================
@@ -19,7 +20,7 @@ import { find_list_shop_order } from './dto/find_list_shop_order'
 // ==================== 服务 ====================
 import { i_service_shop_cart } from '../shop_cart/i_service_shop_cart'
 // ==================== controller ====================
-@Api_Controller('订单')
+@Api_group('v1', '订单')
 export class shop_order {
   constructor(private readonly service_shop_cart: i_service_shop_cart) {}
   @Api_Post('新增-订单')

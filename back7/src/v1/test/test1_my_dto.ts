@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 import { ApiProperty } from '@nestjs/swagger'
 import { Matches, ArrayMinSize, IsNumber, IsString, IsNotEmpty, IsOptional, IsBoolean, IsArray, ValidateIf, ValidateNested, IsIn, isNumber, IsPositive, Min } from 'class-validator'
@@ -54,7 +55,7 @@ export class my_dto {
 
 // ==================== controller ====================
 @Api_public()
-@Api_Controller('测试')
+@Api_group('v1', '测试')
 export class test1_my_dto {
   @Api_Post('我的dto')
   async my_dto(@Body() body: my_dto) {

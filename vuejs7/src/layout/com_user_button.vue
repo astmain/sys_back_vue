@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 import { ref, reactive } from "vue"
 import { ElMessage } from "element-plus"

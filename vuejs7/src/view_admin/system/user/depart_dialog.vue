@@ -10,7 +10,7 @@
 <script setup lang="tsx">
 import { ref } from "vue"
 import { BUS } from "@/BUS"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 let show = ref(false)
 let title = ref("")

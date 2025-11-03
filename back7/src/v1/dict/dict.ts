@@ -2,6 +2,7 @@ import { Body, Module, Req } from '@nestjs/common'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 // ==================== util ====================
 import { util_build_tree } from '@src/plugins/util_build_tree'
@@ -16,7 +17,7 @@ import { remove_dict_ids } from './dto/remove_dict_ids'
 import { find_list_dict } from './dto/find_list_dict'
 
 @Api_public()
-@Api_Controller('字典')
+@Api_group('v1', '字典')
 export class dict {
   @Api_Post('保存-字典')
   async save_dict(@Body() body: save_dict, @Req() req: any) {

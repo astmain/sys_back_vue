@@ -3,7 +3,7 @@ import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 import { ApiOkResponse, ApiResponse, ApiInternalServerErrorResponse, ApiBadRequestResponse } from '@nestjs/swagger'
-
+import { Api_group } from '@src/plugins/Api_group'
 // ==================== 工具 ====================
 import _ from 'lodash'
 import { db1 as db } from '@src/v1/db_prisma_1'
@@ -16,7 +16,7 @@ import { remove_print_order_ids } from './dto/remove_print_order_ids'
 // ==================== 服务 ====================
 
 // ==================== controller ====================
-@Api_Controller('打印-订单')
+@Api_group('v1', '打印-订单')
 export class print_order {
   @Api_Post('保存-打印-订单')
   async save_print_order(@Body() body: save_print_order) {}

@@ -1,6 +1,6 @@
 import { defineComponent, onMounted } from "vue"
 import { ElButton } from "element-plus"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 
 let list_group_card = $ref<any[]>([])
@@ -49,7 +49,7 @@ export default defineComponent({
 })
 
 async function find_list_shop_cart() {
-  const res: any = await api.shop_cart.find_list_shop_cart({ user_id: BUS.user.id })
+  const res: any = await api_v1.shop_cart.find_list_shop_cart({ user_id: BUS.user.id })
   console.log("find_list_shop_cart---res", res)
   if (res.code !== 200) return alert("错了")
   list_group_card = res.result.list_group_card
@@ -58,7 +58,7 @@ async function find_list_shop_cart() {
 }
 
 async function remove_shop_cart_ids(card_id: string) {
-  const res: any = await api.shop_cart.remove_shop_cart_ids({ ids: [card_id] })
+  const res: any = await api_v1.shop_cart.remove_shop_cart_ids({ ids: [card_id] })
   console.log("remove_shop_cart_ids---res", res)
   if (res.code !== 200) return alert("错了")
   find_list_shop_cart()
@@ -71,7 +71,7 @@ function button_remove({ className, card_id }: { className: string; card_id: str
         link
         type="info"
         onClick={async () => {
-          const res: any = await api.shop_cart.remove_shop_cart_ids({ ids: [card_id] })
+          const res: any = await api_v1.shop_cart.remove_shop_cart_ids({ ids: [card_id] })
           console.log("remove_shop_cart_ids---res", res)
           if (res.code !== 200) return alert("错了")
           find_list_shop_cart()

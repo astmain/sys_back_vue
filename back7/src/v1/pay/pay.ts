@@ -3,6 +3,7 @@ import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_Get } from '@src/plugins/Api_Get'
 import { Api_public } from '@src/App_Auth'
+import { Api_group } from '@src/plugins/Api_group'
 
 // ==================== 工具 ====================
 import { db1 as db } from '@src/v1/db_prisma_1'
@@ -16,7 +17,7 @@ import { dict_obj as dict } from '@src/dict_obj'
 import { pay_method_make_url_qr } from './dto/pay_method_make_url_qr'
 import { pay_callback } from './dto/pay_callback'
 import { find_one_shop_order } from './dto/find_one_shop_order'
-@Api_Controller('支付')
+@Api_group('v1', '支付')
 export class pay {
   @Api_Get('支付方式-生成-url二维码')
   @Api_Get('支付方式-生成-url二维码')

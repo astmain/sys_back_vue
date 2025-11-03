@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { BUS } from "@/BUS"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { ElMessage } from "element-plus"
 let drawer_show = ref(false)
 let drawer_title = ref("")
@@ -48,7 +48,7 @@ let ElTreeRef = ref()
 // 打开交互窗口
 async function open(id: string) {
   user_depart_role_ids.value = [] //清空选中的树节点
-  let res: any = await api.user.find_one_user({ id })
+  let res: any = await api_v1.user.find_one_user({ id })
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   console.log("res", res)
   user_depart_role_ids.value = res.result.user_depart_role_ids
@@ -68,7 +68,7 @@ async function submit() {
   // 表单数据
   let form = { id: user.value.id, name: user.value.name, phone: user.value.phone, gender: user.value.gender, remark: user.value.remark, user_depart_role_ids: ids }
 
-  let res: any = await api.user.save_user(form)
+  let res: any = await api_v1.user.save_user(form)
   if (res.code != 200) return ElMessage.error(res.msg)
   ElMessage.success("保存成功")
   drawer_show.value = false

@@ -15,7 +15,7 @@
 
 <script setup lang="tsx">
 import { ref, reactive, watch } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 import { ElMessage } from "element-plus"
 import { useRouter, useRoute } from "vue-router"

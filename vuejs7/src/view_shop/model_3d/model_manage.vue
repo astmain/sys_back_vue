@@ -94,7 +94,7 @@ let form = $ref({ title: "", type_check: "check_pending", is_admin }) //根据�
 
 // 🟩 查询商品列表(租户)
 async function find_list_product_admin() {
-  const res: any = await api.product.find_list_product_admin(form)
+  const res: any = await api_v1.product.find_list_product_admin(form)
   console.log("find_list_product_admin---res", res)
   if (res.code !== 200) return ElMessage.error("管理查询商品列表失败")
   list_product = res.result
@@ -112,7 +112,7 @@ async function edit_product(item: any) {
 // 🟩 删除商品
 async function remove_product_ids(ids: string[]) {
   if (!(await plugin_confirm())) return
-  const res: any = await api.product.remove_product_ids({ ids })
+  const res: any = await api_v1.product.remove_product_ids({ ids })
   console.log("remove_product_ids---res", res)
   if (res.code !== 200) return ElMessage.error("删除商品失败")
   find_list_product_admin()
@@ -120,7 +120,7 @@ async function remove_product_ids(ids: string[]) {
 
 // 🟩 上架商品
 async function publish_product(item: any) {
-  const res: any = await api.product.publish_product({ product_id: item.product_id, is_publish: !item.is_publish })
+  const res: any = await api_v1.product.publish_product({ product_id: item.product_id, is_publish: !item.is_publish })
   console.log("publish_product---res", res)
   if (res.code !== 200) return ElMessage.error("商品上架状态失败")
   ElMessage.success(res.msg)
@@ -135,7 +135,7 @@ async function check_product(item: any) {
   let render = model_product
   ref_com_dialog_model_manage_check_product.value.open(form, render)
   ref_com_dialog_model_manage_check_product.value.callback = async () => {
-    const res: any = await api.product.check_product(form)
+    const res: any = await api_v1.product.check_product(form)
     console.log("check_product---res", res)
     if (res.code !== 200) return ElMessage.error("审核商品失败")
     ElMessage.success(res.msg)

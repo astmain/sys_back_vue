@@ -22,7 +22,7 @@
 
 <script setup lang="tsx">
 import { onMounted, ref } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { useRouter } from "vue-router"
 
 // 响应式数据
@@ -30,7 +30,7 @@ let products = $ref<any[]>([])
 const router = useRouter()
 async function find_list_product_public() {
   const form = { title: "" }
-  const res: any = await api.product.find_list_product_public(form)
+  const res: any = await api_v1.product.find_list_product_public(form)
   console.log("find_list_product---res", res)
   if (res.code !== 200) return alert("错了")
   products = res.result

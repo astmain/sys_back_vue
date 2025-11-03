@@ -22,7 +22,7 @@
 import { ref, reactive } from "vue"
 import { useRouter } from "vue-router"
 import { ElMessage, type FormInstance, type FormRules } from "element-plus"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 import /*组件*/ env_control from "./env_control.vue"
 
@@ -53,14 +53,14 @@ async function handle_login_api() {
   if (!login_form_ref.value) return
   const valid = await login_form_ref.value.validate()
   if (valid) {
-    const res: any = await api.auth.login(login_form)
-    console.log("api.auth.login---res", res)
+    const res: any = await api_v1.auth.login(login_form)
+    console.log("api_v1.auth.login---res", res)
     if (res.code === 200) {
       // localStorage.setItem("token", res.result.token)
       // console.log("localStorage.setItem(token, res.result.token)", localStorage.getItem("token"))
       BUS.token = res.result.token
-      const res2: any = await api.user.find_one_user({ id: res.result.id })
-      console.log("api.user.find_one_user---res2", res2)
+      const res2: any = await api_v1.user.find_one_user({ id: res.result.id })
+      console.log("api_v1.user.find_one_user---res2", res2)
       BUS.role_menu_tree = res2.result.role_menu_tree
       BUS.user = res2.result.user
       // 跳转到首页

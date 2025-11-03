@@ -86,7 +86,7 @@ async function compute_price_shop_cart() {
   // console.log("111---compute_price_shop_cart---cart_list", JSON.parse(JSON.stringify(cart_list)))
   cart_list.map((cart) => (cart.checked ? form.checked_items.push({ card_id: cart.card_id, count: cart.count }) : 0)) //过滤出选中的购物车
   // console.log("111---compute_price_shop_cart---form", form)
-  const res: any = await api.shop_cart.compute_price_shop_cart(form)
+  const res: any = await api_v1.shop_cart.compute_price_shop_cart(form)
   // console.log("222--compute_price_shop_cart---res", res)
   if (res.code !== 200) return alert("错了")
   cart_compute_result = res.result
@@ -95,7 +95,7 @@ async function compute_price_shop_cart() {
 
 // 查询购物车
 async function find_list_shop_cart() {
-  const res: any = await api.shop_cart.find_list_shop_cart({ user_id: BUS.user.id })
+  const res: any = await api_v1.shop_cart.find_list_shop_cart({ user_id: BUS.user.id })
   console.log("find_list_shop_cart---res", res)
   if (res.code !== 200) return alert("错了")
   list_group_card = res.result.list_group_card
@@ -104,14 +104,14 @@ async function find_list_shop_cart() {
 
 // 删除购物车
 async function remove_shop_cart_ids(card_id: string) {
-  const res: any = await api.shop_cart.remove_shop_cart_ids({ ids: [card_id] })
+  const res: any = await api_v1.shop_cart.remove_shop_cart_ids({ ids: [card_id] })
   console.log("remove_shop_cart_ids---res", res)
   if (res.code !== 200) return alert("错了")
   find_list_shop_cart()
 }
 
 async function create_shop_order() {
-  const res: any = await api.shop_order.create_shop_order({ user_id: BUS.user.id, card_ids: cart_compute_result.card_ids, type_order: "model" })
+  const res: any = await api_v1.shop_order.create_shop_order({ user_id: BUS.user.id, card_ids: cart_compute_result.card_ids, type_order: "model" })
   console.log("create_shop_order---res", res)
   if (res.code === 200) {
     let order_id = res.result.order_id

@@ -55,7 +55,7 @@
 
 <script setup lang="tsx">
 import { onMounted, ref } from "vue"
-import { api } from "@/api"
+import { api_v1} from "@/api_v1"
 import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { dividerProps, ElMessage } from "element-plus"
@@ -100,7 +100,7 @@ const menu_depart_role_list = ref([
     label: "删除",
     click: async (item: any) => {
       if (!(await plugin_confirm())) return
-      let res: any = await api.depart.delete_depart_role_ids({ ids: [ElTreeRefCurrNode.value.id] })
+      let res: any = await api_v1.depart.delete_depart_role_ids({ ids: [ElTreeRefCurrNode.value.id] })
       if (res.code != 200) return ElMessage.error(res.msg) //前置判断
       ElMessage.success(res.msg)
       await find_tree_depart()
@@ -117,8 +117,8 @@ const tree_depart = ref({
 async function tree_left_click() {
   Menu1Ref.value.hide_menu()
   ElTreeRefCurrNode.value = ElTreeRef.value.getCurrentNode()
-  let res: any = await api.user.find_list_user({ depart_id: ElTreeRefCurrNode.value.id })
-  console.log("api.user.find_list_user---res", res)
+  let res: any = await api_v1.user.find_list_user({ depart_id: ElTreeRefCurrNode.value.id })
+  console.log("api_v1.user.find_list_user---res", res)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   user_list.value = res.result.user_list
 }
@@ -144,7 +144,7 @@ function tree_ritht_click(event: MouseEvent, item: any) {
 // ✅删除用户
 async function remove_ids_user(ids: string[]) {
   if (!(await plugin_confirm())) return
-  let res: any = await api.user.remove_ids_user({ ids })
+  let res: any = await api_v1.user.remove_ids_user({ ids })
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   tree_left_click()
 }
@@ -152,8 +152,8 @@ async function remove_ids_user(ids: string[]) {
 // ✅查询部门树
 BUS.func.find_tree_depart = find_tree_depart //全局BUS函数
 async function find_tree_depart() {
-  let res: any = await api.user.find_tree_depart()
-  console.log("api.user.find_tree_depart---res", res)
+  let res: any = await api_v1.user.find_tree_depart()
+  console.log("api_v1.user.find_tree_depart---res", res)
   if (res.code != 200) return ElMessage.error(res.msg) //前置判断
   tree_depart.value.data = res.result.depart_tree
   console.log("tree_depart.value.data", JSON.parse(JSON.stringify(res.result.depart_tree)))
