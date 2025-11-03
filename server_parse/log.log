@@ -23,3 +23,8 @@ INFO  |2025-11-03|18:37:09|service_parse.py              |42  |当前环境---wi
 INFO  |2025-11-03|18:37:09|service_parse.py              |45  |拼接后的path_file:,D:/BBB/sys_back_vue/filestore_oss/6mb.stl
 INFO  |2025-11-03|18:37:12|service_parse.py              |88  |截图功能--state['path_screenshot_absolute'] :,D:/BBB/sys_back_vue/filestore_oss/6mb.png
 INFO  |2025-11-03|18:37:12|service_parse.py              |93  |接口成功res---:,{'code': 200, 'msg': '成功:解析', 'result': {'size': 1, 'length': 57.08331298828125, 'width': 87.88800048828125, 'height': 99.99980163574219, 'surface_area': 29252.025390625, 'volume': 214244.765625, 'complexity': 0.4999850438216027, 'structural_strength': 66864, 'num_faces': 66864, 'points': 66864, 'min_thickness': 3.1415, 'thickness_proportion': np.float64(0.4696987825670785), 'path_screenshot_absolute': 'D:/BBB/sys_back_vue/filestore_oss/6mb.png', 'path_screenshot_relative': '/6mb.png'}, 'err': ''}
+INFO  |2025-11-03|18:40:05|config_app.py                 |76  |程序启动
+INFO  |2025-11-03|18:40:53|config_app.py                 |76  |程序启动
+INFO  |2025-11-03|18:41:19|config_app.py                 |76  |程序启动
+INFO  |2025-11-03|18:41:36|config_app.py                 |76  |程序启动
+INFO  |2025-11-03|18:41:49|config_app.py                 |76  |程序启动

@@ -1,6 +1,8 @@
 import paho.mqtt.client as mqtt
 from tool.json_str_to_obj import json_str_to_obj
 
+from service_parse import service_parse
+
 
 # 连接成功回调
 def on_connect(client, userdata, flags, rc):
@@ -16,6 +18,11 @@ def on_message(client, userdata, msg):
     print(msg_obj['from'], msg_obj['to'])
     if msg_obj['from'] == 'parse':
         print("111---222:", 333)
+        # from service_parse import service_parse
+        gpu_or_cpu = msg_obj['gpu_or_cpu']
+        path_file = msg_obj['path_file']
+        res = service_parse(gpu_or_cpu, path_file)
+        return
 
 
 client = mqtt.Client()
