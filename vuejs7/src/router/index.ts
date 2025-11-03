@@ -15,6 +15,8 @@ export const view_admin = [
   { name: "订单管理", path: "/shop/order", component: () => import("../view_admin/shop/order/order.vue") },
   { name: "商品管理", path: "/shop/product", component: () => import("../view_admin/shop/product/product.vue") },
   { name: "财务管理", path: "/shop/finance", component: () => import("../view_admin/shop/finance/finance.vue") },
+  // 测试页面
+  { name: "测试MQTT", path: "/test_mqtt", component: () => import("../view_admin/test_mqtt/test_mqtt.vue") },
 ]
 
 // ==================== 商城界面 ====================

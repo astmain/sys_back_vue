@@ -18,3 +18,10 @@ node_modules/
 # 排除  pnpm install -D unplugin-vue-components unplugin-auto-import  自动生产引入的代码
 auto-imports.d.ts
 components.d.ts
+
+
+
+
+# 排除filestore_oss
+**/filestore_oss/
+

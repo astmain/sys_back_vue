@@ -34,7 +34,7 @@ def api(
         # path_file: str = Query(description="外部文件的路径(filestore/文件名.后缀)", default="/filestore_oss/parse3d/111.stl", min_length=2, max_length=1000),
         # path_file: str = Query(description="外部文件的路径(filestore/文件名.后缀)", default="/filestore_oss/public/1/111.stl", min_length=2, max_length=1000),
         # path_file: str = Query(description="外部文件的路径(filestore/文件名.后缀)", default="/filestore_oss/parse3d/111.stl", min_length=2, max_length=1000),
-        path_file: str = Query(description="外部文件的路径(filestore/文件名.后缀)", default="/filestore_oss/parse3d/g2_土地婆2.stl", min_length=2, max_length=1000),
+        path_file: str = Query(description="外部文件的路径(filestore/文件名.后缀)", default="/filestore_oss/6mb.stl", min_length=2, max_length=1000),
 
 ):
     # 判断使用gpu还是cpu

@@ -42,10 +42,13 @@
               </el-menu-item>
             </template>
 
-            <!-- 保留原有的文件系统菜单 -->
-            <el-menu-item index="/view/admin/file_sys">
-              <span>文件系统</span>
-            </el-menu-item>
+              <!-- 保留原有的文件系统菜单 -->
+              <el-menu-item index="/view/admin/file_sys">
+                <span>文件系统</span>
+              </el-menu-item>
+              <el-menu-item index="/test_mqtt">
+                <span>测试MQTT</span>
+              </el-menu-item>
           </el-menu>
         </el-aside>
       </div>

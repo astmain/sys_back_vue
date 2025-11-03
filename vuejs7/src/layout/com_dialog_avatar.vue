@@ -110,7 +110,7 @@ async function submit() {
   util_sdk_oss_upload({
     file: previews.value.url,
     path_static: "/public/0/我的头像",
-    callback: (res: any) => {
+    callback: async (res: any) => {
       console.log(res)
       if (res.code !== 200) alert("上传头像异常")
       img_upload_url.value = res.result.url
