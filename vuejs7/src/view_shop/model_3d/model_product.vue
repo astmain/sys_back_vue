@@ -92,7 +92,7 @@
 
 <script setup lang="tsx">
 import { ref, onMounted, nextTick } from "vue"
-import { api, type info_file } from "@/api"
+import { api_v1, type info_file } from "@/api_v1"
 import { BUS } from "@/BUS"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { ElMessage } from "element-plus"

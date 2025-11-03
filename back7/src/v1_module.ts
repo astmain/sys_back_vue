@@ -46,5 +46,6 @@ export const v1_module = {
     shop_cart_Module,
     shop_order_Module,
     user_address_take_Module,
+    user_Module,
   ],
 }

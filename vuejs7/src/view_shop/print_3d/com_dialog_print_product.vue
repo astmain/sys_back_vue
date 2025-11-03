@@ -56,7 +56,7 @@
 <script setup lang="tsx">
 import { onMounted, ref, computed } from "vue"
 import { BUS } from "@/BUS"
-import { api, type info_print_card } from "@/api"
+import { api_v1, type info_print_card } from "@/api_v1"
 
 import { ElMessage } from "element-plus"
 import { ElNotification } from "element-plus"

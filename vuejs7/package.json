@@ -41,6 +41,7 @@
     "vue-drag-resize": "^1.5.4",
     "vue-draggable-plus": "^0.6.0",
     "vue-router": "^4.5.1",
+    "mqtt": "^5.14.1",
     "zod": "^4.1.12"
   },
   "devDependencies": {

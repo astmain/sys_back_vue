@@ -75,7 +75,7 @@
 <script setup lang="tsx">
 import { ref, onMounted, nextTick } from "vue"
 import { BUS } from "@/BUS"
-import { api, type info_file } from "@/api"
+import { api_v1, type info_file } from "@/api_v1"
 import { util_sdk_oss_upload } from "@/plugins/util_sdk_oss_upload"
 import { util_url_to_qr_base64 } from "@/plugins/util_url_to_qr_base64"
 import { plugin_confirm } from "@/plugins/plugin_confirm"

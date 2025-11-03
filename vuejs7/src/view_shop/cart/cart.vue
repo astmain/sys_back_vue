@@ -41,7 +41,7 @@
 
 <script setup lang="tsx">
 import { ref, onMounted, nextTick } from "vue"
-import { api, type info_file } from "@/api"
+import { api_v1, type info_file } from "@/api_v1"
 import { BUS } from "@/BUS"
 import { plugin_confirm } from "@/plugins/plugin_confirm"
 import { ElMessage } from "element-plus"

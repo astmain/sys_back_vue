@@ -33,7 +33,7 @@
 
 <script setup lang="tsx">
 import { ref, onMounted, nextTick, defineExpose } from "vue"
-import { api, type info_file } from "@/api"
+import { api_v1, type info_file } from "@/api_v1"
 import { util_url_to_qr_base64 } from "@/plugins/util_url_to_qr_base64"
 import { ElMessage } from "element-plus"
 // 参数
