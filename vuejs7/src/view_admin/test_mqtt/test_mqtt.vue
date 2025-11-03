@@ -95,12 +95,8 @@ function client_02_init() {
     if (msg_obj.to != "oss") return
     await new Promise((resolve) => setTimeout(resolve, 3000))
     client_02_result.value += JSON.stringify(JSON.parse(payload.toString())) + "\n" + "--------------------------------" + "\n"
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-
     const url = "http://127.0.0.1:60002/api_parse_nestjs?gpu_or_cpu=cpu&uid=123&path_file=/filestore_oss/6mb.stl"
-
     let msg_str = `{"from":"oss","to":"parse","data":{"url":"${url}"}}`
-
     client_01.publish("testtopic/1", msg_str, { qos: 0, retain: false }, (error: any) => {
       if (error) {
         console.error(error)
