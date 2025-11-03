@@ -25,7 +25,8 @@ function client_init() {
   const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
   console.log(`clientId:'${clientId}'`)
 
-  const connectUrl = `ws://${host}:${port}/mqtt`
+  // const connectUrl = `ws://192.168.0.250:8083/mqtt`
+  const connectUrl = `ws://103.119.2.223:8083/mqtt`
 
   // const connectUrl = `ws://192.168.0.250:8083/mqtt`
   client = mqtt.connect(connectUrl, {
@@ -56,19 +57,22 @@ function client_init() {
   client.on("offline", () => {
     console.log("客户端离线")
   })
-  client.on("message", (topic: any, payload: any) => {
-    console.log("收到消息---topic:", topic)
-    console.log("收到消息---payload:", payload.toString())
+  client.on("message", (topic: any, payload: any, arg: any) => {
+    console.log("🟩收到消息")
+    console.log("topic:", topic)
+    console.log("payload:", payload.toString())
+    console.log("arg:", arg)
   })
 }
 
+// 客户端发送消息
 function client_send() {
   let msg_str = JSON.stringify(msg.value)
   client.publish("testtopic/1", msg_str, { qos: 0, retain: false }, (error: any) => {
     if (error) {
       console.error(error)
     } else {
-      console.error("发送成功", msg_str)
+      console.error("🟦发送成功", msg_str)
     }
   })
 }

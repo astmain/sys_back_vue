@@ -34,6 +34,7 @@
     "lodash": "^4.17.21",
     "make": "^0.8.1",
     "module-alias": "^2.2.3",
+    "mqtt": "^5.14.1",
     "nest-knife4j": "^1.0.1",
     "nestjs-zod": "^5.0.1",
     "reflect-metadata": "^0.1.13",

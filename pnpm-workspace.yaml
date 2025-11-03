@@ -23,6 +23,7 @@ packages:
   - "vuejs9"
   # 服务server_oss
   - "server_oss"
+  - "server_mqtt"
 
 
   # 工具 =====================================================
