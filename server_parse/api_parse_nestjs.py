@@ -27,7 +27,7 @@ except Exception as error:
 route = APIRouter()
 
 
-@route.post("/api_parse_nestjs")
+@route.get("/api_parse_nestjs")
 def api(
         gpu_or_cpu: str = Query(description="gpu_或者_cpu", default="cpu", min_length=3, max_length=3),
         uid: str = Query(description="用户uid", default="123", min_length=1, max_length=250),
