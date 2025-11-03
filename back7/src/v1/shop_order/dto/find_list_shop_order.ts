@@ -1,0 +1,18 @@
+import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsIn, IsOptional, IsNumber, IsNotEmpty, IsString } from 'class-validator'
+
+export class find_list_shop_order {
+  @ApiProperty({ description: '用户id', example: 'user_1' })
+  @IsString({ message: '用户id-必须是字符串' })
+  @IsNotEmpty({ message: '用户id-必须不能为空' })
+  user_id: string
+
+  @ApiProperty({ description: '订单状态', example: 'order_pending_pay' })
+  @IsString({ message: '订单状态-必须是字符串' })
+  status: string
+
+
+  @ApiProperty({ description: '订单类型', example: 'model' })
+  @IsIn(['model', 'print'], { message: '订单类型-必须是model或print' })
+  type_order: string
+}

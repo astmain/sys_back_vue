@@ -1,5 +1,5 @@
 import { Injectable, Module } from '@nestjs/common'
-import { db } from '@src/App_prisma'
+import { db1 as db } from '@src/v1/db_prisma_1'
 import { Api_Controller } from '@src/plugins/Api_Controller'
 import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'

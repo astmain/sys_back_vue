@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { db } from '@src/App_prisma'
+import { db1 as db } from '@src/v1/db_prisma_1'
 
 @Injectable()
 export class rbac_service {

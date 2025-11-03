@@ -1,34 +1,116 @@
-import { Controller, Module, Get, Post, Body, Query, Req, Inject } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger'
-import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger'
-import { Api_group } from '@src/plugins/Api_group'
-import { Api_Get } from '@src/plugins/Api_Get'
+import { Body, Module, Req } from '@nestjs/common'
+import { Api_Controller } from '@src/plugins/Api_Controller'
+import { Api_Post } from '@src/plugins/Api_Post'
+import { Api_public } from '@src/App_Auth'
 
-// dto
-import { ApiProperty, PickType } from '@nestjs/swagger'
-import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, Min, ValidateNested } from 'class-validator'
-import { Type } from 'class-transformer'
+import { db1 as db } from '@src/v1/db_prisma_1'
+import _ from 'lodash'
 
-import { db1 as db } from '@src/v1/zoom_prisma/db_prisma_1'
+// ==================== util ====================
+import { util_build_tree } from '@src/plugins/util_build_tree'
 
-class find_list_user {
-  @ApiProperty({ description: '名称', example: '名称' })
-  @IsString()
-  name1: string
-}
-// http://127.0.0.1:3002/doc.html
-// http://127.0.0.1:3002/v1/user/find_list_user?name1=111
-@Api_group('v1', '用户管理')
+// ==================== dto ====================
+import { find_one_user } from './dto/find_one_user'
+import { find_list_user } from './dto/find_list_user'
+import { save_user } from './dto/save_user'
+import { remove_ids_user } from './dto/remove_ids_user'
+import { update_user_info } from './dto/update_user_info'
+
+// ==================== zod ====================
+import { z } from 'zod'
+import { createZodDto } from 'nestjs-zod'
+import { ZodValidationPipe } from 'nestjs-zod'
+import { find_list_user_schema } from './dto/find_list_user'
+import { i_find_list_user } from './dto/find_list_user'
+class find_list_user_dto extends createZodDto(find_list_user_schema) {}
+
+@Api_public()
+@Api_Controller('用户')
 export class user {
-  @Api_Get('查询用户列表')
-  async find_list_user(@Query() body: find_list_user, @Req() _req: any) {
-    await db.test1.create({
-      data: {
-        name: 'test1',
+  @Api_Post('查询-用户-详情')
+  async find_one_user(@Body() body: find_one_user) {
+    // 查询用户
+    const /*用户信息*/ user = await db.sys_user.findFirst({ where: { id: body.id } })
+
+    // 查询用户部门角色ids
+    const /*用户的角色列表*/ user_role = await db.sys_user.findFirst({ where: { id: body.id }, include: { sys_depart: true } })
+    const /*用户部角色ids*/ user_depart_role_ids = user_role?.sys_depart?.map((item) => item.id) ?? []
+
+    //查询角色对应的菜单信息
+    const /*角色的权限列表*/ role_permiss_list = await db.sys_menu.findMany({ where: { sys_depart: { some: { id: { in: user_depart_role_ids } } } } })
+    const /*角色的权限列表ids*/ role_permiss_ids = role_permiss_list.map((o) => o.id)
+    const /*角色的菜单和权限父级和自身的ids */ menu_permiss_ids = await db_find_ids_self_and_parent({ table_name: 'sys_menu', ids: role_permiss_ids })
+    const /*角色的菜单和权限列表*/ role_menu_permiss_list = await db.sys_menu.findMany({ where: { id: { in: menu_permiss_ids } } })
+    const /*角色的菜单树*/ role_menu_tree = util_build_tree(role_menu_permiss_list.filter((o) => o.type === 'menu'))
+
+    // 全部的菜单信息
+    const /*全部的菜单列表*/ all_menu_list = await db.sys_menu.findMany({ include: { children: true } })
+    const /*全部的菜单树*/ all_menu_tree = util_build_tree(all_menu_list.filter((o) => o.type === 'menu'))
+    return { code: 200, msg: '成功', result: { user, user_depart_role_ids, role_menu_tree, all_menu_tree } }
+  }
+
+  @Api_Post('查询-部门-树')
+  async find_tree_depart(@Req() req: any) {
+    let depart_tree = await db.sys_depart.findFirst({
+      where: { id: 'depart_0' },
+      include: {
+        parent: true,
+        children: {
+          include: {
+            parent: true,
+            children: { include: { parent: true, children: true } },
+          },
+        },
       },
     })
-    let list = await db.test1.findMany()
-    return { code: 200, msg: '成功:v1', result: { list } }
+
+    const all_menus = await db.sys_depart.findMany()
+    for (let index = 0; index < all_menus.length; index++) {
+      const ele = all_menus[index]
+      // console.log('ele', ele)
+      if (ele.type === 'role') {
+        const role_id = ele.id
+        let menu: any = await db.sys_depart.findUnique({ where: { id: role_id }, select: { sys_menu: true } })
+        // console.log('ele.name', ele.name)
+        // console.log('menu', JSON.stringify(menu, null, 2))
+        all_menus[index]['menu_button_ids'] = menu.sys_menu.map((o) => o.id)
+      }
+    }
+    let tree_menus = util_build_tree(all_menus)
+
+    return { code: 200, msg: '成功', result: { depart_tree: tree_menus, all_menus, tree_menus } }
+  }
+
+  @Api_Post('查询-用户-列表')
+  async find_list_user(@Body() body: find_list_user, @Req() req: any) {
+    // 通过depart_id找到所有的父子级id和parent_id
+    const depart_list_id_AND_parent_id = await db_find_ids_self_and_children({ db, table_name: 'sys_depart', id: body.depart_id })
+    // console.log(`depart_list_id_AND_parent_id---`, depart_list_id_AND_parent_id)
+    // 得到所有的部门ids
+    const depart_ids = depart_list_id_AND_parent_id.map((item) => item.id)
+    let user_list = await db.sys_user.findMany({
+      where: { sys_depart: { some: { id: { in: depart_ids } } } },
+      include: { sys_depart: { include: { parent: true } } },
+    })
+    return { code: 200, msg: '成功', result: { user_list, depart_id: body.depart_id } }
+  }
+  @Api_Post('保存-用户')
+  async save_user(@Body() body: save_user, @Req() req: any) {
+    let { user_depart_role_ids, ...data } = body
+    await db.sys_user.update({ where: { id: body.id }, data: { ...data, sys_depart: { set: user_depart_role_ids.map((id) => ({ id })) } } })
+    return { code: 200, msg: '成功', result: {} }
+  }
+
+  @Api_Post('保存-用户')
+  async update_user_info(@Body() body: update_user_info, @Req() req: any) {
+    await db.sys_user.update({ where: { id: body.id }, data: body })
+    return { code: 200, msg: '成功', result: {} }
+  }
+
+  @Api_Post('删除-用户')
+  async remove_ids_user(@Body() body: remove_ids_user, @Req() req: any) {
+    await db.sys_user.deleteMany({ where: { id: { in: body.ids } } })
+    return { code: 200, msg: '成功', result: {} }
   }
 }
 
@@ -36,4 +118,47 @@ export class user {
   controllers: [user],
   providers: [],
 })
-export class user_module {}
+export class user_Module {}
+
+// 构建菜单树的递归函数
+function build_tree(menus: any, parent_id: string | null = null) {
+  const filtered_menus = menus.filter((menu) => {
+    const menu_parent_id = menu.parent_id || null
+    return menu_parent_id === parent_id
+  })
+
+  return filtered_menus.map((menu) => ({
+    ...menu,
+    children: build_tree(menus, menu.id),
+  }))
+}
+
+// 通过id找到自身id和子级id
+async function db_find_ids_self_and_children({ db, table_name, id }: { db: any; table_name: string; id: any }) {
+  const result = await db.$queryRawUnsafe(`
+        WITH RECURSIVE tb_temp AS 
+        ( SELECT id, parent_id FROM ${table_name}  WHERE id = '${id}'
+
+          UNION ALL
+
+          SELECT t1.id, t1.parent_id  FROM ${table_name} t1 INNER JOIN tb_temp t2 ON t1.parent_id = t2.id
+        )
+          SELECT   DISTINCT id  FROM tb_temp;
+    `)
+  return result
+}
+
+// 通过id找到自身id和父亲级id
+async function db_find_ids_self_and_parent({ table_name, ids }: { table_name: string; ids: string[] }) {
+  const result: any = await db.$queryRawUnsafe(`
+      WITH RECURSIVE tb_temp AS 
+      ( SELECT id,parent_id, 0 as level FROM ${table_name} WHERE id IN (${ids.map((id) => `'${id}'`).join(',')})
+
+        UNION ALL
+
+        SELECT m.id,m.parent_id,mh.level + 1  AS level FROM ${table_name} m INNER JOIN tb_temp mh ON m.id = mh.parent_id WHERE mh.level < 10
+      )
+        SELECT DISTINCT id FROM tb_temp ORDER BY id
+  `)
+  return result.map((o) => o.id)
+}

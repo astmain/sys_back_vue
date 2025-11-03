@@ -4,7 +4,7 @@ import { Api_Post } from '@src/plugins/Api_Post'
 import { Api_public } from '@src/App_Auth'
 
 
-import { db } from '@src/App_Prisma'
+import { db1 as db } from '@src/v1/db_prisma_1'
 import _ from 'lodash'
 
 

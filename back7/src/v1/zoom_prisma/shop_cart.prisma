@@ -1,5 +1,5 @@
 // 模型商品表
-model v2_cart {
+model shop_cart {
     card_id    String @id @default(cuid()) //购车id
     user_id    String @default("") // 用户id
     author_id  String @default("") // 作者id
