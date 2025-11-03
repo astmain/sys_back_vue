@@ -57,8 +57,8 @@
 
                     <div class="flex gap-1">
                       <span class="text-12px">单价:</span>
-                      <!-- <span class="text-12px">{{ cart?.product_history?.arg_product_model[cart.price_type] }}元</span> -->
-                      <span class="text-12px">{{ cart?.product_history }}元</span>
+                      <span class="text-12px">{{ cart?.product_history?.arg_product_model[cart.price_type] }}元</span>
+                      <!-- <span class="text-12px">{{ cart?.product_history }}元</span> -->
                     </div>
                   </nav>
                 </div>
@@ -103,8 +103,8 @@ async function handle_active(item: any) {
 
 // 获取订单列表
 async function find_list_shop_order() {
-  // const res: any = await api_v1.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "model" })
-  const res: any = await api_v1.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "print" })
+  const res: any = await api_v1.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "model" })
+  // const res: any = await api_v1.shop_order.find_list_shop_order({ user_id: BUS.user.id, status: active.value, type_order: "print" })
   console.log("find_list_order---res", res)
   if (res.code === 200) {
     shop_order_list.value = res.result.list_group
