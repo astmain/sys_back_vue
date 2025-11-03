@@ -9,6 +9,9 @@ from util_parse_igs import util_parse_igs
 from util_parse_obj import util_parse_obj
 from util_parse_stp import util_parse_stp
 
+
+
+# from service_parse import service_parse
 cupy = None
 import numpy
 

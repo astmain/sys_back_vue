@@ -44,7 +44,7 @@ let client_02_id = `c2_${Math.random().toString(16).slice(3)}`
 let client_02_msg = ref<string>("")
 let client_02_result = ref<string>("")
 
-// 客户端发送消息
+// 客户端发送消息 let list1=[1,2,3,4]
 function client_01_send() {
   let msg_str = client_01_msg.value
   client_01.publish("testtopic/1", msg_str, { qos: 0, retain: false }, (error: any) => {
@@ -55,6 +55,9 @@ function client_01_send() {
     }
   })
 }
+
+
+
 
 function client_01_init() {
   client_01 = mqtt.connect(client_01_url, { clientId: client_01_id, clean: true, connectTimeout: 4000, username: "emqx", password: "public", reconnectPeriod: 1000 })
@@ -76,6 +79,11 @@ function client_01_init() {
     client_01_result.value += JSON.stringify(JSON.parse(payload.toString())) + "\n" + "--------------------------------" + "\n"
   })
 }
+
+
+
+
+
 function client_02_init() {
   client_02 = mqtt.connect(client_02_url, { clientId: client_02_id, clean: true, connectTimeout: 4000, username: "emqx", password: "public", reconnectPeriod: 1000 })
   client_02.on("connect", () => {
