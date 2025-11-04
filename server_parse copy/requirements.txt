@@ -1,0 +1,23 @@
+fastapi
+uvicorn
+tortoise-orm
+pydantic
+python-dotenv
+loguru
+cerberus
+
+# postgre
+asyncpg
+
+# paser
+numpy
+numpy-stl
+trimesh
+numba
+scipy
+open3d
+
+# cupy-cuda118
+
+# conda install -c conda-forge cupy cudatoolkit=11.8
+# conda install -c stepcode

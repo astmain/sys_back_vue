@@ -2,7 +2,7 @@
 import random
 import paho.mqtt.client as mqtt
 from typing import Callable, Optional, Dict, Any
-from config_logger import print
+# from config_logger import print
 from tool.json_str_to_obj import json_str_to_obj
 
 
@@ -31,10 +31,7 @@ class ServiceMqtt:
 
         # 创建MQTT客户端
 
-        self.client = mqtt.Client(
-            client_id=self.client_id,
-            callback_api_version=mqtt.CallbackAPIVersion.VERSION1
-        )
+        self.client = mqtt.Client( client_id=self.client_id,     callback_api_version=mqtt.CallbackAPIVersion.VERSION1)
 
         # 设置回调函数
         self.client.on_connect = self._on_connect
@@ -49,6 +46,7 @@ class ServiceMqtt:
 
         # 订阅的主题列表
         self.subscribed_topics: Dict[str, int] = {}
+        print("self.成功:MQTT连接成功 :",     self.broker ,  self.port)
 
     def _on_connect(self, client, userdata, flags, rc):
         """连接成功回调"""

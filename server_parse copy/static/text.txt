@@ -1,0 +1,2 @@
+测试静态资源文件
+http://127.0.0.1:9001/filestore/text.txt

@@ -6,7 +6,6 @@ from config_app import app
 # 路由引入=====================================
 from api_test import route as api_test
 from api_test import route as api_test
-from mqtt_py import client as mqtt_client
 from api_parse_nestjs import route as api_parse_nestjs
 from api_sys_gpu_state import route as api_sys_gpu_state
 
@@ -22,16 +21,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.environ["PROJECT_ROOT"] = PROJECT_ROOT
 print("项目根路径:", PROJECT_ROOT)
 
-# from mqtt_py import init_mqtt
-# init_mqtt()
 
-from service_mqtt import ServiceMqtt
-
-mqtt_service = ServiceMqtt(
-    broker='103.119.2.223',
-    port=1883,
-    keepalive=60
-)
 
 if __name__ == '__main__':
     print("""

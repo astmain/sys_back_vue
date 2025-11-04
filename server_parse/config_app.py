@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import Response, StreamingResponse, RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
+
 # 自定义
 from config_logger import print
 
@@ -48,14 +49,22 @@ http://127.0.0.1:60002/project/log.log
 1- structural_strength = fields.Float('结构强度')
 
 
-"""
+""",
 )
 
 # 跨域设置==================================================================
-app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=["*"], allow_headers=["*"], allow_origins=["*", "http://localhost:3000"], )
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_origins=["*", "http://localhost:3000"],
+)
 
 # 静态资源=================================================================
-app.mount("/static", StaticFiles(directory="static"), name="static")  # 项目自身静态文件夹
+app.mount(
+    "/static", StaticFiles(directory="static"), name="static"
+)  # 项目自身静态文件夹
 app.mount("/project", StaticFiles(directory="."), name="project")  # 全项目文档
 
 
@@ -73,23 +82,12 @@ def read_root():
 
 @app.on_event("startup")
 async def on_startup():
-    print("程序启动")
-    # 初始化MQTT服务
-
+    print("程序启动")  # 初始化MQTT服务
 
 
 @app.on_event("shutdown")
 async def on_shutdown():
-    print("程序关闭")
-    # 关闭MQTT服务
-    try:
-        from mqtt_py import mqtt_service
-        if mqtt_service:
-            mqtt_service.disconnect()
-            mqtt_service.loop_stop()
-    except Exception as e:
-        print(f"警告:MQTT服务关闭失败 - {str(e)}")
-    # print("🛑程序关闭")
+    print("程序关闭")  # 关闭MQTT服务
 
 
 # 中间件拦截响应参考文章  https://www.cnblogs.com/xunhanliu/p/15936911.html
@@ -126,5 +124,5 @@ async def on_shutdown():
 #         )
 #
 
-if __name__ == '__main__':
-    print('111---:', 111)
+if __name__ == "__main__":
+    print("111---:", 111)

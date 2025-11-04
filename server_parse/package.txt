@@ -12,7 +12,7 @@ cerberus
 
 pyopencl
 
-
+paho-mqtt               #mq通信 https://docs.emqx.com/zh/emqx/v5.8/tutorial/mqtt-programming.html
 
 # postgre
 asyncpg

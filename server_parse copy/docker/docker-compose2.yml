@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  server_parse:
+    container_name: server_parse
+    image: image_api_3d_parse_9001
+    restart: unless-stopped  # 替代 --rm 的持续运行方案，如需自动删除可使用 run 命令
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all  # 使用所有可用GPU
+              capabilities: [gpu]
+    ports:
+      - "60002:60002"
+    volumes:
+      - ./:/app
+      - ../filestore_oss/parse3d:/app/filestore_oss/parse3d
+    command: >
+      sh -c "
+      pip install uvicorn==0.20.0 &&
+      cd app && python main.py
+      
+      "

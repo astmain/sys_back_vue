@@ -1,0 +1,81 @@
+services:
+  api_3d_parse_9001:
+    image: continuumio/miniconda3:25.1.1-2
+    container_name: api_3d_parse_9001
+    ports:
+      - "9001:9001" # 映射容器端口到主机
+    #restart: always # 容器重启策略，服务宕机时自动重启
+    stdin_open: true
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+    volumes:
+      - .:/api_3d_parse_9001                                   #映射项目路径
+      - ../filestore:/api_3d_parse_9001/filestore #映射管理文件夹-别的项目共享文件夹
+    # pip install -r requirements.txt &&
+    # pip install -r package.txt &&
+    command: >
+      sh -c "
+      echo '安装vtk需要的环境' &&
+      apt-get update && 
+      apt-get install -y --no-install-recommends  build-essential  && 
+      apt-get install -y --no-install-recommends  cmake  && 
+      apt-get install -y --no-install-recommends  libgl1-mesa-glx  && 
+      apt-get install -y --no-install-recommends  libgl1-mesa-dev  && 
+      apt-get install -y --no-install-recommends  libxrender1  && 
+      apt-get install -y --no-install-recommends  libxext6  && 
+      apt-get install -y --no-install-recommends  libsm6  && 
+      apt-get install -y --no-install-recommends  libice6  &&
+      cd /api_3d_parse_9001 &&
+      echo '安装python基础包package.txt' &&
+      pip install -r package.txt &&
+      echo '安装pythonocc' &&
+      conda install -c conda-forge pythonocc-core=7.8.1.1 -y &&
+      echo '安装cupy' &&
+      conda install -c conda-forge cupy cudatoolkit=11.8  -y  &&
+      echo '安装完成' &&
+      python main.py
+      "
+
+
+
+#  build-essential   cmake libgl1-mesa-glx  libgl1-mesa-dev  libxrender1    libxext6  libsm6   libice6
+#  docker-compose up -d
+#  docker-compose logs -f
+#  docker-compose restart 重启容器
+
+
+#  docker-compose logs api_3d_parse_9001
+
+#  docker rm -f   api_3d_parse_9001
+#  docker ps -a
+#  docker exec -it api_3d_parse_9001 /bin/bash
+
+
+
+#    http://127.0.0.1:9001/docs
+
+
+
+
+
+#打包成镜像
+#  docker commit api_3d_parse_9001    my_api_parse_run:latest
+
+
+
+#  docker run -d  -it -name  aaa     my_api_parse_run:latest
+#  docker logs -f --tail 100 my_api_parse
+
+
+
+
+
+
+

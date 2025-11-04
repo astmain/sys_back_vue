@@ -1,0 +1,67 @@
+FROM continuumio/miniconda3:25.1.1-2
+
+# 安装 VTK 所需的依赖
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    libgl1-mesa-glx \
+    libgl1-mesa-dev \
+    libxrender1 \
+    libxext6 \
+    libsm6 \
+    libice6 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# 设置工作目录
+WORKDIR /api_3d_parse_9001
+
+# 将当前目录复制到容器中（只适用于构建时，运行时仍建议用 -v 挂载）
+COPY . /api_3d_parse_9001
+
+# 安装 Python 包
+RUN pip install --no-cache-dir -r package.txt && \
+    conda install -y -c conda-forge pythonocc-core=7.8.1.1 && \
+    conda install -y -c conda-forge cupy cudatoolkit=11.8
+
+# 设置默认执行命令
+CMD ["python", "main.py"]
+
+
+
+
+
+#构建镜像
+# docker build -t image_api_3d_parse_9001 .
+
+#运行linux
+# docker run -it --rm --gpus all -p 9001:9001 -v $(pwd):/api_3d_parse_9001 -v $(pwd)/../filestore:/api_3d_parse_9001/filestore --name api_3d_parse_9001   image_api_3d_parse_9001
+#运行windows
+#输出运行
+# docker run -it --rm --gpus all -p 9001:9001 -v ${PWD}:/api_3d_parse_9001 -v ${PWD}\..\filestore:/api_3d_parse_9001/filestore --name api_3d_parse_9001   image_api_3d_parse_9001
+
+#后台运行
+# docker run  -d --rm --gpus all -p 9001:9001 -v ${PWD}:/api_3d_parse_9001 -v ${PWD}\..\filestore:/api_3d_parse_9001/filestore --name api_3d_parse_9001   image_api_3d_parse_9001
+
+
+#进入容器
+# docker   exec -it       api_3d_parse_9001  bash
+
+#查看容器
+#  docker images
+#删除镜像
+#  docker rm  -f  api_3d_parse_9001
+#  docker rmi     image_api_3d_parse_9001:latest
+
+
+
+#制作镜像压缩包
+#  docker save -o    image_api_3d_parse_9001.tar    image_api_3d_parse_9001:latest
+#加载镜像压缩包
+#  docker load -i    image_api_3d_parse_9001.tar
+
+
+
+
+
