@@ -36,3 +36,55 @@ INFO  |2025-11-04|11:27:57|service_parse.py              |45  |拼接后的path_
 INFO  |2025-11-04|11:27:59|service_parse.py              |88  |截图功能--state['path_screenshot_absolute'] :,D:/BBB/sys_back_vue/filestore_oss/6mb.png
 INFO  |2025-11-04|11:27:59|service_parse.py              |93  |接口成功res---:,{'code': 200, 'msg': '成功:解析', 'result': {'size': 1, 'length': 57.08331298828125, 'width': 87.88800048828125, 'height': 99.99980163574219, 'surface_area': 29252.025390625, 'volume': 214244.765625, 'complexity': 0.4999850438216027, 'structural_strength': 66864, 'num_faces': 66864, 'points': 66864, 'min_thickness': 3.1415, 'thickness_proportion': np.float64(0.4696987825670785), 'path_screenshot_absolute': 'D:/BBB/sys_back_vue/filestore_oss/6mb.png', 'path_screenshot_relative': '/6mb.png'}, 'err': ''}
 INFO  |2025-11-04|11:30:48|config_app.py                 |90  |程序关闭
+INFO  |2025-11-04|11:47:47|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|11:50:31|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|11:50:49|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|11:52:00|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|12:09:07|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|12:09:35|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:11:39|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:11:47|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:13:39|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:14:05|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:17:36|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:17:49|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:20:25|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:21:07|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:21:21|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:21:32|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:21:52|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:24:10|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:24:13|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:24:17|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:25:07|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:25:12|config_app.py                 |85  |程序启动
+INFO  |2025-11-04|14:27:32|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:27:48|config_app.py                 |98  |程序关闭
+INFO  |2025-11-04|14:44:08|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:44:46|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:44:56|config_app.py                 |98  |程序关闭
+INFO  |2025-11-04|14:45:14|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:45:47|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:45:47|config_app.py                 |95  |程序关闭
+INFO  |2025-11-04|14:46:41|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:47:08|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:47:21|config_app.py                 |95  |程序关闭
+INFO  |2025-11-04|14:47:27|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:47:58|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:48:23|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:48:33|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:54:36|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|14:56:32|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:10:07|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:12:13|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:12:17|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:12:56|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:13:10|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:13:31|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:13:38|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:13:47|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:14:12|config_app.py                 |92  |111---data:,{'from': 'client_react', 'to': 'oss'}
+INFO  |2025-11-04|15:18:53|config_app.py                 |92  |111---data:,{'from': 'client_react', 'to': 'oss'}
+INFO  |2025-11-04|15:19:43|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:19:46|config_app.py                 |92  |111---222:,333
+INFO  |2025-11-04|15:20:19|config_app.py                 |88  |程序启动

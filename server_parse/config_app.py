@@ -80,9 +80,19 @@ def read_root():
     return RedirectResponse(url="/docs", status_code=302)
 
 
+from service_mqtt import ServiceMqtt
+
+
 @app.on_event("startup")
 async def on_startup():
     print("程序启动")  # 初始化MQTT服务
+    from service_mqtt import ServiceMqtt
+
+    def on_message(client, userdata, data):
+        print("111---222:" ,  333   )
+        # print("111---data:", data)
+
+    service_mqtt = ServiceMqtt(on_message)
 
 
 @app.on_event("shutdown")
