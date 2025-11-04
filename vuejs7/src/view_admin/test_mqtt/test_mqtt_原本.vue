@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div id="test_mqtt " class="flex gap-4">
     <!--  客户端 -->
     <nav class="uno_card1 w-400px p-4">
@@ -13,6 +13,9 @@
     <!--  oss端 -->
     <nav class="uno_card1 w-400px p-4">
       <h1>client_02(oss端)</h1>
+
+      <el-button type="primary" @click="client_02_send">发送</el-button>
+      <el-input v-model="client_02_msg" type="textarea" placeholder="请输入内容" :rows="10" />
       <h1>{{ client_02_id }}</h1>
       <h1>{{ client_02_url }}</h1>
       <el-input v-model="client_02_result" type="textarea" placeholder="请输入内容" :rows="10" />
@@ -34,7 +37,7 @@ const topic = "testtopic/1"
 let client_01: any = null
 let client_01_url = `ws://103.119.2.223:8083/mqtt`
 let client_01_id = `c1_${Math.random().toString(16).slice(3)}`
-let client_01_msg = ref<string>('{"from":"client_react","to":"oss"}')
+let client_01_msg = ref<string>('{"from":"web_react","to":"server_oss"}')
 let client_01_result = ref<string>("")
 // client_02(oss端)
 
@@ -51,7 +54,7 @@ function client_01_send() {
     if (error) {
       console.error(error)
     } else {
-      console.error("🟦发送成功", msg_str)
+      console.info("🟩发送成功", msg_str)
     }
   })
 }
@@ -72,7 +75,7 @@ function client_01_init() {
   })
   client_01.on("message", (topic: any, payload: any, arg: any) => {
     let msg_obj = JSON.parse(payload.toString())
-    if (msg_obj.to != "client_react") return
+    if (msg_obj.to != "web_react") return
     client_01_result.value += JSON.stringify(JSON.parse(payload.toString())) + "\n" + "--------------------------------" + "\n"
   })
 }
@@ -93,27 +96,39 @@ function client_02_init() {
   })
   client_02.on("message", async (topic: any, payload: any, arg: any) => {
     let msg_obj = JSON.parse(payload.toString())
-    if (msg_obj.to != "oss") return
+    if (msg_obj.to != "server_oss") return
     await new Promise((resolve) => setTimeout(resolve, 3000))
     client_02_result.value += JSON.stringify(JSON.parse(payload.toString())) + "\n" + "--------------------------------" + "\n"
-    const url = "http://127.0.0.1:60002/api_parse_nestjs?gpu_or_cpu=cpu&uid=123&path_file=/filestore_oss/6mb.stl"
-    let msg_str = `{"from":"oss","to":"parse","data":{"url":"${url}"}}`
+    // const url = "http://127.0.0.1:60002/api_parse_nestjs?gpu_or_cpu=cpu&uid=123&path_file=/filestore_oss/6mb.stl"
+    let msg_str = `{"from":"server_oss","to":"server_parse","data":{"gpu_or_cpu":"cpu","path_file":"/filestore_oss/6mb.stl"}}`
+    client_02_msg.value += msg_str + "\n" + "--------------------------------" + "\n"
+    // client_02_send()
+    console.info("🟨发送成功", msg_str)
     client_01.publish("testtopic/1", msg_str, { qos: 0, retain: false }, (error: any) => {
       if (error) {
         console.error(error)
       } else {
-        console.error("🟦发送成功", msg_str)
+        console.info("🟨发送成功", msg_str)
       }
     })
+  })
+}
 
-    await axios.get(url)
+function client_02_send() {
+  let msg_str = client_02_msg.value
+  client_02.publish("testtopic/1", msg_str, { qos: 0, retain: false }, (error: any) => {
+    if (error) {
+      console.error(error)
+    } else {
+      console.info("🟩发送成功", msg_str)
+    }
   })
 }
 
 onMounted(async () => {
   client_01_init()
-  //client_02_init()
+  client_02_init()
 })
 </script>
 
-<style scoped></style> -->
+<style scoped></style>

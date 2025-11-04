@@ -12,21 +12,14 @@ from api_sys_gpu_state import route as api_sys_gpu_state
 # 路由注册=====================================
 # app.include_router(api_test, tags=["测试", ])
 # app.include_router(api_parse, tags=["解析3d模型", ])
-app.include_router(
-    api_parse_nestjs,
-    tags=[
-        "解析3d模型nestjs",
-    ],
-)
-# app.include_router(api_sys_gpu_state, tags=["查看电脑运行状态", ])
+app.include_router(api_parse_nestjs, tags=["解析3d模型nestjs", ], )
+app.include_router(api_sys_gpu_state, tags=["查看电脑运行状态", ])
 
 
 # 项目根路径设置全局变量,让其他代码使用使用
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.environ["PROJECT_ROOT"] = PROJECT_ROOT
 print("项目根路径:", PROJECT_ROOT)
-
-
 
 if __name__ == "__main__":
     print(
