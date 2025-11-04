@@ -11,9 +11,9 @@ from paho.mqtt import client as mqtt_client
 class ServiceMqtt:
     """MQTT客户端封装类"""
 
-    def __init__(self, on_message):
+    def __init__(self, callback_message):
         self.client = None
-        self.on_message = on_message
+        self.callback_message = callback_message
         self.connect()
 
     def connect(self):
@@ -33,14 +33,19 @@ class ServiceMqtt:
                 print("失败:连接", rc)
 
         # 消息接收回调
-        def __on_message(client, userdata, msg):
+        def on_message(client, userdata, msg):
             # print("成功:收到消息", msg.topic + " ", json_str_to_obj(msg.payload.decode()))
             data = json_str_to_obj(msg.payload.decode())
-            # print(__on_message, data['from'], data['to'])
-            self.on_message(client, userdata, data)
+            # print(on_message, data['from'], data['to'])
+            # 只接收to等于server_parse的消息
+            if data['to'] == "server_parse":
+                self.callback_message(client, userdata, data)
+            else:
+                print("其他消息data['to']=", data['to'])
+                return
 
         client.on_connect = on_connect
-        client.on_message = __on_message
+        client.on_message = on_message
         client = client
         client.loop_start()
         # client.loop_forever()

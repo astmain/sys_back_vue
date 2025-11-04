@@ -11,7 +11,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
 # 自定义
-from config_logger import print
+# from config_logger import print
 
 app = FastAPI(
     title="api功能-3d文件解析支持[stl,stp,obj,igs],截图功能1",
@@ -87,12 +87,15 @@ from service_mqtt import ServiceMqtt
 async def on_startup():
     print("程序启动")  # 初始化MQTT服务
     from service_mqtt import ServiceMqtt
+    from service_parse import service_parse
+    def callback_message(client, userdata, data):
+        print("111---222:", data)
 
-    def on_message(client, userdata, data):
-        print("111---222:" ,  333   )
-        # print("111---data:", data)
+        gpu_or_cpu = data.url
+        path_file = data.path_file
+        res = service_parse(gpu_or_cpu, path_file)
 
-    service_mqtt = ServiceMqtt(on_message)
+    ServiceMqtt(callback_message)
 
 
 @app.on_event("shutdown")

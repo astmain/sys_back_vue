@@ -88,3 +88,8 @@ INFO  |2025-11-04|15:18:53|config_app.py                 |92  |111---data:,{'fro
 INFO  |2025-11-04|15:19:43|config_app.py                 |88  |程序启动
 INFO  |2025-11-04|15:19:46|config_app.py                 |92  |111---222:,333
 INFO  |2025-11-04|15:20:19|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:21:41|config_app.py                 |92  |111---222:,333
+INFO  |2025-11-04|15:21:44|config_app.py                 |92  |111---222:,333
+INFO  |2025-11-04|15:21:46|config_app.py                 |92  |111---222:,333
+INFO  |2025-11-04|15:22:01|config_app.py                 |88  |程序启动
+INFO  |2025-11-04|15:22:03|config_app.py                 |92  |111---222:,{'from': 'client_react', 'to': 'oss'}
