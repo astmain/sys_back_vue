@@ -74,12 +74,21 @@ def read_root():
 @app.on_event("startup")
 async def on_startup():
     print("程序启动")
-    # print("🚀程序启动")
+    # 初始化MQTT服务
+
 
 
 @app.on_event("shutdown")
 async def on_shutdown():
     print("程序关闭")
+    # 关闭MQTT服务
+    try:
+        from mqtt_py import mqtt_service
+        if mqtt_service:
+            mqtt_service.disconnect()
+            mqtt_service.loop_stop()
+    except Exception as e:
+        print(f"警告:MQTT服务关闭失败 - {str(e)}")
     # print("🛑程序关闭")
 
 

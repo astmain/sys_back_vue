@@ -22,6 +22,16 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.environ["PROJECT_ROOT"] = PROJECT_ROOT
 print("项目根路径:", PROJECT_ROOT)
 
+# from mqtt_py import init_mqtt
+# init_mqtt()
+
+from service_mqtt import ServiceMqtt
+
+mqtt_service = ServiceMqtt(
+    broker='103.119.2.223',
+    port=1883,
+    keepalive=60
+)
 
 if __name__ == '__main__':
     print("""

@@ -39,3 +39,44 @@ INFO  |2025-11-04|08:39:06|service_parse.py              |88  |截图功能--sta
 INFO  |2025-11-04|08:39:06|service_parse.py              |93  |接口成功res---:,{'code': 200, 'msg': '成功:解析', 'result': {'size': 1, 'length': 57.08331298828125, 'width': 87.88800048828125, 'height': 99.99980163574219, 'surface_area': 29252.025390625, 'volume': 214244.765625, 'complexity': 0.4999850438216027, 'structural_strength': 66864, 'num_faces': 66864, 'points': 66864, 'min_thickness': 3.1415, 'thickness_proportion': np.float64(0.4696987825670785), 'path_screenshot_absolute': 'D:/BBB/sys_back_vue/filestore_oss/6mb.png', 'path_screenshot_relative': '/6mb.png'}, 'err': ''}
 INFO  |2025-11-04|08:40:56|config_app.py                 |76  |程序启动
 INFO  |2025-11-04|08:41:17|config_app.py                 |76  |程序启动
+INFO  |2025-11-04|09:14:57|service_mqtt.py               |123 |正在连接MQTT服务器 - 103.119.2.223:1883
+INFO  |2025-11-04|09:14:57|service_mqtt.py               |152 |成功:订阅MQTT主题 - topic:testtopic/1, qos:0
+INFO  |2025-11-04|09:14:57|service_mqtt.py               |222 |MQTT客户端已启动网络循环（非阻塞）
+INFO  |2025-11-04|09:14:57|mqtt_py.py                    |70  |MQTT服务已启动
+INFO  |2025-11-04|09:14:57|service_mqtt.py               |71  |成功:MQTT连接成功 - broker:103.119.2.223:1883
+INFO  |2025-11-04|09:14:59|service_mqtt.py               |123 |正在连接MQTT服务器 - 103.119.2.223:1883
+INFO  |2025-11-04|09:14:59|service_mqtt.py               |152 |成功:订阅MQTT主题 - topic:testtopic/1, qos:0
+INFO  |2025-11-04|09:14:59|service_mqtt.py               |222 |MQTT客户端已启动网络循环（非阻塞）
+INFO  |2025-11-04|09:14:59|mqtt_py.py                    |70  |MQTT服务已启动
+INFO  |2025-11-04|09:14:59|mqtt_py.py                    |52  |警告:MQTT服务已初始化
+INFO  |2025-11-04|09:14:59|config_app.py                 |76  |程序启动
+INFO  |2025-11-04|09:14:59|service_mqtt.py               |71  |成功:MQTT连接成功 - broker:103.119.2.223:1883
+INFO  |2025-11-04|09:15:15|service_mqtt.py               |123 |正在连接MQTT服务器 - 103.119.2.223:1883
+INFO  |2025-11-04|09:15:15|service_mqtt.py               |152 |成功:订阅MQTT主题 - topic:testtopic/1, qos:0
+INFO  |2025-11-04|09:15:15|service_mqtt.py               |222 |MQTT客户端已启动网络循环（非阻塞）
+INFO  |2025-11-04|09:15:15|mqtt_py.py                    |70  |MQTT服务已启动
+INFO  |2025-11-04|09:15:15|mqtt_py.py                    |52  |警告:MQTT服务已初始化
+INFO  |2025-11-04|09:15:15|config_app.py                 |76  |程序启动
+INFO  |2025-11-04|09:15:15|service_mqtt.py               |71  |成功:MQTT连接成功 - broker:103.119.2.223:1883
+INFO  |2025-11-04|09:16:16|service_mqtt.py               |112 |正在连接MQTT服务器 - 103.119.2.223:1883
+INFO  |2025-11-04|09:16:16|service_mqtt.py               |141 |成功:订阅MQTT主题 - topic:testtopic/1, qos:0
+INFO  |2025-11-04|09:16:16|service_mqtt.py               |211 |MQTT客户端已启动网络循环（非阻塞）
+INFO  |2025-11-04|09:16:16|mqtt_py.py                    |70  |MQTT服务已启动
+INFO  |2025-11-04|09:16:16|mqtt_py.py                    |52  |警告:MQTT服务已初始化
+INFO  |2025-11-04|09:16:16|config_app.py                 |76  |程序启动
+INFO  |2025-11-04|09:16:16|service_mqtt.py               |60  |成功:MQTT连接成功 - broker:103.119.2.223:1883
+INFO  |2025-11-04|09:17:12|service_mqtt.py               |110 |正在连接MQTT服务器 - 103.119.2.223:1883
+INFO  |2025-11-04|09:17:12|service_mqtt.py               |139 |成功:订阅MQTT主题 - topic:testtopic/1, qos:0
+INFO  |2025-11-04|09:17:12|service_mqtt.py               |209 |MQTT客户端已启动网络循环（非阻塞）
+INFO  |2025-11-04|09:17:12|mqtt_py.py                    |70  |MQTT服务已启动
+INFO  |2025-11-04|09:17:12|mqtt_py.py                    |52  |警告:MQTT服务已初始化
+INFO  |2025-11-04|09:17:12|config_app.py                 |76  |程序启动
+INFO  |2025-11-04|09:17:12|service_mqtt.py               |58  |成功:MQTT连接成功 - broker:103.119.2.223:1883
+INFO  |2025-11-04|09:19:12|service_mqtt.py               |109 |正在连接MQTT服务器 - 103.119.2.223:1883
+INFO  |2025-11-04|09:19:12|service_mqtt.py               |138 |成功:订阅MQTT主题 - topic:testtopic/1, qos:0
+INFO  |2025-11-04|09:19:12|service_mqtt.py               |208 |MQTT客户端已启动网络循环（非阻塞）
+INFO  |2025-11-04|09:19:12|mqtt_py.py                    |70  |MQTT服务已启动
+INFO  |2025-11-04|09:19:12|mqtt_py.py                    |52  |警告:MQTT服务已初始化
+INFO  |2025-11-04|09:19:12|config_app.py                 |76  |程序启动
+INFO  |2025-11-04|09:19:12|service_mqtt.py               |57  |成功:MQTT连接成功 - broker:103.119.2.223:1883
+INFO  |2025-11-04|09:24:17|config_app.py                 |76  |程序启动
