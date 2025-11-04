@@ -88,14 +88,16 @@ async def on_startup():
     print("程序启动")  # 初始化MQTT服务
     from service_mqtt import ServiceMqtt
     from service_parse import service_parse
-    def callback_message(client, userdata, data):
-        print("111---222:", data)
-
-        gpu_or_cpu = data.url
-        path_file = data.path_file
+    def message_callback(clazz, userdata, result):
+        print("111---result:", result)
+        gpu_or_cpu = result['data']['gpu_or_cpu']
+        path_file = result['data']['path_file']
         res = service_parse(gpu_or_cpu, path_file)
+        print("111---res:", res)
+        clazz.send_message({"from": "server_parse", "to": "web_react", "data": res})
+        print("222---我发送:", 333)
 
-    ServiceMqtt(callback_message)
+    ServiceMqtt(message_callback)
 
 
 @app.on_event("shutdown")
