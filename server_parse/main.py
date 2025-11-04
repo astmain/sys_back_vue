@@ -5,7 +5,8 @@ from config_app import app
 
 # 路由引入=====================================
 from api_test import route as api_test
-from api_parse import route as api_parse
+from api_test import route as api_test
+from mqtt_py import client as mqtt_client
 from api_parse_nestjs import route as api_parse_nestjs
 from api_sys_gpu_state import route as api_sys_gpu_state
 
@@ -19,8 +20,7 @@ app.include_router(api_parse_nestjs, tags=["解析3d模型nestjs", ])
 # 项目根路径设置全局变量,让其他代码使用使用
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.environ["PROJECT_ROOT"] = PROJECT_ROOT
-
-
+print("项目根路径:", PROJECT_ROOT)
 
 
 if __name__ == '__main__':
