@@ -7,6 +7,8 @@ export const IS_PUBLIC_KEY = 'Api_public'
 
 process.env.VITE_jwt_secret = 'xzz2021'
 process.env.VITE_jwt_time_exp = '1000d'
+// js循环
+        
 
 /**
  * @description 跳过全局身份验证
