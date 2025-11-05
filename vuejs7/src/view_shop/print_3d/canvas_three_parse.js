@@ -2,14 +2,14 @@ import * as THREE from "three"
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 export async function canvas_three_parse({ canvas, file }) {
-  console.log("canvas.clientWidth", canvas.clientWidth)
-  console.log("canvas.clientHeight", canvas.clientHeight)
+  // console.log("canvas.clientWidth", canvas.clientWidth)
+  // console.log("canvas.clientHeight", canvas.clientHeight)
 
   // 渲染器
   let renderer = (window.renderer = new THREE.WebGLRenderer({ canvas, antialias: true })) //antialias是否执行抗锯齿。默认为false
   renderer.setSize(canvas.clientWidth, canvas.clientHeight)
   renderer.setClearColor(0xeeeeee)
-  console.log("渲染器-renderer", renderer)
+  // console.log("渲染器-renderer", renderer)
 
   // 场景
   let scene = new THREE.Scene()

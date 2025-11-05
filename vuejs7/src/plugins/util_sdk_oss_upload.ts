@@ -64,7 +64,7 @@ export const axios_oss = axios_instance
 let chunk_list_uploaded = [] as any[] //已经上传的分片数组
 
 // ✅上传文件                                                          callback 回调函数自己写
-export async function util_sdk_oss_upload({ file, path_static, oss_type = "oss_parse", callback = async (res: any) => {} }: { file: any; path_static: string; oss_type?: "oss" | "oss_parse" | "oss_parse_back"; callback?: (res: any) => Promise<void> }) {
+export async function util_sdk_oss_upload({ file, path_static, oss_type = "oss_parse", callback = async (res: any) => { } }: { file: any; path_static: string; oss_type?: "oss" | "oss_parse" | "oss_parse_back"; callback?: (res: any) => Promise<void> }) {
   // console.log("util_sdk_oss_upload---typeof---file", typeof file)
   callback({ msg: "开始上传-计算文件大小1", progress: 0 })
 
@@ -74,7 +74,12 @@ export async function util_sdk_oss_upload({ file, path_static, oss_type = "oss_p
   const chunk_size = 1024 * 1024 * 10
   const total_chunks = Math.ceil((file as any).size / chunk_size)
   // 简单md5: 文件名+大小+lastModified
+  console.time("get_file_md5")
   const file_md5: any = await get_file_md5(file)
+  console.timeEnd("get_file_md5")
+  debugger
+
+  return
   //   const file_md5 = `${file.name}_${file.size}_${file.lastModified}`
   //   console.log(`file_md5:`, file_md5)
   let uploaded = [] // 查询已上传分片
