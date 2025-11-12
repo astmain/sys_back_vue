@@ -26,9 +26,11 @@ model sys_depart {
   type      String       @default("depart") // 是否是组织，如果为false就相当于角色
   parent    sys_depart?  @relation("self_sys_depart", fields: [parent_id], references: [id], onDelete: Cascade)
   children  sys_depart[] @relation("self_sys_depart")
-  sort      Int          @default(0)
+  sort      Int          @default(0) 
   sys_user  sys_user[]
   sys_menu  sys_menu[]
+
+  
 }
 
 // 3. 菜单表
@@ -55,7 +57,7 @@ model sys_permiss {
   menu_id String  @default("")
 }
 
-// 1. 用户表
+// 1. 收货地址
 model arg_user_address_take {
   id       String   @id @default(uuid())
   user_id  String   @map("user_id")
